@@ -1,0 +1,11 @@
+OB_POS_URL=https://norauto-test.cloud.openbravo.com/openbravo/web/org.openbravo.retail.posterminal
+TERMINAL_KEY=NORRONCQ2VVV
+USER=vvanhaute
+PASSWORD=123456
+CHROME_PROFILE_PATH=C:\\Users\\ValentinVANHAUTE\\AppData\\Local\\Google\\Chrome\\User Data\\
+CHROME_PROFILE=Profile 1
+ORDER_LOADER_URL=https://norauto-test.cloud.openbravo.com/openbravo/org.openbravo.mobile.core.service.jsonrest/com.openbravo.norauto.ouragan.integration.OuraganExternalOrderLoader
+ORDER_LOADER_USER=Ouragan
+ORDER_LOADER_PASSWORD=123
+ORDER_LOADER_SYNCHRONIZED_PROCESSING=true
+

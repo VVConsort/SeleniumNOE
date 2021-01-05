@@ -1,0 +1,54 @@
+{
+        "messageId": "92006c84-b281-4f00-888c-6a54f14befe2",
+        "posTerminal": "0003",
+        "channel": "External",
+        "data": [
+        {
+        "internalDocumentType": "RA",
+        "collaboratorId": "01",
+        "documentNo": "00030014617611321210",
+        "orderReference": "",
+        "norautoClientType": "PAR",
+        "businessPartner": "00d405de-af8f-11e9-9685-5d2ca824653f",
+        "licensePlate": "XXX",
+        "kilometer": 534343,
+        "ticketActions": 0,
+        "currency": "EUR",
+        "grossAmount": 215,
+        "lines": [
+        {
+        "lineID": "4",
+        "product": "499408",
+        "productName": "MONTAGE PNEU 15\" A 16\"",
+        "productType": "S",
+        "GM": "011",
+        "qty": 1,
+        "unitPrice": 3.5,
+        "grossAmount": 7,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        },
+        {
+        "lineID": "256",
+        "product": "342717",
+        "productName": "205/65R15 94T LAT.TOUR MICH",
+        "productType": "I",
+        "GM": "141",
+        "qty": 2,
+        "unitPrice": 90.5,
+        "grossAmount": 181,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20
+        }
+        ]
+        }
+        ]
+        }
