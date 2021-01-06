@@ -42,4 +42,24 @@ public class WebElementHelper {
         }
         return webElem;
     }
+////*[@id="terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments_tbody_control_renderPaymentLine3_removePayment"]
+    /**
+     * Retourne l'élement à partir de son text
+     * @param label
+     * @return
+     */
+    public static WebElement getElementFromText(String label, WebDriver driver) {
+        // Recherche l'élement 'label' à partir du texte
+        return getElement(driver, By.xpath("*//div[text()='" + label + "']"));
+        //*[@id="terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments_tbody_control_renderPaymentLine2_name"]
+    }
+
+    public static WebElement getElementFromTextAndClass(String label,WebDriver driver)
+    {
+        String Xpath = "*//div[starts-with(@id,'terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments') and contains (text(),'"+label+"')]";
+        return getElement(driver,By.xpath(Xpath));
+    }
+    ////*[@id="terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments_tbody_control_renderPaymentLine3_name"]
+
+    //div[starts-with(@id,'terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent') and contains (text(),'Avoir')]")
 }

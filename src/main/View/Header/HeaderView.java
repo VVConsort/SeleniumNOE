@@ -1,6 +1,6 @@
-package Pages.Header;
+package View.Header;
 
-import Pages.BasePage;
+import View.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

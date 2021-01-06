@@ -67,7 +67,7 @@
        <classes>
            <class name="TestCases.Promotions.NOE749"/>
        </classes>
-   </test> -->
+   </test>-->
   <!-- <test name="NOE744">
        <parameter name="productACode" value="10060271"/>
        <parameter name="productBCode" value="2167322"/>
@@ -87,11 +87,19 @@
             <class name="TestCases.Promotions.NOE745"/>
         </classes>
     </test>-->
-     <test name="NOE741">
+    <!--<test name="NOE741">
         <parameter name="productCode" value="2167322"/>
         <parameter name="creditNoteCode" value="TESTAUTO-0020000067"/>
         <classes>
             <class name="TestCases.Promotions.NOE741"/>
+        </classes>
+    </test> -->
+    <test name="NOE695">
+        <parameter name="productCode" value="2167322"/>
+        <parameter name="creditNoteCode" value="TESTAUTO-0020000092"/>
+        <parameter name ="expectedPendingAmount" value ="23.95€"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE695"/>
         </classes>
     </test>
 </suite>

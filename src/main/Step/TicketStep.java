@@ -1,9 +1,9 @@
 package Step;
 
 import Step.Value.BaseStepValue;
-import Pages.Footer.FooterView;
-import Pages.Ticket.MergedDocumentsView;
-import Pages.Ticket.ReceiptView;
+import View.Footer.FooterView;
+import View.Ticket.MergedDocumentsView;
+import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 

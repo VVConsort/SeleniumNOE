@@ -1,6 +1,7 @@
 package Helpers.Element;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,14 +14,15 @@ public class WaitHelper {
     // XPath chargement
     private static final String LOADING_XPATH = "//*[@id=\"terminal_containerLoading_control\"]";
 
-
     /**
      * Attend que le chargement soit fini
      * @param timeOutInSeconds
      * @param driver
      */
     public static void waitUntilLoadIsFinished(WebDriver driver, int timeOutInSeconds) {
-        waitForVisibleToInvisible(driver, timeOutInSeconds, LOADING_XPATH);
+        waitUntilComponentIsVisble(driver, timeOutInSeconds, LOADING_XPATH, false);
+        waitUntilComponentIsNotVisible(driver, timeOutInSeconds, LOADING_XPATH, false);
+        //waitForVisibleToInvisible(driver, timeOutInSeconds, LOADING_XPATH);
     }
 
     /**
@@ -43,9 +45,31 @@ public class WaitHelper {
      * @param timeOutInSeconds
      * @param xPath
      */
-    public static void waitUntilComponentIsVisble(WebDriver driver , int timeOutInSeconds,String xPath)
-    {
-        WebDriverWait wait = new WebDriverWait(driver,timeOutInSeconds);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+    public static void waitUntilComponentIsVisble(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+        } catch (TimeoutException e) {
+            if (throwException) {
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * @param driver
+     * @param timeOutInSeconds
+     * @param xPath
+     * @param throwException
+     */
+    public static void waitUntilComponentIsNotVisible(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xPath)));
+        } catch (TimeoutException e) {
+            if (throwException) {
+                throw e;
+            }
+        }
     }
 }

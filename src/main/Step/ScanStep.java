@@ -1,6 +1,6 @@
 package Step;
 
-import Pages.Header.HeaderView;
+import View.Header.HeaderView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 

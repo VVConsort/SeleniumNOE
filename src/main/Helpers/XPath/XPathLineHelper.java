@@ -1,6 +1,6 @@
 package Helpers.XPath;
 
-public class XPathHelper {
+public class XPathLineHelper {
     // Nom des variables contenues dans les ID
     private static final String XPATH_BODY_CONTROL_VAR = "VAR1";
     private static final String XPATH_RENDER_ORDER_LINE_VAR = "VAR2";

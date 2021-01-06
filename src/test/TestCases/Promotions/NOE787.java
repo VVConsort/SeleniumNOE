@@ -2,8 +2,8 @@ package TestCases.Promotions;
 
 import Helpers.Test.BaseTest;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
-import Pages.OpenBravoLauncher;
-import Pages.Log.LogScreenView;
+import View.OpenBravoLauncher;
+import View.Log.LogScreenView;
 import Step.DiscountStep;
 import Step.LoggingStep;
 import Step.ScanStep;

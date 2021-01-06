@@ -1,6 +1,8 @@
-package Pages;
+package View;
 
 import Helpers.Element.PopupHelper;
+import Helpers.Element.WebElementHelper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,6 +62,21 @@ public class PosOpening extends BasePage {
      */
     public void clickValidateCash() {
         super.click(validateCashBtn);
+    }
+
+    /**
+     * Confirme la date d'ouverture de la caisse
+     */
+    public void confirmPosOpeningDate()
+    {
+        // On récupère la pop up de confirmation de date d'ouverture
+        WebElement continueLogBtn = WebElementHelper.getElement(driver, By.xpath("//*[@id=\"terminal_confirmationContainer_dynamicConfirmationPopup_footer_continueLogin\"]"));
+        // Si elle existe on appuie sur le bouton "Continuer"
+        if(continueLogBtn != null)
+        {
+            super.click(continueLogBtn);
+        }
+
     }
 
 }

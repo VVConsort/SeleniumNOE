@@ -1,7 +1,8 @@
-package Pages.Ticket.Payment.CreditNote;
+package View.Ticket.Payment.CreditNote;
 
+import Helpers.Element.WaitHelper;
 import Helpers.Element.WebElementHelper;
-import Pages.BasePage;
+import View.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 public class CreditNoteSearchView extends BasePage {
 
     // XPath de la fenêtre unitaire "Avoir"
-    private static final String CREDIT_NOTE_WINDOW_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_GCNV_UI_Details\"]";
+    private static final String CREDIT_NOTE_WINDOW_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_GCNV_UI_Details_header\"]";
     // Champs de saisie numéro avoir
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_GCNV_UI_ModalGiftCards_body_giftcards_stGCAssignToReceipt_theader_modalGcScrollableHeader_filterSelector_formElementEntityFilterText_coreElementContainer_entityFilterText\"]")
     private WebElement creditNoteInput;
@@ -34,6 +35,8 @@ public class CreditNoteSearchView extends BasePage {
         creditNoteInput.sendKeys(creditNoteNumber);
         // Touche Entrée
         creditNoteInput.sendKeys(Keys.ENTER);
+        // Attend que l'élément soit visible
+        WaitHelper.waitUntilComponentIsVisble(driver,10,CREDIT_NOTE_WINDOW_XPATH,false);
         // Si l'élement "Vue unitaire avoir" est affiché c'est que le code correspond à un avoir valide
         WebElement creditNoteWindow = WebElementHelper.getElement(driver, By.xpath(CREDIT_NOTE_WINDOW_XPATH));
         // Si il y a un avoir valide trouvé
@@ -41,7 +44,6 @@ public class CreditNoteSearchView extends BasePage {
             // Instanciation de la vue CreditNote unitaire
             creditNoteUnitView = new CreditNoteUnitView(driver);
         }
-
         return creditNoteUnitView;
     }
 

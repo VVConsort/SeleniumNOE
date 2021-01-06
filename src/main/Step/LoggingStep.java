@@ -2,8 +2,8 @@ package Step;
 
 import Helpers.Element.WaitHelper;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
-import Pages.OpenBravoLauncher;
-import Pages.Log.LogScreenView;
+import View.OpenBravoLauncher;
+import View.Log.LogScreenView;
 import Step.Value.LoggingStepValue;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 public class LoggingStep {
 
     // Timeout d'ouverture du cache
-    private static final int CACHE_LOADING_TIMEOUT_IN_SECONDS = 120;
+    private static final int CACHE_LOADING_TIMEOUT_IN_SECONDS = 10;
 
     /**
      * Lancement d'OB avec le cache et l'utilisateur par défaut (définie dans les propriètes de la testsuite)

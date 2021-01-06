@@ -2,8 +2,7 @@ package Helpers.Test;
 
 import Enums.PaymentMean;
 import Helpers.Test.TestSuiteProperties.PropertiesLoader;
-import Pages.Ticket.ReceiptView;
-import Step.PaymentStep;
+import View.Ticket.ReceiptView;
 import Step.TicketStep;
 import Step.Value.*;
 import io.qameta.allure.Attachment;
