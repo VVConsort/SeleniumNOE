@@ -3,6 +3,7 @@ package Helpers.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -66,6 +67,16 @@ public class WaitHelper {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xPath)));
+        } catch (TimeoutException e) {
+            if (throwException) {
+                throw e;
+            }
+        }
+    }
+    public static void waitUntilComponentIsNotVisible(WebDriver driver, int timeOutInSeconds, WebElement webElement, boolean throwException) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(webElement));
         } catch (TimeoutException e) {
             if (throwException) {
                 throw e;

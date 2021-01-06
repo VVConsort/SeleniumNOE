@@ -1,15 +1,14 @@
 package View.Ticket.Payment.CreditNote;
 
 import Helpers.Element.WaitHelper;
-import Helpers.Element.WebElementHelper;
-import View.BasePage;
+import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreditNoteSearchView extends BasePage {
+public class CreditNoteSearchView extends BaseView {
 
     // XPath de la fenêtre unitaire "Avoir"
     private static final String CREDIT_NOTE_WINDOW_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_GCNV_UI_Details_header\"]";
@@ -38,7 +37,7 @@ public class CreditNoteSearchView extends BasePage {
         // Attend que l'élément soit visible
         WaitHelper.waitUntilComponentIsVisble(driver,10,CREDIT_NOTE_WINDOW_XPATH,false);
         // Si l'élement "Vue unitaire avoir" est affiché c'est que le code correspond à un avoir valide
-        WebElement creditNoteWindow = WebElementHelper.getElement(driver, By.xpath(CREDIT_NOTE_WINDOW_XPATH));
+        WebElement creditNoteWindow = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(CREDIT_NOTE_WINDOW_XPATH));
         // Si il y a un avoir valide trouvé
         if (creditNoteWindow != null) {
             // Instanciation de la vue CreditNote unitaire

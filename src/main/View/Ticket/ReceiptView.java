@@ -1,8 +1,7 @@
 package View.Ticket;
 
-import Helpers.Element.WebElementHelper;
 import Helpers.XPath.XPathLineHelper;
-import View.BasePage;
+import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Page Ticket
  */
-public class ReceiptView extends BasePage {
+public class ReceiptView extends BaseView {
 
     // Préfixe du libellé des promotions sur OB
     private static final String OB_DISCOUNT_LABEL_PREFIX = "-- ";
@@ -52,7 +51,7 @@ public class ReceiptView extends BasePage {
         if (!discountLabelId.isEmpty()) {
             // Récupération de l'ID du montant promo
             String amountXPath = XPathLineHelper.getLineDiscountGrossAmountXPath(XPathLineHelper.getBodyControlXPathVarFromProductId(discountLabelId), XPathLineHelper.getRenderOrderLineXPathVarFromProductId(discountLabelId), XPathLineHelper.getEndVariableFromProductId(discountLabelId));
-            result = WebElementHelper.getTextFromElement(driver, By.xpath(amountXPath));
+            result = Helpers.Element.WebElementHelper.getTextFromElement(driver, By.xpath(amountXPath));
         }
         // On retourne le montant de la promo
         return result;
@@ -66,7 +65,7 @@ public class ReceiptView extends BasePage {
     private String getDiscountLabelELemIdByText(String label) {
         String result = "";
         // Recherche l'élement 'label' à partir du texte
-        WebElement discoutNameElem = WebElementHelper.getElementFromText(OB_DISCOUNT_LABEL_PREFIX + label, driver);
+        WebElement discoutNameElem = Helpers.Element.WebElementHelper.getElementFromText(OB_DISCOUNT_LABEL_PREFIX + label, driver);
         // Blindage
         if (discoutNameElem != null) {
             // Affectation de l'id de l'élement

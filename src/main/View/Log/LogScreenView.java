@@ -1,6 +1,6 @@
 package View.Log;
 
-import View.BasePage;
+import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Page loggin OB
  */
-public class LogScreenView extends BasePage {
+public class LogScreenView extends BaseView {
 
     // Champ utilisateur
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_login_formElementUsername_coreElementContainer_username\"]")

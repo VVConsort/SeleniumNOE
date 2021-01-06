@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="OpenPOS">
-    <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\TESTAUTO-002"/>
+    <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\default"/>
     <!-- Ouvre la caisse en validant la monnaie -->
     <test name="OpenPos">
         <classes>
-            <class name="TestCases.PosOpening.CashOpening"/>
+            <class name="TestCases.PosOpening.PosOpening"/>
         </classes>
     </test>
 </suite>

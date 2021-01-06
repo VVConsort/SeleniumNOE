@@ -9,7 +9,7 @@ public enum PaymentMean {
     // Label du mode de paiement
     private String label;
 
-    private PaymentMean(String label) {
+    PaymentMean(String label) {
         this.label = label;
     }
 

@@ -18,7 +18,7 @@ public class WebElementHelper {
      * @return
      */
     public static String getTextFromElement(WebDriver driver, By by) {
-        WebElement webElem;
+        org.openqa.selenium.WebElement webElem;
         try {
             webElem = driver.findElement(by);
         } catch (NoSuchElementException e) {
@@ -42,7 +42,7 @@ public class WebElementHelper {
         }
         return webElem;
     }
-////*[@id="terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments_tbody_control_renderPaymentLine3_removePayment"]
+
     /**
      * Retourne l'élement à partir de son text
      * @param label
@@ -54,12 +54,9 @@ public class WebElementHelper {
         //*[@id="terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments_tbody_control_renderPaymentLine2_name"]
     }
 
-    public static WebElement getElementFromTextAndClass(String label,WebDriver driver)
+    public static WebElement getElementFromTextAndClass(String label, WebDriver driver)
     {
         String Xpath = "*//div[starts-with(@id,'terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments') and contains (text(),'"+label+"')]";
         return getElement(driver,By.xpath(Xpath));
     }
-    ////*[@id="terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments_tbody_control_renderPaymentLine3_name"]
-
-    //div[starts-with(@id,'terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent') and contains (text(),'Avoir')]")
 }

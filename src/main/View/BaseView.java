@@ -1,28 +1,29 @@
 package View;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class BasePage {
+public class BaseView {
 
     // Timeout
-    private static final int TIME_OUT = 30;
+    private static final int AJAX_WEBELEMENT_LOADING_TIMEOUT = 30;
     // Driver
     protected WebDriver driver;
 
     /**
      * Set le driver et le timeout de chargement des WebElement
      * @param webDriver
-     * @param basePage
+     * @param baseView
      */
-    protected void init(WebDriver webDriver, BasePage basePage) {
+    protected void init(WebDriver webDriver, BaseView baseView) {
         this.driver = webDriver;
         // Lazy loading
-        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, TIME_OUT);
-        PageFactory.initElements(factory, basePage);
+        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, AJAX_WEBELEMENT_LOADING_TIMEOUT);
+        PageFactory.initElements(factory, baseView);
     }
 
     /**
@@ -40,5 +41,20 @@ public class BasePage {
     protected void click(WebElement webElement) {
         setZoomTo1();
         webElement.click();
+    }
+
+    /**
+     * Clic sur l'élément si celui-ci est affiché à l'écran
+     * @param XPath
+     */
+    protected void clickIfElementPresent(String XPath)
+    {
+        // On récupère la pop up de confirmation de date d'ouverture
+        WebElement continueLogBtn = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(XPath));
+        // Si elle existe on appuie sur le bouton "Continuer"
+        if(continueLogBtn != null)
+        {
+            click(continueLogBtn);
+        }
     }
 }

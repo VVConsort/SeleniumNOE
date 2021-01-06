@@ -1,11 +1,11 @@
 package View.Header;
 
-import View.BasePage;
+import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class HeaderView extends BasePage {
+public class HeaderView extends BaseView {
     // Bouton scanner
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightToolbar_rightToolbar_toolbar_toolbarBtnScan\"]")
     WebElement scannerBtn;

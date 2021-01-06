@@ -2,12 +2,12 @@ package TestCases.Promotions;
 
 import Helpers.Test.BaseTest;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
-import View.OpenBravoLauncher;
-import View.Log.LogScreenView;
 import Step.DiscountStep;
 import Step.LoggingStep;
 import Step.ScanStep;
 import Step.TicketStep;
+import View.Log.LogScreenView;
+import View.OpenBravoLauncher;
 import io.qameta.allure.Link;
 import io.qameta.allure.Step;
 import org.testng.annotations.Parameters;
@@ -28,24 +28,16 @@ public class NOE787 extends BaseTest {
         currentDriver = LoggingStep.launchAndLogOB();
         // Ajout du produits en promo
         ScanStep.scanValue(familyDiscountProduct, currentDriver);
-        //addFamilyDiscountProduct(familyDiscountProduct);
         // Vérifie l'affichage de la promotion
-        //Object expectedValue, String discountLabel, String associatedProduct, WebDriver driver, SoftAssert soft, boolean isHardAssert
         // Controle du montant de la promo
         DiscountStep.checkDiscountLineAmount(newDiscountStepValue(expectedDiscountAmount, discountLabel, familyDiscountProduct, false));
-        //checkDiscountLabel(discountLabel);
-        //checkDiscountLineAmount(discountLabel, expectedDiscountAmount);
         TicketStep.checkTotalToPay(newTicketStepValue(expectedTotalWithDiscount, false));
-        //checkTotalToPayWithDiscount(expectedTotalWithDiscount);
         // Suppression et fermeture du navigateur
         TicketStep.deleteTicket(currentDriver);
         // Fermeture du navigateur
         closeBrowser();
-        //deleteTicketAndCloseBrowser();
         // Lancement de la caisse non éligible au promo
         currentDriver = LoggingStep.launchAndLogOB(newLoggingStepValue(TestSuiteProperties.OB_POS_URL, noDiscountPos, noDiscountChromeProfilePath, noDiscountChromeProfileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD));
-        //logOnNoDiscountPos(noDiscountPos, noDiscountChromeProfilePath, noDiscountChromeProfileName);
-        //addProduct(familyDiscountProduct);
         // Ajout du produit en promo
         ScanStep.scanValue(familyDiscountProduct, currentDriver);
         // Controle le non affichage de la promo

@@ -1,11 +1,11 @@
 package View.Footer;
 
-import View.BasePage;
+import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class FooterView extends BasePage {
+public class FooterView extends BaseView {
 
     // Menu
     // A payer

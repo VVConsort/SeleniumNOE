@@ -1,13 +1,12 @@
 package View.Header;
 
-import Helpers.Element.WebElementHelper;
 import Helpers.Input.InputHelper;
-import View.BasePage;
+import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ScannerView extends BasePage {
+public class ScannerView extends BaseView {
 
     // Délai d'attente en milli après avoir valider une saisie
     private static final int DELAY_AFTER_INPUT_MILLI = 2000;
@@ -38,6 +37,6 @@ public class ScannerView extends BasePage {
      */
     private WebElement getListener()
     {
-        return WebElementHelper.getElement(driver, By.xpath(KEY_LISTENER_XPATH));
+        return Helpers.Element.WebElementHelper.getElement(driver, By.xpath(KEY_LISTENER_XPATH));
     }
 }

@@ -1,11 +1,12 @@
 package View.Ticket.Payment.CreditNote;
 
-import View.BasePage;
+import Helpers.Element.WaitHelper;
+import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreditNoteUnitView extends BasePage {
+public class CreditNoteUnitView extends BaseView {
 
     // Boutton Appliquer
     //*[@id="terminal_containerWindow_pointOfSale_GCNV_UI_Details_footer_okbutton"]
@@ -26,5 +27,7 @@ public class CreditNoteUnitView extends BasePage {
     public void clickApplyBtn()
     {
         super.click(applyBtn);
+        // On attend que le bouton disparaisse
+        WaitHelper.waitUntilComponentIsNotVisible(driver,5,applyBtn,false);
     }
 }

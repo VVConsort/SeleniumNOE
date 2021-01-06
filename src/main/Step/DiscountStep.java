@@ -1,14 +1,9 @@
 package Step;
 
-import Helpers.Element.WebElementHelper;
-import Helpers.XPath.XPathLineHelper;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class DiscountStep {
 
