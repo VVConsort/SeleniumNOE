@@ -78,7 +78,7 @@ public class BaseTest {
         closeBrowser();
     }
 
-    @AfterTest
+    @AfterMethod
     protected void onMethodEnd(ITestResult result) {
         // Si la méthode est en échec, on prend un screenshot pour l'attacher au rapport
         if (result.getStatus() == ITestResult.FAILURE) {
