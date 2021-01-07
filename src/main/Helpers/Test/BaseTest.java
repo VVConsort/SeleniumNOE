@@ -70,13 +70,13 @@ public class BaseTest {
         softAssert.assertAll();
     }
 
-    /*@AfterTest
+    @AfterTest
     protected void onAfterTest() {
         // Vérification des valeures comparées
         assertAll();
         // Fermeture du navigateur
         closeBrowser();
-    }*/
+    }
 
     @AfterTest
     protected void onMethodEnd(ITestResult result) {
@@ -84,10 +84,6 @@ public class BaseTest {
         if (result.getStatus() == ITestResult.FAILURE) {
             attachScreenshot();
         }
-        // Vérification des valeures comparées
-        assertAll();
-        // Fermeture du navigateur
-        closeBrowser();
     }
 
     /**
