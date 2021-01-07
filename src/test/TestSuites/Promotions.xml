@@ -54,13 +54,13 @@
             <class name="TestCases.Promotions.NOE763"/>
         </classes>
    </test>
-   <test name="NOE774">
+   <!--<test name="NOE774">
         <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\TESTAUTO-002"/>
         <parameter name="jsonFilePath" value="src/test/TestCases/Promotions/In/noe774.xml"/>
         <classes>
             <class name="TestCases.Promotions.NOE774"/>
         </classes>
-    </test>
+    </test>-->
     <test name="NOE749">
         <parameter name="productACode" value="490006"/>
         <parameter name="productBCode" value="187579"/>
