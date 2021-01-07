@@ -1,5 +1,6 @@
 package View;
 
+import Helpers.Element.WebElementHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -44,17 +45,19 @@ public class BaseView {
     }
 
     /**
-     * Clic sur l'élément si celui-ci est affiché à l'écran
+     * Clic sur l'élément si celui-ci est affiché à l'écran et retourne vrai si celui-ci est présent
      * @param XPath
      */
-    protected void clickIfElementPresent(String XPath)
+    protected boolean clickIfElementPresent(String XPath)
     {
-        // On récupère la pop up de confirmation de date d'ouverture
-        WebElement continueLogBtn = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(XPath));
-        // Si elle existe on appuie sur le bouton "Continuer"
+        // On tente de récupèrer l'élement à partir du XPath
+        WebElement continueLogBtn = WebElementHelper.getElement(driver, By.xpath(XPath));
+        // Click si existe
         if(continueLogBtn != null)
         {
             click(continueLogBtn);
+            return true;
         }
+        return false;
     }
 }

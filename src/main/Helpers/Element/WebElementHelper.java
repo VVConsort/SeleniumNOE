@@ -51,7 +51,6 @@ public class WebElementHelper {
     public static WebElement getElementFromText(String label, WebDriver driver) {
         // Recherche l'élement 'label' à partir du texte
         return getElement(driver, By.xpath("*//div[text()='" + label + "']"));
-        //*[@id="terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments_tbody_control_renderPaymentLine2_name"]
     }
 
     public static WebElement getElementFromTextAndClass(String label, WebDriver driver)

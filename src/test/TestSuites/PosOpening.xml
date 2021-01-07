@@ -4,6 +4,8 @@
     <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\default"/>
     <!-- Ouvre la caisse en validant la monnaie -->
     <test name="OpenPos">
+        <parameter name="productACode" value="10060271"/>
+        <parameter name="productBCode" value="2167322"/>
         <classes>
             <class name="TestCases.PosOpening.PosOpening"/>
         </classes>

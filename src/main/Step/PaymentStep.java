@@ -31,7 +31,7 @@ public class PaymentStep {
     }
 
     // TODO : cas ou plusieurs même mode de paiement : différencier sur montant
-    @Step("Retire la ligne de paiement {value.paymentMean.getLabel()}")
+    @Step("Retire la ligne de paiement {value.paymentMean.label}")
     public static void removePaymentLine(PaymentStepValue value) {
         PaymentPanelView view = new PaymentPanelView(value.driver);
         // Appuie sur le btn de suppression correspond au mode de paiement

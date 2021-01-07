@@ -22,25 +22,11 @@ public class PosOpeningView extends BaseView {
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_loginCashUp_cashupMultiColumn_leftPanel_listPaymentMethods_paymentsList_tbody_control_stepRenderPaymentsLine_buttonOk\"]")
     private WebElement validateCashBtn;
 
+    // XPath boutton "OK" cloture de caisse
+
     public PosOpeningView(WebDriver webDriver) {
         init(webDriver, this);
     }
-
-    /**
-     * Ouvre la caisse en validant le montant en espece
-     */
-    /*public void validateCashAndOpenPos() {
-        // Valide la pop et entre en ouverture de caisse
-        PopupHelper.clickOkBtn(driver);
-        // Clic bouton "Suivant"
-        clickNext();
-        // Valide le détail monnaie
-        clickValidateCash();
-        // Appuie sur finaliser
-        clickNext();
-        // Confirme le succès de l'ouverture
-        PopupHelper.clickOkBtn(driver);
-    }*/
 
     /**
      * Click sur le boutton 'Suivant'
@@ -66,8 +52,8 @@ public class PosOpeningView extends BaseView {
     /**
      * Confirme l'entrée en ouverture de caisse
      */
-    public void enterPosOpening() {
-        clickIfElementPresent(ENTER_POS_OPENING_POPUP_BTN_XPATH);
+    public boolean enterPosOpening() {
+        return clickIfElementPresent(ENTER_POS_OPENING_POPUP_BTN_XPATH);
     }
 
 }

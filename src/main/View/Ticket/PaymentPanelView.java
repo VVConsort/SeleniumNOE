@@ -70,8 +70,8 @@ public class PaymentPanelView extends BaseView {
         WebElement removeBtn = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(removePaymentLineBtnXPath));
         if (removeBtn != null) {
             super.click(removeBtn);
-            // On attend que la fenetre se ferme afin que le montant restant soit actualisé
-            WaitHelper.waitUntilComponentIsNotVisible(driver,5,removePaymentLineBtnXPath,false);
+            // Attend que le boutton disparaisse
+            WaitHelper.waitUntilComponentIsNotVisible(driver, 5, removePaymentLineBtnXPath, false);
         }
     }
 
@@ -88,11 +88,11 @@ public class PaymentPanelView extends BaseView {
      * @param label
      * @return
      */
-    private String getPaymentLineIdElemByText(String label){
+    private String getPaymentLineIdElemByText(String label) {
         String result = "";
         // Recherche l'élement 'label' à partir du texte
         //WebElement paymentLineElem = WebElementHelper.getElementFromText(label, driver);
-       WebElement paymentLineElem = Helpers.Element.WebElementHelper.getElementFromTextAndClass(label, driver);
+        WebElement paymentLineElem = Helpers.Element.WebElementHelper.getElementFromTextAndClass(label, driver);
         // Blindage
         if (paymentLineElem != null) {
             // Affectation de l'id de l'élement
