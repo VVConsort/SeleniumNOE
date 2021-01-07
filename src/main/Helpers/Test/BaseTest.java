@@ -78,13 +78,14 @@ public class BaseTest {
         closeBrowser();
     }
 
-    @AfterMethod
-    protected void onMethodEnd(ITestResult result) {
+    // FIXME
+    /*@AfterMethod
+    //protected void onMethodEnd(ITestResult result) {
         // Si la méthode est en échec, on prend un screenshot pour l'attacher au rapport
         if (result.getStatus() == ITestResult.FAILURE) {
             attachScreenshot();
         }
-    }
+    }*/
 
     /**
      * Prend un screenshot et l'attache au rapport
