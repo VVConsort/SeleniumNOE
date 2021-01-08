@@ -35,7 +35,7 @@ public class PosOpeningStep {
         closingView.clickNextBtn();
         // Next
         closingView.clickNextBtn();
-        //closingView.clickNextBtn();
+        closingView.clickNextBtn();
         WaitHelper.waitUntilLoadIsFinished(driver, 120);
     }
 
@@ -44,6 +44,7 @@ public class PosOpeningStep {
         // Clic bouton "Suivant"
         openingView.clickNext();
         // Appuie sur "Finaliser"
+        openingView.clickNext();
         openingView.clickNext();
         // Attend le chargement du cache
         WaitHelper.waitUntilLoadIsFinished(driver, 120);

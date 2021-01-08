@@ -31,7 +31,6 @@ public class OpenBravoLauncher {
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
         // Chemin vers le profil contenant le cache OB
         ChromeOptions chromeProfile = new ChromeOptions();
-
         chromeProfile.addArguments("user-data-dir=" + chromeProfilePath);
         // Le nom de dossier du profil
         chromeProfile.addArguments("profile-directory=" + chromeProfileName);
