@@ -1,5 +1,6 @@
-package View.Footer.Menu;
+package View.Footer.Menu.Voucher;
 
+import Helpers.Element.WebElementHelper;
 import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,7 @@ public class VoucherCodeInputView extends BaseView {
     private WebElement voucherCodeInput;
 
     // Bouton OK
-    @FindBy(xpath ="//*[@id=\"terminal_containerWindow_pointOfSale_OBDISCP_modalInsertCouponCode_footer_okButton\"]")
+    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_OBDISCP_modalInsertCouponCode_footer_okButton\"]")
     private WebElement okButton;
 
     public VoucherCodeInputView(WebDriver driver) {
@@ -30,9 +31,15 @@ public class VoucherCodeInputView extends BaseView {
     /**
      * Clic sur le boutton ok
      */
-    public void clickOkButton()
-    {
+    public InvalidVoucherView clickOk() {
+        InvalidVoucherView result = null;
         super.click(okButton);
+        // Si le coupon n'est pas valide
+        if (WebElementHelper.getElementFromText("achat invalide.", driver) != null) {
+            // On retourne une vue "Bon d'achat invalide"
+            result = new InvalidVoucherView(driver);
+        }
+        return result;
     }
 
 }

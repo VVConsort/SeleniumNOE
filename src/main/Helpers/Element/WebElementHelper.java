@@ -49,8 +49,8 @@ public class WebElementHelper {
      * @return
      */
     public static WebElement getElementFromText(String label, WebDriver driver) {
-        // Recherche l'élement 'label' à partir du texte
-        return getElement(driver, By.xpath("*//div[text()='" + label + "']"));
+        // Recherche l'élement à partir du texte
+        return getElement(driver, By.xpath("*//div[contains(text(),'" + label + "')]"));
     }
 
     public static WebElement getElementFromTextAndClass(String label, WebDriver driver)

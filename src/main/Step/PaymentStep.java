@@ -2,7 +2,8 @@ package Step;
 
 import Step.Value.PaymentStepValue;
 import View.Footer.FooterView;
-import View.Footer.Menu.VoucherCodeInputView;
+import View.Footer.Menu.Voucher.InvalidVoucherView;
+import View.Footer.Menu.Voucher.VoucherCodeInputView;
 import View.Ticket.Payment.CreditNote.CreditNoteSearchView;
 import View.Ticket.Payment.CreditNote.CreditNoteUnitView;
 import View.Ticket.PaymentPanelView;
@@ -82,7 +83,7 @@ public class PaymentStep {
         stepValue.isEquals(view.getPendingAmount());
     }
 
-    @Step("Ajoute le bon d'achat dd au ticket")
+    @Step("Ajoute le bon d'achat {stepValue.paymentId} au ticket")
     public static void useVoucher(PaymentStepValue stepValue) {
         FooterView footerView = new FooterView(stepValue.driver);
         // Pop up bon d'achat
@@ -90,6 +91,11 @@ public class PaymentStep {
         // On entre le code du bon d'achat
         voucherView.enterVoucherCode(stepValue.paymentId);
         // On click sur OK
-        voucherView.clickOkButton();
+        InvalidVoucherView invalidView = voucherView.clickOk();
+        // Si le bon d'achat est invalide
+        if (invalidView != null) {
+            // Ferme la fenetre d'erreur
+            invalidView.clickOK();
+        }
     }
 }
