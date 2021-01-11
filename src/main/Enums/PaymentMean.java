@@ -4,7 +4,7 @@ package Enums;
  * Moyen de paiements
  */
 public enum PaymentMean {
-    CREDIT_CARD("Carte de crédit"), CASH("Espèces"), CREDIT_NOTE("Avoir");
+    CREDIT_CARD("Carte de crédit"), CASH("Espèces"), CREDIT_NOTE("Avoir"),VOUCHER("Bon d'achat");
 
     // Label du mode de paiement
     private String label;

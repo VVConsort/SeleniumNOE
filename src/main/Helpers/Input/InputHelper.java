@@ -13,17 +13,21 @@ public class InputHelper {
     // Element à envoyer les keys
     WebElement webElement;
 
-    private void doType(int keyCodes) {
+    /*private void doType(int keyCodes) {
         doType(keyCodes);
     }
+
+    private void doType(int keyCodeA,int keyCodeB) {
+        webElement.sendKeys(Keys.chord(Keys.getKeyFromUnicode(keyCodeA)));
+    }*/
 
     private void doType(Keys key) {
         webElement.sendKeys(Keys.chord(key));
     }
 
-    /*public void escape() {
-        WebUI.sendKeys(findTestObject('OpenBravo/POS/Input/KeyboardListener'), Keys.chord(Keys.ESCAPE));
-    }*/
+    private void doType(String charac) {
+        webElement.sendKeys(Keys.chord(charac));
+    }
 
     public void type(CharSequence characters, WebElement webElement) {
         this.webElement = webElement;
@@ -193,10 +197,10 @@ public class InputHelper {
                 break;
             case 'Z':
                 doType(VK_SHIFT, VK_Z);
-                break;*/
+                break;
             case '`':
                 doType(VK_BACK_QUOTE);
-                break;
+                break;*/
             case '0':
                 doType(Keys.NUMPAD0);
                 break;
@@ -330,7 +334,8 @@ public class InputHelper {
                 doType(VK_SPACE);
                 break;*/
             default:
-                throw new IllegalArgumentException("Cannot type character " + character);
+                doType(String.valueOf(character));
+                break;
         }
     }
 }

@@ -19,6 +19,8 @@ public class NOE744 extends BaseTest {
     public void noe744(String productACode, String productBCode, String expectedDiscountAmount, String discountLabel, String expectedTotal) throws MalformedURLException, InterruptedException {
         // Log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Scan 2 fois le produit A
         ScanStep.scanValue(productACode, currentDriver, 2);
         // Scan le produit B

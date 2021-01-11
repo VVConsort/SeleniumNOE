@@ -25,6 +25,8 @@ public class NOE774 extends BaseTest {
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Scan du BT intégré
         ScanStep.scanValue(documentCode,currentDriver);
         // On ferme la fenetre des documents associés

@@ -19,6 +19,8 @@ public class NOE749 extends BaseTest {
     public void noe749(String productACode, String productBCode,String expectedTotal,String discountLabel,String expectedDiscountAmount) throws MalformedURLException, InterruptedException {
         // Log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Scan des produits
         ScanStep.scanValues(new String[]{productACode,productBCode}, currentDriver);
         // Vérifie la présence et le montant de la promotion

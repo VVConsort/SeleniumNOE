@@ -36,7 +36,7 @@
         <classes>
             <class name="TestCases.Promotions.NOE787"/>
         </classes>
-    </test>-->
+    </test> -->
     <test name="NOE767">
         <parameter name="discountLabel" value="AUTO-NOE767"/>
         <parameter name="discountedProductCode" value="233697"/>
@@ -54,13 +54,13 @@
             <class name="TestCases.Promotions.NOE763"/>
         </classes>
    </test>
-   <!--<test name="NOE774">
+  <!-- <test name="NOE774">
         <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\TESTAUTO-002"/>
         <parameter name="jsonFilePath" value="src/test/TestCases/Promotions/In/noe774.xml"/>
         <classes>
             <class name="TestCases.Promotions.NOE774"/>
         </classes>
-    </test>-->
+    </test> -->
     <test name="NOE749">
         <parameter name="productACode" value="490006"/>
         <parameter name="productBCode" value="187579"/>
@@ -97,12 +97,20 @@
              <class name="TestCases.Promotions.NOE741"/>
          </classes>
      </test>
-    <test name="NOE695">
+   <test name="NOE695">
         <parameter name="productCode" value="2167322"/>
         <parameter name="creditNoteCode" value="TESTAUTO-0020000092"/>
         <parameter name ="expectedPendingAmount" value ="23.95€"/>
         <classes>
             <class name="TestCases.Promotions.NOE695"/>
+        </classes>
+    </test>
+   <test name="NOE683">
+        <parameter name="productCode" value="0000002212135"/>
+        <parameter name="voucherCode" value="8FDB7018D4892E8CA35A"/>
+        <parameter name="expectedTotal" value ="57.95€"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE683"/>
         </classes>
     </test>
 </suite>

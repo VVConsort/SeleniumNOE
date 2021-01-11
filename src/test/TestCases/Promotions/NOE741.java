@@ -20,6 +20,8 @@ public class NOE741 extends BaseTest {
     public void noe741(String productCode, String creditNoteCode) throws MalformedURLException, InterruptedException {
         // Log OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Scan article
         ScanStep.scanValue(productCode, currentDriver);
         // On tente d'utiliser l'avoir déjà cramé

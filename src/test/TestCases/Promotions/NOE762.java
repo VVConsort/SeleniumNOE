@@ -19,6 +19,8 @@ public class NOE762 extends BaseTest {
     public void noe762(String discountLabel, String discountedProductCode, String expectedDiscountAmount) throws MalformedURLException, InterruptedException {
         // Lancement et log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Ajout du produit
         ScanStep.scanValue(discountedProductCode, currentDriver);
         // Control du montant de la promotion

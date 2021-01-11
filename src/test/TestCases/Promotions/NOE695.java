@@ -21,6 +21,8 @@ public class NOE695 extends BaseTest {
     public void noe695(String productCode, String creditNoteCode, String expectedPendingAmount) throws MalformedURLException, InterruptedException {
         // Log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Ajout produit
         ScanStep.scanValue(productCode, currentDriver);
         // Jeu de données step payement

@@ -1,8 +1,8 @@
 package Step;
 
-import Helpers.Element.WaitHelper;
 import Step.Value.PaymentStepValue;
 import View.Footer.FooterView;
+import View.Footer.Menu.VoucherCodeInputView;
 import View.Ticket.Payment.CreditNote.CreditNoteSearchView;
 import View.Ticket.Payment.CreditNote.CreditNoteUnitView;
 import View.Ticket.PaymentPanelView;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 public class PaymentStep {
 
     // TODO
-    private static void pay(PaymentStepValue stepValue) {
+    /*private static void pay(PaymentStepValue stepValue) {
         // Clic sur le boutton "A payer" du footer
         FooterView footerView = new FooterView(stepValue.driver);
         footerView.clickOnTotalToPayBtn();
@@ -20,7 +20,7 @@ public class PaymentStep {
         switch (stepValue.paymentMean) {
             case CREDIT_NOTE -> getCreditNoteUnitView(stepValue);
         }
-    }
+    }*/
 
     @Step("Applique l'avoir {stepValue.paymentId}")
     public static void applyCreditNote(PaymentStepValue stepValue) {
@@ -80,5 +80,16 @@ public class PaymentStep {
         PaymentPanelView view = new PaymentPanelView(stepValue.driver);
         // Comparaison avec la valeure attendue
         stepValue.isEquals(view.getPendingAmount());
+    }
+
+    @Step("Ajoute le bon d'achat dd au ticket")
+    public static void useVoucher(PaymentStepValue stepValue) {
+        FooterView footerView = new FooterView(stepValue.driver);
+        // Pop up bon d'achat
+        VoucherCodeInputView voucherView = footerView.clickOnMenuBtn().clickOnVoucherBtn();
+        // On entre le code du bon d'achat
+        voucherView.enterVoucherCode(stepValue.paymentId);
+        // On click sur OK
+        voucherView.clickOkButton();
     }
 }

@@ -26,6 +26,8 @@ public class NOE787 extends BaseTest {
     public void noe787(String familyDiscountProduct, String discountLabel, String expectedDiscountAmount, String expectedTotalWithDiscount, String expectedTotalWithoutDiscount, String noDiscountPos, String noDiscountChromeProfilePath, String noDiscountChromeProfileName) throws MalformedURLException, InterruptedException {
         // Lance et se log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Ajout du produits en promo
         ScanStep.scanValue(familyDiscountProduct, currentDriver);
         // Vérifie l'affichage de la promotion

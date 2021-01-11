@@ -18,6 +18,8 @@ public class NOE763 extends BaseTest {
     public void noe763(String productCode, String expectedTotalAmount) throws IOException, InterruptedException {
         // Lancement et log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Ajout du produit générique
         ScanStep.scanValue(productCode, currentDriver,3);
         // Vérifie le montant à payer

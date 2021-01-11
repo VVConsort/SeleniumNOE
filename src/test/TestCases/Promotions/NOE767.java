@@ -4,6 +4,7 @@ import Helpers.Test.BaseTest;
 import Step.DiscountStep;
 import Step.LoggingStep;
 import Step.ScanStep;
+import Step.TicketStep;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -18,6 +19,8 @@ public class NOE767 extends BaseTest {
     public void noe767(String discountLabel, String discountedProductCode, String firstDiscountedPrice, String secondDiscountedPrice, String thirdDiscountedPrice) throws MalformedURLException, InterruptedException {
         // Lancement et log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
+        // On vide le ticket
+        TicketStep.deleteTicket(currentDriver);
         // Ajout du premier produit
         addDiscountedProductAndCheckDiscount(discountedProductCode, firstDiscountedPrice, discountLabel);
         // Ajout du deuxieme produit

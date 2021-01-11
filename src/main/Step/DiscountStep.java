@@ -27,7 +27,7 @@ public class DiscountStep {
      * Vérifie le montant de la promotion
      * @param value
      */
-    @Step("Vérifie que la promotion {discountLabel} est égale à {value.expectedValue}")
+    @Step("Vérifie que la promotion {value.discountLabel} est égale à {value.expectedValue}")
     public static void checkDiscountLineAmount(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         value.isEquals(view.getDiscountLineAmount(value.discountLabel));

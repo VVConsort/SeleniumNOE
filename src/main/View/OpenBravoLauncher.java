@@ -23,19 +23,18 @@ public class OpenBravoLauncher {
      * @throws MalformedURLException
      */
     public static WebDriver launchOpenBravoWithCache(String url, String terminalKey, String chromeProfilePath, String chromeProfileName) throws MalformedURLException {
-        /** Test
-         *
-         */
         // Chemin vers le driver
         String pathToChromeDriver = "src/main/resources/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
         // Chemin vers le profil contenant le cache OB
-        ChromeOptions chromeProfile = new ChromeOptions();
-        chromeProfile.addArguments("user-data-dir=" + chromeProfilePath);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("user-data-dir=" + chromeProfilePath);
         // Le nom de dossier du profil
-        chromeProfile.addArguments("profile-directory=" + chromeProfileName);
+        chromeOptions.addArguments("profile-directory=" + chromeProfileName);
+        // Lance Chrome en plein écran, sinon certains boutons ne seront pas clickable
+        //chromeOptions.addArguments("--start-maximized");
         //RemoteWebDriver driver = new ChromeDriver(chromeProfile);
-        WebDriver driver = new ChromeDriver(chromeProfile);
+        WebDriver driver = new ChromeDriver(chromeOptions);
         // Ajout des paramètres à l'URL
         driver.get(url + "/?terminal=" + terminalKey);
         // Retourne le driver
