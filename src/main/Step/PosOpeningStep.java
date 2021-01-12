@@ -6,7 +6,6 @@ import View.Log.PosClosingView;
 import View.Log.PosOpeningView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class PosOpeningStep {
 
@@ -22,9 +21,9 @@ public class PosOpeningStep {
         // Vue Ouverture de caisse
         PosOpeningView posOpeningView = new PosOpeningView(driver);
         // Confirme la date d'ouverture si nécessaire
-        posOpeningView.confirmPosOpeningDate();
+        posOpeningView.clickConfirmOpeningDate();
         // Si une ouverture de caisse est demandée ou si on est déjà en ouverture
-        if (posOpeningView.enterPosOpening() || isAlreadyInOpening(driver)) {
+        if (posOpeningView.clickEnterPosOpening() || isAlreadyInOpening(driver)) {
             doOpenPos(driver, posOpeningView);
         }
     }
@@ -43,9 +42,12 @@ public class PosOpeningStep {
     public static void doOpenPos(WebDriver driver, PosOpeningView openingView) {
         // Clic bouton "Suivant"
         openingView.clickNext();
+        // Clic bouton "Suivant"
+        openingView.clickNext();
+        // Approuve la différence de rendue si nécessaire
+        openingView.clickApprovalOk();
         // Appuie sur "Finaliser"
-        openingView.clickNext();
-        openingView.clickNext();
+        //openingView.clickNext();
         // Attend le chargement du cache
         WaitHelper.waitUntilLoadIsFinished(driver, 120);
     }
@@ -55,8 +57,7 @@ public class PosOpeningStep {
      * @param driver
      * @return
      */
-    private static boolean isAlreadyInOpening(WebDriver driver)
-    {
-       return WebElementHelper.getElementFromText("Ouverture caisse",driver) != null;
+    private static boolean isAlreadyInOpening(WebDriver driver) {
+        return WebElementHelper.getElementFromText("Ouverture caisse", driver) != null;
     }
 }

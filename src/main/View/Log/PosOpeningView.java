@@ -14,6 +14,10 @@ public class PosOpeningView extends BaseView {
     private static final String ENTER_POS_OPENING_POPUP_BTN_XPATH = "//button[@id=\"terminal_confirmationContainer_dynamicConfirmationPopup_footer_confirmationPopup_btnOK\"]";
     // XPath "Confirmer date d'ouverture de la caisse"
     private static final String CONFIRM_POS_OPENING_DATE_BTN_XPATH = "//*[@id=\"terminal_confirmationContainer_dynamicConfirmationPopup_footer_continueLogin\"]";
+    // XPath boutton ok "Différence monnaie"
+    private static final String APPROVAL_REASON_OK_BTN_XPATH = "//*[@id=\"terminal_containerWindow_loginCashUp_POSS_modalApprovalReason_footer_btnModalApprovalReasonAccept\"]";
+
+    //*[@id="terminal_containerWindow_loginCashUp_POSS_modalApprovalReason_footer_btnModalApprovalReasonAccept"]
 
     // Boutton suivant
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_loginCashUp_cashupMultiColumn_leftToolbar_leftToolbar_toolbar_btnNext\"]")
@@ -45,15 +49,22 @@ public class PosOpeningView extends BaseView {
     /**
      * Confirme la date d'ouverture de la caisse
      */
-    public void confirmPosOpeningDate() {
-        clickIfElementPresent(CONFIRM_POS_OPENING_DATE_BTN_XPATH);
+    public void clickConfirmOpeningDate() {
+        searchAndClickElement(CONFIRM_POS_OPENING_DATE_BTN_XPATH);
     }
 
     /**
      * Confirme l'entrée en ouverture de caisse
      */
-    public boolean enterPosOpening() {
-        return clickIfElementPresent(ENTER_POS_OPENING_POPUP_BTN_XPATH);
+    public boolean clickEnterPosOpening() {
+        return searchAndClickElement(ENTER_POS_OPENING_POPUP_BTN_XPATH);
+    }
+
+    /**
+     * Click sur le bouton d'aprobation diff rendu
+     */
+    public void clickApprovalOk() {
+        searchAndClickElement(APPROVAL_REASON_OK_BTN_XPATH);
     }
 
 }

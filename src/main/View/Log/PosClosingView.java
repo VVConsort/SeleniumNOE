@@ -30,7 +30,7 @@ public class PosClosingView extends BaseView {
      * Entre en cloture de caisse
      */
     public boolean enterPosClosing() {
-        return clickIfElementPresent(ENTER_POS_CLOSING_POPUP_BTN_XPATH);
+        return searchAndClickElement(ENTER_POS_CLOSING_POPUP_BTN_XPATH);
     }
 
     /**

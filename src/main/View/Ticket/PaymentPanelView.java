@@ -43,16 +43,13 @@ public class PaymentPanelView extends BaseView {
     public BaseView clickPayAllBtn() {
         // La vue à renvoyer selon le mode dde paiement
         BaseView paymentPage = null;
-        // On recherche l'élement
-        WebElement payAllBtn = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(PAY_ALL_BTN_XPATH));
-        // Si il existe
-        if (payAllBtn != null) {
-            super.click(payAllBtn);
-        }
-        // On renvoie la vue correspondant au mode de paiement sélectionné
-        switch (selectedPayment) {
-            case CREDIT_NOTE -> paymentPage = new CreditNoteSearchView(driver);
-            // TODO : les autres mode de paiement
+        // Si l'élément est présent et clické
+        if (super.searchAndClickElement(PAY_ALL_BTN_XPATH)) {
+            // On renvoie la vue correspondante au mode de paiement sélectionné
+            switch (selectedPayment) {
+                case CREDIT_NOTE -> paymentPage = new CreditNoteSearchView(driver);
+                // TODO : les autres mode de paiement
+            }
         }
         return paymentPage;
     }

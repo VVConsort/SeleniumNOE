@@ -113,4 +113,12 @@
             <class name="TestCases.Promotions.NOE683"/>
         </classes>
     </test>
+    <test name="NOE682">
+        <parameter name="productCode" value="0000002212135"/>
+        <parameter name="voucherCode" value= "474200E0B4C283030FEC"/>
+        <parameter name="expectedTotal" value ="62.95€"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE682"/>
+        </classes>
+    </test>
 </suite>

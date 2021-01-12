@@ -1,10 +1,7 @@
 package View;
 
 import Helpers.Element.WebElementHelper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
@@ -40,21 +37,32 @@ public class BaseView {
      * @param webElement
      */
     protected void click(WebElement webElement) {
+        // Met le zoom à 1 pour éviter les problemes de click
         setZoomTo1();
-        webElement.click();
+        try {
+            webElement.click();
+        }
+        // Si le DOM a changé on  re recherche l'élément
+        catch (StaleElementReferenceException ex) {
+            // récupère l'ID de l'élément
+            String id = webElement.getAttribute("id");
+            // On recherche l'élément à partir de l'id extraite
+            webElement = WebElementHelper.getElement(driver, By.id(id));
+            // reclick
+            click(webElement);
+        }
     }
 
     /**
-     * Clic sur l'élément si celui-ci est affiché à l'écran et retourne vrai si celui-ci est présent
+     * Recherche l'élément à partir de son XPath et click
      * @param XPath
+     * @return true si l'élément est présent et clické
      */
-    protected boolean clickIfElementPresent(String XPath)
-    {
+    protected boolean searchAndClickElement(String XPath) {
         // On tente de récupèrer l'élement à partir du XPath
         WebElement continueLogBtn = WebElementHelper.getElement(driver, By.xpath(XPath));
         // Click si existe
-        if(continueLogBtn != null)
-        {
+        if (continueLogBtn != null) {
             click(continueLogBtn);
             return true;
         }
