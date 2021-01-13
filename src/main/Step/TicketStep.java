@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 public class TicketStep {
 
     // Temps de chargement du BT
-    private static final int BT_LOADING_TIME =1500;
+    private static final int BT_LOADING_TIME =3000;
 
     /**
      * Vide le ticket en cours
