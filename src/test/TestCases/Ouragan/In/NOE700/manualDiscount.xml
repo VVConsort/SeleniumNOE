@@ -1,0 +1,43 @@
+{
+        "messageId": "b825c4f5-be78-424e-a45b-be1118aaced1",
+        "posTerminal": "0003",
+        "channel": "External",
+        "data": [
+        {
+        "internalDocumentType": "BRW",
+        "collaboratorId": "01",
+        "documentNo": "0003001455771320881",
+        "orderReference": "48208812",
+        "norautoClientType": "PAR",
+        "businessPartner": "82553b9a-b9e3-11ea-a567-09abe3925bd2",
+        "ticketActions": 0,
+        "currency": "EUR",
+        "grossAmount": 900.99,
+        "lines": [
+        {
+        "lineID": "2",
+        "product": "679128",
+        "productName": "LAVE-GLACE ETE 1ER PRIX 5L",
+        "productType": "I",
+        "GM": "412",
+        "qty": 1,
+        "unitPrice": 1.99,
+        "grossAmount": 1.99,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 278,
+        "statusReservation": "R",
+        "manualDiscount": [
+        {
+        "ruleId": "201",
+        "unitDiscount": 20
+        }
+        ]
+        }
+        ]
+        }
+        ]
+        }

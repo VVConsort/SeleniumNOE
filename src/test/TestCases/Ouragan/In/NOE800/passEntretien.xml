@@ -1,0 +1,670 @@
+{
+        "messageId": "3a64805e-4aa8-47be-9be1-9010b3f6245a",
+        "posTerminal": "0003",
+        "channel": "External",
+        "data": [
+        {
+        "internalDocumentType": "RA",
+        "collaboratorId": "12",
+        "documentNo": "02280016015811085908",
+        "orderReference": "",
+        "norautoClientType": "PAR",
+        "businessPartner": "05626527-6788-4dca-a2b2-f14041a1b3d4",
+        "licensePlate": "EH981RH",
+        "kilometer": 98920,
+        "ticketActions": 4,
+        "currency": "EUR",
+        "grossAmount": 475.0,
+        "orderPayment": "RABCL",
+        "lines": [
+        {
+        "lineID": "5376",
+        "product": "F0954",
+        "productName": "Entretien climatisation avec gaz R-1234yf (contrôle climatisation inclus)",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 139.0,
+        "grossAmount": 139.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "2180896",
+        "productName": "Entretien \"clim\" ctrl inclus 1",
+        "productType": "S",
+        "GM": "079",
+        "qty": 1.0,
+        "unitPrice": 139.0,
+        "grossAmount": 139.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "6656",
+        "product": "F1584",
+        "productName": "Montage plaquettes de frein arrière FERODO (Pièces incluses)",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 69.0,
+        "grossAmount": 69.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "18",
+        "product": "2196646",
+        "productName": "Forf. plaquettes de marque AR",
+        "productType": "S",
+        "GM": "068",
+        "qty": 1.0,
+        "unitPrice": 49.05,
+        "grossAmount": 49.05,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        },
+        {
+        "lineID": "20",
+        "product": "788885",
+        "productName": "FDB1083 PLAQUETTES FERODO AR",
+        "productType": "I",
+        "GM": "622",
+        "qty": 1.0,
+        "unitPrice": 19.95,
+        "grossAmount": 19.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 22
+        }
+        ]
+        },
+        {
+        "lineID": "6912",
+        "product": "F1505",
+        "productName": "Vidange et remplacement du liquide de frein y compris véhicule ABS/ESP(liquide de frein inclus)",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 48.0,
+        "grossAmount": 48.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9354",
+        "productName": "PURGE FREINAGE ESP",
+        "productType": "S",
+        "GM": "068",
+        "qty": 1.0,
+        "unitPrice": 48.0,
+        "grossAmount": 48.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558,
+        "crossPrice": [
+        {
+        "ruleId": "004965",
+        "unitDiscount": 13.0
+        }
+        ]
+        }
+        ]
+        },
+        {
+        "lineID": "7424",
+        "product": "F9508",
+        "productName": "ENVOI SMS GRATUIT",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9194",
+        "productName": "ENVOI SMS",
+        "productType": "S",
+        "GM": "982",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "256",
+        "product": "9999",
+        "productName": "DES 100000 KM OU DES 4 ANS",
+        "productType": "R",
+        "qty": 1.0,
+        "unitPrice": 219.0,
+        "grossAmount": 219.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "512",
+        "product": "F9420",
+        "productName": "VIDANGE DSL HUILE NORAUTO (INCLUS)",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 54.95,
+        "grossAmount": 54.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9806",
+        "productName": "VIDANGE DIESEL HUILE NORAUTO",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        },
+        {
+        "lineID": "2",
+        "product": "2233879",
+        "productName": "H. NOR 0W30 C2 B71 2312 FORF.",
+        "productType": "I",
+        "GM": "395",
+        "qty": 1.0,
+        "unitPrice": 54.95,
+        "grossAmount": 54.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 22
+        }
+        ]
+        },
+        {
+        "lineID": "768",
+        "product": "F9440",
+        "productName": "MONTAGE FILTRE À HUILE",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 13.0,
+        "grossAmount": 13.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9809",
+        "productName": "MONTAGE FILTRE A HUILE",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        },
+        {
+        "lineID": "2",
+        "product": "2039653",
+        "productName": "HU7033Z F.HUILE MANN-FILTER",
+        "productType": "I",
+        "GM": "641",
+        "qty": 1.0,
+        "unitPrice": 13.0,
+        "grossAmount": 13.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 22
+        }
+        ]
+        },
+        {
+        "lineID": "1024",
+        "product": "F9460",
+        "productName": "MONTAGE FILTRE À AIR",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 14.0,
+        "grossAmount": 14.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9813",
+        "productName": "MONTAGE FILTRE A AIR",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        },
+        {
+        "lineID": "2",
+        "product": "2026487",
+        "productName": "C24017 FILTRE AIR MANN-FILTER",
+        "productType": "I",
+        "GM": "642",
+        "qty": 1.0,
+        "unitPrice": 14.0,
+        "grossAmount": 14.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 22
+        }
+        ]
+        },
+        {
+        "lineID": "1280",
+        "product": "F9459",
+        "productName": "MONTAGE FILTRE D\u0027 HABITACLE",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 15.95,
+        "grossAmount": 15.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9812",
+        "productName": "MONTAGE FILTRE D\u0027HABITACLE",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        },
+        {
+        "lineID": "2",
+        "product": "935024",
+        "productName": "FC149 F.HABITACLE NORAUTO",
+        "productType": "I",
+        "GM": "",
+        "qty": 1.0,
+        "unitPrice": 15.95,
+        "grossAmount": 15.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 22
+        }
+        ]
+        },
+        {
+        "lineID": "1536",
+        "product": "F9458",
+        "productName": "MONTAGE FILTRE À GASOIL",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 28.95,
+        "grossAmount": 28.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9811",
+        "productName": "MONTAGE FILTRE A GASOIL",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        },
+        {
+        "lineID": "2",
+        "product": "2175920",
+        "productName": "PU7010Z F.CARBUR MANN-FILTER",
+        "productType": "I",
+        "GM": "643",
+        "qty": 1.0,
+        "unitPrice": 28.95,
+        "grossAmount": 28.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 22
+        }
+        ]
+        },
+        {
+        "lineID": "1792",
+        "product": "F9444",
+        "productName": "MISE A NIVEAU ADBLUE",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "2003619",
+        "productName": "Mise à niveau Adblue",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 0.0,
+        "grossAmount": 0.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "2048",
+        "product": "F6904",
+        "productName": "Diagnostic électronique moteur (si vidange ou entretien )",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 19.0,
+        "grossAmount": 19.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "2",
+        "product": "9348",
+        "productName": "DIAGNOSTIC ELECTRONIQUE",
+        "productType": "S",
+        "GM": "030",
+        "qty": 1.0,
+        "unitPrice": 19.0,
+        "grossAmount": 19.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "2304",
+        "product": "F6941",
+        "productName": "DIAG ECOCONTROLE 5 GAZ DIESEL(REVISION)",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 9.0,
+        "grossAmount": 9.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "664597",
+        "productName": "diag 5 gaz die (avec opération",
+        "productType": "S",
+        "GM": "030",
+        "qty": 1.0,
+        "unitPrice": 9.0,
+        "grossAmount": 9.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "2560",
+        "product": "F9481",
+        "productName": "CONTROLES NIVEAU 1 DIESEL",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 19.14,
+        "grossAmount": 19.14,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9819",
+        "productName": "CONTROLES NIVEAU 1 DIESEL",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 19.14,
+        "grossAmount": 19.14,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "2816",
+        "product": "F9482",
+        "productName": "CONTROLES NIVEAU 2 DIESEL",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 15.0,
+        "grossAmount": 15.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9821",
+        "productName": "CONTROLES NIVEAU 2 DIESEL",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 15.0,
+        "grossAmount": 15.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "3072",
+        "product": "F9483",
+        "productName": "CONTROLES NIVEAU 3 DIESEL",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 30.0,
+        "grossAmount": 30.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "9822",
+        "productName": "CONTROLES NIVEAU 3 DIESEL",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 30.0,
+        "grossAmount": 30.0,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        },
+        {
+        "lineID": "3328",
+        "product": "F9492",
+        "productName": "CONTROLES NIVEAU 4 DIESEL",
+        "productType": "F",
+        "qty": 1.0,
+        "unitPrice": 0.01,
+        "grossAmount": 0.01,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 20,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "653814",
+        "productName": "CONTROLE NIVEAU 4 DIESEL",
+        "productType": "S",
+        "GM": "038",
+        "qty": 1.0,
+        "unitPrice": 0.01,
+        "grossAmount": 0.01,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        }
+        ]
+        }
+        ]
+        }
+        ]
+        }

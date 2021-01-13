@@ -1,5 +1,6 @@
 package Step;
 
+import Helpers.Element.WaitHelper;
 import Step.Value.BaseStepValue;
 import View.Footer.FooterView;
 import View.Ticket.MergedDocumentsView;
@@ -12,17 +13,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class TicketStep {
 
-    /**
-     *
-     * @param ticket
-     * @param discountLabel
-     * @return
-     */
-    /*public static String getDiscountValue(Ticket ticket, String discountLabel)
-    {
-        // On récupère le montant de la promo
-        return ticket.getDiscountLineAmount(discountLabel);
-    }*/
+    // Temps de chargement du BT
+    private static final int BT_LOADING_TIME =1500;
 
     /**
      * Vide le ticket en cours
@@ -50,10 +42,15 @@ public class TicketStep {
      * @param driver
      */
     @Step("Fermeture des documents associés")
-    public static void closeMergedDocuments(WebDriver driver) {
+    public static void closeMergedDocuments(WebDriver driver) throws InterruptedException {
         MergedDocumentsView mergedDoc = new MergedDocumentsView(driver);
         // Click sur 'annuler'
         mergedDoc.clickCancelButton();
+        // Attente chargement cache
+        WaitHelper.waitUntilLoadIsFinished(driver,10);
+        // FIXME : L'affichage de BT se fait ligne par ligne, sans attente toutes les éléments ne sont pas chargés et les comparaisons de valeures deviennent fausses
+        // A terme conditionner cette attente par la visiblité d'un élément
+        Thread.sleep(BT_LOADING_TIME);
     }
 
     @Step("Vérifie que la valeur du ticket est égale à {stepValue.expectedValue}")

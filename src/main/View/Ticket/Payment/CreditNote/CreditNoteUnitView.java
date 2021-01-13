@@ -28,6 +28,6 @@ public class CreditNoteUnitView extends BaseView {
     {
         super.click(applyBtn);
         // On attend que le bouton disparaisse
-        WaitHelper.waitUntilComponentIsNotVisible(driver,5,applyBtn,false);
+        WaitHelper.waitUntilElementIsNotVisible(driver,5,applyBtn,false);
     }
 }

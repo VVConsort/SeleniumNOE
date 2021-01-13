@@ -8,20 +8,17 @@ import org.openqa.selenium.support.FindBy;
 
 public class FooterView extends BaseView {
 
+    // XPath du bouton "Confirmer suppression"
+    private static final String CONFIRM_DELETE_BTN_XPATH = "//button[@id=\"terminal_containerWindow_pointOfSale_modalConfirmReceiptDelete_footer_btnModalApplyDelete\"]";
     // Menu
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_mainMenu_menuHolder_mainMenuButton\"]")
     private WebElement menuBtn;
     // A payer
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_btnTotalToPay\"]")
     private WebElement totalToPayBtn;
-    // Nouveau ticket
     // Vider ticket
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_buttonDelete\"]")
     private WebElement deleteTicketBtn;
-
-    // Bouton confirmation suppression ticket
-    @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_modalConfirmReceiptDelete_footer_btnModalApplyDelete\"]")
-    private WebElement confirmDeleteBtn;
 
     public FooterView(WebDriver driver) {
         init(driver, this);
@@ -38,7 +35,7 @@ public class FooterView extends BaseView {
      * Click sur le bouton 'confirmer suppression ticket'
      */
     public void clickOnConfirmDeleteBtn() {
-        super.click(confirmDeleteBtn);
+        super.searchAndClickElement(CONFIRM_DELETE_BTN_XPATH);
     }
 
     /**

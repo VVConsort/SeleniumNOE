@@ -15,7 +15,7 @@ public class PosOpening extends BaseTest {
 
     @Parameters({"terminalKey", "profileName"})
     @Test(description = "Ouvre la caisse {terminalKey}")
-    public void openPos(@Optional String terminalKey, @Optional String profileName) throws MalformedURLException {
+    public void openPos(@Optional String terminalKey, @Optional String profileName) throws MalformedURLException, InterruptedException {
         // Si une caisse est spécifiée
         if (terminalKey != null && !terminalKey.isEmpty() && profileName != null && !profileName.isEmpty()) {
             // Ouvre OB et se log avec la caisse passée en paramètre

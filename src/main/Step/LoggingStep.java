@@ -20,7 +20,7 @@ public class LoggingStep {
      * @return le webdriver crée
      */
     @Step("Log sur OpenBravo")
-    public static WebDriver launchAndLogOB() throws MalformedURLException {
+    public static WebDriver launchAndLogOB() throws MalformedURLException, InterruptedException {
 
         // Récupération du driver et lancement de la caisse
         WebDriver driver = OpenBravoLauncher.launchOpenBravoWithCache();
@@ -39,7 +39,7 @@ public class LoggingStep {
     }
 
     @Step("Log sur OpenBravo avec la caisse {step.terminalKey}")
-    public static WebDriver launchAndLogOB(LoggingStepValue step) throws MalformedURLException {
+    public static WebDriver launchAndLogOB(LoggingStepValue step) throws MalformedURLException, InterruptedException {
 
         // Récupération du driver et lancement de la caisse
         WebDriver driver = OpenBravoLauncher.launchOpenBravoWithCache(step.url, step.terminalKey, step.chromeProfilePath, step.chromeProfile);

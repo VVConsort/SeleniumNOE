@@ -19,7 +19,7 @@ public class PopupHelper {
      */
     public static void clickOkBtn(WebDriver driver) {
         // Attenc l'apparation de la pop up
-        WaitHelper.waitUntilComponentIsVisble(driver, TIME_OUT_IN_SECONDS, okBtnXPath,false);
+        WaitHelper.waitUntilElementIsVisible(driver, TIME_OUT_IN_SECONDS, okBtnXPath,false);
         // Recherche le bouton OK par XPath
         WebElement okBtn = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(okBtnXPath));
         // Clic

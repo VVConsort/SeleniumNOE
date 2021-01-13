@@ -20,24 +20,9 @@ public class WaitHelper {
      * @param timeOutInSeconds
      * @param driver
      */
-    public static void waitUntilLoadIsFinished(WebDriver driver, int timeOutInSeconds) {
-        waitUntilComponentIsVisble(driver, timeOutInSeconds, LOADING_XPATH, false);
-        waitUntilComponentIsNotVisible(driver, timeOutInSeconds, LOADING_XPATH, false);
-        //waitForVisibleToInvisible(driver, timeOutInSeconds, LOADING_XPATH);
-    }
-
-    /**
-     * Attend l'apparition d'un élément et sa disparition
-     * @param driver
-     * @param timeOutInSeconds
-     * @param xPath
-     */
-    private static void waitForVisibleToInvisible(WebDriver driver, int timeOutInSeconds, String xPath) {
-        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-        // On attend une premiere fois que la fenêtre de chargement apparaisse
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
-        // Et qu'elle disparaisse
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xPath)));
+    public static void waitUntilLoadIsFinished(WebDriver driver, int timeOutInSeconds) throws InterruptedException {
+        waitUntilElementIsVisible(driver, timeOutInSeconds, LOADING_XPATH, false);
+        waitUntilElementIsNotVisible(driver, timeOutInSeconds, LOADING_XPATH, false);
     }
 
     /**
@@ -46,7 +31,7 @@ public class WaitHelper {
      * @param timeOutInSeconds
      * @param xPath
      */
-    public static void waitUntilComponentIsVisble(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
+    public static void waitUntilElementIsVisible(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
@@ -63,7 +48,7 @@ public class WaitHelper {
      * @param xPath
      * @param throwException
      */
-    public static void waitUntilComponentIsNotVisible(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
+    public static void waitUntilElementIsNotVisible(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xPath)));
@@ -73,7 +58,15 @@ public class WaitHelper {
             }
         }
     }
-    public static void waitUntilComponentIsNotVisible(WebDriver driver, int timeOutInSeconds, WebElement webElement, boolean throwException) {
+
+    /**
+     *
+     * @param driver
+     * @param timeOutInSeconds
+     * @param webElement
+     * @param throwException
+     */
+    public static void waitUntilElementIsNotVisible(WebDriver driver, int timeOutInSeconds, WebElement webElement, boolean throwException) {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
             wait.until(ExpectedConditions.invisibilityOf(webElement));

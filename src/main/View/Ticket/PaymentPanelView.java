@@ -68,7 +68,7 @@ public class PaymentPanelView extends BaseView {
         if (removeBtn != null) {
             super.click(removeBtn);
             // Attend que le boutton disparaisse
-            WaitHelper.waitUntilComponentIsNotVisible(driver, 5, removePaymentLineBtnXPath, false);
+            WaitHelper.waitUntilElementIsNotVisible(driver, 5, removePaymentLineBtnXPath, false);
         }
     }
 

@@ -11,7 +11,7 @@ public class PosOpeningStep {
 
     @Step("Ouvre la caisse")
     // driver, ?
-    public static void openPos(WebDriver driver) {
+    public static void openPos(WebDriver driver) throws InterruptedException {
         // Si cloture nécessaire
         PosClosingView closingView = new PosClosingView(driver);
         // Si une cloture est nécessaire
@@ -29,7 +29,7 @@ public class PosOpeningStep {
     }
 
     @Step("Cloture de caisse")
-    public static void closePos(WebDriver driver, PosClosingView closingView) {
+    public static void closePos(WebDriver driver, PosClosingView closingView) throws InterruptedException {
         // Next
         closingView.clickNextBtn();
         // Next
@@ -39,7 +39,7 @@ public class PosOpeningStep {
     }
 
     @Step("Ouvre la caisse")
-    public static void doOpenPos(WebDriver driver, PosOpeningView openingView) {
+    public static void doOpenPos(WebDriver driver, PosOpeningView openingView) throws InterruptedException {
         // Clic bouton "Suivant"
         openingView.clickNext();
         // Clic bouton "Suivant"

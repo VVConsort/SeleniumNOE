@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="NOE542-Promotion">
-    <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\TESTAUTO-002"/>
+    <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\Promotions"/>
     <test name="openPos">
         <classes>
             <class name="TestCases.PosOpening.PosOpening"/>
@@ -55,7 +55,7 @@
         </classes>
    </test>
   <!-- <test name="NOE774">
-        <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\TESTAUTO-002"/>
+        <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\Promotions"/>
         <parameter name="jsonFilePath" value="src/test/TestCases/Promotions/In/noe774.xml"/>
         <classes>
             <class name="TestCases.Promotions.NOE774"/>

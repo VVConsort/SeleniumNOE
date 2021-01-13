@@ -2,10 +2,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="OpenPOS">
     <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\default"/>
-    <!-- Ouvre la caisse en validant la monnaie -->
-    <test name="OpenPos">
-        <parameter name="productACode" value="10060271"/>
-        <parameter name="productBCode" value="2167322"/>
+
+    <test name="openPos">
         <classes>
             <class name="TestCases.PosOpening.PosOpening"/>
         </classes>
