@@ -30,6 +30,6 @@ public class NOE700 extends BaseTest {
         // Controle du montant du ticket
         TicketStep.checkTotalToPay(newStepValue(expectedTotal, false));
         // Vidage du ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteWorkOrder(currentDriver);
     }
 }

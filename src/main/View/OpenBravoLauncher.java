@@ -9,10 +9,6 @@ import java.net.MalformedURLException;
 
 public class OpenBravoLauncher {
 
-    public static final String USERNAME = "valentinvanhaute1";
-    public static final String AUTOMATE_KEY = "UfWYC3LfWLWjmy1qmn6n";
-    public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-
     /**
      * Lance Chrome à partir des paramètres spécifiés
      * @param url
@@ -26,6 +22,10 @@ public class OpenBravoLauncher {
         // Chemin vers le driver
         String pathToChromeDriver = "src/main/resources/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
+        // Proxy
+        System.setProperty("http.proxyHost", "Panoz4.nor.lan");
+        System.setProperty("http.proxyPort", "8080");
+
         // Chemin vers le profil contenant le cache OB
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("user-data-dir=" + chromeProfilePath);

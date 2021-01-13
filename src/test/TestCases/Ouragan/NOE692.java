@@ -27,7 +27,7 @@ public class NOE692 extends BaseTest {
         TicketStep.closeMergedDocuments(currentDriver);
         // Vérification du montant à payer
         TicketStep.checkTotalToPay(newStepValue(expectedPendingAmount,false));
-        // Vidage du ticket
-        TicketStep.deleteTicket(currentDriver);
+        // Vidage du BT
+        TicketStep.deleteWorkOrder(currentDriver);
     }
 }
