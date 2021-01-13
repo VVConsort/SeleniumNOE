@@ -23,12 +23,11 @@ public class OpenBravoLauncher {
         String pathToChromeDriver = "src/main/resources/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
         // Proxy
-        System.setProperty("java.net.useSystemProxies","true");
-        /*System.setProperty("https.proxyHost", "Panoz4.nor.lan");
+        // FIXME stockage du password proxy ?
+        System.setProperty("https.proxyHost", "Panoz4.nor.lan");
         System.setProperty("https.proxyPort", "8080");
-
         System.setProperty("https.proxyUser", "vvanhaute");
-        System.setProperty("https.proxyPassword", "SCEpter1986");*/
+        System.setProperty("https.proxyPassword", "SCEpter1986");
 
         // Chemin vers le profil contenant le cache OB
         ChromeOptions chromeOptions = new ChromeOptions();
