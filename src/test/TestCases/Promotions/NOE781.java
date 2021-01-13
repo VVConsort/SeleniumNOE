@@ -18,12 +18,12 @@ import java.net.MalformedURLException;
 /**
  * Remise dédiée Magasin : offre sur une région spécifique
  */
-public class NOE787 extends BaseTest {
+public class NOE781 extends BaseTest {
 
     @Parameters({"familyDiscountProduct", "discountLabel", "expectedDiscountAmount", "expectedTotalWithDiscount", "expectedTotalWithoutDiscount", "noDiscountPos", "noDiscountChromeProfilePath", "noDiscountChromeProfileName"})
     @Test(description = "Remise dédiée Magasin : offre sur une région spécifique")
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-787")
-    public void noe787(String familyDiscountProduct, String discountLabel, String expectedDiscountAmount, String expectedTotalWithDiscount, String expectedTotalWithoutDiscount, String noDiscountPos, String noDiscountChromeProfilePath, String noDiscountChromeProfileName) throws MalformedURLException, InterruptedException {
+    public void noe781(String familyDiscountProduct, String discountLabel, String expectedDiscountAmount, String expectedTotalWithDiscount, String expectedTotalWithoutDiscount, String noDiscountPos, String noDiscountChromeProfilePath, String noDiscountChromeProfileName) throws MalformedURLException, InterruptedException {
         // Lance et se log sur OB
         currentDriver = LoggingStep.launchAndLogOB();
         // On vide le ticket

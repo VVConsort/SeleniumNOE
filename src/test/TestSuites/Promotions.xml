@@ -34,7 +34,7 @@
                    value="C://Users//APP-vvanhaute//AppData//Local//Google//Chrome//User data"/>
         <parameter name="noDiscountChromeProfileName" value="Profile 3"/>
         <classes>
-            <class name="TestCases.Promotions.NOE787"/>
+            <class name="TestCases.Promotions.NOE781"/>
         </classes>
     </test>
     <test name="NOE767">
