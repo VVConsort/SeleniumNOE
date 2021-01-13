@@ -23,20 +23,20 @@
              <class name="TestCases.Promotions.NOE762"/>
          </classes>
      </test>
-    <!-- <test name="NOE787">
+    <test name="NOE787">
         <parameter name="familyDiscountProduct" value="361559"/>
         <parameter name="discountLabel" value="AUTO-NOE787"/>
         <parameter name="expectedDiscountAmount" value="-0.97"/>
         <parameter name="expectedTotalWithDiscount" value="8.75"/>
         <parameter name="expectedTotalWithoutDiscount" value="9.72"/>
-        <parameter name="noDiscountPos" value="TESTAUT001"/>
+        <parameter name="noDiscountPos" value="TESTAUT-001"/>
         <parameter name="noDiscountChromeProfilePath"
-                   value="C:\\Users\\ValentinVANHAUTE\\AppData\\Local\\Google\\Chrome\\User Data\\"/>
-        <parameter name="noDiscountChromeProfileName" value="Profile 2"/>
+                   value="C://Users//APP-vvanhaute//AppData//Local//Google//Chrome//User data"/>
+        <parameter name="noDiscountChromeProfileName" value="Profile 3"/>
         <classes>
             <class name="TestCases.Promotions.NOE787"/>
         </classes>
-    </test> -->
+    </test>
     <test name="NOE767">
         <parameter name="discountLabel" value="AUTO-NOE767"/>
         <parameter name="discountedProductCode" value="233697"/>
