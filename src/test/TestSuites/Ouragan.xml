@@ -2,11 +2,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="NOE517-Ouragan">
     <parameter name="propertiesFilePath" value="src/test/TestSuites/Properties/Ouragan"/>
-    <!--<test name="openPos">
+    <test name="openPos">
         <classes>
             <class name="TestCases.PosOpening.PosOpening"/>
         </classes>
-    </test>-->
+    </test>
+    <test name="NOE692">
+        <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE692/webOrder.xml"/>
+        <parameter name="expectedPendingAmount" value= "0.00"/>
+        <classes>
+            <class name="TestCases.Ouragan.NOE692"/>
+        </classes>
+    </test>
     <test name="NOE700">
         <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE700/manualDiscount.xml"/>
         <parameter name="discountLabel" value="GESTE COMMERCIAL - €"/>
