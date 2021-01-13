@@ -26,8 +26,8 @@ public class OpenBravoLauncher {
         System.setProperty("https.proxyHost", "Panoz4.nor.lan");
         System.setProperty("https.proxyPort", "8080");
 
-        System.setProperty("https.proxyUser", "vvanhaute");
-        System.setProperty("https.proxyPassword", "SCEpter1986");
+        /*System.setProperty("https.proxyUser", "vvanhaute");
+        System.setProperty("https.proxyPassword", "SCEpter1986");*/
 
         // Chemin vers le profil contenant le cache OB
         ChromeOptions chromeOptions = new ChromeOptions();
