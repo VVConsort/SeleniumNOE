@@ -24,8 +24,8 @@ public class OpenBravoLauncher {
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
         // Proxy
         // FIXME stockage du password proxy ?
-        System.setProperty("https.proxyHost", "Panoz4.nor.lan");
-        System.setProperty("https.proxyPort", "8080");
+        System.setProperty("http.proxyHost", "Panoz4.nor.lan");
+        System.setProperty("http.proxyPort", "8080");
         System.setProperty("http.proxyUser", "vvanhaute");
         System.setProperty("http.proxyPassword", "SCEpter1986");
 
