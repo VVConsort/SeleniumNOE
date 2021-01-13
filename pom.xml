@@ -32,6 +32,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.6/aspectjweaver-1.9.6.jar"
+                        -Djava.net.useSystemProxies=true
                     </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteFile}</suiteXmlFile>
