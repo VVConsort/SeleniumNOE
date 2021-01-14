@@ -7,6 +7,7 @@ import View.Log.LogScreenView;
 import Step.Value.LoggingStepValue;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.MalformedURLException;
 
@@ -20,10 +21,10 @@ public class LoggingStep {
      * @return le webdriver crée
      */
     @Step("Log sur OpenBravo")
-    public static WebDriver launchAndLogOB() throws MalformedURLException, InterruptedException {
+    public static ChromeDriver launchAndLogOB() throws MalformedURLException, InterruptedException {
 
         // Récupération du driver et lancement de la caisse
-        WebDriver driver = OpenBravoLauncher.launchOpenBravoWithCache();
+        ChromeDriver driver = OpenBravoLauncher.launchOpenBravoWithCache();
         // Ecran de loggin
         LogScreenView logScreenView = new LogScreenView(driver);
         // Set l'utilisateur
@@ -39,10 +40,10 @@ public class LoggingStep {
     }
 
     @Step("Log sur OpenBravo avec la caisse {step.terminalKey}")
-    public static WebDriver launchAndLogOB(LoggingStepValue step) throws MalformedURLException, InterruptedException {
+    public static ChromeDriver launchAndLogOB(LoggingStepValue step) throws MalformedURLException, InterruptedException {
 
         // Récupération du driver et lancement de la caisse
-        WebDriver driver = OpenBravoLauncher.launchOpenBravoWithCache(step.url, step.terminalKey, step.chromeProfilePath, step.chromeProfile);
+        ChromeDriver driver = OpenBravoLauncher.launchOpenBravoWithCache(step.url, step.terminalKey, step.chromeProfilePath, step.chromeProfile);
         // On attend le chargement de la page
         // Ecran de loggin
         LogScreenView logScreenView = new LogScreenView(driver);

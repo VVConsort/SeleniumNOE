@@ -18,7 +18,7 @@ public class OpenBravoLauncher {
      * @return
      * @throws MalformedURLException
      */
-    public static WebDriver launchOpenBravoWithCache(String url, String terminalKey, String chromeProfilePath, String chromeProfileName) throws MalformedURLException {
+    public static ChromeDriver launchOpenBravoWithCache(String url, String terminalKey, String chromeProfilePath, String chromeProfileName) throws MalformedURLException {
         // Chemin vers le driver
         String pathToChromeDriver = "src/main/resources/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
@@ -30,7 +30,7 @@ public class OpenBravoLauncher {
         // Lance Chrome en plein écran, sinon certains boutons ne seront pas clickable
         //chromeOptions.addArguments("--start-maximized");
         //RemoteWebDriver driver = new ChromeDriver(chromeProfile);
-        WebDriver driver = new ChromeDriver(chromeOptions);
+        ChromeDriver driver = new ChromeDriver(chromeOptions);
         // Ajout des paramètres à l'URL
         driver.get(url + "/?terminal=" + terminalKey);
         // Retourne le driver
@@ -41,7 +41,7 @@ public class OpenBravoLauncher {
      * On lance OB en utilisant URL, caisse et profile Chrome définies dans les Properties de la TestSuite
      * @return
      */
-    public static WebDriver launchOpenBravoWithCache() throws MalformedURLException {
+    public static ChromeDriver launchOpenBravoWithCache() throws MalformedURLException {
         return launchOpenBravoWithCache(TestSuiteProperties.OB_POS_URL, TestSuiteProperties.TERMINAL_KEY, TestSuiteProperties.CHROME_PROFILE_PATH, TestSuiteProperties.CHROME_PROFILE);
     }
 }

@@ -7,9 +7,7 @@ import Step.Value.*;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -59,7 +57,7 @@ public class BaseTest {
      * Ferme le navigateur
      */
     protected void closeBrowser() {
-        if (currentDriver != null && currentDriver.getSessionId()!= null) {
+        if (currentDriver != null && currentDriver.getSessionId() != null) {
             // Ferme le navigateur
             currentDriver.quit();
         }
@@ -98,10 +96,15 @@ public class BaseTest {
         // Si la méthode est en échec, on prend un screenshot pour l'attacher au rapport
         if (result.getStatus() == ITestResult.FAILURE) {
             hasError = true;
-            if (currentDriver != null && currentDriver.getSessionId()!= null) {
+            if (currentDriver != null && currentDriver.getSessionId() != null) {
                 attachScreenshot();
             }
         }
+    }
+
+    private boolean isDriverClosed()
+    {
+        return currentDriver != null;
     }
 
     /**
