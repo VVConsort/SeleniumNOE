@@ -68,11 +68,15 @@ public class BaseTest {
     }
 
     @AfterTest
-    protected void onAfterTest() {
+    protected void onAfterTest(ITestResult result) {
         // Fermeture du navigateur
         closeBrowser();
         // Vérification des valeures comparées
         assertAll();
+        // Si le test est en échec, on prend un screenshot pour l'attacher au rapport
+        if (result.getStatus() == ITestResult.FAILURE) {
+            attachScreenshot();
+        }
     }
 
     // FIXME
