@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 public class PosOpeningStep {
 
     @Step("Ouvre la caisse")
-    // driver, ?
     public static void openPos(WebDriver driver) throws InterruptedException {
         // Si cloture nécessaire
         PosClosingView closingView = new PosClosingView(driver);

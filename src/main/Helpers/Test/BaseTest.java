@@ -2,15 +2,16 @@ package Helpers.Test;
 
 import Enums.PaymentMean;
 import Helpers.Test.TestSuiteProperties.PropertiesLoader;
-import View.Ticket.ReceiptView;
 import Step.TicketStep;
 import Step.Value.*;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
@@ -19,8 +20,6 @@ public class BaseTest {
     public WebDriver currentDriver;
     // Soft assert
     public SoftAssert softAssert = new SoftAssert();
-    // Page ticket
-    private ReceiptView _receiptViewPage;
 
     /**
      * Charge les properties de la TestSuite
@@ -72,10 +71,10 @@ public class BaseTest {
 
     @AfterTest
     protected void onAfterTest() {
-        // Vérification des valeures comparées
-        assertAll();
         // Fermeture du navigateur
         closeBrowser();
+        // Vérification des valeures comparées
+        assertAll();
     }
 
     // FIXME
@@ -94,17 +93,6 @@ public class BaseTest {
     @Attachment(value = "Page screenshot", type = "image/png")
     protected byte[] attachScreenshot() {
         return ((TakesScreenshot) currentDriver).getScreenshotAs(OutputType.BYTES);
-    }
-
-    /**
-     * Retourne la page ticket en l'instanciant si nécessaire
-     * @return
-     */
-    protected ReceiptView getTicketPage() {
-        if (_receiptViewPage == null) {
-            _receiptViewPage = new ReceiptView(currentDriver);
-        }
-        return _receiptViewPage;
     }
 
     /**

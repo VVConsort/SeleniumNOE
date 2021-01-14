@@ -23,7 +23,7 @@
              <class name="TestCases.Promotions.NOE762"/>
          </classes>
      </test>
-    <test name="NOE787">
+    <test name="NOE781">
         <parameter name="familyDiscountProduct" value="361559"/>
         <parameter name="discountLabel" value="AUTO-NOE787"/>
         <parameter name="expectedDiscountAmount" value="-0.97"/>
