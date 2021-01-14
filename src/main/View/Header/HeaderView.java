@@ -24,7 +24,7 @@ public class HeaderView extends BaseView {
      * Clic sur le bouton Scanner
      */
     public ScannerView clickOnScanBtn() {
-        click(scannerBtn);
+        super.click(scannerBtn);
         // Retourne un objet Scanner
         return new ScannerView(driver);
     }
