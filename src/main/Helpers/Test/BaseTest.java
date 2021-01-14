@@ -8,10 +8,8 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
@@ -78,13 +76,13 @@ public class BaseTest {
     }
 
     // FIXME
-    /*@AfterMethod
-    //protected void onMethodEnd(ITestResult result) {
+    @AfterMethod
+    protected void onMethodEnd(ITestResult result) {
         // Si la méthode est en échec, on prend un screenshot pour l'attacher au rapport
         if (result.getStatus() == ITestResult.FAILURE) {
             attachScreenshot();
         }
-    }*/
+    }
 
     /**
      * Prend un screenshot et l'attache au rapport
