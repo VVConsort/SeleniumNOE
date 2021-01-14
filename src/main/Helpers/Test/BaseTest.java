@@ -66,10 +66,9 @@ public class BaseTest {
      */
     protected void assertAll() {
         // On visualise les comparaisons fausses
-        try{
+        try {
             softAssert.assertAll();
-        }catch (AssertionError err)
-        {
+        } catch (AssertionError err) {
             hasError = true;
             throw err;
         }
@@ -81,7 +80,7 @@ public class BaseTest {
         // Vérification des valeures comparées
         assertAll();
         // Si le test est en échec, on prend un screenshot pour l'attacher au rapport
-        if (hasError) {
+        if (hasError && currentDriver != null) {
             attachScreenshot();
         }
         // Fermeture du navigateur
@@ -94,7 +93,9 @@ public class BaseTest {
         // Si la méthode est en échec, on prend un screenshot pour l'attacher au rapport
         if (result.getStatus() == ITestResult.FAILURE) {
             hasError = true;
-            attachScreenshot();
+            if (currentDriver != null) {
+                attachScreenshot();
+            }
         }
     }
 
@@ -133,7 +134,7 @@ public class BaseTest {
         return new TicketStepValue(expectedValue, currentDriver, softAssert, stopTestOnFail);
     }
 
-    protected PaymentStepValue newPaymentStepValue(Object expectedValue, String paymentAmount, PaymentMean paymentMean , String paymentId, boolean stopTestOnFail) {
-        return new PaymentStepValue(expectedValue, paymentAmount,paymentMean,paymentId,currentDriver, softAssert, stopTestOnFail);
+    protected PaymentStepValue newPaymentStepValue(Object expectedValue, String paymentAmount, PaymentMean paymentMean, String paymentId, boolean stopTestOnFail) {
+        return new PaymentStepValue(expectedValue, paymentAmount, paymentMean, paymentId, currentDriver, softAssert, stopTestOnFail);
     }
 }
