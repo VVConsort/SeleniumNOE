@@ -43,7 +43,7 @@ public class BaseView {
             webElement.click();
         }
         // Si le DOM a changé on  re recherche l'élément
-        catch (StaleElementReferenceException ex) {
+        catch (Exception ex) {
             // récupère l'ID de l'élément
             String id = webElement.getAttribute("id");
             // On recherche l'élément à partir de l'id extraite

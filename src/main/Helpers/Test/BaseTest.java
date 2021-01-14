@@ -8,6 +8,7 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -57,8 +58,10 @@ public class BaseTest {
      * Ferme le navigateur
      */
     protected void closeBrowser() {
-        // Ferme le navigateur
-        currentDriver.quit();
+        if (currentDriver != null) {
+            // Ferme le navigateur
+            currentDriver.quit();
+        }
     }
 
     /**
@@ -77,14 +80,15 @@ public class BaseTest {
 
     @AfterTest
     protected void onAfterTest() {
+        // Fermeture du navigateur
+        closeBrowser();
         // Vérification des valeures comparées
         assertAll();
         // Si le test est en échec, on prend un screenshot pour l'attacher au rapport
-        if (hasError && currentDriver != null) {
+        /*if (hasError && currentDriver != null) {
             attachScreenshot();
-        }
-        // Fermeture du navigateur
-        closeBrowser();
+        }*/
+
     }
 
     // FIXME

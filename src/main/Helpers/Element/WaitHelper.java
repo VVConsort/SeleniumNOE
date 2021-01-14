@@ -31,15 +31,16 @@ public class WaitHelper {
      * @param timeOutInSeconds
      * @param xPath
      */
-    public static void waitUntilElementIsVisible(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
+    public static WebElement waitUntilElementIsVisible(WebDriver driver, int timeOutInSeconds, String xPath, boolean throwException) {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
+           return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xPath)));
         } catch (TimeoutException e) {
             if (throwException) {
                 throw e;
             }
         }
+        return null;
     }
 
     /**

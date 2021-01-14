@@ -7,9 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class InvalidVoucherView extends BaseView {
 
-    // Boutton OK
-    @FindBy (xpath = "//*[@id=\"terminal_confirmationContainer_dynamicConfirmationPopup_footer_confirmationPopup_btnOk\"]")
-    WebElement okButton;
+    // Xpath Boutton OK
+    private static final String BTN_OK_XPATH = "//*[@id=\"terminal_confirmationContainer_dynamicConfirmationPopup_footer_confirmationPopup_btnOk\"]";
 
 
     public InvalidVoucherView(WebDriver driver) {
@@ -18,6 +17,6 @@ public class InvalidVoucherView extends BaseView {
 
     public void clickOK()
     {
-        super.click(okButton);
+        super.searchAndClickElement(BTN_OK_XPATH);
     }
 }

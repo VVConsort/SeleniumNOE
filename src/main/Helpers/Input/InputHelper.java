@@ -1,17 +1,21 @@
 package Helpers.Input;
 
+import Helpers.Element.WebElementHelper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import static java.awt.event.KeyEvent.*;
 
 /*
  * Classe utilitaire pour les entrées clavier
  */
 public class InputHelper {
 
-    // Element à envoyer les keys
-    WebElement webElement;
+    // Xpath du listener d'input
+    private static final String KEY_LISTENER_XPATH = "//input[@id=\"_focusKeeper\"]";
+
+    // Listener d'input
+    private WebElement inputListener;
 
     /*private void doType(int keyCodes) {
         doType(keyCodes);
@@ -22,22 +26,31 @@ public class InputHelper {
     }*/
 
     private void doType(Keys key) {
-        webElement.sendKeys(Keys.chord(key));
+        inputListener.sendKeys(Keys.chord(key));
     }
 
     private void doType(String charac) {
-        webElement.sendKeys(Keys.chord(charac));
+        inputListener.sendKeys(Keys.chord(charac));
     }
 
-    public void type(CharSequence characters, WebElement webElement) {
-        this.webElement = webElement;
+    public void type(CharSequence characters, WebDriver driver) {
+        // On récupère le listener d'input
+        inputListener = getInputListener(driver);
         int length = characters.length();
         for (int i = 0; i < length; i++) {
             char character = characters.charAt(i);
             type(character);
         }
         // Appuie sur Entrée
-        webElement.sendKeys(Keys.ENTER);
+        inputListener.sendKeys(Keys.ENTER);
+    }
+
+    /**
+     * Retourne le listener d'input
+     * @return
+     */
+    private WebElement getInputListener(WebDriver driver) {
+        return WebElementHelper.getElement(driver, By.xpath(KEY_LISTENER_XPATH));
     }
 
     private void type(char character) {
