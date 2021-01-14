@@ -10,9 +10,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class MergedDocumentsView extends BaseView {
 
-    // Bouton cancel
-    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_OBMTR_UI_ModalOpenMergeRelatedReceipts_footer_openMergeRelatedReceipts_btnCancel\"]")
-    private WebElement cancelBtn;
+    // Xpath du bouton "Fermer document associés"
+    private static final String CANCEL_BTN_XPATH="//*[@id=\\\"terminal_containerWindow_pointOfSale_OBMTR_UI_ModalOpenMergeRelatedReceipts_footer_openMergeRelatedReceipts_btnCancel\\\"]\"";
 
     public MergedDocumentsView(WebDriver driver)
     {
@@ -20,10 +19,10 @@ public class MergedDocumentsView extends BaseView {
     }
 
     /**
-     * Appuie sur le bouton annuler
+     * Appuie sur le bouton annuler  si il existe
      */
     public void clickCancelButton()
     {
-        super.click(cancelBtn);
+        super.searchAndClickElement(CANCEL_BTN_XPATH);
     }
 }
