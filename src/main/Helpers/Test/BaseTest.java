@@ -18,6 +18,8 @@ public class BaseTest {
     public WebDriver currentDriver;
     // Soft assert
     public SoftAssert softAssert = new SoftAssert();
+    // Flag signalant que le test en erreur
+    private boolean hasError = false;
 
     /**
      * Charge les properties de la TestSuite
@@ -64,17 +66,24 @@ public class BaseTest {
      */
     protected void assertAll() {
         // On visualise les comparaisons fausses
-        softAssert.assertAll();
+        try{
+            softAssert.assertAll();
+        }catch (AssertionError err)
+        {
+            hasError = true;
+            throw err;
+        }
+
     }
 
     @AfterTest
-    protected void onAfterTest(ITestResult result) {
+    protected void onAfterTest() {
         // Fermeture du navigateur
         closeBrowser();
         // Vérification des valeures comparées
         assertAll();
         // Si le test est en échec, on prend un screenshot pour l'attacher au rapport
-        if (result.getStatus() == ITestResult.FAILURE) {
+        if (hasError) {
             attachScreenshot();
         }
     }
@@ -84,6 +93,7 @@ public class BaseTest {
     protected void onMethodEnd(ITestResult result) {
         // Si la méthode est en échec, on prend un screenshot pour l'attacher au rapport
         if (result.getStatus() == ITestResult.FAILURE) {
+            hasError = true;
             attachScreenshot();
         }
     }
