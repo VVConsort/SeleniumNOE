@@ -37,6 +37,8 @@ public class NOE655 extends BaseTest {
         PaymentStep.finalizeOrder(new FinalizePaymentStepValue(SendTicketMode.MAIL_ONLY, null, currentDriver, softAssert, false));
         // Vérification de son état
         System.out.println("done");
+        //TODO
+        //OuraganStep.checkOrderStat(numCommande,expectedState)
 
     }
 }

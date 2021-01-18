@@ -3,13 +3,12 @@ package Helpers.Test;
 import Enums.PaymentMean;
 import Helpers.Test.TestSuiteProperties.PropertiesLoader;
 import Step.TicketStep;
-import Step.Value.*;
+import Step.Value.BaseStepValue;
+import Step.Value.DiscountStepValue;
+import Step.Value.LoggingStepValue;
 import Step.Value.Payment.PaymentStepValue;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import Step.Value.TicketStepValue;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
@@ -72,7 +71,6 @@ public class BaseTest {
         try {
             softAssert.assertAll();
         } catch (AssertionError err) {
-            attachScreenshot();
             throw err;
         }
 
@@ -85,7 +83,7 @@ public class BaseTest {
             softAssert.assertAll();
         } catch (AssertionError err) {
             // Prend un screenshot
-            attachScreenshot();
+            ReportHelper.attachScreenshot(currentDriver);
             // Fermeture du navigateur
             closeBrowser();
             throw err;
@@ -96,12 +94,12 @@ public class BaseTest {
 
     // FIXME
     @AfterMethod
-    protected void onMethodEnd(ITestResult result) {
+    /*protected void onMethodEnd(ITestResult result) {
         // On prend un screenshot pour l'attacher au rapport
         if (!isDriverClosed()) {
             attachScreenshot();
         }
-    }
+    }*/
 
     /**
      * Renvoie vrai si le driver/navigateur est fermé
@@ -109,15 +107,6 @@ public class BaseTest {
      */
     private boolean isDriverClosed() {
         return currentDriver == null || currentDriver.getSessionId() == null;
-    }
-
-    /**
-     * Prend un screenshot et l'attache au rapport
-     * @return
-     */
-    @Attachment(value = "Page screenshot", type = "image/png")
-    protected byte[] attachScreenshot() {
-        return ((TakesScreenshot) currentDriver).getScreenshotAs(OutputType.BYTES);
     }
 
     /**

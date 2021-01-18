@@ -1,5 +1,6 @@
 package Step.Value;
 
+import Helpers.Test.ReportHelper;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -30,6 +31,8 @@ public class BaseStepValue {
         } else {
             soft.assertEquals(valueToTest,expectedValue);
         }
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
     }
 
     /**
@@ -43,6 +46,8 @@ public class BaseStepValue {
         } else {
             soft.assertNotNull(valueToTest);
         }
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
     }
 
     /**
@@ -56,10 +61,14 @@ public class BaseStepValue {
         } else {
             soft.assertNull(valueToTest);
         }
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
     }
 
     public String getExpectedValue()
     {
         return String.valueOf(expectedValue);
     }
+
+
 }
