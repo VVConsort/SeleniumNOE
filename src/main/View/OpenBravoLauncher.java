@@ -28,6 +28,12 @@ public class OpenBravoLauncher {
         // Le nom de dossier du profil
         chromeOptions.addArguments("profile-directory=" + chromeProfileName);
         // Lance Chrome en plein écran, sinon certains boutons ne seront pas clickable
+        chromeOptions.addArguments("start-maximized"); // open Browser in maximized mode
+        chromeOptions.addArguments("disable-infobars"); // disabling infobars
+        chromeOptions.addArguments("--disable-extensions"); // disabling extensions
+        chromeOptions.addArguments("--disable-gpu"); // applicable to windows os only
+        chromeOptions.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        chromeOptions.addArguments("--no-sandbox"); // Bypass OS security model
         //chromeOptions.addArguments("--start-maximized");
         //RemoteWebDriver driver = new ChromeDriver(chromeProfile);
         ChromeDriver driver = new ChromeDriver(chromeOptions);

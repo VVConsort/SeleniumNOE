@@ -1,0 +1,55 @@
+{
+        "messageId": "30db96c7-918a-44e2-a85f-f064e500e3ef",
+        "posTerminal": "0003",
+        "channel": "External",
+        "data": [
+        {
+        "internalDocumentType": "BRW",
+        "collaboratorId": "05",
+        "documentNo": "000810",
+        "orderReference": "000810",
+        "norautoClientType": "PAR",
+        "businessPartner": "82553b9a-b9e3-11ea-a567-09abe3925bd2",
+        "paidDeposit": 0,
+        "ticketActions": 0,
+        "currency": "EUR",
+        "grossAmount": 30.3,
+        "lines": [
+        {
+        "statusReservation": "R",
+        "lineID": "1",
+        "product": "230380",
+        "productName": "PACK LUXE TRIANGLE+GILET+PHARM",
+        "productType": "I",
+        "GM": "921",
+        "qty": 1,
+        "unitPrice": 26.5,
+        "grossAmount": 26.5,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 278
+        },
+        {
+        "statusReservation": "R",
+        "lineID": "2",
+        "product":"679128",
+        "productName":"LAVE-GLACE ETE 1ER PRIX 5L",
+        "productType": "I",
+        "GM": "412",
+        "qty": 1,
+        "unitPrice": 1.99,
+        "grossAmount": 1.99,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 278
+        }
+        ]
+        }
+        ]
+        }

@@ -1,4 +1,4 @@
-package View.Ticket;
+package View.Ticket.Payment;
 
 import Enums.PaymentMean;
 import Helpers.Element.WaitHelper;
@@ -13,15 +13,17 @@ import org.openqa.selenium.support.FindBy;
 public class PaymentPanelView extends BaseView {
     // Xpath boutton "Tout payer"
     private static final String PAY_ALL_BTN_XPATH = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_exactbutton\"]";
-
+    // XPath du bouton "Finaliser"
+    private static final String FINALIZE_BTN_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_donebutton\"]";
     // Boutton 'Avoir'
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide3_GCNV_payment.creditnote_button\"]")
     private WebElement creditNoteBtn;
-
+    // Boutton 'Espece'
+    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide2_OBPOS_payment.cash_button\"]")
+    private WebElement cashBtn;
     // Montant restant à règler
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_totalpending\"]")
     private WebElement totalPending;
-
     // Mode de paiement sélectionné
     private PaymentMean selectedPayment;
 
@@ -38,6 +40,14 @@ public class PaymentPanelView extends BaseView {
     }
 
     /**
+     * Clique sur le boutton "Espèces"
+     */
+    public void clickCashBtn() {
+        super.click(cashBtn);
+        selectedPayment = PaymentMean.CASH;
+    }
+
+    /**
      * Appuie sur le boutton "Tout payer"
      */
     public BaseView clickPayAllBtn() {
@@ -48,7 +58,7 @@ public class PaymentPanelView extends BaseView {
             // On renvoie la vue correspondante au mode de paiement sélectionné
             switch (selectedPayment) {
                 case CREDIT_NOTE -> paymentPage = new CreditNoteSearchView(driver);
-                // TODO : les autres mode de paiement
+                case CASH -> paymentPage = this;
             }
         }
         return paymentPage;
@@ -96,6 +106,15 @@ public class PaymentPanelView extends BaseView {
             result = paymentLineElem.getAttribute("id");
         }
         return result;
+    }
+
+    /**
+     * Finalise la commande
+     */
+    public SendTicketView clickFinalize() {
+
+        super.searchAndClickElement(FINALIZE_BTN_XPATH);
+        return new SendTicketView(driver);
     }
 
 }

@@ -28,7 +28,7 @@ public class NOE767 extends BaseTest {
         // Ajout du troisieme produit
         addDiscountedProductAndCheckDiscount(discountedProductCode, thirdDiscountedPrice, discountLabel);
         // Vide le ticket
-        deleteTicket();
+        TicketStep.deleteTicket(currentDriver);
     }
 
     /**

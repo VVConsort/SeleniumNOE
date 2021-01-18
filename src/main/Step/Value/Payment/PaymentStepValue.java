@@ -1,10 +1,11 @@
-package Step.Value;
+package Step.Value.Payment;
 
 import Enums.PaymentMean;
+import Step.Value.BaseStepValue;
 import org.openqa.selenium.WebDriver;
 import org.testng.asserts.SoftAssert;
 
-public class PaymentStepValue extends BaseStepValue{
+public class PaymentStepValue extends BaseStepValue {
     //  TODO Montant à payer, si vide = tout payer
     public String paymentAmount;
     // Moyen de paiement à utiliser

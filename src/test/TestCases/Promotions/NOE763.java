@@ -25,7 +25,7 @@ public class NOE763 extends BaseTest {
         // Vérifie le montant à payer
         TicketStep.checkTotalToPay( newTicketStepValue(expectedTotalAmount,false));
         // Vidage du ticket
-        deleteTicket();
+        TicketStep.deleteTicket(currentDriver);
     }
 
 }

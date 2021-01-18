@@ -4,6 +4,7 @@ import Enums.PaymentMean;
 import Helpers.Test.TestSuiteProperties.PropertiesLoader;
 import Step.TicketStep;
 import Step.Value.*;
+import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,8 +19,6 @@ public class BaseTest {
     public ChromeDriver currentDriver;
     // Soft assert
     public SoftAssert softAssert = new SoftAssert();
-    // Flag signalant que le test en erreur
-    private boolean hasError = false;
 
     /**
      * Charge les properties de la TestSuite
@@ -47,7 +46,7 @@ public class BaseTest {
     }
 
     /**
-     * Vide le ticket et ferme chrome
+     * Vide le ticket
      */
     protected void deleteTicket() {
         TicketStep.deleteTicket(currentDriver);
@@ -57,7 +56,9 @@ public class BaseTest {
      * Ferme le navigateur
      */
     protected void closeBrowser() {
-        if (currentDriver != null && currentDriver.getSessionId() != null) {
+        if (!isDriverClosed()) {
+            // Screenshot
+            //attachScreenshot();
             // Ferme le navigateur
             currentDriver.quit();
         }
@@ -71,7 +72,7 @@ public class BaseTest {
         try {
             softAssert.assertAll();
         } catch (AssertionError err) {
-            hasError = true;
+            attachScreenshot();
             throw err;
         }
 
@@ -79,32 +80,35 @@ public class BaseTest {
 
     @AfterTest
     protected void onAfterTest() {
+        // On test les comparaisons
+        try {
+            softAssert.assertAll();
+        } catch (AssertionError err) {
+            // Prend un screenshot
+            attachScreenshot();
+            // Fermeture du navigateur
+            closeBrowser();
+            throw err;
+        }
         // Fermeture du navigateur
         closeBrowser();
-        // Vérification des valeures comparées
-        assertAll();
-        // Si le test est en échec, on prend un screenshot pour l'attacher au rapport
-        /*if (hasError && currentDriver != null) {
-            attachScreenshot();
-        }*/
-
     }
 
     // FIXME
     @AfterMethod
     protected void onMethodEnd(ITestResult result) {
-        // Si la méthode est en échec, on prend un screenshot pour l'attacher au rapport
-        if (result.getStatus() == ITestResult.FAILURE) {
-            hasError = true;
-            if (currentDriver != null && currentDriver.getSessionId() != null) {
-                attachScreenshot();
-            }
+        // On prend un screenshot pour l'attacher au rapport
+        if (!isDriverClosed()) {
+            attachScreenshot();
         }
     }
 
-    private boolean isDriverClosed()
-    {
-        return currentDriver != null;
+    /**
+     * Renvoie vrai si le driver/navigateur est fermé
+     * @return
+     */
+    private boolean isDriverClosed() {
+        return currentDriver == null || currentDriver.getSessionId() == null;
     }
 
     /**

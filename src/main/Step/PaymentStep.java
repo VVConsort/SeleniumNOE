@@ -1,12 +1,15 @@
 package Step;
 
-import Step.Value.PaymentStepValue;
+import Enums.SendTicketMode;
+import Step.Value.Payment.FinalizePaymentStepValue;
+import Step.Value.Payment.PaymentStepValue;
 import View.Footer.FooterView;
 import View.Footer.Menu.Voucher.InvalidVoucherView;
 import View.Footer.Menu.Voucher.VoucherCodeInputView;
 import View.Ticket.Payment.CreditNote.CreditNoteSearchView;
 import View.Ticket.Payment.CreditNote.CreditNoteUnitView;
-import View.Ticket.PaymentPanelView;
+import View.Ticket.Payment.PaymentPanelView;
+import View.Ticket.Payment.SendTicketView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
@@ -44,8 +47,8 @@ public class PaymentStep {
      * @param stepValue
      */
     private static CreditNoteUnitView getCreditNoteUnitView(PaymentStepValue stepValue) {
-        // Clic sur le boutton "A payer" du footer
         FooterView footerView = new FooterView(stepValue.driver);
+        // Clic sur le boutton "A payer" du footer
         footerView.clickOnTotalToPayBtn();
         // Panel de paiement
         PaymentPanelView paymentPanel = new PaymentPanelView(stepValue.driver);
@@ -96,6 +99,39 @@ public class PaymentStep {
         if (invalidView != null) {
             // Ferme la fenetre d'erreur
             invalidView.clickOK();
+        }
+    }
+
+    @Step("Paie en espèces")
+    public static void payWithCash(PaymentStepValue stepValue) {
+        // Vue panneau paiement
+        PaymentPanelView panelView = new PaymentPanelView(stepValue.driver);
+        // Vue panneau paiement
+        FooterView footerView = new FooterView(stepValue.driver);
+        // Clic sur le boutton "A payer" du footer
+        footerView.clickOnTotalToPayBtn();
+        // Sélection du mode de paiement "Espèces"
+        panelView.clickCashBtn();
+        // Click sur "Tout payer"
+        panelView.clickPayAllBtn();
+    }
+
+    @Step("Finalise le ticket en sélectionnant l'envoi {sendTicketMode.getLabel()}")
+    public static void finalizeOrder(FinalizePaymentStepValue stepValue) {
+        // Vue panneau paiement
+        PaymentPanelView view = new PaymentPanelView(stepValue.driver);
+        // Finalise la commande
+        sendTicket(stepValue.sendTicketMode, view.clickFinalize());
+    }
+
+    /**
+     * Envoie le ticket selon le mode sélectionné
+     * @param sendTicketMode
+     * @param sendTicketView
+     */
+    private static void sendTicket(SendTicketMode sendTicketMode, SendTicketView sendTicketView) {
+        switch (sendTicketMode) {
+            case MAIL_ONLY -> sendTicketView.clickMailOnly();
         }
     }
 }

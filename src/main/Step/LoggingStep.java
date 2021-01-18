@@ -14,7 +14,7 @@ import java.net.MalformedURLException;
 public class LoggingStep {
 
     // Timeout d'ouverture du cache
-    private static final int CACHE_LOADING_TIMEOUT_IN_SECONDS = 120;
+    private static final int CACHE_LOADING_TIMEOUT_IN_SECONDS = 600;
 
     /**
      * Lancement d'OB avec le cache et l'utilisateur par défaut (définie dans les propriètes de la testsuite)

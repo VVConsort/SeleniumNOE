@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 public class TicketStep {
 
     // Temps de chargement du BT
-    private static final int BT_LOADING_TIME =3000;
+    private static final int BT_LOADING_TIME = 3000;
 
     /**
      * Vide le ticket en cours
@@ -30,8 +30,7 @@ public class TicketStep {
     }
 
     @Step("Vide le ticket")
-    public static void deleteWorkOrder(WebDriver driver)
-    {
+    public static void deleteWorkOrder(WebDriver driver) {
         FooterView footerView = new FooterView(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();
@@ -47,7 +46,7 @@ public class TicketStep {
         // Click sur 'annuler'
         mergedDoc.clickCancelButton();
         // Attente chargement cache
-        WaitHelper.waitUntilLoadIsFinished(driver,10);
+        WaitHelper.waitUntilLoadIsFinished(driver, 10);
         // FIXME : L'affichage de BT se fait ligne par ligne, sans attente toutes les éléments ne sont pas chargés et les comparaisons de valeures deviennent fausses
         // A terme conditionner cette attente par la visiblité d'un élément
         Thread.sleep(BT_LOADING_TIME);
@@ -59,5 +58,13 @@ public class TicketStep {
         ReceiptView receiptView = new ReceiptView(stepValue.driver);
         // Comparaison du total avec la valeure attendue
         stepValue.isEquals(receiptView.getTotalAmount());
+    }
+
+    @Step("Vérifie que l'état de la commande est à {stepValue.expectedValue}")
+    public static void checkOrderState(BaseStepValue stepValue) {
+        // Footer
+        FooterView footerView = new FooterView(stepValue.driver);
+        // Comparaison de l'état ave l'état attendu
+        stepValue.isEquals(footerView.getOrderState());
     }
 }

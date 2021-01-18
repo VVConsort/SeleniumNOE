@@ -6,7 +6,7 @@ import Step.LoggingStep;
 import Step.PaymentStep;
 import Step.ScanStep;
 import Step.TicketStep;
-import Step.Value.PaymentStepValue;
+import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
