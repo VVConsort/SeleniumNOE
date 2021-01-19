@@ -37,19 +37,19 @@ public class BaseView {
      * @param webElement
      */
     protected void click(WebElement webElement) {
-        // Met le zoom à 1 pour éviter les problemes de click
-        setZoomTo1();
+        // Peut arrivé lorsque le DOM change/a changé lorsqu'on appelle le click
         try {
-            webElement.click();
-        }
-        // Si le DOM a changé on  re recherche l'élément
-        catch (StaleElementReferenceException ex) {
-            // récupère l'ID de l'élément
-            String id = webElement.getAttribute("id");
-            // On recherche l'élément à partir de l'id extraite
-            webElement = WebElementHelper.getElement(driver, By.id(id));
-            // reclick
-            click(webElement);
+            doClick(webElement);
+        } catch (StaleElementReferenceException ex) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println("click() : StaleRefException " + i);
+                // On récupère l'id de l'élément
+                String id = webElement.getAttribute("id");
+                // Cherche l'élément à partir de son id
+                WebElement newWebElem = WebElementHelper.getElement(driver, By.id(id));
+                // Tente de reclicker
+                click(newWebElem);
+            }
         }
     }
 
@@ -60,12 +60,19 @@ public class BaseView {
      */
     protected boolean searchAndClickElement(String XPath) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement continueLogBtn = WebElementHelper.getElement(driver, By.xpath(XPath));
+        WebElement webElem = WebElementHelper.getElement(driver, By.xpath(XPath));
         // Click si existe
-        if (continueLogBtn != null) {
-            click(continueLogBtn);
+        if (webElem != null) {
+            doClick(webElem);
             return true;
         }
         return false;
+    }
+
+    private void doClick(WebElement webElement) {
+        // Met le zoom à 1 pour éviter les problemes de click
+        setZoomTo1();
+        // Clic clic
+        webElement.click();
     }
 }
