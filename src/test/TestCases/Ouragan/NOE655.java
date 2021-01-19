@@ -4,19 +4,21 @@ import Enums.PaymentMean;
 import Enums.SendTicketMode;
 import Helpers.Test.BaseTest;
 import Step.*;
-import Step.Value.Payment.FinalizePaymentStepValue;
+import Step.Value.BaseStepValue;
+import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class NOE655 extends BaseTest {
 
-    @Parameters({"jsonFilePath", "expectedPendingAmount", "expectedState", "postPaymentState",})
+    @Parameters({"jsonFilePath", "expectedPendingAmount", "expectedState"})
     @Test(description = " Scanner et régler une Réservation Web contenant un article A et un article B")
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-655")
-    public void noe655(String jsonFilePath, String expectedPendingAmount, String expectedState, String postPaymentState) throws IOException, InterruptedException {
+    public void noe655(String jsonFilePath, String expectedPendingAmount, String expectedState) throws IOException, InterruptedException, SQLException {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Lancement et log sur OB
@@ -28,17 +30,23 @@ public class NOE655 extends BaseTest {
         // Fermeture des documents associés
         TicketStep.closeMergedDocuments(currentDriver);
         // Vérification du montant à payer
-        TicketStep.checkTotalToPay(newStepValue(expectedPendingAmount, false));
+        BaseStepValue stepValue = getNewBaseStepValue(false);
+        stepValue.expectedValue = expectedPendingAmount;
+        TicketStep.checkTotalToPay(stepValue);
         // Vérification de l'état
-        TicketStep.checkOrderState(newStepValue(expectedState, false));
+        stepValue.expectedValue = expectedState;
+        TicketStep.checkOrderState(stepValue);
         // Paiment de la commande en cash
-        PaymentStep.payWithCash(newPaymentStepValue(null, null, PaymentMean.CASH, null, false));
+        PaymentStepValue payStepValue = getNewPaymentStepValue(false);
+        payStepValue.paymentMean = PaymentMean.CASH;
+        payStepValue.sendTicketMode = SendTicketMode.MAIL_ONLY;
+        PaymentStep.payWithCash(payStepValue);
         // Finalisation
-        PaymentStep.finalizeOrder(new FinalizePaymentStepValue(SendTicketMode.MAIL_ONLY, null, currentDriver, softAssert, false));
-        // Vérification de son état
-        System.out.println("done");
-        //TODO
-        //OuraganStep.checkOrderStat(numCommande,expectedState)
-
+        PaymentStep.finalizeOrder(payStepValue);
+        // Fermeture du BT
+        TicketStep.deleteWorkOrder(currentDriver);
+        /*String ouraganOrderState = OuraganStep.getOrderState(TestSuiteProperties.OURAGAN_DB_URL, TestSuiteProperties.OURAGAN_DB_USER, TestSuiteProperties.OURAGAN_DB_PASSWORD, OuraganJsonHelper.getOrderReference(OuraganJsonHelper.getJsonFromFileURL(jsonFilePath)));
+        // Comparaison avec l'état attendu
+        softAssert.assertEquals(ouraganOrderState, expectedState);*/
     }
 }

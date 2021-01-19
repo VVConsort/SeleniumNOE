@@ -4,6 +4,7 @@ import Helpers.Test.BaseTest;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
 import Step.LoggingStep;
 import Step.PosOpeningStep;
+import Step.Value.LoggingStepValue;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -19,7 +20,8 @@ public class PosOpening extends BaseTest {
         // Si une caisse est spécifiée
         if (terminalKey != null && !terminalKey.isEmpty() && profileName != null && !profileName.isEmpty()) {
             // Ouvre OB et se log avec la caisse passée en paramètre
-            currentDriver = LoggingStep.launchAndLogOB(newLoggingStepValue(TestSuiteProperties.OB_POS_URL, terminalKey, TestSuiteProperties.CHROME_PROFILE_PATH, profileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD));
+            LoggingStepValue logStepValue = new LoggingStepValue(TestSuiteProperties.OB_POS_URL, terminalKey, TestSuiteProperties.CHROME_PROFILE_PATH, profileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD);
+            currentDriver = LoggingStep.launchAndLogOB(logStepValue);
         }
         // Sinon ouverture en utilisant les paramètres de la TestSuite
         else {

@@ -1,5 +1,7 @@
 package Helpers.Test.TestSuiteProperties;
 
+import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,6 +18,9 @@ public class PropertiesLoader {
     private static final String ORDER_LOADER_USER_KEY = "ORDER_LOADER_USER";
     private static final String ORDER_LOADER_PASSWORD_KEY = "ORDER_LOADER_PASSWORD";
     private static final String ORDER_LOADER_SYNCHRONIZED_PROCESSING_KEY = "ORDER_LOADER_SYNCHRONIZED_PROCESSING";
+    private static final String OURAGAN_DB_URL = "OURAGAN_DB_URL";
+    private static final String OURAGAN_DB_USER = "OURAGAN_DB_USER";
+    private static final String OURAGAN_DB_PASSWORD = "OURAGAN_DB_PASSWORD";
 
     /**
      * Charge les propriétés de la TestSuite à partir du chemin spécifié en paramètre
@@ -41,6 +46,9 @@ public class PropertiesLoader {
         TestSuiteProperties.ORDER_LOADER_USER = properties.getProperty(ORDER_LOADER_USER_KEY);
         TestSuiteProperties.ORDER_LOADER_PASSWORD = properties.getProperty(ORDER_LOADER_PASSWORD_KEY);
         TestSuiteProperties.ORDER_LOADER_SYNCHRONIZED_PROCESSING = properties.getProperty(ORDER_LOADER_SYNCHRONIZED_PROCESSING_KEY);
+        TestSuiteProperties.OURAGAN_DB_URL = properties.getProperty(OURAGAN_DB_URL);
+        TestSuiteProperties.OURAGAN_DB_USER = properties.getProperty(OURAGAN_DB_USER);
+        TestSuiteProperties.OURAGAN_DB_PASSWORD = properties.getProperty(OURAGAN_DB_PASSWORD);
     }
 }
 

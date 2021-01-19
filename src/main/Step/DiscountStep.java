@@ -19,7 +19,7 @@ public class DiscountStep {
     }
 
     @Step("Vérifie que la promotion {discountLabel} n'est pas présente")
-    public static void isDiscountNotPresent(BaseStepValue value) {
+    public static void isDiscountNotPresent(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification de l'absence
         value.isNull(view.getDiscountLineAmount(value.expectedValue.toString()));

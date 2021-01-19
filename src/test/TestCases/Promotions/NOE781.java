@@ -3,6 +3,9 @@ package TestCases.Promotions;
 import Helpers.Test.BaseTest;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
 import Step.*;
+import Step.Value.BaseStepValue;
+import Step.Value.DiscountStepValue;
+import Step.Value.LoggingStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -24,24 +27,33 @@ public class NOE781 extends BaseTest {
         TicketStep.deleteTicket(currentDriver);
         // Ajout du produits en promo
         ScanStep.scanValue(familyDiscountProduct, currentDriver);
+        // Valeur à controler
+        DiscountStepValue discountStepValue = getNewDiscountStepValue(false);
+        discountStepValue.discountLabel = discountLabel;
+        discountStepValue.expectedValue = expectedDiscountAmount;
+        discountStepValue.associatedProduct = familyDiscountProduct;
         // Vérifie l'affichage de la promotion
-        DiscountStep.checkDiscountLineAmount(newDiscountStepValue(expectedDiscountAmount, discountLabel, familyDiscountProduct, false));
+        DiscountStep.checkDiscountLineAmount(discountStepValue);
         // Controle du montant de la promo
-        TicketStep.checkTotalToPay(newTicketStepValue(expectedTotalWithDiscount, false));
+        BaseStepValue ticketStep = getNewBaseStepValue(false);
+        ticketStep.expectedValue = expectedTotalWithDiscount;
+        TicketStep.checkTotalToPay(ticketStep);
         // Suppression et fermeture du navigateur
         TicketStep.deleteTicket(currentDriver);
         // Fermeture du navigateur
         closeBrowser();
         // Lancement de la caisse non éligible au promo
-        currentDriver = LoggingStep.launchAndLogOB(newLoggingStepValue(TestSuiteProperties.OB_POS_URL, noDiscountPos, noDiscountChromeProfilePath, noDiscountChromeProfileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD));
+        LoggingStepValue logStep = new LoggingStepValue(TestSuiteProperties.OB_POS_URL, noDiscountPos, noDiscountChromeProfilePath, noDiscountChromeProfileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD);
+        currentDriver = LoggingStep.launchAndLogOB(logStep);
         // Ouverture de la caisse
         PosOpeningStep.openPos(currentDriver);
         // Ajout du produit en promo
         ScanStep.scanValue(familyDiscountProduct, currentDriver);
         // Controle le non affichage de la promo
-        DiscountStep.isDiscountNotPresent(newStepValue(discountLabel, false));
+        DiscountStep.isDiscountNotPresent(discountStepValue);
         // Controle le montant du ticket
-        TicketStep.checkTotalToPay(newStepValue(expectedTotalWithoutDiscount, false));
+        ticketStep.expectedValue = expectedTotalWithoutDiscount;
+        TicketStep.checkTotalToPay(ticketStep);
         // Vidage ticket
         TicketStep.deleteTicket(currentDriver);
     }

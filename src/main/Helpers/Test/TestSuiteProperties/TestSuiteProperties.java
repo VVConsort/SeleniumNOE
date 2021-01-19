@@ -21,6 +21,12 @@ public class TestSuiteProperties {
     public static String ORDER_LOADER_PASSWORD;
     // Valeur Synchronized Processing OrderLoader
     public static String ORDER_LOADER_SYNCHRONIZED_PROCESSING;
+    // URL de la DB Ouragan
+    public static String OURAGAN_DB_URL;
+    // Utilisateur de la DB Ouragan
+    public static String OURAGAN_DB_USER;
+    // Password de la DB Ouragan
+    public static String OURAGAN_DB_PASSWORD;
 
 
 

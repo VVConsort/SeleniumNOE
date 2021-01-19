@@ -1,12 +1,13 @@
 package TestCases.Promotions;
 
+import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.ScanStep;
-import Helpers.Test.BaseTest;
+import Step.TicketStep;
+import Step.Value.BaseStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import Step.TicketStep;
 
 import java.io.IOException;
 
@@ -21,9 +22,11 @@ public class NOE763 extends BaseTest {
         // On vide le ticket
         TicketStep.deleteTicket(currentDriver);
         // Ajout du produit générique
-        ScanStep.scanValue(productCode, currentDriver,3);
+        ScanStep.scanValue(productCode, currentDriver, 3);
         // Vérifie le montant à payer
-        TicketStep.checkTotalToPay( newTicketStepValue(expectedTotalAmount,false));
+        BaseStepValue ticketStepVal = getNewBaseStepValue(false);
+        ticketStepVal.expectedValue = expectedTotalAmount;
+        TicketStep.checkTotalToPay(ticketStepVal);
         // Vidage du ticket
         TicketStep.deleteTicket(currentDriver);
     }

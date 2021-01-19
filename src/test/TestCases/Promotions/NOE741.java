@@ -6,6 +6,7 @@ import Step.LoggingStep;
 import Step.PaymentStep;
 import Step.ScanStep;
 import Step.TicketStep;
+import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -25,7 +26,10 @@ public class NOE741 extends BaseTest {
         // Scan article
         ScanStep.scanValue(productCode, currentDriver);
         // On tente d'utiliser l'avoir déjà cramé
-        PaymentStep.tryUsedCreditNote(newPaymentStepValue(null, null, PaymentMean.CREDIT_NOTE, creditNoteCode, false));
+        PaymentStepValue payStepValue = getNewPaymentStepValue(false);
+        payStepValue.paymentMean = PaymentMean.CREDIT_NOTE;
+        payStepValue.paymentId = creditNoteCode;
+        PaymentStep.tryUsedCreditNote(payStepValue);
         // Fermeture de la fenêtre de recherche d'avoir
         PaymentStep.closeCreditNoteSearchView(currentDriver);
         // Vidage du ticket

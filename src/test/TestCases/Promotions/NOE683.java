@@ -6,6 +6,8 @@ import Step.LoggingStep;
 import Step.PaymentStep;
 import Step.ScanStep;
 import Step.TicketStep;
+import Step.Value.BaseStepValue;
+import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -25,9 +27,14 @@ public class NOE683 extends BaseTest {
         // Ajout du produit
         ScanStep.scanValue(productCode, currentDriver);
         // Ajout du bon d'achat
-        PaymentStep.useVoucher(newPaymentStepValue(null, null, PaymentMean.VOUCHER, voucherCode, false));
+        PaymentStepValue payStepValue = getNewPaymentStepValue(false);
+        payStepValue.paymentMean = PaymentMean.VOUCHER;
+        payStepValue.paymentId = voucherCode;
+        PaymentStep.useVoucher(payStepValue);
         // Controle du prix du ticket
-        TicketStep.checkTotalToPay(newStepValue(expectedTotal, false));
+        BaseStepValue stepValue = getNewBaseStepValue(false);
+        stepValue.expectedValue = expectedTotal;
+        TicketStep.checkTotalToPay(stepValue);
         // Vidage du ticket
         TicketStep.deleteTicket(currentDriver);
     }

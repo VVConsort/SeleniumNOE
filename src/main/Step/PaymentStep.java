@@ -117,7 +117,7 @@ public class PaymentStep {
     }
 
     @Step("Finalise le ticket en sélectionnant l'envoi {sendTicketMode.getLabel()}")
-    public static void finalizeOrder(FinalizePaymentStepValue stepValue) {
+    public static void finalizeOrder(PaymentStepValue stepValue) {
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(stepValue.driver);
         // Finalise la commande

@@ -5,6 +5,7 @@ import Step.LoggingStep;
 import Step.OuraganStep;
 import Step.ScanStep;
 import Step.TicketStep;
+import Step.Value.BaseStepValue;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 public class NOE692 extends BaseTest {
 
-    @Parameters({"jsonFilePath","expectedPendingAmount"})
+    @Parameters({"jsonFilePath", "expectedPendingAmount"})
     @Test(description = "Part : Récupérer une commande Click and Collect")
     public void noe692(String jsonFilePath, String expectedPendingAmount) throws IOException, InterruptedException {
         // Envoie du relevé atelier vers OB
@@ -26,7 +27,9 @@ public class NOE692 extends BaseTest {
         // Fermeture des documents associés
         TicketStep.closeMergedDocuments(currentDriver);
         // Vérification du montant à payer
-        TicketStep.checkTotalToPay(newStepValue(expectedPendingAmount,false));
+        BaseStepValue stepValue = getNewBaseStepValue(false);
+        stepValue.expectedValue = expectedPendingAmount;
+        TicketStep.checkTotalToPay(stepValue);
         // Vidage du BT
         TicketStep.deleteWorkOrder(currentDriver);
     }

@@ -8,15 +8,11 @@ import org.testng.asserts.SoftAssert;
 public class BaseStepValue {
 
     public Object expectedValue;
-
-    boolean isHardAssert;
-
     public WebDriver driver;
-
+    boolean isHardAssert;
     private SoftAssert soft;
 
-    public BaseStepValue(Object expectedValue, WebDriver driver, SoftAssert soft, boolean isHardAssert) {
-        this.expectedValue = expectedValue;
+    public BaseStepValue(WebDriver driver, SoftAssert soft, boolean isHardAssert) {
         this.driver = driver;
         this.soft = soft;
         this.isHardAssert = isHardAssert;
@@ -26,47 +22,44 @@ public class BaseStepValue {
      * Comparaison des deux valeures
      */
     public void isEquals(Object valueToTest) {
-        if (isHardAssert) {
-            Assert.assertEquals(valueToTest,expectedValue);
-        } else {
-            soft.assertEquals(valueToTest,expectedValue);
-        }
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
+        if (isHardAssert) {
+            Assert.assertEquals(valueToTest, expectedValue);
+        } else {
+            soft.assertEquals(valueToTest, expectedValue);
+        }
     }
 
     /**
      * Vérifie que la valeur n'est pas null
      * @param valueToTest
      */
-    public void isNotNull(Object valueToTest)
-    {
+    public void isNotNull(Object valueToTest) {
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
             Assert.assertNotNull(valueToTest);
         } else {
             soft.assertNotNull(valueToTest);
         }
-        // Prend un screenshot
-        ReportHelper.attachScreenshot(driver);
     }
 
     /**
      * Vérifie que la valeur est null
      * @param valueToTest
      */
-    public void isNull(Object valueToTest)
-    {
+    public void isNull(Object valueToTest) {
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
             Assert.assertNull(valueToTest);
         } else {
             soft.assertNull(valueToTest);
         }
-        // Prend un screenshot
-        ReportHelper.attachScreenshot(driver);
     }
 
-    public String getExpectedValue()
-    {
+    public String getExpectedValue() {
         return String.valueOf(expectedValue);
     }
 

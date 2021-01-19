@@ -5,6 +5,7 @@ import Step.DiscountStep;
 import Step.LoggingStep;
 import Step.ScanStep;
 import Step.TicketStep;
+import Step.Value.DiscountStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -42,6 +43,10 @@ public class NOE767 extends BaseTest {
         // Scan du produit
         ScanStep.scanValue(productCode, currentDriver);
         // Controle du montant de la promop
-        DiscountStep.checkDiscountLineAmount(newDiscountStepValue(expectedValue, discountLabel, productCode, false));
+        DiscountStepValue discStepValue = getNewDiscountStepValue(false);
+        discStepValue.expectedValue = expectedValue;
+        discStepValue.discountLabel = discountLabel;
+        discStepValue.associatedProduct = productCode;
+        DiscountStep.checkDiscountLineAmount(discStepValue);
     }
 }

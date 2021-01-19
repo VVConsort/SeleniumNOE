@@ -18,6 +18,8 @@ public class OuraganJsonHelper {
     private static final String JSON_DATA_ARRAY_KEY = "data";
     // Clé JSON pour le num de doc
     private static final String JSON_DOCUMENT_NO_KEY = "documentNo";
+    // Clé JSON pour la référence commande
+    private static final String JSON_ORDER_REF_KEY = "orderReference";
     // Clé JSON pour le montant
     private static final String JSON_GROSS_AMOUNT_KEY = "grossAmount";
     // Clé JSON pour l'accompte cliet
@@ -69,6 +71,16 @@ public class OuraganJsonHelper {
     public static String getDocumentCode(String json) {
         JSONObject result = new JSONObject(json);
         return result.getJSONArray(JSON_DATA_ARRAY_KEY).getJSONObject(0).getString(JSON_DOCUMENT_NO_KEY);
+    }
+
+    /**
+     * Retourne la référence commande
+     * @param json
+     * @return
+     */
+    public static String getOrderReference(String json) {
+        JSONObject result = new JSONObject(json);
+        return result.getJSONArray(JSON_DATA_ARRAY_KEY).getJSONObject(0).getString(JSON_ORDER_REF_KEY);
     }
 
     /**

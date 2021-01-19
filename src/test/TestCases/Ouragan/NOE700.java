@@ -2,6 +2,7 @@ package TestCases.Ouragan;
 
 import Helpers.Test.BaseTest;
 import Step.*;
+import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 public class NOE700 extends BaseTest {
 
-    @Parameters({"jsonFilePath","discountLabel","discountAmount","expectedTotal"})
+    @Parameters({"jsonFilePath", "discountLabel", "discountAmount", "expectedTotal"})
     @Test(description = "Scanner un RA contenant une remise manuelle")
     public void noe700(String jsonFilePath, String discountLabel, String discountAmount, String expectedTotal) throws IOException, InterruptedException {
         // Envoie du relevé atelier vers OB
@@ -24,11 +25,15 @@ public class NOE700 extends BaseTest {
         // Fermeture des documents associés
         TicketStep.closeMergedDocuments(currentDriver);
         // Données à controler
-        DiscountStepValue discStepValue = newDiscountStepValue(discountAmount, discountLabel, null, false);
+        DiscountStepValue discStepValue = new DiscountStepValue(currentDriver, softAssert, false);
+        discStepValue.expectedValue = discountAmount;
+        discStepValue.discountLabel = discountLabel;
         // Controle du montant de la promo
         DiscountStep.checkDiscountLineAmount(discStepValue);
         // Controle du montant du ticket
-        TicketStep.checkTotalToPay(newStepValue(expectedTotal, false));
+        BaseStepValue stepValue = getNewBaseStepValue(false);
+        stepValue.expectedValue = expectedTotal;
+        TicketStep.checkTotalToPay(stepValue);
         // Vidage du ticket
         TicketStep.deleteWorkOrder(currentDriver);
     }

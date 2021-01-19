@@ -4,6 +4,7 @@ import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.ScanStep;
 import Step.TicketStep;
+import Step.Value.BaseStepValue;
 import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -23,7 +24,9 @@ public class NOE859 extends BaseTest {
         // Ajout des produits brix barrés et promos
         ScanStep.scanValues(new String[]{crossedPriceProduct, familyDiscountProduct}, currentDriver);
         // Vérifie le montant total à payer
-        TicketStep.checkTotalToPay(newStepValue(expectedTotal, true));
+        BaseStepValue stepValue = new BaseStepValue(currentDriver, softAssert, false);
+        stepValue.expectedValue = expectedTotal;
+        TicketStep.checkTotalToPay(stepValue);
         // Suppression ticket
         TicketStep.deleteTicket(currentDriver);
     }

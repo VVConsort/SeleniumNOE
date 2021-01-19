@@ -6,14 +6,14 @@
         {
         "internalDocumentType": "BRW",
         "collaboratorId": "05",
-        "documentNo": "000810",
-        "orderReference": "000810",
-        "norautoClientType": "PAR",
-        "businessPartner": "82553b9a-b9e3-11ea-a567-09abe3925bd2",
+        "documentNo":"0003001455771320881",
+        "orderReference":"48208812",
+        "norautoClientType":"PAR",
+        "businessPartner":"82553b9a-b9e3-11ea-a567-09abe3925bd2",
         "paidDeposit": 0,
         "ticketActions": 0,
         "currency": "EUR",
-        "grossAmount": 30.3,
+        "grossAmount": 28.49,
         "lines": [
         {
         "statusReservation": "R",
@@ -35,8 +35,8 @@
         {
         "statusReservation": "R",
         "lineID": "2",
-        "product":"679128",
-        "productName":"LAVE-GLACE ETE 1ER PRIX 5L",
+        "product": "679128",
+        "productName": "LAVE-GLACE ETE 1ER PRIX 5L",
         "productType": "I",
         "GM": "412",
         "qty": 1,

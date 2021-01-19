@@ -6,10 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.testng.asserts.SoftAssert;
 
 public class FinalizePaymentStepValue extends BaseStepValue {
+    // Méthode d'envoi du ticket
     public SendTicketMode sendTicketMode;
 
-    public FinalizePaymentStepValue(SendTicketMode sendTicketMode, Object expectedValue, WebDriver driver, SoftAssert soft, boolean isHardAssert) {
-        super(expectedValue, driver, soft, isHardAssert);
-        this.sendTicketMode = sendTicketMode;
+    public FinalizePaymentStepValue(WebDriver driver, SoftAssert soft, boolean isHardAssert) {
+        super(driver, soft, isHardAssert);
     }
 }

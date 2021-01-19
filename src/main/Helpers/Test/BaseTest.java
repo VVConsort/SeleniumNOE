@@ -1,13 +1,10 @@
 package Helpers.Test;
 
-import Enums.PaymentMean;
 import Helpers.Test.TestSuiteProperties.PropertiesLoader;
 import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
-import Step.Value.LoggingStepValue;
 import Step.Value.Payment.PaymentStepValue;
-import Step.Value.TicketStepValue;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -56,8 +53,6 @@ public class BaseTest {
      */
     protected void closeBrowser() {
         if (!isDriverClosed()) {
-            // Screenshot
-            //attachScreenshot();
             // Ferme le navigateur
             currentDriver.quit();
         }
@@ -73,7 +68,6 @@ public class BaseTest {
         } catch (AssertionError err) {
             throw err;
         }
-
     }
 
     @AfterTest
@@ -90,6 +84,33 @@ public class BaseTest {
         }
         // Fermeture du navigateur
         closeBrowser();
+    }
+
+    /**
+     * Instancie et retourne une step
+     * @param isHardAssert
+     * @return
+     */
+    protected BaseStepValue getNewBaseStepValue(boolean isHardAssert) {
+        return new BaseStepValue(currentDriver, softAssert, isHardAssert);
+    }
+
+    /**
+     * Instancie et retourne une step promo
+     * @param isHardAssert
+     * @return
+     */
+    protected DiscountStepValue getNewDiscountStepValue(boolean isHardAssert) {
+        return new DiscountStepValue(currentDriver, softAssert, isHardAssert);
+    }
+
+    /**
+     * Instancie et retourne une step paiement
+     * @param isHardAssert
+     * @return
+     */
+    protected PaymentStepValue getNewPaymentStepValue(boolean isHardAssert) {
+        return new PaymentStepValue(currentDriver, softAssert, isHardAssert);
     }
 
     // FIXME
@@ -109,33 +130,5 @@ public class BaseTest {
         return currentDriver == null || currentDriver.getSessionId() == null;
     }
 
-    /**
-     * @param expectedValue
-     * @param stopTestOnFail
-     * @return
-     */
-    protected BaseStepValue newStepValue(Object expectedValue, boolean stopTestOnFail) {
-        return new BaseStepValue(expectedValue, currentDriver, softAssert, stopTestOnFail);
-    }
 
-    /**
-     * @param expectedValue
-     * @param stopTestOnFail
-     * @return
-     */
-    protected DiscountStepValue newDiscountStepValue(Object expectedValue, String discountLabel, String associatedProduct, boolean stopTestOnFail) {
-        return new DiscountStepValue(expectedValue, discountLabel, associatedProduct, currentDriver, softAssert, stopTestOnFail);
-    }
-
-    protected LoggingStepValue newLoggingStepValue(String url, String terminalKey, String chromeProfilesPath, String chromeProfile, String userName, String password) {
-        return new LoggingStepValue(url, terminalKey, chromeProfilesPath, chromeProfile, userName, password);
-    }
-
-    protected TicketStepValue newTicketStepValue(Object expectedValue, boolean stopTestOnFail) {
-        return new TicketStepValue(expectedValue, currentDriver, softAssert, stopTestOnFail);
-    }
-
-    protected PaymentStepValue newPaymentStepValue(Object expectedValue, String paymentAmount, PaymentMean paymentMean, String paymentId, boolean stopTestOnFail) {
-        return new PaymentStepValue(expectedValue, paymentAmount, paymentMean, paymentId, currentDriver, softAssert, stopTestOnFail);
-    }
 }

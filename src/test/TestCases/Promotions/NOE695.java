@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
 
 public class NOE695 extends BaseTest {
 
-    @Parameters({"productCode", "creditNoteCode","expectedPendingAmount"})
+    @Parameters({"productCode", "creditNoteCode", "expectedPendingAmount"})
     @Test(description = "Passer un bon d'achat Fidélité A sur la caisse OpenBravo et voir son prix diminuer")
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-695")
     public void noe695(String productCode, String creditNoteCode, String expectedPendingAmount) throws MalformedURLException, InterruptedException {
@@ -26,7 +26,10 @@ public class NOE695 extends BaseTest {
         // Ajout produit
         ScanStep.scanValue(productCode, currentDriver);
         // Jeu de données step payement
-        PaymentStepValue step = newPaymentStepValue(expectedPendingAmount, null, PaymentMean.CREDIT_NOTE, creditNoteCode, false);
+        PaymentStepValue step = getNewPaymentStepValue(false);
+        step.paymentMean = PaymentMean.CREDIT_NOTE;
+        step.expectedValue = expectedPendingAmount;
+        step.paymentId = creditNoteCode;
         // Ajout avoir
         PaymentStep.applyCreditNote(step);
         // Control prix restant

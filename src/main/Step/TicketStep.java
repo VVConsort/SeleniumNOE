@@ -67,4 +67,6 @@ public class TicketStep {
         // Comparaison de l'état ave l'état attendu
         stepValue.isEquals(footerView.getOrderState());
     }
+
+
 }

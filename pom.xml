@@ -92,5 +92,10 @@
             <artifactId>properties-maven-plugin</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>21.1.0.0</version>
+        </dependency>
     </dependencies>
 </project>
