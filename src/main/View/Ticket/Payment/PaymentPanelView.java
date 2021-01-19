@@ -15,9 +15,8 @@ public class PaymentPanelView extends BaseView {
     private static final String PAY_ALL_BTN_XPATH = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_exactbutton\"]";
     // XPath du bouton "Finaliser"
     private static final String FINALIZE_BTN_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_donebutton\"]";
-    // Boutton 'Avoir'
-    @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide3_GCNV_payment.creditnote_button\"]")
-    private WebElement creditNoteBtn;
+    // XPath Boutton 'Avoir'
+    private static final String CREDIT_NOTE_BTN_XPATH ="//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide3_GCNV_payment.creditnote_button\"]";
     // Boutton 'Espece'
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide2_OBPOS_payment.cash_button\"]")
     private WebElement cashBtn;
@@ -35,7 +34,7 @@ public class PaymentPanelView extends BaseView {
      * Clique sur le boutton "Avoir"
      */
     public void clickCreditNoteBtn() {
-        super.click(creditNoteBtn);
+        super.searchAndClickElement(CREDIT_NOTE_BTN_XPATH);
         selectedPayment = PaymentMean.CREDIT_NOTE;
     }
 

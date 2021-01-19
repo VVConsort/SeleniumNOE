@@ -11,14 +11,14 @@ public class DiscountStep {
      * Vérifie l'affichage d'une promotion
      * @return
      */
-    @Step("Vérifie que la promotion {discountLabel} est présente")
-    public static void isDiscountPresent(BaseStepValue value) {
+    @Step("Vérifie que la promotion {value.discountLabel} est présente")
+    public static void isDiscountPresent(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification de la présence
         value.isNotNull(view.getDiscountLineAmount(value.expectedValue.toString()));
     }
 
-    @Step("Vérifie que la promotion {discountLabel} n'est pas présente")
+    @Step("Vérifie que la promotion {value.discountLabel} n'est pas présente")
     public static void isDiscountNotPresent(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification de l'absence
