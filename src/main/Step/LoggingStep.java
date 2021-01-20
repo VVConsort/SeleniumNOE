@@ -1,6 +1,7 @@
 package Step;
 
 import Helpers.Element.WaitHelper;
+import Helpers.Test.ReportHelper;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
 import View.OpenBravoLauncher;
 import View.Log.LogScreenView;
@@ -35,6 +36,7 @@ public class LoggingStep {
         logScreenView.clickConnexion();
         // On attend que le cache soit chargé
         WaitHelper.waitUntilLoadIsFinished(driver, CACHE_LOADING_TIMEOUT_IN_SECONDS);
+        ReportHelper.attachScreenshot(driver);
         // Retourne le driver
         return driver;
     }
@@ -55,6 +57,7 @@ public class LoggingStep {
         logScreenView.clickConnexion();
         // On attend que le cache soit chargé
         WaitHelper.waitUntilLoadIsFinished(driver, CACHE_LOADING_TIMEOUT_IN_SECONDS);
+        ReportHelper.attachScreenshot(driver);
         return driver;
     }
 

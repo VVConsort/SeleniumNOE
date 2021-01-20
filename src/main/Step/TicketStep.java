@@ -1,6 +1,7 @@
 package Step;
 
 import Helpers.Element.WaitHelper;
+import Helpers.Test.ReportHelper;
 import Step.Value.BaseStepValue;
 import View.Footer.FooterView;
 import View.Ticket.MergedDocumentsView;
@@ -27,6 +28,7 @@ public class TicketStep {
         footerView.clickOnDeleteTicketBtn();
         // Clic sur 'Confirmer suppression'
         footerView.clickOnConfirmDeleteBtn();
+        ReportHelper.attachScreenshot(driver);
     }
 
     @Step("Vide le ticket")
@@ -34,6 +36,7 @@ public class TicketStep {
         FooterView footerView = new FooterView(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();
+        ReportHelper.attachScreenshot(driver);
     }
 
     /**
@@ -50,6 +53,7 @@ public class TicketStep {
         // FIXME : L'affichage de BT se fait ligne par ligne, sans attente toutes les éléments ne sont pas chargés et les comparaisons de valeures deviennent fausses
         // A terme conditionner cette attente par la visiblité d'un élément
         Thread.sleep(BT_LOADING_TIME);
+        ReportHelper.attachScreenshot(driver);
     }
 
     @Step("Vérifie que la valeur du ticket est égale à {stepValue.expectedValue}")

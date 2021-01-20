@@ -18,6 +18,7 @@ public class ReceiptView extends BaseView {
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_totalReceiptLine_totalgross\"]")
     private WebElement totalToPay;
 
+
     public ReceiptView(WebDriver driver) {
         init(driver, this);
     }

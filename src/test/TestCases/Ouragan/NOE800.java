@@ -4,6 +4,7 @@ import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.OuraganStep;
 import Step.ScanStep;
+import io.qameta.allure.Link;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -13,6 +14,7 @@ public class NOE800 extends BaseTest {
 
     @Parameters({"jsonFilePath"})
     @Test(description = "Remise immédiate : Montage des pneus offert pour l'achat de 2 pneus")
+    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-800")
     public void noe800(String jsonFilePath) throws IOException, InterruptedException {
         // Envoie du relevé atelier vers OB
         //String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);

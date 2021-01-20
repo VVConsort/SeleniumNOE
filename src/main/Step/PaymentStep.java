@@ -1,6 +1,7 @@
 package Step;
 
 import Enums.SendTicketMode;
+import Helpers.Test.ReportHelper;
 import Step.Value.Payment.FinalizePaymentStepValue;
 import Step.Value.Payment.PaymentStepValue;
 import View.Footer.FooterView;
@@ -30,6 +31,7 @@ public class PaymentStep {
     public static void applyCreditNote(PaymentStepValue stepValue) {
         // Vue unitaire avoir
         CreditNoteUnitView unitView = getCreditNoteUnitView(stepValue);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Appliquer l'avoir
         unitView.clickApplyBtn();
     }
@@ -38,6 +40,7 @@ public class PaymentStep {
     @Step("Retire la ligne de paiement {value.paymentMean.label}")
     public static void removePaymentLine(PaymentStepValue value) {
         PaymentPanelView view = new PaymentPanelView(value.driver);
+        ReportHelper.attachScreenshot(value.driver);
         // Appuie sur le btn de suppression correspond au mode de paiement
         view.clickRemovePaymentLine(value.paymentMean.getLabel());
     }
@@ -48,16 +51,22 @@ public class PaymentStep {
      */
     private static CreditNoteUnitView getCreditNoteUnitView(PaymentStepValue stepValue) {
         FooterView footerView = new FooterView(stepValue.driver);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Clic sur le boutton "A payer" du footer
         footerView.clickOnTotalToPayBtn();
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Panel de paiement
         PaymentPanelView paymentPanel = new PaymentPanelView(stepValue.driver);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Clic sur "Avoir"
         paymentPanel.clickCreditNoteBtn();
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Clic sur "Tout payer"
         CreditNoteSearchView creditNoteSearchView = (CreditNoteSearchView) paymentPanel.clickPayAllBtn();
+        ReportHelper.attachScreenshot(stepValue.driver);
         // On entre le numéro de l'avoir
         CreditNoteUnitView creditNoteUnitView = creditNoteSearchView.getCreditNote(stepValue.paymentId);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Retourne la vue unitaire
         return creditNoteUnitView;
     }
@@ -75,6 +84,7 @@ public class PaymentStep {
     public static void closeCreditNoteSearchView(WebDriver driver) {
         // Ferme la fenetre de recherche d'avoir
         CreditNoteSearchView creditNoteSearchView = new CreditNoteSearchView(driver);
+        ReportHelper.attachScreenshot(driver);
         creditNoteSearchView.closeCreditNoteSearchView();
     }
 
@@ -89,39 +99,54 @@ public class PaymentStep {
     @Step("Ajoute le bon d'achat {stepValue.paymentId} au ticket")
     public static void useVoucher(PaymentStepValue stepValue) {
         FooterView footerView = new FooterView(stepValue.driver);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Pop up bon d'achat
         VoucherCodeInputView voucherView = footerView.clickOnMenuBtn().clickOnVoucherBtn();
+        ReportHelper.attachScreenshot(stepValue.driver);
         // On entre le code du bon d'achat
         voucherView.enterVoucherCode(stepValue.paymentId);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // On click sur OK
         InvalidVoucherView invalidView = voucherView.clickOk();
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Si le bon d'achat est invalide
         if (invalidView != null) {
+            ReportHelper.attachScreenshot(stepValue.driver);
             // Ferme la fenetre d'erreur
             invalidView.clickOK();
+            ReportHelper.attachScreenshot(stepValue.driver);
         }
     }
 
     @Step("Paie en espèces")
     public static void payWithCash(PaymentStepValue stepValue) {
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Vue panneau paiement
         PaymentPanelView panelView = new PaymentPanelView(stepValue.driver);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Vue panneau paiement
         FooterView footerView = new FooterView(stepValue.driver);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Clic sur le boutton "A payer" du footer
         footerView.clickOnTotalToPayBtn();
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Sélection du mode de paiement "Espèces"
         panelView.clickCashBtn();
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Click sur "Tout payer"
         panelView.clickPayAllBtn();
+        ReportHelper.attachScreenshot(stepValue.driver);
     }
 
     @Step("Finalise le ticket en sélectionnant l'envoi {sendTicketMode.getLabel()}")
     public static void finalizeOrder(PaymentStepValue stepValue) {
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(stepValue.driver);
+        ReportHelper.attachScreenshot(stepValue.driver);
         // Finalise la commande
         sendTicket(stepValue.sendTicketMode, view.clickFinalize());
+        ReportHelper.attachScreenshot(stepValue.driver);
     }
 
     /**

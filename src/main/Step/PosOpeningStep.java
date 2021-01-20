@@ -2,6 +2,7 @@ package Step;
 
 import Helpers.Element.WaitHelper;
 import Helpers.Element.WebElementHelper;
+import Helpers.Test.ReportHelper;
 import View.Log.PosClosingView;
 import View.Log.PosOpeningView;
 import io.qameta.allure.Step;
@@ -11,6 +12,7 @@ public class PosOpeningStep {
 
     @Step("Ouvre la caisse")
     public static void openPos(WebDriver driver) throws InterruptedException {
+        ReportHelper.attachScreenshot(driver);
         // Si cloture nécessaire
         PosClosingView closingView = new PosClosingView(driver);
         // Si une cloture est nécessaire
@@ -29,22 +31,30 @@ public class PosOpeningStep {
 
     @Step("Cloture de caisse")
     public static void closePos(WebDriver driver, PosClosingView closingView) throws InterruptedException {
+        ReportHelper.attachScreenshot(driver);
         // Next
         closingView.clickNextBtn();
+        ReportHelper.attachScreenshot(driver);
         // Next
         closingView.clickNextBtn();
+        ReportHelper.attachScreenshot(driver);
         closingView.clickNextBtn();
+        ReportHelper.attachScreenshot(driver);
         WaitHelper.waitUntilLoadIsFinished(driver, 120);
     }
 
     @Step("Ouvre la caisse")
     public static void doOpenPos(WebDriver driver, PosOpeningView openingView) throws InterruptedException {
+        ReportHelper.attachScreenshot(driver);
         // Clic bouton "Suivant"
         openingView.clickNext();
+        ReportHelper.attachScreenshot(driver);
         // Clic bouton "Suivant"
         openingView.clickNext();
+        ReportHelper.attachScreenshot(driver);
         // Approuve la différence de rendue si nécessaire
         openingView.clickApprovalOk();
+        ReportHelper.attachScreenshot(driver);
         // Appuie sur "Finaliser"
         //openingView.clickNext();
         // Attend le chargement du cache
