@@ -46,7 +46,7 @@ public class TicketStep {
         // Click sur 'annuler'
         mergedDoc.clickCancelButton();
         // Attente chargement cache
-        WaitHelper.waitUntilLoadIsFinished(driver, 10);
+        WaitHelper.waitUntilLoadIsFinished(driver, 30);
         // FIXME : L'affichage de BT se fait ligne par ligne, sans attente toutes les éléments ne sont pas chargés et les comparaisons de valeures deviennent fausses
         // A terme conditionner cette attente par la visiblité d'un élément
         Thread.sleep(BT_LOADING_TIME);
