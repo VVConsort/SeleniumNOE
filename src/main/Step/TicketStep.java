@@ -24,19 +24,22 @@ public class TicketStep {
     @Step("Vide le ticket")
     public static void deleteTicket(WebDriver driver) {
         FooterView footerView = new FooterView(driver);
+        ReportHelper.attachScreenshot(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();
+        ReportHelper.attachScreenshot(driver);
         // Clic sur 'Confirmer suppression'
         footerView.clickOnConfirmDeleteBtn();
-        ReportHelper.attachScreenshot(driver);
+
     }
 
     @Step("Vide le ticket")
     public static void deleteWorkOrder(WebDriver driver) {
         FooterView footerView = new FooterView(driver);
+        ReportHelper.attachScreenshot(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();
-        ReportHelper.attachScreenshot(driver);
+
     }
 
     /**

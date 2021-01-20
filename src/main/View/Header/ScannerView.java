@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class ScannerView extends BaseView {
 
     // Délai d'attente en milli après avoir valider une saisie
-    private static final int DELAY_AFTER_INPUT_MILLI = 1000;
+    private static final int DELAY_AFTER_INPUT_MILLI = 1500;
 
     public ScannerView(WebDriver driver) {
         init(driver, this);
