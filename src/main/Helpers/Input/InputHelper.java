@@ -1,5 +1,6 @@
 package Helpers.Input;
 
+import Helpers.Element.WaitHelper;
 import Helpers.Element.WebElementHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -33,7 +34,8 @@ public class InputHelper {
         inputListener.sendKeys(Keys.chord(charac));
     }
 
-    public void type(CharSequence characters, WebDriver driver) {
+    public void type(CharSequence characters, WebDriver driver) throws InterruptedException {
+        Thread.sleep(1000);
         // On récupère le listener d'input
         inputListener = getInputListener(driver);
         int length = characters.length();
@@ -50,6 +52,7 @@ public class InputHelper {
      * @return
      */
     private WebElement getInputListener(WebDriver driver) {
+
         return WebElementHelper.getElement(driver, By.xpath(KEY_LISTENER_XPATH));
     }
 
