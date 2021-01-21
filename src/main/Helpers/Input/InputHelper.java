@@ -35,7 +35,7 @@ public class InputHelper {
     }
 
     public void type(CharSequence characters, WebDriver driver) throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(500);
         // On récupère le listener d'input
         inputListener = getInputListener(driver);
         int length = characters.length();
@@ -43,6 +43,7 @@ public class InputHelper {
             char character = characters.charAt(i);
             type(character);
         }
+        Thread.sleep(1000);
         // Appuie sur Entrée
         inputListener.sendKeys(Keys.ENTER);
     }

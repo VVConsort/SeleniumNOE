@@ -13,9 +13,12 @@ public class FooterView extends BaseView {
     // Menu
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_mainMenu_menuHolder_mainMenuButton\"]")
     private WebElement menuBtn;
-    // A payer
+    // Bouton "Payer"
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_btnTotalToPay\"]")
     private WebElement totalToPayBtn;
+    // A payer
+    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_btnTotalToPay_icon_totalPrinter\"]")
+    private WebElement totalToPay;
     // Etat
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_btnTotalToPay_label_labelText_0\"]")
     private WebElement orderStateLbl;
@@ -64,5 +67,14 @@ public class FooterView extends BaseView {
     public String getOrderState()
     {
         return orderStateLbl.getText();
+    }
+
+    /**
+     * Retourne le montant à payer
+     * @return
+     */
+    public String getTotalToPay()
+    {
+        return totalToPay.getText();
     }
 }

@@ -59,12 +59,13 @@ public class TicketStep {
         ReportHelper.attachScreenshot(driver);
     }
 
-    @Step("Vérifie que la valeur du ticket est égale à {stepValue.expectedValue}")
+    @Step("Vérifie que le montant à payer est égal à {stepValue.expectedValue}")
     public static void checkTotalToPay(BaseStepValue stepValue) {
         // Page panier
-        ReceiptView receiptView = new ReceiptView(stepValue.driver);
+        //ReceiptView receiptView = new ReceiptView(stepValue.driver);
+        FooterView footer = new FooterView(stepValue.driver);
         // Comparaison du total avec la valeure attendue
-        stepValue.isEquals(receiptView.getTotalAmount());
+        stepValue.isEquals(footer.getTotalToPay());
     }
 
     @Step("Vérifie que l'état de la commande est à {stepValue.expectedValue}")
