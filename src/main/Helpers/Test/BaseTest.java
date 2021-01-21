@@ -5,8 +5,12 @@ import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import Step.Value.Payment.PaymentStepValue;
+import io.qameta.allure.Step;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
@@ -51,6 +55,7 @@ public class BaseTest {
     /**
      * Ferme le navigateur
      */
+    @Step("Fermeture du navigateur")
     protected void closeBrowser() {
         if (!isDriverClosed()) {
             // Ferme le navigateur
@@ -61,18 +66,9 @@ public class BaseTest {
     /**
      * Fait apparaitre les comparaisons fausses et met éventuellement le test en FAILED
      */
+    @Step("Vérification des valeurs attendues")
     protected void assertAll() {
         // On visualise les comparaisons fausses
-        try {
-            softAssert.assertAll();
-        } catch (AssertionError err) {
-            throw err;
-        }
-    }
-
-    @AfterTest
-    protected void onAfterTest() {
-        // On test les comparaisons
         try {
             softAssert.assertAll();
         } catch (AssertionError err) {
@@ -82,6 +78,12 @@ public class BaseTest {
             closeBrowser();
             throw err;
         }
+    }
+
+    @AfterTest
+    protected void onAfterTest() {
+        // On test les comparaisons
+        assertAll();
         // Fermeture du navigateur
         closeBrowser();
     }
@@ -112,15 +114,6 @@ public class BaseTest {
     protected PaymentStepValue getNewPaymentStepValue(boolean isHardAssert) {
         return new PaymentStepValue(currentDriver, softAssert, isHardAssert);
     }
-
-    // FIXME
-    @AfterMethod
-    /*protected void onMethodEnd(ITestResult result) {
-        // On prend un screenshot pour l'attacher au rapport
-        if (!isDriverClosed()) {
-            attachScreenshot();
-        }
-    }*/
 
     /**
      * Renvoie vrai si le driver/navigateur est fermé
