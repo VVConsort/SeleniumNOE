@@ -16,12 +16,21 @@ public class XPathPaymentLineHelper {
     private static final String XPATH_RENDER_ORDER_LINE_VAR = "VAR2";
 
     /**
-     * Renvoi l'XPath du boutton "suppression ligne paiement" à partir du libellé
+     * Retourne l'XPath du boutton "suppression ligne paiement"
      * @param paymentLabel
      * @return
      */
     public static String getRemovePaymentButtonAmountXPath(String paymentLabel) {
         return setVars(REMOVE_PAYMENT_BTN_XPATH, getBodyControlXPathVarFromPaymentLabel(paymentLabel), getRenderOrderLineXPathVarFromPaymentLabel(paymentLabel));
+    }
+
+    /**
+     * Retourne l'XPath du montant de la ligne de paiement
+     * @param paymentLabel
+     * @return
+     */
+    public static String getPaymentLineAmountXPath(String paymentLabel) {
+        return setVars(PAYMENT_AMOUNT_XPATH, getBodyControlXPathVarFromPaymentLabel(paymentLabel), getRenderOrderLineXPathVarFromPaymentLabel(paymentLabel));
     }
 
     /**

@@ -24,9 +24,35 @@ public class PaymentStep {
         ReportHelper.attachScreenshot(stepValue.driver);
     }
 
+    @Step("Vérifie que le mode de paiement {value.paymentId} est présent")
+    public static void containsPaymentLine(PaymentStepValue value) {
+        FooterView footerView = new FooterView(value.driver);
+        // Clic sur le boutton "A payer" du footer
+        footerView.clickOnTotalToPayBtn();
+        // Vue panneau paiement
+        PaymentPanelView payView = new PaymentPanelView(value.driver);
+        // Test si la ligne de paiement est présente
+        value.isTrue(payView.hasPaymentLine(value.paymentMean.getLabel()));
+    }
+
+    @Step("Vérifie que le montant de la ligne {value.paymentMean.label} est égale à {value.expectedValue}")
+    public static void checkPaymentLineAmount(PaymentStepValue value) {
+        FooterView footerView = new FooterView(value.driver);
+        // Clic sur le boutton "A payer" du footer
+        footerView.clickOnTotalToPayBtn();
+        // Vue panneau paiement
+        PaymentPanelView view = new PaymentPanelView(value.driver);
+        // Test le montant de la ligne avec celui attendu
+        value.isEquals(view.getPaymentLineAmount(value.paymentMean.getLabel()));
+    }
+
     // TODO : cas ou plusieurs même mode de paiement : différencier sur montant
     @Step("Retire la ligne de paiement {value.paymentMean.label}")
     public static void removePaymentLine(PaymentStepValue value) {
+        FooterView footerView = new FooterView(value.driver);
+        // Clic sur le boutton "A payer" du footer
+        footerView.clickOnTotalToPayBtn();
+        // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(value.driver);
         // Appuie sur le btn de suppression correspond au mode de paiement
         view.clickRemovePaymentLine(value.paymentMean.getLabel());
@@ -71,7 +97,7 @@ public class PaymentStep {
         ReportHelper.attachScreenshot(driver);
     }
 
-    @Step("Controle que le montant restant à payer est égal à {stepValue.expectedValue}")
+    //@Step("Controle que le montant restant à payer est égal à {stepValue.expectedValue}")
     public static void checkPendingAmount(PaymentStepValue stepValue) {
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(stepValue.driver);
@@ -113,8 +139,9 @@ public class PaymentStep {
 
     @Step("Finalise le ticket en sélectionnant l'envoi {sendTicketMode.getLabel()}")
     public static void finalizeOrder(PaymentStepValue stepValue) {
+        FooterView footer = new FooterView(stepValue.driver);
         // Vue panneau paiement
-        PaymentPanelView view = new PaymentPanelView(stepValue.driver);
+        PaymentPanelView view = footer.clickOnTotalToPayBtn();
         // Finalise la commande
         sendTicket(stepValue.sendTicketMode, view.clickFinalize());
         ReportHelper.attachScreenshot(stepValue.driver);

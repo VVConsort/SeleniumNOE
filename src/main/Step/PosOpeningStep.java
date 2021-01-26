@@ -1,7 +1,7 @@
 package Step;
 
-import Helpers.Element.WaitHelper;
 import Helpers.Element.WebElementHelper;
+import Helpers.Loading.LoadingHelper;
 import Helpers.Test.ReportHelper;
 import View.Log.PosClosingView;
 import View.Log.PosOpeningView;
@@ -36,7 +36,7 @@ public class PosOpeningStep {
         // Next
         closingView.clickNextBtn();
         closingView.clickNextBtn();
-        WaitHelper.waitUntilLoadIsFinished(driver, 120);
+        LoadingHelper.waitUntilLoadIsFinished(driver, 120);
         ReportHelper.attachScreenshot(driver);
     }
 
@@ -51,7 +51,7 @@ public class PosOpeningStep {
         // Appuie sur "Finaliser"
         //openingView.clickNext();
         // Attend le chargement du cache
-        WaitHelper.waitUntilLoadIsFinished(driver, 120);
+        LoadingHelper.waitUntilLoadIsFinished(driver, 120);
         ReportHelper.attachScreenshot(driver);
     }
 

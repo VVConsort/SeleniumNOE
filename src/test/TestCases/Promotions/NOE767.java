@@ -19,7 +19,7 @@ public class NOE767 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-767")
     public void noe767(String discountLabel, String discountedProductCode, String firstDiscountedPrice, String secondDiscountedPrice, String thirdDiscountedPrice) throws MalformedURLException, InterruptedException {
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogOB();
+        currentDriver = LoggingStep.launchAndLogOpenBravo();
         // On vide le ticket
         TicketStep.deleteTicket(currentDriver);
         // Ajout du premier produit

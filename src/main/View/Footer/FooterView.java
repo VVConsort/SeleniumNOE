@@ -2,6 +2,7 @@ package View.Footer;
 
 import View.BaseView;
 import View.Footer.Menu.MenuItemListView;
+import View.Ticket.Payment.PaymentPanelView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,14 +42,17 @@ public class FooterView extends BaseView {
      * Click sur le bouton 'confirmer suppression ticket'
      */
     public void clickOnConfirmDeleteBtn() {
-        super.searchAndClickElement(CONFIRM_DELETE_BTN_XPATH);
+        if (isElementPresentOnView(CONFIRM_DELETE_BTN_XPATH)) {
+            super.searchAndClickElement(CONFIRM_DELETE_BTN_XPATH);
+        }
     }
 
     /**
-     * Click sur le bouton 'A payer'
+     * Click sur le bouton 'A payer' et retourne la panneau des paiements
      */
-    public void clickOnTotalToPayBtn() {
+    public PaymentPanelView clickOnTotalToPayBtn() {
         super.click(totalToPayBtn);
+        return new PaymentPanelView(driver);
     }
 
     /**
@@ -64,8 +68,7 @@ public class FooterView extends BaseView {
      * Retourne l'état de la commande
      * @return
      */
-    public String getOrderState()
-    {
+    public String getOrderState() {
         return orderStateLbl.getText();
     }
 
@@ -73,8 +76,7 @@ public class FooterView extends BaseView {
      * Retourne le montant à payer
      * @return
      */
-    public String getTotalToPay()
-    {
+    public String getTotalToPay() {
         return totalToPay.getText();
     }
 }

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 public class BaseView {
 
     // Timeout
-    private static final int AJAX_WEBELEMENT_LOADING_TIMEOUT = 30;
+    private static final int ELEMENT_MISSING_TIMEOUT = 10;
     // Driver
     protected WebDriver driver;
 
@@ -20,7 +20,7 @@ public class BaseView {
     protected void init(WebDriver webDriver, BaseView baseView) {
         this.driver = webDriver;
         // Lazy loading
-        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, AJAX_WEBELEMENT_LOADING_TIMEOUT);
+        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, ELEMENT_MISSING_TIMEOUT);
         PageFactory.initElements(factory, baseView);
     }
 
@@ -42,13 +42,14 @@ public class BaseView {
             doClick(webElement);
         } catch (StaleElementReferenceException ex) {
             for (int i = 0; i < 10; i++) {
-                System.out.println("click() : StaleRefException " + i);
+                System.out.println(""+ex + i);
                 // On récupère l'id de l'élément
                 String id = webElement.getAttribute("id");
                 // Cherche l'élément à partir de son id
-                WebElement newWebElem = WebElementHelper.getElement(driver, By.id(id));
+                WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.id(id), true);
                 // Tente de reclicker
-                click(newWebElem);
+                click(webElem);
+
             }
         }
     }
@@ -60,13 +61,24 @@ public class BaseView {
      */
     protected boolean searchAndClickElement(String XPath) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement webElem = WebElementHelper.getElement(driver, By.xpath(XPath));
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), true);
         // Click si existe
         if (webElem != null) {
             doClick(webElem);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Renvoi vrai si l'élément est présent
+     * @param xPath
+     * @return
+     */
+    protected boolean isElementPresentOnView(String xPath) {
+        // On tente de récupèrer l'élement à partir du XPath
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), false);
+        return webElem != null;
     }
 
     private void doClick(WebElement webElement) {

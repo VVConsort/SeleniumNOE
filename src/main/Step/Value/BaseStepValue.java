@@ -59,6 +59,16 @@ public class BaseStepValue {
         }
     }
 
+    public void isTrue(boolean valueToTest){
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
+        if (isHardAssert) {
+            Assert.assertTrue(valueToTest);
+        } else {
+            soft.assertTrue(valueToTest);
+        }
+    }
+
     public String getExpectedValue() {
         return String.valueOf(expectedValue);
     }

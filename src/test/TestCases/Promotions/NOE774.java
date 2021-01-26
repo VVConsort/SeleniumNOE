@@ -1,6 +1,6 @@
 package TestCases.Promotions;
 
-import Helpers.Element.WaitHelper;
+import Helpers.Loading.LoadingHelper;
 import Helpers.Test.BaseTest;
 import Step.*;
 import Step.Value.BaseStepValue;
@@ -18,15 +18,13 @@ public class NOE774 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Log sur OB
-        currentDriver = LoggingStep.launchAndLogOB();
+        currentDriver = LoggingStep.launchAndLogOpenBravo();
         // On vide le ticket
         TicketStep.deleteTicket(currentDriver);
-        // Scan du BT intégré
-        ScanStep.scanValue(documentCode, currentDriver);
-        // On ferme la fenetre des documents associés
-        TicketStep.closeMergedDocuments(currentDriver);
+        // Ouverture du BT intégré
+        OuraganStep.openWorkOrder(documentCode,currentDriver);
         // On attend le chargement
-        WaitHelper.waitUntilLoadIsFinished(currentDriver, 20);
+        LoadingHelper.waitUntilLoadIsFinished(currentDriver, 20);
         // Controle de la gratuité du montage
         DiscountStepValue discStepValue = getNewDiscountStepValue(false);
         discStepValue.expectedValue = expectedDiscountAmount;

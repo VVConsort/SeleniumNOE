@@ -1,7 +1,8 @@
 package View.Footer.Menu.Voucher;
 
-import Helpers.Element.WaitHelper;
+import Helpers.Element.WebElementHelper;
 import View.BaseView;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,7 +37,7 @@ public class VoucherCodeInputView extends BaseView {
         InvalidVoucherView result = null;
         super.click(okButton);
         // On attend éventuellement l'affichage de la popup "Bon d'achat invalide"
-        WebElement invalidVoucherBtn = WaitHelper.waitUntilElementIsVisible(driver, 10, INVALID_VOUCHER_POP_UP_XPATH, false);
+        WebElement invalidVoucherBtn = WebElementHelper.waitUntilElementIsVisible(driver, 10, By.xpath(INVALID_VOUCHER_POP_UP_XPATH), false);
         // Si le coupon n'est pas valide
         if (invalidVoucherBtn != null) {
             // On retourne une vue "Bon d'achat invalide"

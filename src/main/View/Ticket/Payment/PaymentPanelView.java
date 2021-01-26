@@ -1,7 +1,7 @@
 package View.Ticket.Payment;
 
 import Enums.PaymentMean;
-import Helpers.Element.WaitHelper;
+import Helpers.Element.WebElementHelper;
 import Helpers.XPath.XPathPaymentLineHelper;
 import View.BaseView;
 import View.Ticket.Payment.CreditNote.CreditNoteSearchView;
@@ -16,13 +16,20 @@ public class PaymentPanelView extends BaseView {
     // XPath du bouton "Finaliser"
     private static final String FINALIZE_BTN_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_donebutton\"]";
     // XPath Boutton 'Avoir'
-    private static final String CREDIT_NOTE_BTN_XPATH ="//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide3_GCNV_payment.creditnote_button\"]";
+    private static final String CREDIT_NOTE_BTN_XPATH = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide3_GCNV_payment.creditnote_button\"]";
+    // XPath du libellé "Le total est de zéro, pas de paiement nécessaire"
+    private static final String ALREADY_PAID_LBL_XPATH = " //*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_donezerolbl\"]";
+    // Id du contenant des lignes de paiements
+    private static final String PAYMENT_CONTENT_ID = "terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments";
+
     // Boutton 'Espece'
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide2_OBPOS_payment.cash_button\"]")
     private WebElement cashBtn;
+
     // Montant restant à règler
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_totalpending\"]")
     private WebElement totalPending;
+
     // Mode de paiement sélectionné
     private PaymentMean selectedPayment;
 
@@ -73,12 +80,22 @@ public class PaymentPanelView extends BaseView {
         // Récupère le Xpath du boutton suppression paiement
         String removePaymentLineBtnXPath = XPathPaymentLineHelper.getRemovePaymentButtonAmountXPath(paymentNameId);
         // Recherche du bouttn "Supprimer ligne" associé au mode de paiement
-        WebElement removeBtn = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(removePaymentLineBtnXPath));
+        WebElement removeBtn = WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(removePaymentLineBtnXPath), false);
         if (removeBtn != null) {
             super.click(removeBtn);
             // Attend que le boutton disparaisse
-            WaitHelper.waitUntilElementIsNotVisible(driver, 5, removePaymentLineBtnXPath, false);
+            WebElementHelper.waitUntilElementIsNotPresent(driver, 5, By.xpath(removePaymentLineBtnXPath), false);
         }
+    }
+
+    /**
+     * Renvoi vrai si la ligne de paiement est présente
+     * @param paymentLabel
+     * @return
+     */
+    public boolean hasPaymentLine(String paymentLabel) {
+        // On récupère l'élément 'Ligne paiement' à partir de son libellé
+        return getPaymentLineIdElemByText(paymentLabel) != null;
     }
 
     /**
@@ -97,8 +114,7 @@ public class PaymentPanelView extends BaseView {
     private String getPaymentLineIdElemByText(String label) {
         String result = "";
         // Recherche l'élement 'label' à partir du texte
-        //WebElement paymentLineElem = WebElementHelper.getElementFromText(label, driver);
-        WebElement paymentLineElem = Helpers.Element.WebElementHelper.getElementFromTextAndClass(label, driver);
+        WebElement paymentLineElem = WebElementHelper.getElementFromIdAndText(PAYMENT_CONTENT_ID,label, driver);
         // Blindage
         if (paymentLineElem != null) {
             // Affectation de l'id de l'élement
@@ -111,9 +127,39 @@ public class PaymentPanelView extends BaseView {
      * Finalise la commande
      */
     public SendTicketView clickFinalize() {
-
         super.searchAndClickElement(FINALIZE_BTN_XPATH);
         return new SendTicketView(driver);
+    }
+
+    /**
+     * Renvoi vrai si la commande est déjà réglée
+     * @return
+     */
+    public boolean isAlreadyPaid() {
+        return isElementPresentOnView(ALREADY_PAID_LBL_XPATH);
+    }
+
+    /**
+     * Retourne le montant du paiement
+     * @param paymentLabel
+     * @return
+     */
+    public String getPaymentLineAmount(String paymentLabel) {
+        String amount = "";
+        // On récupère l'id de l'élement 'Nom ligne paiement'
+        String paymentNameId = getPaymentLineIdElemByText(paymentLabel);
+        // Récupère le Xpath de l'élement 'Montant ligne paiement'
+        String lineAmountXPath = XPathPaymentLineHelper.getPaymentLineAmountXPath(paymentNameId);
+        // Recherche du bouttn "Supprimer ligne" associé au mode de paiement
+        WebElement lineAmount = WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(lineAmountXPath), false);
+        // Si le montant est présent
+        if (lineAmount != null) {
+            // On récupère la valeur contenue dans le texte
+            amount = lineAmount.getText();
+        }
+
+        return amount;
+
     }
 
 }

@@ -27,6 +27,8 @@ public class TestSuiteProperties {
     public static String OURAGAN_DB_USER;
     // Password de la DB Ouragan
     public static String OURAGAN_DB_PASSWORD;
+    // URL du BackOffice
+    public static String OB_BO_URL;
 
 
 

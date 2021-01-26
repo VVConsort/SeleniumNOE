@@ -1,5 +1,6 @@
 package Helpers.Test.TestSuiteProperties;
 
+import junit.framework.TestSuite;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -21,6 +22,7 @@ public class PropertiesLoader {
     private static final String OURAGAN_DB_URL = "OURAGAN_DB_URL";
     private static final String OURAGAN_DB_USER = "OURAGAN_DB_USER";
     private static final String OURAGAN_DB_PASSWORD = "OURAGAN_DB_PASSWORD";
+    private static final String OB_BO_URL = "OB_BO_URL";
 
     /**
      * Charge les propriétés de la TestSuite à partir du chemin spécifié en paramètre
@@ -49,6 +51,7 @@ public class PropertiesLoader {
         TestSuiteProperties.OURAGAN_DB_URL = properties.getProperty(OURAGAN_DB_URL);
         TestSuiteProperties.OURAGAN_DB_USER = properties.getProperty(OURAGAN_DB_USER);
         TestSuiteProperties.OURAGAN_DB_PASSWORD = properties.getProperty(OURAGAN_DB_PASSWORD);
+        TestSuiteProperties.OB_BO_URL = properties.getProperty(OB_BO_URL);
     }
 }
 

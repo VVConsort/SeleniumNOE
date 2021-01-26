@@ -1,6 +1,6 @@
 package View.Ticket;
 
-import Helpers.XPath.XPathLineHelper;
+import Helpers.XPath.XPathDiscountLineHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -51,7 +51,7 @@ public class ReceiptView extends BaseView {
         String discountLabelId = getDiscountLabelELemIdByText(discountLabel);
         if (!discountLabelId.isEmpty()) {
             // Récupération de l'ID du montant promo
-            String amountXPath = XPathLineHelper.getLineDiscountGrossAmountXPath(XPathLineHelper.getBodyControlXPathVarFromProductId(discountLabelId), XPathLineHelper.getRenderOrderLineXPathVarFromProductId(discountLabelId), XPathLineHelper.getEndVariableFromProductId(discountLabelId));
+            String amountXPath = XPathDiscountLineHelper.getLineDiscountGrossAmountXPath(XPathDiscountLineHelper.getBodyControlXPathVarFromProductId(discountLabelId), XPathDiscountLineHelper.getRenderOrderLineXPathVarFromProductId(discountLabelId), XPathDiscountLineHelper.getEndVariableFromProductId(discountLabelId));
             result = Helpers.Element.WebElementHelper.getTextFromElement(driver, By.xpath(amountXPath));
         }
         // On retourne le montant de la promo

@@ -1,6 +1,5 @@
 package Helpers.Input;
 
-import Helpers.Element.WaitHelper;
 import Helpers.Element.WebElementHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -43,7 +42,6 @@ public class InputHelper {
             char character = characters.charAt(i);
             type(character);
         }
-        Thread.sleep(1000);
         // Appuie sur Entrée
         inputListener.sendKeys(Keys.ENTER);
     }
