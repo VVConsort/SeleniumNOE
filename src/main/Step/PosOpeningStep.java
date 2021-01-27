@@ -47,8 +47,10 @@ public class PosOpeningStep {
     private static void doOpenPos(WebDriver driver, PosOpeningView openingView) throws InterruptedException {
         // Clic bouton "Suivant"
         openingView.clickNext();
+        Thread.sleep(500);
         // Clic bouton "Suivant"
         openingView.clickNext();
+        Thread.sleep(500);
         // Approuve la différence de rendue si nécessaire
         openingView.clickApprovalOk(false);
         // Attend le chargement du cache
@@ -64,8 +66,10 @@ public class PosOpeningStep {
     private static void doClosePos(WebDriver driver, PosClosingView closingView) throws InterruptedException {
         // Next
         closingView.clickNextBtn();
+        Thread.sleep(500);
         // Next
         closingView.clickNextBtn();
+        Thread.sleep(500);
         // Finaliser
         closingView.clickNextBtn();
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
