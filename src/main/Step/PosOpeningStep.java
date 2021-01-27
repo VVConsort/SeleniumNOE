@@ -67,8 +67,10 @@ public class PosOpeningStep {
         // Next
         closingView.clickNextBtn();
         Thread.sleep(500);
+        closingView.confirmApprovalReason(false);
         // Next
         closingView.clickNextBtn();
+        closingView.confirmApprovalReason(false);
         Thread.sleep(500);
         // Finaliser
         closingView.clickNextBtn();
