@@ -8,7 +8,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 public class BaseView {
 
     // Timeout
-    private static final int ELEMENT_MISSING_TIMEOUT = 10;
+    protected static final int ELEMENT_MISSING_TIMEOUT = 5;
     // Driver
     protected WebDriver driver;
 
@@ -42,7 +42,7 @@ public class BaseView {
             doClick(webElement);
         } catch (StaleElementReferenceException ex) {
             for (int i = 0; i < 10; i++) {
-                System.out.println(""+ex + i);
+                System.out.println("" + ex + i);
                 // On récupère l'id de l'élément
                 String id = webElement.getAttribute("id");
                 // Cherche l'élément à partir de son id
@@ -59,9 +59,9 @@ public class BaseView {
      * @param XPath
      * @return true si l'élément est présent et clické
      */
-    protected boolean searchAndClickElement(String XPath) {
+    protected boolean findAndClickElement(String XPath, boolean isMandatory) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), true);
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), isMandatory);
         // Click si existe
         if (webElem != null) {
             doClick(webElem);
@@ -71,14 +71,14 @@ public class BaseView {
     }
 
     /**
-     * Renvoi vrai si l'élément est présent
+     * Renvoi l'élément si présent sur la view
      * @param xPath
      * @return
      */
-    protected boolean isElementPresentOnView(String xPath) {
+    protected WebElement findElement(String xPath, boolean isMandatory) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), false);
-        return webElem != null;
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), isMandatory);
+        return webElem;
     }
 
     private void doClick(WebElement webElement) {

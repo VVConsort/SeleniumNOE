@@ -18,7 +18,7 @@ public class NOE763 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-763")
     public void noe763(String productCode, String expectedTotalAmount) throws IOException, InterruptedException {
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogOpenBravo();
+        currentDriver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
         TicketStep.deleteTicket(currentDriver);
         // Ajout du produit générique

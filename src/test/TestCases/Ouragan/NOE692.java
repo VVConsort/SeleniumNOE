@@ -3,7 +3,6 @@ package TestCases.Ouragan;
 import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.OuraganStep;
-import Step.ScanStep;
 import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import io.qameta.allure.Link;
@@ -21,7 +20,7 @@ public class NOE692 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogOpenBravo();
+        currentDriver = LoggingStep.launchAndLogToOpenBravo();
         // Vidage du ticket
         TicketStep.deleteTicket(currentDriver);
         // Ouverture du BT intégré

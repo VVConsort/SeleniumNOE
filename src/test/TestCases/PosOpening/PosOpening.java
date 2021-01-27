@@ -21,13 +21,18 @@ public class PosOpening extends BaseTest {
         if (terminalKey != null && !terminalKey.isEmpty() && profileName != null && !profileName.isEmpty()) {
             // Ouvre OB et se log avec la caisse passée en paramètre
             LoggingStepValue logStepValue = new LoggingStepValue(TestSuiteProperties.OB_POS_URL, terminalKey, TestSuiteProperties.CHROME_PROFILE_PATH, profileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD);
-            currentDriver = LoggingStep.launchAndLogOpenBravo(logStepValue);
+            currentDriver = LoggingStep.launchAndLogToOpenBravo(logStepValue);
         }
         // Sinon ouverture en utilisant les paramètres de la TestSuite
         else {
-            currentDriver = LoggingStep.launchAndLogOpenBravo();
+            currentDriver = LoggingStep.launchAndLogToOpenBravo();
         }
-        // Ouverture de la caisse
+        // Fermeture de la caisse
+        if (PosOpeningStep.closePos(currentDriver)) {
+            // Si la caisse a été cloturé il faut se re logger
+            LoggingStep.logToOpenBravo(currentDriver);
+        }
+        // Ouverture de caisse
         PosOpeningStep.openPos(currentDriver);
     }
 

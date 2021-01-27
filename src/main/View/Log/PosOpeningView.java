@@ -49,22 +49,27 @@ public class PosOpeningView extends BaseView {
     /**
      * Confirme la date d'ouverture de la caisse
      */
-    public void clickConfirmOpeningDate() {
-        searchAndClickElement(CONFIRM_POS_OPENING_DATE_BTN_XPATH);
+    public void clickConfirmOpeningDate(boolean isMandatory) {
+        // Recherche du btn de confirmation de date
+        WebElement confirmDateBtn = findElement(CONFIRM_POS_OPENING_DATE_BTN_XPATH, isMandatory);
+        // Si il est présent
+        if (confirmDateBtn != null) {
+            super.click(confirmDateBtn);
+        }
     }
 
     /**
      * Confirme l'entrée en ouverture de caisse
      */
     public boolean clickEnterPosOpening() {
-        return searchAndClickElement(ENTER_POS_OPENING_POPUP_BTN_XPATH);
+        return findAndClickElement(ENTER_POS_OPENING_POPUP_BTN_XPATH, false);
     }
 
     /**
      * Click sur le bouton d'aprobation diff rendu
      */
-    public void clickApprovalOk() {
-        searchAndClickElement(APPROVAL_REASON_OK_BTN_XPATH);
+    public void clickApprovalOk(boolean isMandatory) {
+        findAndClickElement(APPROVAL_REASON_OK_BTN_XPATH, isMandatory);
     }
 
 }

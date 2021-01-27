@@ -22,18 +22,20 @@ public class LoggingStep {
      * @return le webdriver crée
      */
     @Step("Lancement et log sur OpenBravo")
-    public static ChromeDriver launchAndLogOpenBravo() throws MalformedURLException, InterruptedException {
+    public static ChromeDriver launchAndLogToOpenBravo() throws MalformedURLException, InterruptedException {
 
         // Récupération du driver et lancement de la caisse
         ChromeDriver driver = BrowserLauncher.launchOpenBravoWithCache();
+        // Log sur OpenBravo
+        logToOpenBravo(driver);
         // Ecran de loggin
-        LogScreenView logScreenView = new LogScreenView(driver);
+        /*LogScreenView logScreenView = new LogScreenView(driver);
         // Set l'utilisateur
         logScreenView.setUserName(TestSuiteProperties.USERNAME);
         // Set le mdp
         logScreenView.setPassword(TestSuiteProperties.PASSWORD);
         // Connection
-        logScreenView.clickConnexion();
+        logScreenView.clickConnexion();*/
         // On attend que le cache soit chargé
         LoadingHelper.waitUntilLoadIsFinished(driver, CACHE_LOADING_TIMEOUT_IN_SECONDS);
         ReportHelper.attachScreenshot(driver);
@@ -41,8 +43,8 @@ public class LoggingStep {
         return driver;
     }
 
-    @Step("Log sur OpenBravo avec la caisse {step.terminalKey}")
-    public static ChromeDriver launchAndLogOpenBravo(LoggingStepValue step) throws MalformedURLException, InterruptedException {
+    @Step("Lancement et log sur OpenBravo avec la caisse {step.terminalKey}")
+    public static ChromeDriver launchAndLogToOpenBravo(LoggingStepValue step) throws MalformedURLException, InterruptedException {
 
         // Récupération du driver et lancement de la caisse
         ChromeDriver driver = BrowserLauncher.launchOpenBravoWithCache(step.url, step.terminalKey, step.chromeProfilePath, step.chromeProfile);
@@ -58,6 +60,21 @@ public class LoggingStep {
         LoadingHelper.waitUntilLoadIsFinished(driver, CACHE_LOADING_TIMEOUT_IN_SECONDS);
         ReportHelper.attachScreenshot(driver);
         return driver;
+    }
+
+    @Step("Log sur OpenBravo")
+    public static void logToOpenBravo(ChromeDriver driver) throws InterruptedException {
+        // Ecran de loggin
+        LogScreenView logScreenView = new LogScreenView(driver);
+        // Set l'utilisateur
+        logScreenView.setUserName(TestSuiteProperties.USERNAME);
+        // Set le mdp
+        logScreenView.setPassword(TestSuiteProperties.PASSWORD);
+        // Connection
+        logScreenView.clickConnexion();
+        // On attend que le cache soit chargé
+        LoadingHelper.waitUntilLoadIsFinished(driver, CACHE_LOADING_TIMEOUT_IN_SECONDS);
+        ReportHelper.attachScreenshot(driver);
     }
 
     @Step("Lancement et log sur le BackOffice")

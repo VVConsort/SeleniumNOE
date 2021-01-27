@@ -22,7 +22,7 @@ public class NOE655 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogOpenBravo();
+        currentDriver = LoggingStep.launchAndLogToOpenBravo();
         // Vidage du ticket
         TicketStep.deleteTicket(currentDriver);
         // Ouverture du BT intégré

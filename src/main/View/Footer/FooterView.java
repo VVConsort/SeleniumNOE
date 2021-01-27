@@ -1,8 +1,10 @@
 package View.Footer;
 
+import Helpers.Element.WebElementHelper;
 import View.BaseView;
 import View.Footer.Menu.MenuItemListView;
 import View.Ticket.Payment.PaymentPanelView;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +29,7 @@ public class FooterView extends BaseView {
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_buttonDelete\"]")
     private WebElement deleteTicketBtn;
 
+    //
     public FooterView(WebDriver driver) {
         init(driver, this);
     }
@@ -42,8 +45,10 @@ public class FooterView extends BaseView {
      * Click sur le bouton 'confirmer suppression ticket'
      */
     public void clickOnConfirmDeleteBtn() {
-        if (isElementPresentOnView(CONFIRM_DELETE_BTN_XPATH)) {
-            super.searchAndClickElement(CONFIRM_DELETE_BTN_XPATH);
+        // Click sur le btn si il est présent
+        if (findAndClickElement(CONFIRM_DELETE_BTN_XPATH, false)) {
+           // On attend sa disparation
+            WebElementHelper.waitUntilElementIsNotPresent(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(CONFIRM_DELETE_BTN_XPATH), true);
         }
     }
 
@@ -51,6 +56,7 @@ public class FooterView extends BaseView {
      * Click sur le bouton 'A payer' et retourne la panneau des paiements
      */
     public PaymentPanelView clickOnTotalToPayBtn() {
+        // Click sur A payer
         super.click(totalToPayBtn);
         return new PaymentPanelView(driver);
     }

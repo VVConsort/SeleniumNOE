@@ -12,16 +12,10 @@ public class PosOpeningStep {
 
     @Step("Ouvre la caisse")
     public static void openPos(WebDriver driver) throws InterruptedException {
-        // Si cloture nécessaire
-        PosClosingView closingView = new PosClosingView(driver);
-        // Si une cloture est nécessaire
-        if (closingView.enterPosClosing()) {
-            closePos(driver, closingView);
-        }
         // Vue Ouverture de caisse
         PosOpeningView posOpeningView = new PosOpeningView(driver);
         // Confirme la date d'ouverture si nécessaire
-        posOpeningView.clickConfirmOpeningDate();
+        posOpeningView.clickConfirmOpeningDate(false);
         // Si une ouverture de caisse est demandée ou si on est déjà en ouverture
         if (posOpeningView.clickEnterPosOpening() || isAlreadyInOpening(driver)) {
             doOpenPos(driver, posOpeningView);
@@ -30,29 +24,51 @@ public class PosOpeningStep {
     }
 
     @Step("Cloture de caisse")
-    public static void closePos(WebDriver driver, PosClosingView closingView) throws InterruptedException {
-        // Next
-        closingView.clickNextBtn();
-        // Next
-        closingView.clickNextBtn();
-        closingView.clickNextBtn();
-        LoadingHelper.waitUntilLoadIsFinished(driver, 120);
+    public static boolean closePos(WebDriver driver) throws InterruptedException {
+        // Flag indiquant que la caisse a été cloturé, dans le cas ou celle-ci l'a été il faut se re logger sur la caisse
+        boolean posHasBeenClosed = false;
+        // Si cloture nécessaire
+        PosClosingView closingView = new PosClosingView(driver);
+        // Si une cloture est nécessaire
+        if (closingView.enterPosClosing()) {
+            doClosePos(driver, closingView);
+            posHasBeenClosed = true;
+        }
         ReportHelper.attachScreenshot(driver);
+        return posHasBeenClosed;
     }
 
-    @Step("Ouvre la caisse")
-    public static void doOpenPos(WebDriver driver, PosOpeningView openingView) throws InterruptedException {
+    /**
+     * Ouvre la caisse
+     * @param driver
+     * @param openingView
+     * @throws InterruptedException
+     */
+    private static void doOpenPos(WebDriver driver, PosOpeningView openingView) throws InterruptedException {
         // Clic bouton "Suivant"
         openingView.clickNext();
         // Clic bouton "Suivant"
         openingView.clickNext();
         // Approuve la différence de rendue si nécessaire
-        openingView.clickApprovalOk();
-        // Appuie sur "Finaliser"
-        //openingView.clickNext();
+        openingView.clickApprovalOk(false);
         // Attend le chargement du cache
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
-        ReportHelper.attachScreenshot(driver);
+    }
+
+    /**
+     * Clos la caisse
+     * @param driver
+     * @param closingView
+     * @throws InterruptedException
+     */
+    private static void doClosePos(WebDriver driver, PosClosingView closingView) throws InterruptedException {
+        // Next
+        closingView.clickNextBtn();
+        // Next
+        closingView.clickNextBtn();
+        // Finaliser
+        closingView.clickNextBtn();
+        LoadingHelper.waitUntilLoadIsFinished(driver, 120);
     }
 
     /**

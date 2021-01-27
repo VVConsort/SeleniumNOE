@@ -41,7 +41,7 @@ public class PaymentPanelView extends BaseView {
      * Clique sur le boutton "Avoir"
      */
     public void clickCreditNoteBtn() {
-        super.searchAndClickElement(CREDIT_NOTE_BTN_XPATH);
+        findAndClickElement(CREDIT_NOTE_BTN_XPATH, true);
         selectedPayment = PaymentMean.CREDIT_NOTE;
     }
 
@@ -59,14 +59,14 @@ public class PaymentPanelView extends BaseView {
     public BaseView clickPayAllBtn() {
         // La vue à renvoyer selon le mode dde paiement
         BaseView paymentPage = null;
-        // Si l'élément est présent et clické
-        if (super.searchAndClickElement(PAY_ALL_BTN_XPATH)) {
-            // On renvoie la vue correspondante au mode de paiement sélectionné
-            switch (selectedPayment) {
-                case CREDIT_NOTE -> paymentPage = new CreditNoteSearchView(driver);
-                case CASH -> paymentPage = this;
-            }
+        // Click sur "Tout payer"
+        findAndClickElement(PAY_ALL_BTN_XPATH, true);
+        // On renvoie la vue correspondante au mode de paiement sélectionné
+        switch (selectedPayment) {
+            case CREDIT_NOTE -> paymentPage = new CreditNoteSearchView(driver);
+            case CASH -> paymentPage = this;
         }
+
         return paymentPage;
     }
 
@@ -114,7 +114,7 @@ public class PaymentPanelView extends BaseView {
     private String getPaymentLineIdElemByText(String label) {
         String result = "";
         // Recherche l'élement 'label' à partir du texte
-        WebElement paymentLineElem = WebElementHelper.getElementFromIdAndText(PAYMENT_CONTENT_ID,label, driver);
+        WebElement paymentLineElem = WebElementHelper.getElementFromIdAndText(PAYMENT_CONTENT_ID, label, driver);
         // Blindage
         if (paymentLineElem != null) {
             // Affectation de l'id de l'élement
@@ -127,7 +127,7 @@ public class PaymentPanelView extends BaseView {
      * Finalise la commande
      */
     public SendTicketView clickFinalize() {
-        super.searchAndClickElement(FINALIZE_BTN_XPATH);
+        findAndClickElement(FINALIZE_BTN_XPATH, true);
         return new SendTicketView(driver);
     }
 
@@ -136,7 +136,7 @@ public class PaymentPanelView extends BaseView {
      * @return
      */
     public boolean isAlreadyPaid() {
-        return isElementPresentOnView(ALREADY_PAID_LBL_XPATH);
+        return findElement(ALREADY_PAID_LBL_XPATH, false) != null;
     }
 
     /**

@@ -69,8 +69,6 @@ public class WebElementHelper {
      * @return
      */
     public static WebElement getElementFromIdAndText(String id, String text, WebDriver driver) {
-        //FIXME
-        //String Xpath = "*//div[starts-with(@id,'terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments') and contains (text(),'" + text + "')]";
         String Xpath = "*//div[starts-with(@id,'" + id + "') and contains (text(),'" + text + "')]";
         return getElement(driver, By.xpath(Xpath));
     }
@@ -82,13 +80,14 @@ public class WebElementHelper {
      */
     public static void waitUntilElementIsNotPresent(WebDriver driver, int timeOutInSeconds, By by, boolean throwException) {
         try {
+            System.out.println("wait for invisibility");
             doWaitForInvisibility(driver, by, timeOutInSeconds);
         } catch (Throwable e) {
             if (throwException) {
                 throw e;
             }
         }
-        System.out.println("invisible");
+        System.out.println("is invisible");
     }
 
     /**
@@ -104,7 +103,6 @@ public class WebElementHelper {
             if (throwException)
                 throw e;
         }
-        System.out.println("visible");
         return elem;
     }
 
@@ -145,10 +143,10 @@ public class WebElementHelper {
                 .ignoring(StaleElementReferenceException.class)
                 .ignoring(NoSuchElementException.class)
                 .ignoring(ElementNotVisibleException.class);
-        // Attend que l'élément ne soit plus présent dans le dom
+        // Attend que l'élément ne soit plus affiché
         wait.until(new Function<WebDriver, Boolean>() {
             public Boolean apply(WebDriver driver) {
-                return driver.findElement(by) == null;
+                return !driver.findElement(by).isDisplayed();
             }
         });
     }

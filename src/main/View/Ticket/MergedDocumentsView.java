@@ -2,6 +2,7 @@ package View.Ticket;
 
 import View.BaseView;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Pop up des documents associés
@@ -10,6 +11,8 @@ public class MergedDocumentsView extends BaseView {
 
     // Xpath du bouton "Fermer document associés"
     private static final String CANCEL_BTN_XPATH = "//*[@id=\\\"terminal_containerWindow_pointOfSale_OBMTR_UI_ModalOpenMergeRelatedReceipts_footer_openMergeRelatedReceipts_btnCancel\\\"]\"";
+    // Bouton "Fermer documents associés"
+    private WebElement cancelBtn;
 
     public MergedDocumentsView(WebDriver driver) {
         init(driver, this);
@@ -19,7 +22,12 @@ public class MergedDocumentsView extends BaseView {
      * Click sur le bouton annuler si il existe
      */
     public void clickCancelButton() {
-        super.searchAndClickElement(CANCEL_BTN_XPATH);
+        // Si l'élément est déjà chargé
+        if (cancelBtn != null) {
+            super.click(cancelBtn);
+        } else {
+            findAndClickElement(CANCEL_BTN_XPATH, true);
+        }
     }
 
     /**
@@ -27,6 +35,7 @@ public class MergedDocumentsView extends BaseView {
      * @return
      */
     public boolean isPresent() {
-        return super.isElementPresentOnView(CANCEL_BTN_XPATH);
+        cancelBtn = findElement(CANCEL_BTN_XPATH, false);
+        return cancelBtn != null;
     }
 }
