@@ -18,13 +18,13 @@ public class NOE774 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ouverture du BT intégré
-        OuraganStep.openWorkOrder(documentCode,currentDriver);
+        OuraganStep.openWorkOrder(documentCode, driver);
         // On attend le chargement
-        LoadingHelper.waitUntilLoadIsFinished(currentDriver, 20);
+        LoadingHelper.waitUntilLoadIsFinished(driver, 20);
         // Controle de la gratuité du montage
         DiscountStepValue discStepValue = getNewDiscountStepValue(false);
         discStepValue.expectedValue = expectedDiscountAmount;
@@ -35,7 +35,7 @@ public class NOE774 extends BaseTest {
         ticketStep.expectedValue = expectedTotal;
         TicketStep.checkTotalToPay(ticketStep);
         // Vidage du ticket
-        TicketStep.deleteWorkOrder(currentDriver);
+        TicketStep.deleteWorkOrder(driver);
 
     }
 

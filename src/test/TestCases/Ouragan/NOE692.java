@@ -20,19 +20,19 @@ public class NOE692 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // Vidage du ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ouverture du BT intégré
-        OuraganStep.openWorkOrder(documentCode,currentDriver);
+        OuraganStep.openWorkOrder(documentCode, driver);
         BaseStepValue stepValue = getNewBaseStepValue(false);
         // Vérification du montant à payer
         stepValue.expectedValue = expectedPendingAmount;
         TicketStep.checkTotalToPay(stepValue);
         // Vérification qu'il n'y a plus rien à payer
         TicketStep.checkOrderAlreadyPaid(stepValue);
-        // TODO Attendre accès base OB
+        // TODO Attendre accès base OB : vérification retour vers Ouragan
         // Vidage du BT
-        TicketStep.deleteWorkOrder(currentDriver);
+        TicketStep.deleteWorkOrder(driver);
     }
 }

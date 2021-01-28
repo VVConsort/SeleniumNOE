@@ -22,11 +22,11 @@ public class NOE655 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // Vidage du ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ouverture du BT intégré
-        OuraganStep.openWorkOrder(documentCode,currentDriver);
+        OuraganStep.openWorkOrder(documentCode, driver);
         // Vérification du montant à payer
         BaseStepValue stepValue = getNewBaseStepValue(false);
         stepValue.expectedValue = expectedPendingAmount;
@@ -42,7 +42,7 @@ public class NOE655 extends BaseTest {
         // Finalisation
         PaymentStep.finalizeOrder(payStepValue);
         // Fermeture du BT
-        TicketStep.deleteWorkOrder(currentDriver);
+        TicketStep.deleteWorkOrder(driver);
         /*String ouraganOrderState = OuraganStep.getOrderState(TestSuiteProperties.OURAGAN_DB_URL, TestSuiteProperties.OURAGAN_DB_USER, TestSuiteProperties.OURAGAN_DB_PASSWORD, OuraganJsonHelper.getOrderReference(OuraganJsonHelper.getJsonFromFileURL(jsonFilePath)));
         // Comparaison avec l'état attendu
         softAssert.assertEquals(ouraganOrderState, expectedState);*/

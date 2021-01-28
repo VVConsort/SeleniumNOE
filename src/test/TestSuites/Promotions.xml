@@ -2,11 +2,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="NOE542-Promotion">
     <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\Promotions"/>
-   <!-- <test name="openPos">
+   <test name="openPos">
         <classes>
             <class name="TestCases.PosOpening.PosOpening"/>
         </classes>
-    </test> -->
+    </test>
      <test name="NOE859">
          <parameter name="crossedPriceProduct" value="97217"/>
          <parameter name="familyDiscountProduct" value="361559"/>

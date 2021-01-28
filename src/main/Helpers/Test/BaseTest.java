@@ -16,9 +16,9 @@ import org.testng.asserts.SoftAssert;
 public class BaseTest {
 
     // Driver Chrome
-    public ChromeDriver currentDriver;
+    protected ChromeDriver driver;
     // Soft assert
-    public SoftAssert softAssert = new SoftAssert();
+    protected SoftAssert softAssert = new SoftAssert();
 
     /**
      * Charge les properties de la TestSuite
@@ -49,7 +49,7 @@ public class BaseTest {
      * Vide le ticket
      */
     protected void deleteTicket() {
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
     }
 
     /**
@@ -59,7 +59,7 @@ public class BaseTest {
     protected void closeBrowser() {
         if (!isDriverClosed()) {
             // Ferme le navigateur
-            currentDriver.quit();
+            driver.quit();
         }
     }
 
@@ -73,7 +73,7 @@ public class BaseTest {
             softAssert.assertAll();
         } catch (AssertionError err) {
             // Prend un screenshot
-            ReportHelper.attachScreenshot(currentDriver);
+            ReportHelper.attachScreenshot(driver);
             // Fermeture du navigateur
             closeBrowser();
             throw err;
@@ -94,7 +94,7 @@ public class BaseTest {
      * @return
      */
     protected BaseStepValue getNewBaseStepValue(boolean isHardAssert) {
-        return new BaseStepValue(currentDriver, softAssert, isHardAssert);
+        return new BaseStepValue(driver, softAssert, isHardAssert);
     }
 
     /**
@@ -103,7 +103,7 @@ public class BaseTest {
      * @return
      */
     protected DiscountStepValue getNewDiscountStepValue(boolean isHardAssert) {
-        return new DiscountStepValue(currentDriver, softAssert, isHardAssert);
+        return new DiscountStepValue(driver, softAssert, isHardAssert);
     }
 
     /**
@@ -112,7 +112,7 @@ public class BaseTest {
      * @return
      */
     protected PaymentStepValue getNewPaymentStepValue(boolean isHardAssert) {
-        return new PaymentStepValue(currentDriver, softAssert, isHardAssert);
+        return new PaymentStepValue(driver, softAssert, isHardAssert);
     }
 
     /**
@@ -120,7 +120,7 @@ public class BaseTest {
      * @return
      */
     private boolean isDriverClosed() {
-        return currentDriver == null || currentDriver.getSessionId() == null;
+        return driver == null || driver.getSessionId() == null;
     }
 
 

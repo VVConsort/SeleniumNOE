@@ -6,12 +6,12 @@ import Helpers.Test.ReportHelper;
 import View.Log.PosClosingView;
 import View.Log.PosOpeningView;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PosOpeningStep {
 
     @Step("Ouvre la caisse")
-    public static void openPos(WebDriver driver) throws InterruptedException {
+    public static void openPos(ChromeDriver driver) throws InterruptedException {
         // Vue Ouverture de caisse
         PosOpeningView posOpeningView = new PosOpeningView(driver);
         // Confirme la date d'ouverture si nécessaire
@@ -24,18 +24,15 @@ public class PosOpeningStep {
     }
 
     @Step("Cloture de caisse")
-    public static boolean closePos(WebDriver driver) throws InterruptedException {
-        // Flag indiquant que la caisse a été cloturé, dans le cas ou celle-ci l'a été il faut se re logger sur la caisse
-        boolean posHasBeenClosed = false;
+    public static void closePos(ChromeDriver driver) throws InterruptedException {
         // Si cloture nécessaire
         PosClosingView closingView = new PosClosingView(driver);
         // Si une cloture est nécessaire
         if (closingView.enterPosClosing()) {
             doClosePos(driver, closingView);
-            posHasBeenClosed = true;
         }
         ReportHelper.attachScreenshot(driver);
-        return posHasBeenClosed;
+
     }
 
     /**
@@ -44,7 +41,7 @@ public class PosOpeningStep {
      * @param openingView
      * @throws InterruptedException
      */
-    private static void doOpenPos(WebDriver driver, PosOpeningView openingView) throws InterruptedException {
+    private static void doOpenPos(ChromeDriver driver, PosOpeningView openingView) throws InterruptedException {
         // Clic bouton "Suivant"
         openingView.clickNext();
         Thread.sleep(500);
@@ -63,7 +60,7 @@ public class PosOpeningStep {
      * @param closingView
      * @throws InterruptedException
      */
-    private static void doClosePos(WebDriver driver, PosClosingView closingView) throws InterruptedException {
+    private static void doClosePos(ChromeDriver driver, PosClosingView closingView) throws InterruptedException {
         // Next
         closingView.clickNextBtn();
         Thread.sleep(500);
@@ -72,9 +69,11 @@ public class PosOpeningStep {
         closingView.clickNextBtn();
         closingView.confirmApprovalReason(false);
         Thread.sleep(500);
-        // Finaliser
+        // Traiter, imprimer & fermer
         closingView.clickNextBtn();
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
+        // On se relog
+        LoggingStep.logToOpenBravo(driver);
     }
 
     /**
@@ -82,7 +81,7 @@ public class PosOpeningStep {
      * @param driver
      * @return
      */
-    private static boolean isAlreadyInOpening(WebDriver driver) {
+    private static boolean isAlreadyInOpening(ChromeDriver driver) {
         return WebElementHelper.getElementFromText("Ouverture caisse", driver) != null;
     }
 }

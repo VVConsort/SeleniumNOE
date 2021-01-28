@@ -18,17 +18,17 @@ public class NOE859 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-859")
     public void noe859(String crossedPriceProduct, String familyDiscountProduct, String expectedTotal) throws MalformedURLException, InterruptedException {
         // Lance et se log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ajout des produits brix barrés et promos
-        ScanStep.scanValues(new String[]{crossedPriceProduct, familyDiscountProduct}, currentDriver);
+        ScanStep.scanValues(new String[]{crossedPriceProduct, familyDiscountProduct}, driver);
         // Vérifie le montant total à payer
-        BaseStepValue stepValue = new BaseStepValue(currentDriver, softAssert, false);
+        BaseStepValue stepValue = new BaseStepValue(driver, softAssert, false);
         stepValue.expectedValue = expectedTotal;
         TicketStep.checkTotalToPay(stepValue);
         // Suppression ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
 
 
 

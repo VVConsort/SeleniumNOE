@@ -21,11 +21,11 @@ public class NOE683 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-683")
     public void noe683(String productCode, String voucherCode, String expectedTotal) throws MalformedURLException, InterruptedException {
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ajout du produit
-        ScanStep.scanValue(productCode, currentDriver);
+        ScanStep.scanValue(productCode, driver);
         // Ajout du bon d'achat
         PaymentStepValue payStepValue = getNewPaymentStepValue(false);
         payStepValue.paymentMean = PaymentMean.VOUCHER;
@@ -36,6 +36,6 @@ public class NOE683 extends BaseTest {
         stepValue.expectedValue = expectedTotal;
         TicketStep.checkTotalToPay(stepValue);
         // Vidage du ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
     }
 }

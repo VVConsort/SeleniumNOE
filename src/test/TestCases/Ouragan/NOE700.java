@@ -19,13 +19,13 @@ public class NOE700 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // Vidage du ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ouverture du BT intégré
-        OuraganStep.openWorkOrder(documentCode,currentDriver);
+        OuraganStep.openWorkOrder(documentCode, driver);
         // Données à controler
-        DiscountStepValue discStepValue = new DiscountStepValue(currentDriver, softAssert, false);
+        DiscountStepValue discStepValue = new DiscountStepValue(driver, softAssert, false);
         discStepValue.expectedValue = discountAmount;
         discStepValue.discountLabel = discountLabel;
         // Controle du montant de la promo
@@ -35,6 +35,7 @@ public class NOE700 extends BaseTest {
         stepValue.expectedValue = expectedTotal;
         TicketStep.checkTotalToPay(stepValue);
         // Vidage du ticket
-        TicketStep.deleteWorkOrder(currentDriver);
+        TicketStep.deleteWorkOrder(driver);
+        //TODO vérification état OB
     }
 }

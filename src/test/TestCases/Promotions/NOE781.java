@@ -22,11 +22,11 @@ public class NOE781 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-787")
     public void noe781(String familyDiscountProduct, String discountLabel, String expectedDiscountAmount, String expectedTotalWithDiscount, String expectedTotalWithoutDiscount, String noDiscountPos, String noDiscountChromeProfilePath, String noDiscountChromeProfileName) throws MalformedURLException, InterruptedException {
         // Lance et se log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ajout du produits en promo
-        ScanStep.scanValue(familyDiscountProduct, currentDriver);
+        ScanStep.scanValue(familyDiscountProduct, driver);
         // Valeur à controler
         DiscountStepValue discountStepValue = getNewDiscountStepValue(false);
         discountStepValue.discountLabel = discountLabel;
@@ -39,22 +39,23 @@ public class NOE781 extends BaseTest {
         ticketStep.expectedValue = expectedTotalWithDiscount;
         TicketStep.checkTotalToPay(ticketStep);
         // Suppression et fermeture du navigateur
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Fermeture du navigateur
         closeBrowser();
         // Lancement de la caisse non éligible au promo
         LoggingStepValue logStep = new LoggingStepValue(TestSuiteProperties.OB_POS_URL, noDiscountPos, noDiscountChromeProfilePath, noDiscountChromeProfileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD);
-        currentDriver = LoggingStep.launchAndLogToOpenBravo(logStep);
-        // Ouverture de la caisse
-        PosOpeningStep.openPos(currentDriver);
+        driver = LoggingStep.launchAndLogToOpenBravo(logStep);
+        // Fermeture/Ouverture si nécessaire
+        PosOpeningStep.closePos(driver);
+        PosOpeningStep.openPos(driver);
         // Ajout du produit en promo
-        ScanStep.scanValue(familyDiscountProduct, currentDriver);
+        ScanStep.scanValue(familyDiscountProduct, driver);
         // Controle le non affichage de la promo
         DiscountStep.isDiscountNotPresent(discountStepValue);
         // Controle le montant du ticket
         ticketStep.expectedValue = expectedTotalWithoutDiscount;
         TicketStep.checkTotalToPay(ticketStep);
         // Vidage ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
     }
 }

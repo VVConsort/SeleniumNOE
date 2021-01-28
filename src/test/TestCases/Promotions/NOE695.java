@@ -20,11 +20,11 @@ public class NOE695 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-695")
     public void noe695(String productCode, String creditNoteCode, String expectedPendingAmount) throws MalformedURLException, InterruptedException {
         // Log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ajout produit
-        ScanStep.scanValue(productCode, currentDriver);
+        ScanStep.scanValue(productCode, driver);
         // Jeu de données step payement
         PaymentStepValue step = getNewPaymentStepValue(false);
         step.paymentMean = PaymentMean.CREDIT_NOTE;
@@ -37,6 +37,6 @@ public class NOE695 extends BaseTest {
         // Retirer ligne de paiement
         PaymentStep.removePaymentLine(step);
         // Vidage ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
     }
 }

@@ -20,19 +20,19 @@ public class NOE741 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-741")
     public void noe741(String productCode, String creditNoteCode) throws MalformedURLException, InterruptedException {
         // Log OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Scan article
-        ScanStep.scanValue(productCode, currentDriver);
+        ScanStep.scanValue(productCode, driver);
         // On tente d'utiliser l'avoir déjà cramé
         PaymentStepValue payStepValue = getNewPaymentStepValue(false);
         payStepValue.paymentMean = PaymentMean.CREDIT_NOTE;
         payStepValue.paymentId = creditNoteCode;
         PaymentStep.tryUsedCreditNote(payStepValue);
         // Fermeture de la fenêtre de recherche d'avoir
-        PaymentStep.closeCreditNoteSearchView(currentDriver);
+        PaymentStep.closeCreditNoteSearchView(driver);
         // Vidage du ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
     }
 }

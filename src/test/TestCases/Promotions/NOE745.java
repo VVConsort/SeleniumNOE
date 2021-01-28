@@ -20,11 +20,11 @@ public class NOE745 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-745")
     public void noe745(String productCode, String expectedDiscountAmount, String discountLabel, String expectedTotal) throws MalformedURLException, InterruptedException {
         // Log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Scan 2 fois le produit
-        ScanStep.scanValue(productCode, currentDriver, 2);
+        ScanStep.scanValue(productCode, driver, 2);
         // On vérifie l'application d'une remise égale au montant du produit B
         DiscountStepValue discStepValue = getNewDiscountStepValue(false);
         discStepValue.expectedValue = expectedDiscountAmount;
@@ -36,6 +36,6 @@ public class NOE745 extends BaseTest {
         stepValue.expectedValue = expectedTotal;
         TicketStep.checkTotalToPay(stepValue);
         // Suppression du ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
     }
 }

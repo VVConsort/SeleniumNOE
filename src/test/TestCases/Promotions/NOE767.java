@@ -19,9 +19,9 @@ public class NOE767 extends BaseTest {
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-767")
     public void noe767(String discountLabel, String discountedProductCode, String firstDiscountedPrice, String secondDiscountedPrice, String thirdDiscountedPrice) throws MalformedURLException, InterruptedException {
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // On vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ajout du premier produit
         addDiscountedProductAndCheckDiscount(discountedProductCode, firstDiscountedPrice, discountLabel);
         // Ajout du deuxieme produit
@@ -29,7 +29,7 @@ public class NOE767 extends BaseTest {
         // Ajout du troisieme produit
         addDiscountedProductAndCheckDiscount(discountedProductCode, thirdDiscountedPrice, discountLabel);
         // Vide le ticket
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
     }
 
     /**
@@ -41,7 +41,7 @@ public class NOE767 extends BaseTest {
      */
     private void addDiscountedProductAndCheckDiscount(String productCode, String expectedValue, String discountLabel) throws InterruptedException {
         // Scan du produit
-        ScanStep.scanValue(productCode, currentDriver);
+        ScanStep.scanValue(productCode, driver);
         // Controle du montant de la promop
         DiscountStepValue discStepValue = getNewDiscountStepValue(false);
         discStepValue.expectedValue = expectedValue;

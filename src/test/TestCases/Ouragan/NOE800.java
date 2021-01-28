@@ -24,11 +24,11 @@ public class NOE800 extends BaseTest {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);
         // Lancement et log sur OB
-        currentDriver = LoggingStep.launchAndLogToOpenBravo();
+        driver = LoggingStep.launchAndLogToOpenBravo();
         // Fermeture du potentiel ticket ouvert
-        TicketStep.deleteTicket(currentDriver);
+        TicketStep.deleteTicket(driver);
         // Ouverture du BT intégré
-        OuraganStep.openWorkOrder(documentCode, currentDriver);
+        OuraganStep.openWorkOrder(documentCode, driver);
         BaseStepValue baseStep = getNewBaseStepValue(false);
         // Vérification du montant à payer
         baseStep.expectedValue = expectedTotalToPay;

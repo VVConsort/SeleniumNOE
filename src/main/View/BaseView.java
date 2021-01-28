@@ -37,9 +37,12 @@ public class BaseView {
      * @param webElement
      */
     protected void click(WebElement webElement) {
-        // Peut arrivé lorsque le DOM change/a changé lorsqu'on appelle le click
         try {
-            doClick(webElement);
+            // Met le zoom à 1 pour éviter les problemes de click
+            setZoomTo1();
+            // Clic clic
+            webElement.click();
+            // Peut arriver lorsque le DOM change/a changé lorsqu'on appelle le click
         } catch (StaleElementReferenceException ex) {
             for (int i = 0; i < 10; i++) {
                 System.out.println("" + ex + i);
@@ -64,7 +67,7 @@ public class BaseView {
         WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), isMandatory);
         // Click si existe
         if (webElem != null) {
-            doClick(webElem);
+            click(webElem);
             return true;
         }
         return false;
@@ -79,12 +82,5 @@ public class BaseView {
         // On tente de récupèrer l'élement à partir du XPath
         WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), isMandatory);
         return webElem;
-    }
-
-    private void doClick(WebElement webElement) {
-        // Met le zoom à 1 pour éviter les problemes de click
-        setZoomTo1();
-        // Clic clic
-        webElement.click();
     }
 }
