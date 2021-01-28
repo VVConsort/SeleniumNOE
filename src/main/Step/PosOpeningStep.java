@@ -42,14 +42,14 @@ public class PosOpeningStep {
      * @throws InterruptedException
      */
     private static void doOpenPos(ChromeDriver driver, PosOpeningView openingView) throws InterruptedException {
-        // Clic bouton "Suivant"
-        openingView.clickNext();
-        Thread.sleep(500);
-        // Clic bouton "Suivant"
-        openingView.clickNext();
-        Thread.sleep(500);
-        // Approuve la différence de rendue si nécessaire
-        openingView.clickApprovalOk(false);
+        boolean hasNextBtn;
+        // Tant qu'il y a un bouton "Suivant" à l'écran
+        do {
+            hasNextBtn = openingView.clickNext(false);
+            Thread.sleep(500);
+            // Approuve la différence de rendue si nécessaire
+            openingView.confirmApprovalReason(false);
+        } while (hasNextBtn);
         // Attend le chargement du cache
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
     }
@@ -61,16 +61,15 @@ public class PosOpeningStep {
      * @throws InterruptedException
      */
     private static void doClosePos(ChromeDriver driver, PosClosingView closingView) throws InterruptedException {
-        // Next
-        closingView.clickNextBtn();
-        Thread.sleep(500);
-        closingView.confirmApprovalReason(false);
-        // Next
-        closingView.clickNextBtn();
-        closingView.confirmApprovalReason(false);
-        Thread.sleep(500);
-        // Traiter, imprimer & fermer
-        closingView.clickNextBtn();
+        boolean hasNextBtn;
+        // Tant qu'il y a un bouton "Suivant" à l'écran
+        do {
+            hasNextBtn = closingView.clickNext(false);
+            Thread.sleep(500);
+            // Approuve la différence de rendue si nécessaire
+            closingView.confirmApprovalReason(false);
+        } while (hasNextBtn);
+        // Attend chargement
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
         // On se relog
         LoggingStep.logToOpenBravo(driver);

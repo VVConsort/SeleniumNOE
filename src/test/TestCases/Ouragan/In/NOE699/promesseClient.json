@@ -1,0 +1,108 @@
+{
+	"messageId": "7affa62d-5ebf-82ac-962d-97428647324a",
+	"posTerminal": "0003",
+	"channel": "External",
+	"data": [
+		{
+			"internalDocumentType": "RA",
+			"collaboratorId": "01",
+			"documentNo": "00330080914311320702",
+			"orderReference": "",
+			"norautoClientType": "PAR",
+			"businessPartner": "0e9cdb71-f62e-11e9-a781-0f1bdafcbf12",
+			"licensePlate": "AA123AA",
+			"kilometer": 122170,
+			"discountList": [
+				{
+					"promesseClient": 90
+				}
+			],
+			"ticketActions": 0,
+			"currency": "EUR",
+			"grossAmount": 13.33,
+			"lines": [
+				{
+					"lineID": "256",
+					"product": "F0422",
+					"productName": "Forfait montage + équilibrage + valve d'un pneumatique de 15\" à 16\"",
+					"productType": "F",
+					"qty": 1,
+					"unitPrice": 13.33,
+					"grossAmount": 13.33,
+					"taxLines": [
+						{
+							"taxCode": "4"
+						}
+					],
+					"lineActions": 20,
+					"packageContent": [
+						{
+							"lineID": "3",
+							"product": "499407",
+							"productName": "EQUILIBRAGE ROUE 15\" A 16\"",
+							"productType": "S",
+							"GM": "022",
+							"qty": 1,
+							"unitPrice": 9.58,
+							"grossAmount": 9.58,
+							"taxLines": [
+								{
+									"taxCode": "4"
+								}
+							],
+							"lineActions": 1558
+						},
+						{
+							"lineID": "4",
+							"product": "499408",
+							"productName": "MONTAGE PNEU 15\" A 16\"",
+							"productType": "S",
+							"GM": "011",
+							"qty": 1,
+							"unitPrice": 2.92,
+							"grossAmount": 2.92,
+							"taxLines": [
+								{
+									"taxCode": "4"
+								}
+							],
+							"lineActions": 1558
+						},
+						{
+							"lineID": "7",
+							"product": "9381",
+							"productName": "VALVE OU JOINT VALVE ELECTRO.",
+							"productType": "S",
+							"GM": "196",
+							"qty": 1,
+							"unitPrice": 0.83,
+							"grossAmount": 0.83,
+							"taxLines": [
+								{
+									"taxCode": "4"
+								}
+							],
+							"lineActions": 1558
+						},
+						{
+							"lineID": "8",
+							"product": "2123451",
+							"productName": "BON ACHAT",
+							"productType": "S",
+							"GM": "",
+							"qty": 1,
+							"unitPrice": 0,
+							"grossAmount": 0,
+							"taxLines": [
+								{
+									"taxCode": "4"
+								}
+							],
+							"lineActions": 1558
+						}
+					]
+				}
+			]
+		}
+	]
+}

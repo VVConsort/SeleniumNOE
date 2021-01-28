@@ -17,11 +17,9 @@ public class PosOpeningView extends BaseView {
     // XPath boutton ok "Différence monnaie"
     private static final String APPROVAL_REASON_OK_BTN_XPATH = "//*[@id=\"terminal_containerWindow_loginCashUp_POSS_modalApprovalReason_footer_btnModalApprovalReasonAccept\"]";
 
-    //*[@id="terminal_containerWindow_loginCashUp_POSS_modalApprovalReason_footer_btnModalApprovalReasonAccept"]
+    // Xpath boutton "Suivant"
+    private static final String NEXT_BTN_XPATH = "//button[@id=\"terminal_containerWindow_loginCashUp_cashupMultiColumn_leftToolbar_leftToolbar_toolbar_btnNext\"]";
 
-    // Boutton suivant
-    @FindBy(xpath = "//button[@id=\"terminal_containerWindow_loginCashUp_cashupMultiColumn_leftToolbar_leftToolbar_toolbar_btnNext\"]")
-    private WebElement nextBtn;
     // Boutton 'Valider monnaie'
     @FindBy(xpath = "//button[@id=\"terminal_containerWindow_loginCashUp_cashupMultiColumn_leftPanel_listPaymentMethods_paymentsList_tbody_control_stepRenderPaymentsLine_buttonOk\"]")
     private WebElement validateCashBtn;
@@ -35,8 +33,8 @@ public class PosOpeningView extends BaseView {
     /**
      * Click sur le boutton 'Suivant'
      */
-    public void clickNext() {
-        super.click(nextBtn);
+    public boolean clickNext(boolean isMandatory) {
+        return super.findAndClickElement(NEXT_BTN_XPATH, isMandatory);
     }
 
     /**
@@ -68,7 +66,7 @@ public class PosOpeningView extends BaseView {
     /**
      * Click sur le bouton d'aprobation diff rendu
      */
-    public void clickApprovalOk(boolean isMandatory) {
+    public void confirmApprovalReason(boolean isMandatory) {
         findAndClickElement(APPROVAL_REASON_OK_BTN_XPATH, isMandatory);
     }
 

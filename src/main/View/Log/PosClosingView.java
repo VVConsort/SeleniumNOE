@@ -4,8 +4,6 @@ import Helpers.Element.WebElementHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class PosClosingView extends BaseView {
 
@@ -23,9 +21,8 @@ public class PosClosingView extends BaseView {
     //*[@id="terminal_containerWindow_cashUp_OBPOS_modalApprovalReason_footer_btnModalApprovalReasonAccept"]
 
     ////*[@id="terminal_containerWindow_loginCashUp_POSS_modalApprovalReason_footer_btnModalApprovalReasonAccept"]
-    // Boutton suivant
-    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_cashUp_closeCashMultiColumn_leftToolbar_leftToolbar_toolbar_btnNext\"]")
-    private WebElement nextBtn;
+    //Xpath Boutton suivant
+    private static final String NEXT_BTN_XPATH ="//*[@id=\"terminal_containerWindow_cashUp_closeCashMultiColumn_leftToolbar_leftToolbar_toolbar_btnNext\"]";
 
     public PosClosingView(WebDriver webDriver) {
         init(webDriver, this);
@@ -60,10 +57,12 @@ public class PosClosingView extends BaseView {
     {
         findAndClickElement(APPROVAL_REASON_OK_BTN_XPATH,isMandatory);
     }
+
     /**
      * Click sur suivant
      */
-    public void clickNextBtn() {
-        super.click(nextBtn);
+    public boolean clickNext(boolean isMandatory) {
+       return super.findAndClickElement(NEXT_BTN_XPATH,isMandatory);
+
     }
 }
