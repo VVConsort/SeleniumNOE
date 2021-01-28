@@ -38,12 +38,12 @@ public class WebElementHelper {
 
     /**
      * Retourne l'élement à partir de son text
-     * @param label
+     * @param text
      * @return
      */
-    public static WebElement getElementFromText(String label, WebDriver driver) {
+    public static WebElement getElementFromText(WebDriver driver, String text, int timeOutInSec, boolean throwException) {
         // Recherche l'élement à partir du texte
-        return getElement(driver, By.xpath("*//div[contains(text(),'" + label + "')]"));
+        return waitUntilElementIsVisible(driver, timeOutInSec, By.xpath("*//div[contains(text(),'" + text + "')]"), throwException);
     }
 
     /**
@@ -106,6 +106,17 @@ public class WebElementHelper {
         return elem;
     }
 
+    public static String waitUntilExpectedText(String expectedText, String textToTest, int timeOutInSeconds, boolean throwException) {
+        String text = null;
+        try {
+            text = doWaitForExpectedText(expectedText, textToTest, timeOutInSeconds);
+        } catch (Throwable e) {
+            if (throwException)
+                throw e;
+        }
+        return text;
+    }
+
     /**
      * @param driver
      * @param by
@@ -136,7 +147,6 @@ public class WebElementHelper {
      * @return
      */
     private static void doWaitForInvisibility(WebDriver driver, By by, int timeOutInSec) {
-
         Wait wait = new FluentWait<>(driver)
                 .withTimeout(timeOutInSec, TimeUnit.SECONDS)
                 .pollingEvery(500, TimeUnit.MILLISECONDS)
@@ -149,6 +159,34 @@ public class WebElementHelper {
                 return !driver.findElement(by).isDisplayed();
             }
         });
+    }
+
+    /**
+     * Attend que le texte passé en param ait la valeur attendue
+     * @param expectedText
+     * @param textToTest
+     * @param timeOutInSec
+     * @return
+     */
+    private static String doWaitForExpectedText(String expectedText, String textToTest, int timeOutInSec) {
+        String text = null;
+        Wait wait = new FluentWait<>(textToTest)
+                .withTimeout(timeOutInSec, TimeUnit.SECONDS)
+                .pollingEvery(500, TimeUnit.MILLISECONDS)
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(NoSuchElementException.class)
+                .ignoring(ElementNotVisibleException.class);
+        // Attend que le texte ait la valeure attendue
+        text = (String) wait.until(new Function<String, String>() {
+            public String apply(String text) {
+                if (text.equals(expectedText)) {
+                    return text;
+                }
+                return null;
+            }
+        });
+        // Si le texte n'a jamais eu la valeur souhaitée, au lieu de renvoyer null on renvoie la dernière valeur testée
+        return text == null ? textToTest : text;
     }
 
 }

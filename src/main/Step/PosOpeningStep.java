@@ -10,6 +10,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PosOpeningStep {
 
+    // Label "déjà en ouverture de caisse"
+    private static final String ALREADY_IN_OPENING_LABEL = "Ouverture caisse";
+
     @Step("Ouvre la caisse")
     public static void openPos(ChromeDriver driver) throws InterruptedException {
         // Vue Ouverture de caisse
@@ -81,6 +84,6 @@ public class PosOpeningStep {
      * @return
      */
     private static boolean isAlreadyInOpening(ChromeDriver driver) {
-        return WebElementHelper.getElementFromText("Ouverture caisse", driver) != null;
+        return WebElementHelper.getElementFromText(driver,ALREADY_IN_OPENING_LABEL , 5, false) != null;
     }
 }

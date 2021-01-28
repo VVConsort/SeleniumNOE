@@ -35,7 +35,7 @@ public class CreditNoteSearchView extends BaseView {
         // Touche Entrée
         creditNoteInput.sendKeys(Keys.ENTER);
         // Attend que l'élément soit visible
-        WebElement creditNoteWindow =   WebElementHelper.waitUntilElementIsVisible(driver,5, By.xpath(CREDIT_NOTE_WINDOW_XPATH),false);
+        WebElement creditNoteWindow =  WebElementHelper.waitUntilElementIsVisible(driver,5, By.xpath(CREDIT_NOTE_WINDOW_XPATH),false);
         // Si l'élement "Vue unitaire avoir" est affiché c'est que le code correspond à un avoir valide
         //WebElement creditNoteWindow = Helpers.Element.WebElementHelper.getElement(driver, By.xpath(CREDIT_NOTE_WINDOW_XPATH));
         // Si il y a un avoir valide trouvé

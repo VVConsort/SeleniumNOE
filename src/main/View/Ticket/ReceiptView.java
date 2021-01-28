@@ -1,5 +1,6 @@
 package View.Ticket;
 
+import Helpers.Element.WebElementHelper;
 import Helpers.XPath.XPathDiscountLineHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
@@ -17,7 +18,6 @@ public class ReceiptView extends BaseView {
     // Montant total du ticket
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_totalReceiptLine_totalgross\"]")
     private WebElement totalToPay;
-
 
     public ReceiptView(WebDriver driver) {
         init(driver, this);
@@ -66,7 +66,7 @@ public class ReceiptView extends BaseView {
     private String getDiscountLabelELemIdByText(String label) {
         String result = "";
         // Recherche l'élement 'label' à partir du texte
-        WebElement discoutNameElem = Helpers.Element.WebElementHelper.getElementFromText(OB_DISCOUNT_LABEL_PREFIX + label, driver);
+        WebElement discoutNameElem = WebElementHelper.getElementFromText(driver, OB_DISCOUNT_LABEL_PREFIX + label, 5, false);
         // Blindage
         if (discoutNameElem != null) {
             // Affectation de l'id de l'élement

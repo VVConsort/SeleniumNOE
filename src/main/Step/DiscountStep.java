@@ -1,11 +1,14 @@
 package Step;
 
-import Step.Value.BaseStepValue;
+import Helpers.Element.WebElementHelper;
 import Step.Value.DiscountStepValue;
 import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
 
 public class DiscountStep {
+
+    // Timeout pour la valeur des éléments testés
+    private static final int WAIT_FOR_VALUE_TIMEOUT_IN_SEC = 5;
 
     /**
      * Vérifie l'affichage d'une promotion
@@ -33,7 +36,7 @@ public class DiscountStep {
     public static void checkDiscountLineAmount(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification du montant
-        value.isEquals(view.getDiscountLineAmount(value.discountLabel));
+        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getDiscountLineAmount(value.discountLabel), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
 }

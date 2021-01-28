@@ -1,6 +1,7 @@
 package Step;
 
 import Enums.SendTicketMode;
+import Helpers.Element.WebElementHelper;
 import Helpers.Test.ReportHelper;
 import Step.Value.Payment.PaymentStepValue;
 import View.Footer.FooterView;
@@ -14,6 +15,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 public class PaymentStep {
+
+    private static final int WAIT_FOR_VALUE_TIMEOUT_IN_SEC = 5;
 
     @Step("Applique l'avoir {stepValue.paymentId}")
     public static void applyCreditNote(PaymentStepValue stepValue) {
@@ -42,8 +45,8 @@ public class PaymentStep {
         footerView.clickOnTotalToPayBtn();
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(value.driver);
-        // Test le montant de la ligne avec celui attendu
-        value.isEquals(view.getPaymentLineAmount(value.paymentMean.getLabel()));
+        // Contrôle le montant de la ligne
+        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getPaymentLineAmount(value.paymentMean.getLabel()), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     // TODO : cas ou plusieurs même mode de paiement : différencier sur montant
@@ -102,7 +105,7 @@ public class PaymentStep {
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(stepValue.driver);
         // Comparaison avec la valeure attendue
-        stepValue.isEquals(view.getPendingAmount());
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), view.getPendingAmount(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     @Step("Ajoute le bon d'achat {stepValue.paymentId} au ticket")
