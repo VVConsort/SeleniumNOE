@@ -185,7 +185,7 @@ public class WebElementHelper {
                 return null;
             }
         });
-        // Si le texte n'a jamais eu la valeur souhaitée, au lieu de renvoyer null on renvoie la dernière valeur testée
+        // Si le texte n'a jamais eu la valeur souhaitée, au lieu de renvoyer null on renvoie la dernière valeur testée pour les Assertions
         return text == null ? textToTest : text;
     }
 

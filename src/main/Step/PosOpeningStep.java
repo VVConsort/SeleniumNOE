@@ -48,10 +48,10 @@ public class PosOpeningStep {
         boolean hasNextBtn;
         // Tant qu'il y a un bouton "Suivant" à l'écran
         do {
-            hasNextBtn = openingView.clickNext(false);
-            Thread.sleep(500);
             // Approuve la différence de rendue si nécessaire
             openingView.confirmApprovalReason(false);
+            hasNextBtn = openingView.clickNext(false);
+            Thread.sleep(500);
         } while (hasNextBtn);
         // Attend le chargement du cache
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
@@ -67,10 +67,10 @@ public class PosOpeningStep {
         boolean hasNextBtn;
         // Tant qu'il y a un bouton "Suivant" à l'écran
         do {
-            hasNextBtn = closingView.clickNext(false);
-            Thread.sleep(500);
             // Approuve la différence de rendue si nécessaire
             closingView.confirmApprovalReason(false);
+            hasNextBtn = closingView.clickNext(false);
+            Thread.sleep(500);
         } while (hasNextBtn);
         // Attend chargement
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
@@ -84,6 +84,6 @@ public class PosOpeningStep {
      * @return
      */
     private static boolean isAlreadyInOpening(ChromeDriver driver) {
-        return WebElementHelper.getElementFromText(driver,ALREADY_IN_OPENING_LABEL , 5, false) != null;
+        return WebElementHelper.getElementFromText(driver, ALREADY_IN_OPENING_LABEL, 5, false) != null;
     }
 }

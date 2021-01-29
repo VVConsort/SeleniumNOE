@@ -8,7 +8,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 public class BaseView {
 
     // Timeout
-    protected static final int ELEMENT_MISSING_TIMEOUT = 5;
+    protected static final int AJAX_ELEMENT_MISSING_TIMEOUT = 30;
     // Driver
     protected WebDriver driver;
 
@@ -20,7 +20,7 @@ public class BaseView {
     protected void init(WebDriver webDriver, BaseView baseView) {
         this.driver = webDriver;
         // Lazy loading
-        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, ELEMENT_MISSING_TIMEOUT);
+        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, AJAX_ELEMENT_MISSING_TIMEOUT);
         PageFactory.initElements(factory, baseView);
     }
 
@@ -49,7 +49,7 @@ public class BaseView {
                 // On récupère l'id de l'élément
                 String id = webElement.getAttribute("id");
                 // Cherche l'élément à partir de son id
-                WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.id(id), true);
+                WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.id(id), true);
                 // Tente de reclicker
                 click(webElem);
 
@@ -64,7 +64,7 @@ public class BaseView {
      */
     protected boolean findAndClickElement(String XPath, boolean isMandatory) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), isMandatory);
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), isMandatory);
         // Click si existe
         if (webElem != null) {
             click(webElem);
@@ -80,7 +80,7 @@ public class BaseView {
      */
     protected WebElement findElement(String xPath, boolean isMandatory) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), isMandatory);
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), isMandatory);
         return webElem;
     }
 }
