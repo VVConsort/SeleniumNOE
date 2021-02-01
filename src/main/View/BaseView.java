@@ -42,10 +42,7 @@ public class BaseView {
     protected void click(WebElement webElement) {
         int exceptionCount = 0;
         try {
-            // Met le zoom à 1 pour éviter les problemes de click
-            setZoomTo1();
-            // Clic clic
-            webElement.click();
+            doClick(webElement);
             // Peut arriver lorsque le DOM change/a changé lorsqu'on appelle le click
         } catch (Exception ex) {
             if (exceptionCount < 5) {
@@ -55,11 +52,19 @@ public class BaseView {
                 // Cherche l'élément à partir de son id
                 WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.id(id), true);
                 // Tente de reclicker
-                click(webElem);
+                doClick(webElem);
             } else {
                 throw ex;
             }
         }
+    }
+
+    private void doClick(WebElement elem)
+    {
+        // Met le zoom à 1 pour éviter les problemes de click
+        setZoomTo1();
+        // Clic clic
+        elem.click();
     }
 
     /**
