@@ -1,7 +1,6 @@
 package Helpers.Element;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -107,10 +106,10 @@ public class WebElementHelper {
         return elem;
     }
 
-    public static String waitUntilExpectedText(String expectedText, WebElement webElem, int timeOutInSeconds, ChromeDriver driver,boolean throwException) {
+    public static String waitUntilExpectedText(String expectedText, WebElement webElem, int timeOutInSeconds, boolean throwException) {
         String text = null;
         try {
-            text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds,driver);
+            text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
         } catch (Throwable e) {
             if (throwException)
                 throw e;
@@ -162,8 +161,9 @@ public class WebElementHelper {
         });
     }
 
-    private static String doWaitForExpectedText(String expectedText, WebElement webElem, int timeOutInSec, ChromeDriver driver) {
+    private static String doWaitForExpectedText(String expectedText, WebElement webElem, int timeOutInSec) {
         String text = null;
+        if (webElem != null) {
             Wait wait = new FluentWait<>(webElem)
                     .withTimeout(timeOutInSec, TimeUnit.SECONDS)
                     .pollingEvery(500, TimeUnit.MILLISECONDS)
@@ -179,6 +179,11 @@ public class WebElementHelper {
                     return null;
                 }
             });
+            // Si text est null on met la dernière valeur testée
+            if (text == null) {
+                text = webElem.getText();
+            }
+        }
         return text;
     }
 
