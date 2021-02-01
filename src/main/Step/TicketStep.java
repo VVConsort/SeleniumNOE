@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 public class TicketStep {
 
     // Timeout pour la valeur des éléments testés
-    private static final int WAIT_FOR_VALUE_TIMEOUT_IN_SEC = 5;
+    private static final int WAIT_FOR_VALUE_TIMEOUT_IN_SEC = 10;
 
     /**
      * Vide le ticket en cours
