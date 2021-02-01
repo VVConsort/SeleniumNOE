@@ -114,7 +114,7 @@ public class WebElementHelper {
             if (throwException)
                 throw e;
         }
-        return text;
+        return text == null ? webElem.getText() : text;
     }
 
     /**
@@ -179,10 +179,6 @@ public class WebElementHelper {
                     return null;
                 }
             });
-            // Si text est null on met la dernière valeur testée
-            if (text == null) {
-                text = webElem.getText();
-            }
         }
         return text;
     }
