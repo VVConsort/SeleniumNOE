@@ -52,7 +52,6 @@ public class TicketStep {
         // Footer
         FooterView footerView = new FooterView(stepValue.driver);
         // Comparaison de l'état ave l'état attendu
-        stepValue.isEquals(footerView.getOrderStateElem());
         stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), footerView.getOrderStateElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 

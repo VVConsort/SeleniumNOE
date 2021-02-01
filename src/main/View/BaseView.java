@@ -1,7 +1,10 @@
 package View;
 
 import Helpers.Element.WebElementHelper;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
@@ -37,6 +40,7 @@ public class BaseView {
      * @param webElement
      */
     protected void click(WebElement webElement) {
+        int exceptionCount = 0;
         try {
             // Met le zoom à 1 pour éviter les problemes de click
             setZoomTo1();
@@ -44,14 +48,16 @@ public class BaseView {
             webElement.click();
             // Peut arriver lorsque le DOM change/a changé lorsqu'on appelle le click
         } catch (Exception ex) {
-            for (int i = 0; i < 10; i++) {
-                System.out.println("" + ex + i);
+            if (exceptionCount < 5) {
+                exceptionCount++;
                 // On récupère l'id de l'élément
                 String id = webElement.getAttribute("id");
                 // Cherche l'élément à partir de son id
                 WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.id(id), true);
                 // Tente de reclicker
                 click(webElem);
+            } else {
+                throw ex;
             }
         }
     }
