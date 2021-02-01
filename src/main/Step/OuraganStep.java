@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class OuraganStep {
 
     // Temps de chargement du BT
-    private static final int BT_LOADING_TIME = 2000;
+    private static final int BT_LOADING_TIME = 5000;
 
     @Step("Importe le bon de travail Ouragan")
     public static String postWorkOrderToOpenBravo(String pathToJsonFile) throws IOException {
