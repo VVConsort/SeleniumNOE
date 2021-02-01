@@ -173,6 +173,7 @@ public class WebElementHelper {
             // Attend que le texte ait la valeure attendue
             text = (String) wait.until(new Function<WebElement, String>() {
                 public String apply(WebElement webElem) {
+                    System.out.println("Elem id :" + webElem.getAttribute("id") + " text : " + webElem.getText());
                     if (webElem.getText().equals(expectedText)) {
                         return webElem.getText();
                     }
