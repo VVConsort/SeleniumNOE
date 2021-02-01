@@ -43,7 +43,7 @@ public class BaseView {
             // Clic clic
             webElement.click();
             // Peut arriver lorsque le DOM change/a changé lorsqu'on appelle le click
-        } catch (StaleElementReferenceException ex) {
+        } catch (Exception ex) {
             for (int i = 0; i < 10; i++) {
                 System.out.println("" + ex + i);
                 // On récupère l'id de l'élément
@@ -52,7 +52,6 @@ public class BaseView {
                 WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.id(id), true);
                 // Tente de reclicker
                 click(webElem);
-
             }
         }
     }
