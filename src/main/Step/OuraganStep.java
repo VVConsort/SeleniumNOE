@@ -54,7 +54,7 @@ public class OuraganStep {
         // Attente chargement cache
         LoadingHelper.waitUntilLoadIsFinished(currentDriver, 30);
         // TODO A terme conditionner cette attente par la visiblité d'un élément
-        //Thread.sleep(BT_LOADING_TIME);
+        Thread.sleep(BT_LOADING_TIME);
         ReportHelper.attachScreenshot(currentDriver);
     }
 }
