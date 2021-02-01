@@ -18,14 +18,14 @@ public class DiscountStep {
     public static void isDiscountPresent(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification de la présence
-        value.isNotNull(view.getDiscountLineAmount(value.expectedValue.toString()));
+        value.isNotNull(view.getDiscountLineAmountElem(value.expectedValue.toString()));
     }
 
     @Step("Vérifie que la promotion {value.discountLabel} n'est pas présente")
     public static void isDiscountNotPresent(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification de l'absence
-        value.isNull(view.getDiscountLineAmount(value.expectedValue.toString()));
+        value.isNull(view.getDiscountLineAmountElem(value.expectedValue.toString()));
     }
 
     /**
@@ -36,7 +36,7 @@ public class DiscountStep {
     public static void checkDiscountLineAmount(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification du montant
-        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getDiscountLineAmount(value.discountLabel), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getDiscountLineAmountElem(value.discountLabel), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
 }

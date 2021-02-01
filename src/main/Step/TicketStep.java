@@ -44,7 +44,7 @@ public class TicketStep {
         // Page panier
         FooterView footer = new FooterView(stepValue.driver);
         // Comparaison du total avec la valeure attendue
-        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), footer.getTotalToPay(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), footer.getTotalToPayElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     @Step("Vérifie que l'état de la commande est à {stepValue.expectedValue}")
@@ -52,8 +52,8 @@ public class TicketStep {
         // Footer
         FooterView footerView = new FooterView(stepValue.driver);
         // Comparaison de l'état ave l'état attendu
-        stepValue.isEquals(footerView.getOrderState());
-        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), footerView.getOrderState(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        stepValue.isEquals(footerView.getOrderStateElem());
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), footerView.getOrderStateElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     @Step("Vérifie que la commande est déjà réglée")
@@ -69,6 +69,6 @@ public class TicketStep {
     @Step("Vérifie que la valeur du ticket est de {stepValue.expectedValue}")
     public static void checkTicketAmount(BaseStepValue stepValue) {
         ReceiptView receiptView = new ReceiptView(stepValue.driver);
-        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getTotalAmount(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getTotalAmountElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 }

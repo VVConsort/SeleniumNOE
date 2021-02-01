@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.function.Function;
+
 /**
  * Page Ticket
  */
@@ -27,8 +29,8 @@ public class ReceiptView extends BaseView {
      * Retourne le montant total du ticket
      * @return
      */
-    public String getTotalAmount() {
-        return totalToPay.getText();
+    public WebElement getTotalAmountElem() {
+        return totalToPay;
     }
 
     /**
@@ -45,14 +47,14 @@ public class ReceiptView extends BaseView {
      * @param discountLabel
      * @return
      */
-    public String getDiscountLineAmount(String discountLabel) {
-        String result = "";
+    public WebElement getDiscountLineAmountElem(String discountLabel) {
+        WebElement result = null;
         // Récupération de l'ID du label
         String discountLabelId = getDiscountLabelELemIdByText(discountLabel);
         if (!discountLabelId.isEmpty()) {
             // Récupération de l'ID du montant promo
             String amountXPath = XPathDiscountLineHelper.getLineDiscountGrossAmountXPath(XPathDiscountLineHelper.getBodyControlXPathVarFromProductId(discountLabelId), XPathDiscountLineHelper.getRenderOrderLineXPathVarFromProductId(discountLabelId), XPathDiscountLineHelper.getEndVariableFromProductId(discountLabelId));
-            result = Helpers.Element.WebElementHelper.getTextFromElement(driver, By.xpath(amountXPath));
+            result = WebElementHelper.getElement(driver, By.xpath(amountXPath));
         }
         // On retourne le montant de la promo
         return result;

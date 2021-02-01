@@ -46,7 +46,7 @@ public class PaymentStep {
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(value.driver);
         // Contrôle le montant de la ligne
-        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getPaymentLineAmount(value.paymentMean.getLabel()), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getPaymentLineAmountElem(value.paymentMean.getLabel()), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     // TODO : cas ou plusieurs même mode de paiement : différencier sur montant
@@ -105,7 +105,7 @@ public class PaymentStep {
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(stepValue.driver);
         // Comparaison avec la valeure attendue
-        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), view.getPendingAmount(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), view.getPendingAmountElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     @Step("Ajoute le bon d'achat {stepValue.paymentId} au ticket")

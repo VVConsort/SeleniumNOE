@@ -99,11 +99,11 @@ public class PaymentPanelView extends BaseView {
     }
 
     /**
-     * Retourne le restant à règler
+     * Retourne l'élément contenant le restant à règler
      * @return
      */
-    public String getPendingAmount() {
-        return totalPending.getText();
+    public WebElement getPendingAmountElem() {
+        return totalPending;
     }
 
     /**
@@ -140,26 +140,23 @@ public class PaymentPanelView extends BaseView {
     }
 
     /**
-     * Retourne le montant du paiement
+     * Retourne l'élement contenant le montant de la ligne
      * @param paymentLabel
      * @return
      */
-    public String getPaymentLineAmount(String paymentLabel) {
-        String amount = "";
+    public WebElement getPaymentLineAmountElem(String paymentLabel) {
+        WebElement result = null;
         // On récupère l'id de l'élement 'Nom ligne paiement'
         String paymentNameId = getPaymentLineIdElemByText(paymentLabel);
         // Récupère le Xpath de l'élement 'Montant ligne paiement'
         String lineAmountXPath = XPathPaymentLineHelper.getPaymentLineAmountXPath(paymentNameId);
-        // Recherche du bouttn "Supprimer ligne" associé au mode de paiement
-        WebElement lineAmount = WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(lineAmountXPath), false);
+        return WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(lineAmountXPath), false);
         // Si le montant est présent
-        if (lineAmount != null) {
+        /*if (lineAmount != null) {
             // On récupère la valeur contenue dans le texte
             amount = lineAmount.getText();
         }
-
-        return amount;
-
+        return result;*/
     }
 
 }

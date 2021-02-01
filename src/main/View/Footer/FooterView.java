@@ -74,15 +74,15 @@ public class FooterView extends BaseView {
      * Retourne l'état de la commande
      * @return
      */
-    public String getOrderState() {
-        return orderStateLbl.getText();
+    public WebElement getOrderStateElem() {
+        return orderStateLbl;
     }
 
     /**
      * Retourne le montant à payer
      * @return
      */
-    public String getTotalToPay() {
-        return totalToPay.getText();
+    public WebElement getTotalToPayElem() {
+        return totalToPay;
     }
 }

@@ -106,10 +106,10 @@ public class WebElementHelper {
         return elem;
     }
 
-    public static String waitUntilExpectedText(String expectedText, String textToTest, int timeOutInSeconds, boolean throwException) {
+    public static String waitUntilExpectedText(String expectedText, WebElement webElem, int timeOutInSeconds, boolean throwException) {
         String text = null;
         try {
-            text = doWaitForExpectedText(expectedText, textToTest, timeOutInSeconds);
+            text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
         } catch (Throwable e) {
             if (throwException)
                 throw e;
@@ -161,32 +161,30 @@ public class WebElementHelper {
         });
     }
 
-    /**
-     * Attend que le texte passé en param ait la valeur attendue
-     * @param expectedText
-     * @param textToTest
-     * @param timeOutInSec
-     * @return
-     */
-    private static String doWaitForExpectedText(String expectedText, String textToTest, int timeOutInSec) {
+    private static String doWaitForExpectedText(String expectedText, WebElement webElem, int timeOutInSec) {
         String text = null;
-        Wait wait = new FluentWait<>(textToTest)
-                .withTimeout(timeOutInSec, TimeUnit.SECONDS)
-                .pollingEvery(500, TimeUnit.MILLISECONDS)
-                .ignoring(StaleElementReferenceException.class)
-                .ignoring(NoSuchElementException.class)
-                .ignoring(ElementNotVisibleException.class);
-        // Attend que le texte ait la valeure attendue
-        text = (String) wait.until(new Function<String, String>() {
-            public String apply(String text) {
-                if (text.equals(expectedText)) {
-                    return text;
+        if (webElem != null) {
+            Wait wait = new FluentWait<>(webElem)
+                    .withTimeout(timeOutInSec, TimeUnit.SECONDS)
+                    .pollingEvery(500, TimeUnit.MILLISECONDS)
+                    .ignoring(StaleElementReferenceException.class)
+                    .ignoring(NoSuchElementException.class)
+                    .ignoring(ElementNotVisibleException.class);
+            // Attend que le texte ait la valeure attendue
+            text = (String) wait.until(new Function<WebElement, String>() {
+                public String apply(WebElement webElem) {
+                    if (webElem.getText().equals(expectedText)) {
+                        return webElem.getText();
+                    }
+                    return null;
                 }
-                return null;
+            });
+            // Si text est null on met la dernière valeur testée
+            if (text == null) {
+                text = webElem.getText();
             }
-        });
-        // Si le texte n'a jamais eu la valeur souhaitée, au lieu de renvoyer null on renvoie la dernière valeur testée pour les Assertions
-        return text == null ? textToTest : text;
+        }
+        return text;
     }
 
 }
