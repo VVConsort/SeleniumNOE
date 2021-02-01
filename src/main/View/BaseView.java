@@ -8,7 +8,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 public class BaseView {
 
     // Timeout
-    protected static final int AJAX_ELEMENT_MISSING_TIMEOUT = 30;
+    protected static final int AJAX_ELEMENT_MISSING_TIMEOUT = 5;
     // Driver
     protected WebDriver driver;
 

@@ -16,6 +16,8 @@ public class PosOpening extends BaseTest {
 
     @Parameters({"terminalKey", "profileName"})
     @Test(description = "Ouvre la caisse {terminalKey}")
+
+    //@Test(retryAnalyzer = Tests.RetryAnalyzer.class)
     public void openPos(@Optional String terminalKey, @Optional String profileName) throws MalformedURLException, InterruptedException {
         // Si une caisse est spécifiée
         if (terminalKey != null && !terminalKey.isEmpty() && profileName != null && !profileName.isEmpty()) {

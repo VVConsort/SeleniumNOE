@@ -5,6 +5,7 @@ import Step.*;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import io.qameta.allure.Link;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 

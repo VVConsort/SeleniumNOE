@@ -6,13 +6,13 @@
         {
         "internalDocumentType": "BRW",
         "collaboratorId": "01",
-        "documentNo": "0003001455771320904",
-        "orderReference": "48208812",
+        "documentNo": "0003001455771320874",
+        "orderReference": "",
         "norautoClientType": "PAR",
         "businessPartner": "82553b9a-b9e3-11ea-a567-09abe3925bd2",
         "ticketActions": 0,
         "currency": "EUR",
-        "grossAmount": 900.99,
+        "grossAmount": 902.98,
         "lines": [
         {
         "lineID": "2",
@@ -20,22 +20,33 @@
         "productName": "LAVE-GLACE ETE 1ER PRIX 5L",
         "productType": "I",
         "GM": "412",
-        "qty": 1,
+        "qty": 2,
         "unitPrice": 1.99,
-        "grossAmount": 1.99,
+        "grossAmount": 3.98,
         "taxLines": [
         {
         "taxCode": "2"
         }
         ],
         "lineActions": 278,
-        "statusReservation": "R",
-        "manualDiscount": [
+        "statusReservation": "R"
+        },
         {
-        "ruleId": "201",
-        "unitDiscount": 20
+        "lineID": "1",
+        "product": "2006822",
+        "productName": "AR NAV CAMP.CAR AVIC-F970BT-C",
+        "productType": "I",
+        "GM": "207",
+        "qty": 1,
+        "unitPrice": 899,
+        "grossAmount": 899,
+        "taxLines": [
+        {
+        "taxCode": "2"
         }
-        ]
+        ],
+        "lineActions": 278,
+        "statusReservation": "R"
         }
         ]
         }
