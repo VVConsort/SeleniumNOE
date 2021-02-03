@@ -3,6 +3,7 @@ package View.Ticket;
 import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * Pop up des documents associés
@@ -14,7 +15,7 @@ public class MergedDocumentsView extends BaseView {
     // Bouton "Fermer documents associés"
     private WebElement cancelBtn;
 
-    public MergedDocumentsView(WebDriver driver) {
+    public MergedDocumentsView(ChromeDriver driver) {
         init(driver, this);
     }
 

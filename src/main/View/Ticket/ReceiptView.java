@@ -1,14 +1,13 @@
 package View.Ticket;
 
 import Helpers.Element.WebElementHelper;
-import Helpers.XPath.XPathDiscountLineHelper;
+import Helpers.XPath.XPathDiscountHelper;
+import Helpers.XPath.XPathLineHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.function.Function;
 
 /**
  * Page Ticket
@@ -21,7 +20,7 @@ public class ReceiptView extends BaseView {
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_totalReceiptLine_totalgross\"]")
     private WebElement totalToPay;
 
-    public ReceiptView(WebDriver driver) {
+    public ReceiptView(ChromeDriver driver) {
         init(driver, this);
     }
 
@@ -39,7 +38,7 @@ public class ReceiptView extends BaseView {
      * @return
      */
     public boolean isDiscountPresent(String discountLabel) {
-        return getDiscountLabelELemIdByText(discountLabel) != null;
+        return WebElementHelper.getElementIdByText(discountLabel, driver) != null;
     }
 
     /**
@@ -49,11 +48,11 @@ public class ReceiptView extends BaseView {
      */
     public WebElement getDiscountLineAmountElem(String discountLabel) {
         WebElement result = null;
-        // Récupération de l'ID du label
-        String discountLabelId = getDiscountLabelELemIdByText(discountLabel);
+        // Récupération ID composant label
+        String discountLabelId = WebElementHelper.getElementIdByText(OB_DISCOUNT_LABEL_PREFIX + discountLabel, driver);
         if (!discountLabelId.isEmpty()) {
             // Récupération de l'ID du montant promo
-            String amountXPath = XPathDiscountLineHelper.getLineDiscountGrossAmountXPath(XPathDiscountLineHelper.getBodyControlXPathVarFromProductId(discountLabelId), XPathDiscountLineHelper.getRenderOrderLineXPathVarFromProductId(discountLabelId), XPathDiscountLineHelper.getEndVariableFromProductId(discountLabelId));
+            String amountXPath = XPathDiscountHelper.getLineDiscountGrossAmountXPath(XPathDiscountHelper.getBodyControlXPathVarFromProductId(discountLabelId), XPathDiscountHelper.getRenderOrderLineXPathVarFromProductId(discountLabelId), XPathDiscountHelper.getEndVariableFromProductId(discountLabelId));
             result = WebElementHelper.getElement(driver, By.xpath(amountXPath));
         }
         // On retourne le montant de la promo
@@ -61,19 +60,75 @@ public class ReceiptView extends BaseView {
     }
 
     /**
-     * Retourne l'ID du libellé ligne de la promo
-     * @param label
+     * Retourne l'élément contenant le prix du forfait
+     * @param forfaitLabel
      * @return
      */
-    private String getDiscountLabelELemIdByText(String label) {
-        String result = "";
-        // Recherche l'élement 'label' à partir du texte
-        WebElement discoutNameElem = WebElementHelper.getElementFromText(driver, OB_DISCOUNT_LABEL_PREFIX + label, 5, false);
-        // Blindage
-        if (discoutNameElem != null) {
-            // Affectation de l'id de l'élement
-            result = discoutNameElem.getAttribute("id");
+    public WebElement getForfaitPriceElem(String forfaitLabel) {
+        WebElement result = null;
+        // Récupération ID composant label
+        String forfaitLabelId = WebElementHelper.getElementIdByText(forfaitLabel, driver);
+        if (!forfaitLabelId.isEmpty()) {
+            // Récupération de l'ID du montant promo
+            String priceXPath = XPathLineHelper.getForfaitTotalPriceXPath(forfaitLabelId);
+            result = WebElementHelper.getElement(driver, By.xpath(priceXPath));
         }
+        // On retourne le composant montant  forfait
         return result;
     }
+
+    /**
+     * Retourne l'élément contenant le prix total de la prestation
+     * @param serviceLabel
+     * @return
+     */
+    public WebElement getServiceGrossPriceElem(String serviceLabel) {
+        WebElement result = null;
+        // Récupération de l'ID du label
+        String serviceLabelId = WebElementHelper.getElementIdByText(serviceLabel, driver);
+        if (!serviceLabelId.isEmpty()) {
+            // Récupération de l'ID du prix total de la presta
+            String grossPriceXPath = XPathLineHelper.getServiceGrossPriceXPath(serviceLabelId);
+            result = WebElementHelper.getElement(driver, By.xpath(grossPriceXPath));
+        }
+        // On retourne le composant prix total
+        return result;
+    }
+
+    /**
+     * Retourne l'élément contenant quantité de la prestation
+     * @param serviceLabel
+     * @return
+     */
+    public WebElement getServiceQuantityElem(String serviceLabel) {
+        WebElement result = null;
+        // Récupération de l'ID du label
+        String serviceLabelId = WebElementHelper.getElementIdByText(serviceLabel, driver);
+        if (!serviceLabelId.isEmpty()) {
+            // Récupération de l'ID du prix total de la presta
+            String quantityXPath = XPathLineHelper.getServiceQuantityXPath(serviceLabelId);
+            result = WebElementHelper.getElement(driver, By.xpath(quantityXPath));
+        }
+        // On retourne le composant quantité
+        return result;
+    }
+
+    /**
+     * Retourne l'élément contenant quantité de la prestation
+     * @param serviceLabel
+     * @return
+     */
+    public WebElement getServiceUnitPriceElem(String serviceLabel) {
+        WebElement result = null;
+        // Récupération de l'ID du label
+        String serviceLabelId = WebElementHelper.getElementIdByText(serviceLabel, driver);
+        if (!serviceLabelId.isEmpty()) {
+            // Récupération de l'ID du prix total de la presta
+            String grossPriceXPath = XPathLineHelper.getServiceUnitPriceXPath(serviceLabelId);
+            result = WebElementHelper.getElement(driver, By.xpath(grossPriceXPath));
+        }
+        // On retourne le composant prix unitaire
+        return result;
+    }
+
 }

@@ -3,6 +3,7 @@ package View.Log;
 import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -26,7 +27,7 @@ public class PosOpeningView extends BaseView {
 
     // XPath boutton "OK" cloture de caisse
 
-    public PosOpeningView(WebDriver webDriver) {
+    public PosOpeningView(ChromeDriver webDriver) {
         init(webDriver, this);
     }
 

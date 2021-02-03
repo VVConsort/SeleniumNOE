@@ -3,6 +3,7 @@ package View.BackOffice;
 import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class LoggingPage extends BaseView {
@@ -19,7 +20,7 @@ public class LoggingPage extends BaseView {
     @FindBy(xpath = "//*[@id=\"buttonOK\"]")
     private WebElement logBtn;
 
-    public LoggingPage(WebDriver driver) {
+    public LoggingPage(ChromeDriver driver) {
         init(driver, this);
     }
 

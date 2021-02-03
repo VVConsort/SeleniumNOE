@@ -3,6 +3,7 @@ package Step;
 import View.Header.HeaderView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * Classe utilitaire de scan
@@ -16,11 +17,11 @@ public class ScanStep {
      * @throws InterruptedException
      */
 
-    public static void scanValue(String value, WebDriver driver) throws InterruptedException {
+    public static void scanValue(String value, ChromeDriver driver) throws InterruptedException {
         doScan(value, driver);
     }
 
-    public static void scanValue(String value, WebDriver driver, int scanCount) throws InterruptedException {
+    public static void scanValue(String value, ChromeDriver driver, int scanCount) throws InterruptedException {
         for (int i = 0; i < scanCount; i++) {
             doScan(value, driver);
         }
@@ -32,7 +33,7 @@ public class ScanStep {
      * @param driver
      * @throws InterruptedException
      */
-    public static void scanValues(String[] values, WebDriver driver) throws InterruptedException {
+    public static void scanValues(String[] values, ChromeDriver driver) throws InterruptedException {
         for (String value : values) {
             doScan(value, driver);
         }
@@ -44,7 +45,7 @@ public class ScanStep {
      * @param driver
      */
     @Step("Scan de la valeur : {value}")
-    private static void doScan(String value, WebDriver driver) throws InterruptedException {
+    private static void doScan(String value, ChromeDriver driver) throws InterruptedException {
         // Header OB
         HeaderView headerView = new HeaderView(driver);
         // Scan

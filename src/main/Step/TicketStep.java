@@ -8,21 +8,19 @@ import View.Ticket.Payment.PaymentPanelView;
 import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * Classe utilitaire pour les promotions
  */
-public class TicketStep {
-
-    // Timeout pour la valeur des éléments testés
-    private static final int WAIT_FOR_VALUE_TIMEOUT_IN_SEC = 10;
+public class TicketStep extends BaseStep {
 
     /**
      * Vide le ticket en cours
      * @param driver
      */
     @Step("Vide le ticket")
-    public static void deleteTicket(WebDriver driver) {
+    public static void deleteTicket(ChromeDriver driver) {
         FooterView footerView = new FooterView(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();
@@ -32,7 +30,7 @@ public class TicketStep {
     }
 
     @Step("Vide le ticket")
-    public static void deleteWorkOrder(WebDriver driver) {
+    public static void deleteWorkOrder(ChromeDriver driver) {
         FooterView footerView = new FooterView(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();

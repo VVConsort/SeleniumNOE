@@ -5,8 +5,8 @@ import View.BaseView;
 import View.Footer.Menu.MenuItemListView;
 import View.Ticket.Payment.PaymentPanelView;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class FooterView extends BaseView {
@@ -30,7 +30,7 @@ public class FooterView extends BaseView {
     private WebElement deleteTicketBtn;
 
     //
-    public FooterView(WebDriver driver) {
+    public FooterView(ChromeDriver driver) {
         init(driver, this);
     }
 
@@ -47,7 +47,7 @@ public class FooterView extends BaseView {
     public void clickOnConfirmDeleteBtn() {
         // Click sur le btn si il est présent
         if (findAndClickElement(CONFIRM_DELETE_BTN_XPATH, false)) {
-           // On attend sa disparation
+            // On attend sa disparation
             WebElementHelper.waitUntilElementIsNotPresent(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.xpath(CONFIRM_DELETE_BTN_XPATH), true);
         }
     }

@@ -46,4 +46,17 @@
             <class name="TestCases.Ouragan.NOE553"/>
         </classes>
     </test>
+    <test name="NOE583">
+        <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE583/noe583.xml"/>
+        <parameter name="forfaitLabel" value= "Forfait sécurité sanitaire"/>
+        <parameter name="forfaitPrice" value= "3.25"/>
+        <parameter name="serviceLabel" value= "PROTECTION ET NETTOYAGE VEHICULE"/>
+        <parameter name="serviceUnitPrice" value= "3.25"/>
+        <parameter name="serviceQuantity" value= "1"/>
+        <parameter name="serviceGrossPrice" value= "3.25"/>
+        <parameter name="expectedTotal" value= "3.25"/>
+        <classes>
+            <class name="TestCases.Ouragan.NOE583"/>
+        </classes>
+    </test>
 </suite>

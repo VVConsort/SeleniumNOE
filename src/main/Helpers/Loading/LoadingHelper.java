@@ -4,6 +4,7 @@ import Helpers.Element.WebElementHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoadingHelper {
     // XPath chargement cache en cours
@@ -18,7 +19,7 @@ public class LoadingHelper {
      * @param timeOutInSeconds
      * @param driver
      */
-    public static void waitUntilLoadIsFinished(WebDriver driver, int timeOutInSeconds) throws InterruptedException {
+    public static void waitUntilLoadIsFinished(ChromeDriver driver, int timeOutInSeconds) throws InterruptedException {
         WebElement loadingElem = null;
         // Tant qu'il y a un chargement
         do {

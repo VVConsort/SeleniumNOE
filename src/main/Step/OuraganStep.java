@@ -7,6 +7,7 @@ import Helpers.Test.ReportHelper;
 import View.Ticket.MergedDocumentsView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -37,7 +38,7 @@ public class OuraganStep {
      * @param driver
      */
     @Step("Fermeture des documents associés")
-    private static void closeMergedDocuments(WebDriver driver) throws InterruptedException {
+    private static void closeMergedDocuments(ChromeDriver driver) throws InterruptedException {
         MergedDocumentsView mergedDoc = new MergedDocumentsView(driver);
         // Si la fenetre des documents associés est ouverte
         if (mergedDoc.isPresent()) {
@@ -46,7 +47,7 @@ public class OuraganStep {
     }
 
     @Step("Ouverture du BT n°")
-    public static void openWorkOrder(String docCode, WebDriver currentDriver) throws InterruptedException {
+    public static void openWorkOrder(String docCode, ChromeDriver currentDriver) throws InterruptedException {
         //Scan du BT
         ScanStep.scanValue(docCode, currentDriver);
         // Fermeture potentielle des docs associés

@@ -2,12 +2,13 @@ package View.Ticket.Payment;
 
 import Enums.PaymentMean;
 import Helpers.Element.WebElementHelper;
-import Helpers.XPath.XPathPaymentLineHelper;
+import Helpers.XPath.XPathPaymentHelper;
 import View.BaseView;
 import View.Ticket.Payment.CreditNote.CreditNoteSearchView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class PaymentPanelView extends BaseView {
@@ -33,7 +34,7 @@ public class PaymentPanelView extends BaseView {
     // Mode de paiement sélectionné
     private PaymentMean selectedPayment;
 
-    public PaymentPanelView(WebDriver driver) {
+    public PaymentPanelView(ChromeDriver driver) {
         init(driver, this);
     }
 
@@ -78,7 +79,7 @@ public class PaymentPanelView extends BaseView {
         // On récupère l'id de l'élement 'Nom ligne paiement'
         String paymentNameId = getPaymentLineIdElemByText(paymentLabel);
         // Récupère le Xpath du boutton suppression paiement
-        String removePaymentLineBtnXPath = XPathPaymentLineHelper.getRemovePaymentButtonAmountXPath(paymentNameId);
+        String removePaymentLineBtnXPath = XPathPaymentHelper.getRemovePaymentButtonAmountXPath(paymentNameId);
         // Recherche du bouttn "Supprimer ligne" associé au mode de paiement
         WebElement removeBtn = WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(removePaymentLineBtnXPath), false);
         if (removeBtn != null) {
@@ -149,7 +150,7 @@ public class PaymentPanelView extends BaseView {
         // On récupère l'id de l'élement 'Nom ligne paiement'
         String paymentNameId = getPaymentLineIdElemByText(paymentLabel);
         // Récupère le Xpath de l'élement 'Montant ligne paiement'
-        String lineAmountXPath = XPathPaymentLineHelper.getPaymentLineAmountXPath(paymentNameId);
+        String lineAmountXPath = XPathPaymentHelper.getPaymentLineAmountXPath(paymentNameId);
         return WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(lineAmountXPath), false);
         // Si le montant est présent
         /*if (lineAmount != null) {

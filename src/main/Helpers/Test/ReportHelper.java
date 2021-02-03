@@ -4,6 +4,7 @@ import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ReportHelper {
 
@@ -12,7 +13,7 @@ public class ReportHelper {
      * @return
      */
     @Attachment(value = "Page screenshot", type = "image/png")
-    public static byte[] attachScreenshot(WebDriver driver) {
+    public static byte[] attachScreenshot(ChromeDriver driver) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

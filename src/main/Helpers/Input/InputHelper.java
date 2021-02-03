@@ -3,8 +3,8 @@ package Helpers.Input;
 import Helpers.Element.WebElementHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 /*
  * Classe utilitaire pour les entrées clavier
@@ -33,7 +33,7 @@ public class InputHelper {
         inputListener.sendKeys(Keys.chord(charac));
     }
 
-    public void type(CharSequence characters, WebDriver driver) throws InterruptedException {
+    public void type(CharSequence characters, ChromeDriver driver) throws InterruptedException {
         Thread.sleep(500);
         // On récupère le listener d'input
         inputListener = getInputListener(driver);
@@ -50,7 +50,7 @@ public class InputHelper {
      * Retourne le listener d'input
      * @return
      */
-    private WebElement getInputListener(WebDriver driver) {
+    private WebElement getInputListener(ChromeDriver driver) {
 
         return WebElementHelper.getElement(driver, By.xpath(KEY_LISTENER_XPATH));
     }

@@ -1,6 +1,6 @@
 package Helpers.XPath;
 
-public class XPathPaymentLineHelper {
+public class XPathPaymentHelper {
 
     // Position de la première variable dans l'id du nom produit
     private static final String PAYMENT_XPATH_BODY_CONTROL = "tbody_control";

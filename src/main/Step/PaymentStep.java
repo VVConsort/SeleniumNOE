@@ -13,10 +13,9 @@ import View.Ticket.Payment.PaymentPanelView;
 import View.Ticket.Payment.SendTicketView;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-public class PaymentStep {
-
-    private static final int WAIT_FOR_VALUE_TIMEOUT_IN_SEC = 5;
+public class PaymentStep extends BaseStep{
 
     @Step("Applique l'avoir {stepValue.paymentId}")
     public static void applyCreditNote(PaymentStepValue stepValue) {
@@ -93,7 +92,7 @@ public class PaymentStep {
     }
 
     @Step("Fermeture de la fenêtre de recherche d'avoir")
-    public static void closeCreditNoteSearchView(WebDriver driver) {
+    public static void closeCreditNoteSearchView(ChromeDriver driver) {
         // Ferme la fenetre de recherche d'avoir
         CreditNoteSearchView creditNoteSearchView = new CreditNoteSearchView(driver);
         creditNoteSearchView.closeCreditNoteSearchView();

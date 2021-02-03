@@ -5,22 +5,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class BaseView {
 
     // Timeout
-    protected static final int AJAX_ELEMENT_MISSING_TIMEOUT = 5;
+    protected static final int AJAX_ELEMENT_MISSING_TIMEOUT = 15;
     // Driver
-    protected WebDriver driver;
+    protected ChromeDriver driver;
 
     /**
      * Set le driver et le timeout de chargement des WebElement
      * @param webDriver
      * @param baseView
      */
-    protected void init(WebDriver webDriver, BaseView baseView) {
+    protected void init(ChromeDriver webDriver, BaseView baseView) {
         this.driver = webDriver;
         // Lazy loading
         AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, AJAX_ELEMENT_MISSING_TIMEOUT);
@@ -40,27 +41,22 @@ public class BaseView {
      * @param webElement
      */
     protected void click(WebElement webElement) {
-        int exceptionCount = 0;
-        try {
-            doClick(webElement);
-            // Peut arriver lorsque le DOM change/a changé lorsqu'on appelle le click
-        } catch (Exception ex) {
-            if (exceptionCount < 5) {
-                exceptionCount++;
-                // On récupère l'id de l'élément
-                String id = webElement.getAttribute("id");
-                // Cherche l'élément à partir de son id
-                WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.id(id), true);
-                // Tente de reclicker
-                doClick(webElem);
-            } else {
-                throw ex;
+        // Nb max de tentative
+        int attemptCount = 0;
+        while (true) {
+            try {
+                doClick(webElement);
+                break;
+            } catch (Exception e) {
+                if (attemptCount > 5) {
+                    throw e;
+                }
+                attemptCount++;
             }
         }
     }
 
-    private void doClick(WebElement elem)
-    {
+    private void doClick(WebElement elem) {
         // Met le zoom à 1 pour éviter les problemes de click
         setZoomTo1();
         // Clic clic

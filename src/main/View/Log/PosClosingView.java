@@ -4,6 +4,7 @@ import Helpers.Element.WebElementHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PosClosingView extends BaseView {
 
@@ -24,7 +25,7 @@ public class PosClosingView extends BaseView {
     //Xpath Boutton suivant
     private static final String NEXT_BTN_XPATH ="//*[@id=\"terminal_containerWindow_cashUp_closeCashMultiColumn_leftToolbar_leftToolbar_toolbar_btnNext\"]";
 
-    public PosClosingView(WebDriver webDriver) {
+    public PosClosingView(ChromeDriver webDriver) {
         init(webDriver, this);
     }
 

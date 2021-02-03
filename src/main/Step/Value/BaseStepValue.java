@@ -1,18 +1,19 @@
 package Step.Value;
 
 import Helpers.Test.ReportHelper;
-import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class BaseStepValue {
 
     public Object expectedValue;
-    public WebDriver driver;
+    public ChromeDriver driver;
     boolean isHardAssert;
     private SoftAssert soft;
 
-    public BaseStepValue(WebDriver driver, SoftAssert soft, boolean isHardAssert) {
+    public BaseStepValue(ChromeDriver driver, SoftAssert soft, boolean isHardAssert) {
         this.driver = driver;
         this.soft = soft;
         this.isHardAssert = isHardAssert;

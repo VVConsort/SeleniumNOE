@@ -2,14 +2,14 @@ package View.Header;
 
 import Helpers.Input.InputHelper;
 import View.BaseView;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ScannerView extends BaseView {
 
     // Délai d'attente en milli après avoir valider une saisie
     private static final int DELAY_AFTER_INPUT_MILLI = 1500;
 
-    public ScannerView(WebDriver driver) {
+    public ScannerView(ChromeDriver driver) {
         init(driver, this);
     }
 

@@ -5,10 +5,7 @@ import Step.Value.DiscountStepValue;
 import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
 
-public class DiscountStep {
-
-    // Timeout pour la valeur des éléments testés
-    private static final int WAIT_FOR_VALUE_TIMEOUT_IN_SEC = 5;
+public class DiscountStep extends BaseStep {
 
     /**
      * Vérifie l'affichage d'une promotion

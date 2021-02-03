@@ -1,6 +1,7 @@
 package Helpers.Element;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
@@ -26,7 +27,7 @@ public class WebElementHelper {
      * @param by
      * @return
      */
-    public static WebElement getElement(WebDriver driver, By by) {
+    public static WebElement getElement(ChromeDriver driver, By by) {
         WebElement webElem = null;
         try {
             webElem = driver.findElement(by);
@@ -41,9 +42,9 @@ public class WebElementHelper {
      * @param text
      * @return
      */
-    public static WebElement getElementFromText(WebDriver driver, String text, int timeOutInSec, boolean throwException) {
+    public static WebElement getElementFromText(ChromeDriver driver, String text, int timeOutInSec, boolean throwException) {
         // Recherche l'élement à partir du texte
-        return waitUntilElementIsVisible(driver, timeOutInSec, By.xpath("*//div[contains(text(),'" + text + "')]"), throwException);
+        return waitUntilElementIsVisible(driver, timeOutInSec, By.xpath("//*[contains(text(),'" + text + "')]"), throwException);
     }
 
     /**
@@ -52,7 +53,7 @@ public class WebElementHelper {
      * @param by
      * @return
      */
-    public static String getTextFromElement(WebDriver driver, By by) {
+    public static String getTextFromElement(ChromeDriver driver, By by) {
         WebElement webElem;
         try {
             webElem = driver.findElement(by);
@@ -68,7 +69,7 @@ public class WebElementHelper {
      * @param driver
      * @return
      */
-    public static WebElement getElementFromIdAndText(String id, String text, WebDriver driver) {
+    public static WebElement getElementFromIdAndText(String id, String text, ChromeDriver driver) {
         String Xpath = "*//div[starts-with(@id,'" + id + "') and contains (text(),'" + text + "')]";
         return getElement(driver, By.xpath(Xpath));
     }
@@ -78,7 +79,7 @@ public class WebElementHelper {
      * @param timeOutInSeconds
      * @param throwException
      */
-    public static void waitUntilElementIsNotPresent(WebDriver driver, int timeOutInSeconds, By by, boolean throwException) {
+    public static void waitUntilElementIsNotPresent(ChromeDriver driver, int timeOutInSeconds, By by, boolean throwException) {
         try {
             System.out.println("wait for invisibility");
             doWaitForInvisibility(driver, by, timeOutInSeconds);
@@ -95,7 +96,7 @@ public class WebElementHelper {
      * @param driver
      * @param timeOutInSeconds
      */
-    public static WebElement waitUntilElementIsVisible(WebDriver driver, int timeOutInSeconds, By by, boolean throwException) {
+    public static WebElement waitUntilElementIsVisible(ChromeDriver driver, int timeOutInSeconds, By by, boolean throwException) {
         WebElement elem = null;
         try {
             elem = doWaitForVisibility(driver, by, timeOutInSeconds);
@@ -108,11 +109,13 @@ public class WebElementHelper {
 
     public static String waitUntilExpectedText(String expectedText, WebElement webElem, int timeOutInSeconds, boolean throwException) {
         String text = null;
-        try {
-            text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
-        } catch (Throwable e) {
-            if (throwException)
-                throw e;
+        if (webElem != null) {
+            try {
+                text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
+            } catch (Throwable e) {
+                if (throwException)
+                    throw e;
+            }
         }
         return text == null ? webElem.getText() : text;
     }
@@ -123,7 +126,7 @@ public class WebElementHelper {
      * @param timeOutInSec
      * @return
      */
-    private static WebElement doWaitForVisibility(WebDriver driver, By by, int timeOutInSec) {
+    private static WebElement doWaitForVisibility(ChromeDriver driver, By by, int timeOutInSec) {
         WebElement elem = null;
         Wait wait = new FluentWait<>(driver)
                 .withTimeout(timeOutInSec, TimeUnit.SECONDS)
@@ -132,8 +135,8 @@ public class WebElementHelper {
                 .ignoring(NoSuchElementException.class)
                 .ignoring(ElementNotVisibleException.class);
 
-        elem = (WebElement) wait.until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
+        elem = (WebElement) wait.until(new Function<ChromeDriver, WebElement>() {
+            public WebElement apply(ChromeDriver driver) {
                 return driver.findElement(by);
             }
         });
@@ -146,7 +149,7 @@ public class WebElementHelper {
      * @param timeOutInSec
      * @return
      */
-    private static void doWaitForInvisibility(WebDriver driver, By by, int timeOutInSec) {
+    private static void doWaitForInvisibility(ChromeDriver driver, By by, int timeOutInSec) {
         Wait wait = new FluentWait<>(driver)
                 .withTimeout(timeOutInSec, TimeUnit.SECONDS)
                 .pollingEvery(500, TimeUnit.MILLISECONDS)
@@ -154,8 +157,8 @@ public class WebElementHelper {
                 .ignoring(NoSuchElementException.class)
                 .ignoring(ElementNotVisibleException.class);
         // Attend que l'élément ne soit plus affiché
-        wait.until(new Function<WebDriver, Boolean>() {
-            public Boolean apply(WebDriver driver) {
+        wait.until(new Function<ChromeDriver, Boolean>() {
+            public Boolean apply(ChromeDriver driver) {
                 return !driver.findElement(by).isDisplayed();
             }
         });
@@ -177,15 +180,33 @@ public class WebElementHelper {
                     if (webElem.getText().equals(expectedText)) {
                         return webElem.getText();
                     }
+                    // Si l'élément n'est pas visible à l'écran (getText() retourne null sur un élément caché/non affiché)
+                    else if(webElem.getAttribute("textContent").trim().equals(expectedText))
+                    {
+                        return webElem.getAttribute("textContent").trim();
+                    }
                     return null;
                 }
             });
-            // Si text est null on met la dernière valeur testée
-            if (text == null) {
-                text = webElem.getText();
-            }
         }
         return text;
+    }
+
+    /**
+     * Retourne l'ID de l'élément à partir de son texte
+     * @param label
+     * @return
+     */
+    public static String getElementIdByText(String label, ChromeDriver driver) {
+        String result = "";
+        // Recherche l'élement 'label' à partir du texte
+        WebElement elem = getElementFromText(driver, label, 5, false);
+        // Blindage
+        if (elem != null) {
+            // Affectation de l'id de l'élement
+            result = elem.getAttribute("id");
+        }
+        return result;
     }
 
 }

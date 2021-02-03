@@ -1,0 +1,55 @@
+{
+        "messageId": "80310d42-b2b6-43ad-9024-280825ca69f5",
+        "posTerminal": "0003",
+        "channel": "External",
+        "data": [
+        {
+        "internalDocumentType": "RA",
+        "collaboratorId": "",
+        "documentNo": "00030070905511320704",
+        "orderReference": "",
+        "norautoClientType": "PAR",
+        "businessPartner": "0e9cdb71-f62e-11e9-a781-0f1bdafcbf12",
+        "licensePlate": "AA123AA",
+        "kilometer": 1,
+        "ticketActions": 0,
+        "currency": "EUR",
+        "grossAmount": 3.25,
+        "lines": [
+        {
+        "lineID": "256",
+        "product": "F9917",
+        "productName": "Forfait sécurité sanitaire",
+        "productType": "F",
+        "qty": 1,
+        "unitPrice": 3.25,
+        "grossAmount": 3.25,
+        "taxLines": [
+        {
+        "taxCode": "4"
+        }
+        ],
+        "lineActions": 22,
+        "packageContent": [
+        {
+        "lineID": "1",
+        "product": "2220843",
+        "productName": "PROTECTION ET NETTOYAGE VEHICU",
+        "productType": "S",
+        "GM": "066",
+        "qty": 1,
+        "unitPrice": 3.25,
+        "grossAmount": 3.25,
+        "taxLines": [
+        {
+        "taxCode": "4"
+        }
+        ],
+        "lineActions": 1558
+        }
+        ]
+        }
+        ]
+        }
+        ]
+        }

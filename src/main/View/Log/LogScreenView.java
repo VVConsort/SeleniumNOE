@@ -3,6 +3,7 @@ package View.Log;
 import View.BaseView;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -22,7 +23,7 @@ public class LogScreenView extends BaseView {
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_login_loginButton\"]")
     WebElement connectionBtn;
 
-    public LogScreenView(WebDriver webDriver) {
+    public LogScreenView(ChromeDriver webDriver) {
         init(webDriver, this);
     }
 

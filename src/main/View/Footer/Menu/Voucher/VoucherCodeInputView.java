@@ -5,6 +5,7 @@ import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class VoucherCodeInputView extends BaseView {
@@ -18,7 +19,7 @@ public class VoucherCodeInputView extends BaseView {
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_OBDISCP_modalInsertCouponCode_body_formElementCouponcode_coreElementContainer_couponcode\"]")
     private WebElement voucherCodeInput;
 
-    public VoucherCodeInputView(WebDriver driver) {
+    public VoucherCodeInputView(ChromeDriver driver) {
         init(driver, this);
     }
 

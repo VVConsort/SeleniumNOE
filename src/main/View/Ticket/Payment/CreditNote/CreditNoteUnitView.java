@@ -5,6 +5,7 @@ import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class CreditNoteUnitView extends BaseView {
@@ -13,7 +14,7 @@ public class CreditNoteUnitView extends BaseView {
     @FindBy(xpath = " //*[@id=\"terminal_containerWindow_pointOfSale_GCNV_UI_Details_footer_okbutton\"]")
     private WebElement applyBtn;
 
-    public CreditNoteUnitView(WebDriver driver) {
+    public CreditNoteUnitView(ChromeDriver driver) {
         init(driver, this);
     }
 
