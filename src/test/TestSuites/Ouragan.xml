@@ -17,7 +17,7 @@
     <test name="NOE700">
         <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE700/manualDiscount.xml"/>
         <parameter name="discountLabel" value="GESTE COMMERCIAL - €"/>
-        <parameter name="discountAmount" value="-20.00"/>
+        <parameter name="discountAmount" value="-1.00"/>
         <parameter name="expectedTotal" value ="1.99"/>
         <classes>
             <class name="TestCases.Ouragan.NOE700"/>
