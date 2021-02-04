@@ -37,6 +37,5 @@ public class NOE700 extends BaseTest {
         TicketStep.checkTotalToPay(stepValue);
         // Vidage du ticket
         TicketStep.deleteWorkOrder(driver);
-        //TODO vérification état OB
     }
 }

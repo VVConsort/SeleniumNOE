@@ -52,6 +52,7 @@ public class PosOpeningStep {
             openingView.confirmApprovalReason(false);
             hasNextBtn = openingView.clickNext(false);
             Thread.sleep(500);
+            ReportHelper.attachScreenshot(driver);
         } while (hasNextBtn);
         // Attend le chargement du cache
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
@@ -71,6 +72,7 @@ public class PosOpeningStep {
             closingView.confirmApprovalReason(false);
             hasNextBtn = closingView.clickNext(false);
             Thread.sleep(500);
+            ReportHelper.attachScreenshot(driver);
         } while (hasNextBtn);
         // Attend chargement
         LoadingHelper.waitUntilLoadIsFinished(driver, 120);
