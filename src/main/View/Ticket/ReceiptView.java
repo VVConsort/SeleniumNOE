@@ -82,13 +82,13 @@ public class ReceiptView extends BaseView {
      * @param serviceLabel
      * @return
      */
-    public WebElement getServiceGrossPriceElem(String serviceLabel) {
+    public WebElement getLineGrossPriceElem(String serviceLabel) {
         WebElement result = null;
         // Récupération de l'ID du label
         String serviceLabelId = WebElementHelper.getElementIdByText(serviceLabel, driver);
         if (!serviceLabelId.isEmpty()) {
             // Récupération de l'ID du prix total de la presta
-            String grossPriceXPath = XPathLineHelper.getServiceGrossPriceXPath(serviceLabelId);
+            String grossPriceXPath = XPathLineHelper.getGrossPriceXPath(serviceLabelId);
             result = WebElementHelper.getElement(driver, By.xpath(grossPriceXPath));
         }
         // On retourne le composant prix total
@@ -100,13 +100,13 @@ public class ReceiptView extends BaseView {
      * @param serviceLabel
      * @return
      */
-    public WebElement getServiceQuantityElem(String serviceLabel) {
+    public WebElement getLineQuantityElem(String serviceLabel) {
         WebElement result = null;
         // Récupération de l'ID du label
         String serviceLabelId = WebElementHelper.getElementIdByText(serviceLabel, driver);
         if (!serviceLabelId.isEmpty()) {
             // Récupération de l'ID du prix total de la presta
-            String quantityXPath = XPathLineHelper.getServiceQuantityXPath(serviceLabelId);
+            String quantityXPath = XPathLineHelper.getQuantityXpath(serviceLabelId);
             result = WebElementHelper.getElement(driver, By.xpath(quantityXPath));
         }
         // On retourne le composant quantité
@@ -118,13 +118,13 @@ public class ReceiptView extends BaseView {
      * @param serviceLabel
      * @return
      */
-    public WebElement getServiceUnitPriceElem(String serviceLabel) {
+    public WebElement getUnitPriceElem(String serviceLabel) {
         WebElement result = null;
         // Récupération de l'ID du label
         String serviceLabelId = WebElementHelper.getElementIdByText(serviceLabel, driver);
         if (!serviceLabelId.isEmpty()) {
             // Récupération de l'ID du prix total de la presta
-            String grossPriceXPath = XPathLineHelper.getServiceUnitPriceXPath(serviceLabelId);
+            String grossPriceXPath = XPathLineHelper.getUnitPriceXPath(serviceLabelId);
             result = WebElementHelper.getElement(driver, By.xpath(grossPriceXPath));
         }
         // On retourne le composant prix unitaire

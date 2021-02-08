@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class NOE583 extends BaseTest {
+
     @Parameters({"jsonFilePath", "forfaitLabel", "forfaitPrice", "serviceLabel", "serviceGrossPrice", "serviceQuantity", "serviceUnitPrice", "expectedTotal"})
     @Test(description = "Scanner un RA contenant un forfait E et une prestation C")
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-583")
@@ -31,13 +32,13 @@ public class NOE583 extends BaseTest {
         TicketLineStep.checkForfaitPrice(forfaitLabel, baseValue);
         // Controle quantité presta
         baseValue.expectedValue = serviceQuantity;
-        TicketLineStep.checkServiceQuantity(serviceLabel, baseValue);
+        TicketLineStep.checkQuantity(serviceLabel, baseValue);
         // Controle prix unitaire presta
         baseValue.expectedValue = serviceUnitPrice;
-        TicketLineStep.checkServiceUnitPrice(serviceLabel, baseValue);
+        TicketLineStep.checkUnitPrice(serviceLabel, baseValue);
         // Controle montant total presta
         baseValue.expectedValue = serviceGrossPrice;
-        TicketLineStep.checkServiceGrossPrice(serviceLabel, baseValue);
+        TicketLineStep.checkGrossPrice(serviceLabel, baseValue);
         // Controle montant total du ticket
         baseValue.expectedValue = expectedTotal;
         TicketStep.checkTotalToPay(baseValue);

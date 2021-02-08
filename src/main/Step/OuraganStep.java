@@ -6,7 +6,6 @@ import Helpers.Ouragan.OuraganOrderLoaderHelper;
 import Helpers.Test.ReportHelper;
 import View.Ticket.MergedDocumentsView;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.IOException;
@@ -55,7 +54,7 @@ public class OuraganStep {
         // Attente chargement cache
         LoadingHelper.waitUntilLoadIsFinished(currentDriver, 30);
         // TODO A terme conditionner cette attente par la visiblité d'un élément
-        Thread.sleep(BT_LOADING_TIME);
+        //Thread.sleep(BT_LOADING_TIME);
         ReportHelper.attachScreenshot(currentDriver);
     }
 }

@@ -1,0 +1,38 @@
+{
+        "messageId": "c3926678-24db-489c-b5a7-9b0baa2acf3a",
+        "posTerminal": "0003",
+        "channel": "External",
+        "data": [
+        {
+        "internalDocumentType": "BRM",
+        "collaboratorId": "16",
+        "documentNo": "00030014556911320722",
+        "orderReference": "",
+        "norautoClientType": "PAR",
+        "businessPartner": "0e9cdb71-f62e-11e9-a781-0f1bdafcbf12",
+        "expectedDeposit": 40,
+        "ticketActions": 0,
+        "currency": "EUR",
+        "grossAmount": 45.95,
+        "lines": [
+        {
+        "statusReservation": "S",
+        "lineID": "1",
+        "product": "2210687",
+        "productName": "6020 KIT FLUSH RAILING",
+        "productType": "I",
+        "GM": "515",
+        "qty": 1,
+        "unitPrice": 45.95,
+        "grossAmount": 45.95,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 278
+        }
+        ]
+        }
+        ]
+        }

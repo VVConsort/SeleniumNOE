@@ -11,11 +11,11 @@ public class XPathLineHelper {
     // XPath du montant forfait
     private static final String FORFAIT_TOTAL_PRICE_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_controlVAR1_renderOrderLineVAR2_forfaitNameTotal\"]";
     // XPath du montant total service
-    private static final String SERVICE_GROSS_PRICE_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_controlVAR1_renderOrderLineVAR2_gross\"]";
+    private static final String GROSS_PRICE_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_controlVAR1_renderOrderLineVAR2_gross\"]";
     // XPath quantité presta
-    private static final String SERVICE_QUANTITY_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_controlVAR1_renderOrderLineVAR2_quantity\"]";
-    // XPath prix unitaire presta
-    private static final String SERVICE_UNIT_PRICE ="//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_controlVAR1_renderOrderLineVAR2_price\"]";
+    private static final String QUANTIY_XPATH = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_controlVAR1_renderOrderLineVAR2_quantity\"]";
+        // XPath prix unitaire presta
+    private static final String UNIT_PRICE_XPATH ="//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_controlVAR1_renderOrderLineVAR2_price\"]";
 
 
     /**
@@ -62,8 +62,8 @@ public class XPathLineHelper {
      * @param serviceLabel
      * @return
      */
-    public static String getServiceGrossPriceXPath(String serviceLabel) {
-        return setVars(SERVICE_GROSS_PRICE_XPATH, getBodyControlXPathVarFromId(serviceLabel), getRenderOrderLineXPathVarFromId(serviceLabel));
+    public static String getGrossPriceXPath(String serviceLabel) {
+        return setVars(GROSS_PRICE_XPATH, getBodyControlXPathVarFromId(serviceLabel), getRenderOrderLineXPathVarFromId(serviceLabel));
     }
 
     /**
@@ -71,8 +71,8 @@ public class XPathLineHelper {
      * @param serviceLabel
      * @return
      */
-    public static String getServiceQuantityXPath(String serviceLabel) {
-        return setVars(SERVICE_QUANTITY_XPATH, getBodyControlXPathVarFromId(serviceLabel), getRenderOrderLineXPathVarFromId(serviceLabel));
+    public static String getQuantityXpath(String serviceLabel) {
+        return setVars(QUANTIY_XPATH, getBodyControlXPathVarFromId(serviceLabel), getRenderOrderLineXPathVarFromId(serviceLabel));
     }
 
     /**
@@ -80,8 +80,8 @@ public class XPathLineHelper {
      * @param serviceLabel
      * @return
      */
-    public static String getServiceUnitPriceXPath(String serviceLabel) {
-        return setVars(SERVICE_UNIT_PRICE, getBodyControlXPathVarFromId(serviceLabel), getRenderOrderLineXPathVarFromId(serviceLabel));
+    public static String getUnitPriceXPath(String serviceLabel) {
+        return setVars(UNIT_PRICE_XPATH, getBodyControlXPathVarFromId(serviceLabel), getRenderOrderLineXPathVarFromId(serviceLabel));
     }
 
     /**
