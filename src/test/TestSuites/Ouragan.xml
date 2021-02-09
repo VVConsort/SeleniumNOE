@@ -59,4 +59,20 @@
             <class name="TestCases.Ouragan.NOE583"/>
         </classes>
     </test>
+    <test name="NOE629">
+        <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE629/noe629.xml"/>
+        <parameter name="expectedDeposit" value="40.00"/>
+        <parameter name="expectedDepositLabel" value="953 - RESERVATIONS"/>
+        <classes>
+            <class name="TestCases.Ouragan.NOE629"/>
+        </classes>
+    </test>
+    <test name="NOE651">
+        <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE651/noe651.xml"/>
+        <parameter name="expectedAmountToPay" value="2.58"/>
+        <parameter name="expectedState" value="A payer"/>
+        <classes>
+            <class name="TestCases.Ouragan.NOE651"/>
+        </classes>
+    </test>
 </suite>

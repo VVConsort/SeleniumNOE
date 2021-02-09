@@ -1,0 +1,37 @@
+{
+        "messageId": "30db96c7-918a-44e2-a85f-f064e500e3ef",
+        "posTerminal": "0003",
+        "channel": "External",
+        "data": [
+        {
+        "internalDocumentType": "BRW",
+        "collaboratorId": "05",
+        "documentNo": "00030070921311320999",
+        "orderReference": "48208859",
+        "norautoClientType": "PAR",
+        "businessPartner": "82553b9a-b9e3-11ea-a567-09abe3925bd2",
+        "ticketActions": 0,
+        "currency": "EUR",
+        "grossAmount": 2.58,
+        "lines": [
+        {
+        "lineID": "1",
+        "product": "252100",
+        "productName": "COCA COLA ZERO 33CL",
+        "productType": "I",
+        "qty": 2,
+        "unitPrice": 1.29,
+        "grossAmount": 2.58,
+        "taxLines": [
+        {
+        "taxCode": "2"
+        }
+        ],
+        "lineActions": 278,
+        "statusReservation": "R",
+        "GM": "921"
+        }
+        ]
+        }
+        ]
+        }
