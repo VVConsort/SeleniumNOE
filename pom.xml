@@ -36,8 +36,6 @@
                     </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteFile}</suiteXmlFile>
-                        <!--<suiteXmlFile>src\test\TestSuites\PosOpening.xml</suiteXmlFile>
-                        <suiteXmlFile>src\test\TestSuites\Promotions.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
                 </configuration>
                 <dependencies>
