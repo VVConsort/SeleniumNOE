@@ -48,7 +48,7 @@ public class BaseTest {
     /**
      * Vide le ticket
      */
-    protected void deleteTicket() {
+    protected void deleteTicket() throws InterruptedException {
         TicketStep.deleteTicket(driver);
     }
 

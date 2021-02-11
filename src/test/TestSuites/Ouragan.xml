@@ -75,4 +75,15 @@
             <class name="TestCases.Ouragan.NOE651"/>
         </classes>
     </test>
+    <test name="NOE636">
+        <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE636/noe636.xml"/>
+        <parameter name="expectedAmountToPay" value="20.00"/>
+        <parameter name="depositLabel" value="953 - RESERVATIONS"/>
+        <parameter name="depositQty" value="-1"/>
+        <parameter name="depositUnitPrice" value="10.00"/>
+        <parameter name="depositGrossPrice" value="-10.00"/>
+        <classes>
+            <class name="TestCases.Ouragan.NOE636"/>
+        </classes>
+    </test>
 </suite>

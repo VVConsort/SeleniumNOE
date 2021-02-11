@@ -45,7 +45,7 @@ public class OuraganStep {
         }
     }
 
-    @Step("Ouverture du BT n°")
+    @Step("Ouverture du BT n° {docCode}")
     public static void openWorkOrder(String docCode, ChromeDriver currentDriver) throws InterruptedException {
         //Scan du BT
         ScanStep.scanValue(docCode, currentDriver);
@@ -53,7 +53,6 @@ public class OuraganStep {
         closeMergedDocuments(currentDriver);
         // Attente chargement cache
         LoadingHelper.waitUntilLoadIsFinished(currentDriver, 30);
-        // TODO A terme conditionner cette attente par la visiblité d'un élément
         //Thread.sleep(BT_LOADING_TIME);
         ReportHelper.attachScreenshot(currentDriver);
     }

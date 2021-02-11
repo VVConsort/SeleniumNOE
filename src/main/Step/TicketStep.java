@@ -20,20 +20,24 @@ public class TicketStep extends BaseStep {
      * @param driver
      */
     @Step("Vide le ticket")
-    public static void deleteTicket(ChromeDriver driver) {
+    public static void deleteTicket(ChromeDriver driver) throws InterruptedException {
         FooterView footerView = new FooterView(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();
         // Clic sur 'Confirmer suppression'
         footerView.clickOnConfirmDeleteBtn();
+        //FIXME On attend une seconde afin de pas fermer Chrome sans que OB ait correctement "vidé" le ticket
+        Thread.sleep(1000);
         ReportHelper.attachScreenshot(driver);
     }
 
     @Step("Vide le ticket")
-    public static void deleteWorkOrder(ChromeDriver driver) {
+    public static void deleteWorkOrder(ChromeDriver driver) throws InterruptedException {
         FooterView footerView = new FooterView(driver);
         // Clic sur 'Vider sur ticket'
         footerView.clickOnDeleteTicketBtn();
+        //FIXME On attend une seconde afin de pas fermer Chrome sans que OB ait correctement "vidé" le ticket
+        Thread.sleep(1000);
         ReportHelper.attachScreenshot(driver);
     }
 
