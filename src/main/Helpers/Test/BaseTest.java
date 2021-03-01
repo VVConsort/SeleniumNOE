@@ -7,18 +7,34 @@ import Step.Value.DiscountStepValue;
 import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Step;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.IHookCallBack;
+import org.testng.IHookable;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
-public class BaseTest {
+public class BaseTest implements IHookable {
 
     // Driver Chrome
     protected ChromeDriver driver;
     // Soft assert
     protected SoftAssert softAssert = new SoftAssert();
+
+    @Override
+    public void run(IHookCallBack callBack, ITestResult testResult) {
+
+        callBack.runTestMethod(testResult);
+        if (testResult.getThrowable() != null) {
+            try {
+                ReportHelper.attachScreenshot(driver, testResult.getMethod().getMethodName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     /**
      * Charge les properties de la TestSuite

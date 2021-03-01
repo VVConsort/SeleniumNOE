@@ -1,6 +1,6 @@
 package Step.Value.Payment;
 
-import Enums.SendTicketMode;
+import Enums.Payment.SendTicketMode;
 import Step.Value.BaseStepValue;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.asserts.SoftAssert;

@@ -1,6 +1,6 @@
 package TestCases.Ouragan;
 
-import Enums.SendTicketMode;
+import Enums.Payment.SendTicketMode;
 import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.OuraganStep;
@@ -38,6 +38,7 @@ public class NOE651 extends BaseTest {
         // Paiement et finalisation du ticket
         PaymentStepValue payStepValue = getNewPaymentStepValue(false);
         payStepValue.sendTicketMode = SendTicketMode.MAIL_ONLY;
+        payStepValue.email="noetest@gmail.com";
         PaymentStep.payWithCash(payStepValue);
         PaymentStep.finalizeOrder(payStepValue);
         //TODO Attente C.Brazier pour accès BDD et controle etat/renvoi vers ouragan

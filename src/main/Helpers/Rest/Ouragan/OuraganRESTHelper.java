@@ -1,5 +1,7 @@
-package Helpers.Ouragan;
+package Helpers.Rest.Ouragan;
 
+import Enums.REST.RESTCodeStatut;
+import Helpers.Json.OuraganJsonHelper;
 import Helpers.Rest.RESTHelper;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
 import org.testng.Assert;
@@ -9,11 +11,10 @@ import java.io.IOException;
 /**
  * Classe utilitaire pour l'import des BR Ouragan
  */
-public class OuraganOrderLoaderHelper {
+public class OuraganRESTHelper {
 
     /**
      * Poste un BT Ouragan vers OB
-     *
      * @param orderLoaderSynchronizedProcessing
      * @param json
      * @param orderLoaderUrl
@@ -21,14 +22,13 @@ public class OuraganOrderLoaderHelper {
      * @param orderLoaderPassword
      * @return
      */
-    public int postOuraganOrderToOpenBravo(String json, String orderLoaderUrl, String orderLoaderUser, String orderLoaderPassword, String orderLoaderSynchronizedProcessing) {
+    public int postOuraganOrderToOpenBravo(String json, String orderLoaderUrl, String orderLoaderUser, String orderLoaderPassword, String orderLoaderSynchronizedProcessing) throws IOException {
         // Post vers l'OrderLoader et recupération du code réponse
-        return RESTHelper.postJson(getCompleteOrderLoaderURL(orderLoaderUrl, orderLoaderUser, orderLoaderPassword, orderLoaderSynchronizedProcessing), OuraganJsonHelper.updateJsonWithNewMessageId(json));
+        return RESTHelper.post(getCompleteOrderLoaderURL(orderLoaderUrl, orderLoaderUser, orderLoaderPassword, orderLoaderSynchronizedProcessing), json).code();
     }
 
     /**
      * Retourne l'URL completée de l'OrderLoader
-     *
      * @param orderLoaderUrl
      * @param orderLoaderUser
      * @param orderLoaderPassword
@@ -42,7 +42,6 @@ public class OuraganOrderLoaderHelper {
 
     /**
      * On charge la commande en utilisant les paramètres OrderLoader définié dans le Properties de la TestSuite
-     *
      * @param json
      * @return
      */
@@ -52,7 +51,6 @@ public class OuraganOrderLoaderHelper {
 
     /**
      * Met a jour le messageId et poste la commande vers l'OrderLoader OB
-     *
      * @param jsonPath
      * @param assertResponseCode si vrai alors hard check la réponse à l'envoi
      * @return le code document
@@ -66,9 +64,8 @@ public class OuraganOrderLoaderHelper {
         // On post le JSON vers OB
         int responseCode = postOuraganOrderToOpenBravo(json);
         // Si assertResponseCode on test le code retour
-        if(assertResponseCode)
-        {
-            Assert.assertEquals(responseCode,RESTHelper.OK_RESPONSE_CODE);
+        if (assertResponseCode) {
+            Assert.assertEquals(responseCode, RESTCodeStatut.OK.getCode());
         }
         // On retourne le code document
         return OuraganJsonHelper.getDocumentCode(json);

@@ -1,8 +1,5 @@
 package Helpers.Test.TestSuiteProperties;
 
-import junit.framework.TestSuite;
-import org.testng.annotations.Test;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,6 +20,14 @@ public class PropertiesLoader {
     private static final String OURAGAN_DB_USER = "OURAGAN_DB_USER";
     private static final String OURAGAN_DB_PASSWORD = "OURAGAN_DB_PASSWORD";
     private static final String OB_BO_URL = "OB_BO_URL";
+    private static final String RCU_AUTH_URL = "RCU_AUTH_URL";
+    private static final String RCU_GET_TOKEN_AUTH = "RCU_GET_TOKEN_AUTH";
+    private static final String RCU_SEARCH_CUST_URL = "RCU_SEARCH_CUST_URL";
+    private static final String RCU_ARCHIVE_CUST_URL = "RCU_ARCHIVE_CUST_URL";
+    private static final String RCU_GET_CUST_URL = "RCU_GET_CUST_URL";
+    private static final String OB_DATABASE_URL = "OB_DATABASE_URL";
+    private static final String OB_DATABASE_USER = "OB_DATABASE_USER";
+    private static final String OB_DATABASE_PASSWORD = "OB_DATABASE_PASSWORD";
 
     /**
      * Charge les propriétés de la TestSuite à partir du chemin spécifié en paramètre
@@ -52,6 +57,14 @@ public class PropertiesLoader {
         TestSuiteProperties.OURAGAN_DB_USER = properties.getProperty(OURAGAN_DB_USER);
         TestSuiteProperties.OURAGAN_DB_PASSWORD = properties.getProperty(OURAGAN_DB_PASSWORD);
         TestSuiteProperties.OB_BO_URL = properties.getProperty(OB_BO_URL);
+        TestSuiteProperties.RCU_AUTH_URL = properties.getProperty(RCU_AUTH_URL);
+        TestSuiteProperties.RCU_GET_TOKEN_ID = properties.getProperty(RCU_GET_TOKEN_AUTH);
+        TestSuiteProperties.RCU_SEARCH_CUST_URL = properties.getProperty(RCU_SEARCH_CUST_URL);
+        TestSuiteProperties.RCU_ARCHIVE_CUST_URL = properties.getProperty(RCU_ARCHIVE_CUST_URL);
+        TestSuiteProperties.RCU_GET_CUST_URL = properties.getProperty(RCU_GET_CUST_URL);
+        TestSuiteProperties.OB_DATABASE_URL = properties.getProperty(OB_DATABASE_URL);
+        TestSuiteProperties.OB_DATABASE_USER = properties.getProperty(OB_DATABASE_USER);
+        TestSuiteProperties.OB_DATABASE_PASSWORD = properties.getProperty(OB_DATABASE_PASSWORD);
     }
 }
 

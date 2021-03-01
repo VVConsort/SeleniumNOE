@@ -1,33 +1,129 @@
 package Helpers.Rest;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import Enums.REST.RESTCodeStatut;
+import Enums.REST.RESTMethod;
+import com.sun.istack.Nullable;
+import okhttp3.*;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class RESTHelper {
 
-    // Code de réponse OK
-    public static final int OK_RESPONSE_CODE =200;
     /**
-     * Post une requete à JSON vers l'URL spécifiée
+     * Envoie une requete POST
      * @param URL
-     * @param json
+     * @param jsonBody
      * @return
      */
-    public static int postJson(String URL, String json ) {
-        // Création du client rest
-        Client client = Client.create();
-        // URL
-        WebResource webResource = client.resource(URL);
-        // JSON
-        ClientResponse response = webResource.type("application/json").post(ClientResponse.class, json);
-        // Si il y'a une erreur
-        if (response.getStatus() != 200) {
-            System.out.println("Failed : HTTP error code : " + response.getStatus());
-            String error = response.getEntity(String.class);
-            System.out.println("Error: " + error);
+    public static Response post(String URL, Map<String, String> headersArg, String jsonBody) throws IOException {
+        // Construction de la requete et appel
+        return buildRequestAndCall(URL, RESTMethod.POST, jsonBody, headersArg);
+    }
+
+    /**
+     * Envoie une requete POST sans corps
+     * @param URL
+     * @param headersArg
+     * @return
+     * @throws IOException
+     */
+    public static Response post(String URL, Map<String, String> headersArg) throws IOException {
+        // Construction de la requete et appel
+        return buildRequestAndCall(URL, RESTMethod.POST, null, headersArg);
+    }
+
+    /**
+     * Envoie une requete POST sans header, renvoi le code statut
+     * @param URL
+     * @param jsonBody
+     * @return
+     */
+    public static Response post(String URL, String jsonBody) throws IOException {
+        return post(URL, null, jsonBody);
+    }
+
+    /**
+     * Envoie une requete GET et renvoi le code statut
+     * @param URL
+     * @param headersArg
+     * @return
+     * @throws IOException
+     */
+    public static Response get(String URL, Map<String, String> headersArg) throws IOException {
+        return buildRequestAndCall(URL, RESTMethod.GET, null, headersArg);
+    }
+
+    /**
+     * Envoie une requete PUT
+     * @param URL
+     * @param jsonBody
+     * @return
+     */
+    public static Response put(String URL, Map<String, String> headersArg, String jsonBody) throws IOException {
+        // Construction de la requete et appel
+        return buildRequestAndCall(URL, RESTMethod.PUT, jsonBody, headersArg);
+    }
+
+    /**
+     * Envoie une requete PUT sans header
+     * @param URL
+     * @param jsonBody
+     * @return
+     */
+    public static Response put(String URL, String jsonBody) throws IOException {
+        // Construction de la requete et appel
+        return buildRequestAndCall(URL, RESTMethod.PUT, jsonBody, null);
+    }
+
+    /**
+     * Construit et renvoi la requete
+     * @param URL
+     * @param method
+     * @param jsonBody
+     * @param headersArg
+     * @return
+     */
+    private static Response buildRequestAndCall(String URL, RESTMethod method, @Nullable String jsonBody, @Nullable Map<String, String> headersArg) throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+        RequestBody requestBody = null;
+        if (jsonBody != null) {
+            requestBody = RequestBody.create(MediaType.parse("application/json"), jsonBody);
         }
-        // Retourne la réponse au POST
-        return response.getStatus();
+        Request request = new Request.Builder()
+                .method(method.getLabel(), requestBody)
+                .url(URL)
+                .headers(getHeader(headersArg))
+                .build();
+        // Appel
+        Response response = client.newCall(request).execute();
+        // Check erreur
+        if (response.code() != RESTCodeStatut.OK.getCode()) {
+            System.out.println("Error: " + response.code());
+        }
+        return response;
+    }
+
+    /**
+     * Construit et renvoi le header
+     * @param headersArg
+     * @return
+     */
+    private static Headers getHeader(Map<String, String> headersArg) {
+        // On set les valeures communes
+        Headers.Builder builder = new Headers.Builder();
+        builder.add("Content-Length", "0");
+        builder.add("Accept", "*/*");
+        builder.add("Accept-Encoding", "UTF-8");
+        builder.add("Connection", "keep-alive");
+        // Params supplémentaires
+        if (headersArg != null) {
+            for (Map.Entry<String, String> entry : headersArg.entrySet()) {
+                builder.add(entry.getKey(), entry.getValue());
+            }
+        }
+
+        // On build et retourne le header
+        return builder.build();
     }
 }

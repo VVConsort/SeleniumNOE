@@ -1,7 +1,7 @@
 package TestCases.Ouragan;
 
-import Enums.PaymentMean;
-import Enums.SendTicketMode;
+import Enums.Payment.PaymentMean;
+import Enums.Payment.SendTicketMode;
 import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.OuraganStep;
@@ -45,6 +45,7 @@ public class NOE800 extends BaseTest {
         payStep.expectedValue = expectedTicketTotal;
         // Vérification du montant de la ligne de paiement
         PaymentStep.checkPaymentLineAmount(payStep);
+        payStep.email = "noetest@gmail.com";
         // On finalise le ticket
         PaymentStep.finalizeOrder(payStep);
         // TODO ajout controle base (attend Christophe Brazier)

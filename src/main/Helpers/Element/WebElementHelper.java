@@ -53,7 +53,7 @@ public class WebElementHelper {
      * @param by
      * @return
      */
-    public static String getTextFromElement(ChromeDriver driver, By by) {
+    /*public static String getTextFromElement(ChromeDriver driver, By by) {
         WebElement webElem;
         try {
             webElem = driver.findElement(by);
@@ -61,7 +61,7 @@ public class WebElementHelper {
             return "";
         }
         return webElem.getText();
-    }
+    }*/
 
     /**
      * Retourne l'élément à partir du texte et de l'id

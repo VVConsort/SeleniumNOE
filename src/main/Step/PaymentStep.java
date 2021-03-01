@@ -1,6 +1,5 @@
 package Step;
 
-import Enums.SendTicketMode;
 import Helpers.Element.WebElementHelper;
 import Helpers.Test.ReportHelper;
 import Step.Value.Payment.PaymentStepValue;
@@ -12,10 +11,9 @@ import View.Ticket.Payment.CreditNote.CreditNoteUnitView;
 import View.Ticket.Payment.PaymentPanelView;
 import View.Ticket.Payment.SendTicketView;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class PaymentStep extends BaseStep{
+public class PaymentStep extends BaseStep {
 
     @Step("Applique l'avoir {stepValue.paymentId}")
     public static void applyCreditNote(PaymentStepValue stepValue) {
@@ -111,7 +109,7 @@ public class PaymentStep extends BaseStep{
     public static void useVoucher(PaymentStepValue stepValue) {
         FooterView footerView = new FooterView(stepValue.driver);
         // Pop up bon d'achat
-        VoucherCodeInputView voucherView = footerView.clickOnMenuBtn().clickOnVoucherBtn();
+        VoucherCodeInputView voucherView = footerView.clickOnMenuBtn().clickOnVoucher();
         // On entre le code du bon d'achat
         voucherView.enterVoucherCode(stepValue.paymentId);
         // On click sur OK
@@ -139,24 +137,31 @@ public class PaymentStep extends BaseStep{
         ReportHelper.attachScreenshot(stepValue.driver);
     }
 
-    @Step("Finalise le ticket en sélectionnant l'envoi {sendTicketMode.getLabel()}")
+    @Step("Finalise le ticket en sélectionnant l'envoi {sendTicketMode.label}")
     public static void finalizeOrder(PaymentStepValue stepValue) {
         FooterView footer = new FooterView(stepValue.driver);
         // Vue panneau paiement
         PaymentPanelView view = footer.clickOnTotalToPayBtn();
         // Finalise la commande
-        sendTicket(stepValue.sendTicketMode, view.clickFinalize());
+        sendTicket(stepValue, view.clickFinalize());
         ReportHelper.attachScreenshot(stepValue.driver);
     }
 
     /**
      * Envoie le ticket selon le mode sélectionné
-     * @param sendTicketMode
+     * @param stepValue
      * @param sendTicketView
      */
-    private static void sendTicket(SendTicketMode sendTicketMode, SendTicketView sendTicketView) {
-        switch (sendTicketMode) {
-            case MAIL_ONLY -> sendTicketView.clickMailOnly();
+    private static void sendTicket(PaymentStepValue stepValue, SendTicketView sendTicketView) {
+        switch (stepValue.sendTicketMode) {
+            case MAIL_ONLY -> {
+                if (stepValue.email != null && !stepValue.email.isEmpty()) {
+                    sendTicketView.setMail(stepValue.email);
+                }
+                sendTicketView.clickMailOnly();
+            }
         }
     }
+
+
 }

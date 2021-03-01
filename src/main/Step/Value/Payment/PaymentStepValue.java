@@ -1,9 +1,8 @@
 package Step.Value.Payment;
 
-import Enums.PaymentMean;
-import Enums.SendTicketMode;
+import Enums.Payment.PaymentMean;
+import Enums.Payment.SendTicketMode;
 import Step.Value.BaseStepValue;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.asserts.SoftAssert;
 
@@ -14,6 +13,8 @@ public class PaymentStepValue extends BaseStepValue {
     public String paymentId;
     // Méthode d'envoi du ticket
     public SendTicketMode sendTicketMode;
+    // Email destinataire ticket
+    public String email;
 
     public PaymentStepValue(ChromeDriver driver, SoftAssert soft, boolean isHardAssert) {
         super(driver, soft, isHardAssert);

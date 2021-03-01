@@ -22,6 +22,6 @@ public class ScannerView extends BaseView {
         // Saisie la valeur
         input.type(value, driver);
         //FIXME : conditionner l'attente par la visibiltié d'un élément
-        Thread.sleep(DELAY_AFTER_INPUT_MILLI);
+        //Thread.sleep(DELAY_AFTER_INPUT_MILLI);
     }
 }

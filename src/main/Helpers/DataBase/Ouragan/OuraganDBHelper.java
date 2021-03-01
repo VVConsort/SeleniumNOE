@@ -1,4 +1,4 @@
-package Helpers.Ouragan;
+package Helpers.DataBase.Ouragan;
 
 import main.Helpers.DataBase.OracleSQLHelper;
 

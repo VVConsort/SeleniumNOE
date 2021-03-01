@@ -1,8 +1,8 @@
 package Step;
 
 import Helpers.Loading.LoadingHelper;
-import Helpers.Ouragan.OuraganDBHelper;
-import Helpers.Ouragan.OuraganOrderLoaderHelper;
+import Helpers.DataBase.Ouragan.OuraganDBHelper;
+import Helpers.Rest.Ouragan.OuraganRESTHelper;
 import Helpers.Test.ReportHelper;
 import View.Ticket.MergedDocumentsView;
 import io.qameta.allure.Step;
@@ -19,7 +19,7 @@ public class OuraganStep {
     @Step("Importe le bon de travail Ouragan")
     public static String postWorkOrderToOpenBravo(String pathToJsonFile) throws IOException {
         // Classe utilitaire pour les envoie vers l'OrderLoader
-        OuraganOrderLoaderHelper helper = new OuraganOrderLoaderHelper();
+        OuraganRESTHelper helper = new OuraganRESTHelper();
         // Envoie la commande vers OB avec un nouvel messageId et retourne le code document
         return helper.updateMessageIdAndPostToOB(pathToJsonFile, true);
     }

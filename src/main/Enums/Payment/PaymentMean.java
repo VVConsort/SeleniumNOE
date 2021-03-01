@@ -1,4 +1,5 @@
-package Enums;
+package Enums.Payment;
+
 
 /**
  * Moyen de paiements

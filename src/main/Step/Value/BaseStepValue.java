@@ -1,7 +1,6 @@
 package Step.Value;
 
 import Helpers.Test.ReportHelper;
-
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -60,13 +59,23 @@ public class BaseStepValue {
         }
     }
 
-    public void isTrue(boolean valueToTest){
+    public void isTrue(boolean valueToTest) {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
             Assert.assertTrue(valueToTest);
         } else {
             soft.assertTrue(valueToTest);
+        }
+    }
+
+    public void isFalse(boolean valueToTest) {
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
+        if (isHardAssert) {
+            Assert.assertFalse(valueToTest);
+        } else {
+            soft.assertFalse(valueToTest);
         }
     }
 

@@ -16,4 +16,13 @@ public class ReportHelper {
     public static byte[] attachScreenshot(ChromeDriver driver) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
+
+    /**
+     * Prend un screenshot et l'attache au rapport
+     * @return
+     */
+    @Attachment(value = "{methodName}", type = "image/png")
+    public static byte[] attachScreenshot(ChromeDriver driver,String methodName) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
 }

@@ -1,4 +1,4 @@
-package Helpers.Ouragan;
+package Helpers.Json;
 
 import org.json.JSONObject;
 
@@ -58,8 +58,10 @@ public class OuraganJsonHelper {
      * @param json
      */
     public static String updateJsonWithNewMessageId(String json) {
+        String newUUID  = UUID.randomUUID().toString();
+        System.out.println(newUUID);
         JSONObject result = new JSONObject(json)
-                .put(JSON_MESSAGE_ID_KEY, UUID.randomUUID().toString());
+                .put(JSON_MESSAGE_ID_KEY, newUUID);
         return result.toString();
     }
 

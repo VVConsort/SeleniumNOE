@@ -48,7 +48,7 @@ public class FooterView extends BaseView {
         // Click sur le btn si il est présent
         if (findAndClickElement(CONFIRM_DELETE_BTN_XPATH, false)) {
             // On attend sa disparation
-            WebElementHelper.waitUntilElementIsNotPresent(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.xpath(CONFIRM_DELETE_BTN_XPATH), true);
+            WebElementHelper.waitUntilElementIsNotPresent(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(CONFIRM_DELETE_BTN_XPATH), true);
         }
     }
 

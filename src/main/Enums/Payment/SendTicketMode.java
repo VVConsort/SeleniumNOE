@@ -1,4 +1,4 @@
-package Enums;
+package Enums.Payment;
 
 public enum SendTicketMode {
     MAIL_ONLY("Email seulement");

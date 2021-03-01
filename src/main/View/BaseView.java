@@ -2,8 +2,6 @@ package View;
 
 import Helpers.Element.WebElementHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -12,7 +10,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 public class BaseView {
 
     // Timeout
-    protected static final int AJAX_ELEMENT_MISSING_TIMEOUT = 15;
+    protected static final int ELEMENT_MISSING_TIMEOUT = 15;
     // Driver
     protected ChromeDriver driver;
 
@@ -24,7 +22,7 @@ public class BaseView {
     protected void init(ChromeDriver webDriver, BaseView baseView) {
         this.driver = webDriver;
         // Lazy loading
-        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, AJAX_ELEMENT_MISSING_TIMEOUT);
+        AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(webDriver, ELEMENT_MISSING_TIMEOUT);
         PageFactory.initElements(factory, baseView);
     }
 
@@ -32,8 +30,17 @@ public class BaseView {
      * Passe la proprieté CSS Zoom à 1 afin d'éviter les problèmes de clic
      */
     private void setZoomTo1() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.querySelector(\"html\").setAttribute(\"style\",\"zoom : 1\")");
+        driver.executeScript("document.querySelector(\"html\").setAttribute(\"style\",\"zoom : 1\")");
+    }
+
+    /**
+     * Utilise Javascript pour changer l'attribut d'un élément
+     * @param element
+     * @param attName
+     * @param attValue
+     */
+    protected void setAttribute(WebElement element, String attName, String attValue) {
+        driver.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attName, attValue);
     }
 
     /**
@@ -70,7 +77,7 @@ public class BaseView {
      */
     protected boolean findAndClickElement(String XPath, boolean isMandatory) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), isMandatory);
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), isMandatory);
         // Click si existe
         if (webElem != null) {
             click(webElem);
@@ -86,7 +93,18 @@ public class BaseView {
      */
     protected WebElement findElement(String xPath, boolean isMandatory) {
         // On tente de récupèrer l'élement à partir du XPath
-        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, AJAX_ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), isMandatory);
+        WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(xPath), isMandatory);
         return webElem;
+    }
+
+    /**
+     * Envoi le text au composant
+     * @param element
+     * @param keys
+     */
+    protected void sendKeys(WebElement element, String keys) {
+        if (element != null && keys != null && !keys.isEmpty()) {
+            element.sendKeys(keys);
+        }
     }
 }

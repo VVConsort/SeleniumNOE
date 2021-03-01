@@ -1,6 +1,6 @@
 package TestCases.Ouragan;
 
-import Enums.SendTicketMode;
+import Enums.Payment.SendTicketMode;
 import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.OuraganStep;
@@ -35,6 +35,7 @@ public class NOE699 extends BaseTest {
         // On paie en espèce
         PaymentStepValue payStep = getNewPaymentStepValue(false);
         payStep.sendTicketMode = SendTicketMode.MAIL_ONLY;
+        payStep.email="noetest@gmail.com";
         PaymentStep.payWithCash(payStep);
         // On finalise la commande
         PaymentStep.finalizeOrder(payStep);

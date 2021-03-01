@@ -29,7 +29,22 @@ public class TestSuiteProperties {
     public static String OURAGAN_DB_PASSWORD;
     // URL du BackOffice
     public static String OB_BO_URL;
-
+    // URL Auth RCU
+    public static String RCU_AUTH_URL;
+    // ID pour récup Token RCU
+    public static String RCU_GET_TOKEN_ID;
+    // URL recherche client
+    public static String RCU_SEARCH_CUST_URL;
+    // URL get client
+    public static String RCU_GET_CUST_URL;
+    // URL archivage client
+    public static String RCU_ARCHIVE_CUST_URL;
+    //URL BDD OB
+    public static String OB_DATABASE_URL;
+    // User BDD OB
+    public static String OB_DATABASE_USER;
+    // Password BDD OB
+    public static String OB_DATABASE_PASSWORD;
 
 
 }

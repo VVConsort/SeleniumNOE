@@ -1,6 +1,6 @@
 package TestCases.Promotions;
 
-import Enums.PaymentMean;
+import Enums.Payment.PaymentMean;
 import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.PaymentStep;
