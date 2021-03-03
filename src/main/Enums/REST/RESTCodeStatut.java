@@ -1,7 +1,7 @@
 package Enums.REST;
 
 public enum RESTCodeStatut {
-    OK(200);
+    OK(200),OK_NO_CONTENT(204);
 
     // Code
     private int code;

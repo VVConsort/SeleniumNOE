@@ -17,8 +17,6 @@ public class RCUJsonHelper {
     private static final String FIRST_NAME_KEY = "firstName";
     // Clé mail
     private static final String EMAIL_KEY = "email";
-    // Clé code postal
-    private static final String POST_CODE_KEY = "postCode";
     // Clé type business/personne
     private static final String TYPE_KEY = "type";
     // Clé objet recherche client b2c
@@ -33,6 +31,21 @@ public class RCUJsonHelper {
     private static final String CUST_SEARCH_RESULT_ARRAY_KEY = "customerSearches";
     // Clé flag archivé
     private static final String ARCHIVED_KEY = "archived";
+    //////// CLES ADRESSE////////////
+    // Clé ligne 1 adr
+    private static final String ADR_LINE1_KEY ="address1";
+    // Clé ligne 2 adr
+    private static final String ADR_LINE2_KEY ="address2";
+    // Clé ligne 3 adr
+    private static final String ADR_LINE3_KEY ="address3";
+    // Clé ligne 4 adr
+    private static final String ADR_LINE4_KEY ="address4";
+    // Clé postal code
+    private static final String POSTAL_CODE_KEY ="postCode";
+    // Clé ville
+    private static final String CITY_KEY ="city";
+    // Clé code pays
+    private static final String COUNTRY_CODE_KEY ="countryCode";
 
     /**
      * Extrait et retourne le token d'accès RCU
@@ -69,7 +82,7 @@ public class RCUJsonHelper {
         }
         // Code postal
         if (customer.postalCode != null && !customer.postalCode.isEmpty()) {
-            searchCustBody.put(POST_CODE_KEY, customer.postalCode);
+            searchCustBody.put(POSTAL_CODE_KEY, customer.postalCode);
         }
         // Type
         searchCustBody.put(TYPE_KEY, customer.type.getRCUValue());
@@ -148,6 +161,13 @@ public class RCUJsonHelper {
         return isPerson ? getB2CCustomerId(json) : getB2BCustomerId(json);
 
     }
+
+    /*public static boolean compareCustomerFieldToJson(String json,Customer cust)
+    {
+        JSONObject parser = new JSONObject(json);
+        boolean result = true;
+        if(cust.firstName.equals())
+    }*/
 
 
 

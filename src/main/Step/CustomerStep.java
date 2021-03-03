@@ -47,6 +47,8 @@ public class CustomerStep extends BaseStep {
         String response = RCURestHelper.getCustomer(cust);
         // Vérifie que la réponse n'est pas vide
         baseStep.isEquals(!response.isEmpty());
+        // Comparaison des champs de la réponse json avec ceux envoyés
+
     }
 
     @Step("Suppression logique du client {cust.customerId}")

@@ -116,8 +116,9 @@ public class WebElementHelper {
                 if (throwException)
                     throw e;
             }
+            return text == null ? webElem.getText() : text;
         }
-        return text == null ? webElem.getText() : text;
+        return text;
     }
 
     /**
@@ -181,8 +182,7 @@ public class WebElementHelper {
                         return webElem.getText();
                     }
                     // Si l'élément n'est pas visible à l'écran (getText() retourne null sur un élément caché/non affiché)
-                    else if(webElem.getAttribute("textContent").trim().equals(expectedText))
-                    {
+                    else if (webElem.getAttribute("textContent").trim().equals(expectedText)) {
                         return webElem.getAttribute("textContent").trim();
                     }
                     return null;

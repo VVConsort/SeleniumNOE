@@ -74,8 +74,13 @@ public class RCURestHelper extends RESTHelper {
         return "";
     }
 
+    /**
+     * Renvoi vrai si le server renvoi OK
+     * @param response
+     * @return
+     */
     private static boolean isResponseOk(Response response) {
-        return response != null && response.code() == RESTCodeStatut.OK.getCode();
+        return response != null && (response.code() == RESTCodeStatut.OK.getCode() || response.code() == RESTCodeStatut.OK_NO_CONTENT.getCode());
     }
 
     /**
@@ -89,7 +94,7 @@ public class RCURestHelper extends RESTHelper {
             Map headerArg = new HashMap<String, String>();
             headerArg.put(AUTH_HEADER_KEY, TestSuiteProperties.RCU_GET_TOKEN_ID);
             // POST, récup du token
-            Response response = post(TestSuiteProperties.RCU_AUTH_URL, headerArg, null);
+            Response response = post(TestSuiteProperties.RCU_AUTH_URL, headerArg, "{}");
             // Si l'appel est OK
             if (isResponseOk(response)) {
                 // Stockage du token et son prefix

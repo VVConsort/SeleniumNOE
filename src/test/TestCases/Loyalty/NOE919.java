@@ -46,12 +46,10 @@ public class NOE919 extends BaseTest {
         BaseStepValue stepValue = getNewBaseStepValue(false);
         // Parcourt des clients à créer
         for (Customer cust : customerList.customers) {
-            // Certains clients avec infos obligatoire manquantes doivent lancer une erreur à la création
+            // Certains clients avec infos obligatoires manquantes doivent lancer une erreur à la création
             stepValue.expectedValue = cust.noErrorOnCreate;
             // Crée le client sur OB
             CustomerStep.createCustomer(cust, stepValue);
-            // Set les résultats de recherche attendue
-            stepValue.expectedValue = cust.noErrorOnCreate ? true : false;
             // Vérifie la présence ou pas du client sur RCU
             CustomerStep.checkCustomerPresenceOnRCU(cust, stepValue);
             // Si le client a été crée, on l'archive
