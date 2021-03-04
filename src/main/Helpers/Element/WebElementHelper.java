@@ -117,7 +117,8 @@ public class WebElementHelper {
                     text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
                     break;
                 } catch (Exception e) {
-                    if (e.equals(TimeoutException.class)) {
+                    // Si le texte attendu n'est pas arrivé à la fin du timeout
+                    if (e.getClass().equals(TimeoutException.class)) {
                         break;
                     } else if (throwException || attemptCount > 10) {
                         throw e;
@@ -208,7 +209,7 @@ public class WebElementHelper {
                     else if (webElem.getAttribute("textContent").trim().equals(expectedText)) {
                         return webElem.getAttribute("textContent").trim();
                     }
-                    return "";
+                    return null;
                 }
             });
         }
