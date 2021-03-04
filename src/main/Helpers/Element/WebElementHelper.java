@@ -120,7 +120,7 @@ public class WebElementHelper {
                     if (throwException && attemptCount > 10) {
                         throw e;
                     }
-                    System.out.println(e.getClass() + " attempt to get text n° : " + attemptCount + " on " + webElem.getAttribute("id"));
+                    System.out.println(e.getClass() + " attempt to get text n° : " + attemptCount + " on " + webElem.getAttribute("class"));
                     attemptCount++;
                 }
             }
