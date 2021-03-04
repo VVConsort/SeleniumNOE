@@ -109,17 +109,39 @@ public class WebElementHelper {
 
     public static String waitUntilExpectedText(String expectedText, WebElement webElem, int timeOutInSeconds, boolean throwException) {
         String text = null;
+        // Nb de tentative
+        int attemptCount = 0;
         if (webElem != null) {
-            try {
-                text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
-            } catch (Throwable e) {
-                if (throwException)
-                    throw e;
+            while (true) {
+                try {
+                    text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
+                    break;
+                } catch (Exception e) {
+                    if (throwException && attemptCount > 10) {
+                        throw e;
+                    }
+                    System.out.println(e.getClass() + " attempt to get text n° : " + attemptCount + " on " + webElem.getAttribute("id"));
+                    attemptCount++;
+                }
             }
+
             return text == null ? webElem.getText() : text;
         }
         return text;
     }
+
+    //while (true) {
+    //            try {
+    //                doClick(elementToClick);
+    //                break;
+    //            } catch (Exception e) {
+    //                if (attemptCount > 10) {
+    //                    throw e;
+    //                }
+    //                elementToClick = WebElementHelper.getElement(driver, By.id(elementToClick.getAttribute("id")));
+    //                attemptCount++;
+    //            }
+    //        }
 
     /**
      * @param driver

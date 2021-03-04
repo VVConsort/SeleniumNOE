@@ -48,7 +48,7 @@ public class BaseView {
      * @param webElement
      */
     protected void click(WebElement webElement) {
-        // Nb max de tentative
+        // Nb de tentative
         int attemptCount = 0;
         WebElement elementToClick = webElement;
         while (true) {
@@ -60,6 +60,7 @@ public class BaseView {
                     throw e;
                 }
                 elementToClick = WebElementHelper.getElement(driver, By.id(elementToClick.getAttribute("id")));
+                System.out.println(e.getClass() + " attempt to click n° : " + attemptCount + " on " + elementToClick.getAttribute("id"));
                 attemptCount++;
             }
         }
