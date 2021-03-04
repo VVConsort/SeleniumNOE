@@ -119,9 +119,16 @@ public class WebElementHelper {
                 } catch (Exception e) {
                     // Si le texte attendu n'est pas arrivé à la fin du timeout
                     if (e.getClass().equals(TimeoutException.class)) {
+                        if (throwException) {
+                            throw e;
+                            //*[@id="terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_control2_renderOrderLine4_control6"]
+                        }
                         break;
-                    } else if (throwException || attemptCount > 10) {
-                        throw e;
+                    } else if (attemptCount > 10) {
+                        if (throwException) {
+                            throw e;
+                        }
+                        break;
                     }
                     System.out.println(e.getClass() + " attempt to get text n° : " + attemptCount + " on " + webElem.getAttribute("id"));
                     attemptCount++;
@@ -131,19 +138,6 @@ public class WebElementHelper {
         }
         return text;
     }
-
-    //while (true) {
-    //            try {
-    //                doClick(elementToClick);
-    //                break;
-    //            } catch (Exception e) {
-    //                if (attemptCount > 10) {
-    //                    throw e;
-    //                }
-    //                elementToClick = WebElementHelper.getElement(driver, By.id(elementToClick.getAttribute("id")));
-    //                attemptCount++;
-    //            }
-    //        }
 
     /**
      * @param driver
@@ -158,8 +152,8 @@ public class WebElementHelper {
                 .pollingEvery(500, TimeUnit.MILLISECONDS)
                 .ignoring(StaleElementReferenceException.class)
                 .ignoring(NoSuchElementException.class)
-                .ignoring(ElementNotVisibleException.class);
-
+                .ignoring(ElementNotVisibleException.class)
+                .ignoring(ElementNotInteractableException.class);
         elem = (WebElement) wait.until(new Function<ChromeDriver, WebElement>() {
             public WebElement apply(ChromeDriver driver) {
                 return driver.findElement(by);

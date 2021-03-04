@@ -33,7 +33,7 @@ public class DiscountStep extends BaseStep {
     public static void checkDiscountLineAmount(DiscountStepValue value) {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification du montant
-        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getDiscountLineAmountElem(value.discountLabel), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getDiscountLineAmountElem(value.discountLabel), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false,value.driver));
     }
 
 }
