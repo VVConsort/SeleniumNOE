@@ -117,14 +117,15 @@ public class WebElementHelper {
                     text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
                     break;
                 } catch (Exception e) {
-                    if (throwException || attemptCount > 10) {
+                    if (e.equals(TimeoutException.class)) {
+                        break;
+                    } else if (throwException || attemptCount > 10) {
                         throw e;
                     }
                     System.out.println(e.getClass() + " attempt to get text n° : " + attemptCount + " on " + webElem.getAttribute("id"));
                     attemptCount++;
                 }
             }
-
             return text == null ? webElem.getText() : text;
         }
         return text;
@@ -188,7 +189,7 @@ public class WebElementHelper {
     }
 
     private static String doWaitForExpectedText(String expectedText, WebElement webElem, int timeOutInSec) {
-        String text = null;
+        String text = "";
         if (webElem != null) {
             Wait wait = new FluentWait<>(webElem)
                     .withTimeout(timeOutInSec, TimeUnit.SECONDS)
@@ -207,7 +208,7 @@ public class WebElementHelper {
                     else if (webElem.getAttribute("textContent").trim().equals(expectedText)) {
                         return webElem.getAttribute("textContent").trim();
                     }
-                    return null;
+                    return "";
                 }
             });
         }
