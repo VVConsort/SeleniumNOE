@@ -117,10 +117,10 @@ public class WebElementHelper {
                     text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
                     break;
                 } catch (Exception e) {
-                    if (throwException && attemptCount > 10) {
+                    if (throwException || attemptCount > 10) {
                         throw e;
                     }
-                    System.out.println(e.getClass() + " attempt to get text n° : " + attemptCount + " on " + webElem.getAttribute("class"));
+                    System.out.println(e.getClass() + " attempt to get text n° : " + attemptCount + " on " + webElem.getAttribute("id"));
                     attemptCount++;
                 }
             }
@@ -199,7 +199,7 @@ public class WebElementHelper {
             // Attend que le texte ait la valeure attendue
             text = (String) wait.until(new Function<WebElement, String>() {
                 public String apply(WebElement webElem) {
-                    System.out.println("Elem id :" + webElem.getAttribute("id") + " text : " + webElem.getText());
+                    System.out.println(webElem.getAttribute("id") + " text : " + webElem.getText() + " expected text : " + expectedText);
                     if (webElem.getText().equals(expectedText)) {
                         return webElem.getText();
                     }

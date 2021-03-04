@@ -47,7 +47,11 @@ public class CustomerStep extends BaseStep {
         String response = RCURestHelper.getCustomer(cust);
         // Vérifie que la réponse n'est pas vide
         baseStep.isEquals(!response.isEmpty());
-        // Comparaison des champs de la réponse json avec ceux envoyés
+    }
+
+    @Step("Vérifie les données client insérées dans RCU")
+    public static void checkRCUCustomerValues(Customer cust,BaseStepValue baseStep)
+    {
 
     }
 
