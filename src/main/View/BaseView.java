@@ -50,14 +50,16 @@ public class BaseView {
     protected void click(WebElement webElement) {
         // Nb max de tentative
         int attemptCount = 0;
+        WebElement elementToClick = webElement;
         while (true) {
             try {
-                doClick(webElement);
+                doClick(elementToClick);
                 break;
             } catch (Exception e) {
-                if (attemptCount > 5) {
+                if (attemptCount > 10) {
                     throw e;
                 }
+                elementToClick = WebElementHelper.getElement(driver, By.id(elementToClick.getAttribute("id")));
                 attemptCount++;
             }
         }
