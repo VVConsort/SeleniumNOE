@@ -45,6 +45,8 @@ public class NOE781 extends BaseTest {
         // Lancement de la caisse non éligible au promo
         LoggingStepValue logStep = new LoggingStepValue(TestSuiteProperties.OB_POS_URL, noDiscountPos, noDiscountChromeProfilePath, noDiscountChromeProfileName, TestSuiteProperties.USERNAME, TestSuiteProperties.PASSWORD);
         driver = LoggingStep.launchAndLogToOpenBravo(logStep);
+        // On affecte le nouveau driver
+        discountStepValue.driver = driver;
         // Fermeture/Ouverture si nécessaire
         PosOpeningStep.closePos(driver);
         PosOpeningStep.openPos(driver);
