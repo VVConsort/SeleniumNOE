@@ -4,7 +4,6 @@ import Helpers.Element.WebElementHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -51,6 +50,6 @@ public class CreditNoteSearchView extends BaseView {
      * Ferme la fenêtre de recherche
      */
     public void closeCreditNoteSearchView() {
-        super.click(closeWindowBtn);
+        super.click(closeWindowBtn, false);
     }
 }

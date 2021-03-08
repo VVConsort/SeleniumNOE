@@ -1,7 +1,6 @@
 package View.Footer.Menu;
 
 import View.BaseView;
-import View.Footer.Menu.Customer.CustomerSearchResultView;
 import View.Footer.Menu.Customer.CustomerSearchView;
 import View.Footer.Menu.Voucher.VoucherCodeInputView;
 import org.openqa.selenium.WebElement;
@@ -26,7 +25,7 @@ public class MenuItemListView extends BaseView {
      * Click sur "Bon d'achat"
      */
     public VoucherCodeInputView clickOnVoucher() {
-        super.click(voucherBtn);
+        super.click(voucherBtn, false);
         // Retourne le composant de saisie de bon d'achat
         return new VoucherCodeInputView(driver);
     }
@@ -35,7 +34,7 @@ public class MenuItemListView extends BaseView {
      * Click sur 'Recherche clients'
      */
     public CustomerSearchView clickOnSearchCustomer() {
-        super.click(customerSearchBtn);
+        super.click(customerSearchBtn, false);
         // Retourne la vue recherche client
         return new CustomerSearchView(driver);
     }

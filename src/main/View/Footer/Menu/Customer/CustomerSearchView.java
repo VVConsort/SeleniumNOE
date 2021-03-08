@@ -19,6 +19,6 @@ public class CustomerSearchView extends BaseView {
      * Appuie sur Annuler
      */
     public void clickCancel() {
-        click(cancelBtn);
+        click(cancelBtn, false);
     }
 }

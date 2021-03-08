@@ -1,7 +1,6 @@
 package View.BackOffice;
 
 import View.BaseView;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -45,7 +44,7 @@ public class LoggingPage extends BaseView {
      */
     public void clickLogIn()
     {
-        super.click(logBtn);
+        super.click(logBtn, false);
     }
 
 }

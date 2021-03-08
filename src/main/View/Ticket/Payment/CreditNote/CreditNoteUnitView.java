@@ -3,7 +3,6 @@ package View.Ticket.Payment.CreditNote;
 import Helpers.Element.WebElementHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +21,7 @@ public class CreditNoteUnitView extends BaseView {
      * Appuie sur le boutton "Appliquer" de l'avoir
      */
     public void clickApplyBtn() {
-        super.click(applyBtn);
+        super.click(applyBtn, false);
         // On attend que le bouton disparaisse
         WebElementHelper.waitUntilElementIsNotPresent(driver, 5, By.id(applyBtn.getAttribute("id")), false);
     }

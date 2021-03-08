@@ -49,7 +49,7 @@ public class PaymentPanelView extends BaseView {
      * Clique sur le boutton "Espèces"
      */
     public void clickCashBtn() {
-        super.click(cashBtn);
+        super.click(cashBtn, false);
         selectedPayment = PaymentMean.CASH;
     }
 
@@ -82,7 +82,7 @@ public class PaymentPanelView extends BaseView {
         // Recherche du bouttn "Supprimer ligne" associé au mode de paiement
         WebElement removeBtn = WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(removePaymentLineBtnXPath), false);
         if (removeBtn != null) {
-            super.click(removeBtn);
+            super.click(removeBtn, false);
             // Attend que le boutton disparaisse
             WebElementHelper.waitUntilElementIsNotPresent(driver, 5, By.xpath(removePaymentLineBtnXPath), false);
         }

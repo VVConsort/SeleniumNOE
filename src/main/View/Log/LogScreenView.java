@@ -1,7 +1,6 @@
 package View.Log;
 
 import View.BaseView;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -47,7 +46,7 @@ public class LogScreenView extends BaseView {
      * Clic sur Connection
      */
     public void clickConnexion() {
-        super.click(connectionBtn);
+        super.click(connectionBtn, false);
     }
 
 }

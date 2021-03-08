@@ -46,8 +46,9 @@ public class BaseView {
     /**
      * Met le zoom à 1 et click sur l'élément
      * @param webElement
+     * @param isMandatory
      */
-    protected void click(WebElement webElement) {
+    protected void click(WebElement webElement, boolean isMandatory) {
         // Nb de tentative
         int attemptCount = 0;
         WebElement elementToClick = webElement;
@@ -57,7 +58,11 @@ public class BaseView {
                 break;
             } catch (Exception e) {
                 if (attemptCount > 10) {
-                    throw e;
+                    if(isMandatory)
+                    {
+                        throw e;
+                    }
+                    break;
                 }
                 elementToClick = WebElementHelper.getElement(driver, By.id(elementToClick.getAttribute("id")));
                 System.out.println(e.getClass() + " attempt to click n° : " + attemptCount + " on " + elementToClick.getAttribute("id"));
@@ -65,6 +70,7 @@ public class BaseView {
             }
         }
     }
+
 
     private void doClick(WebElement elem) {
         // Met le zoom à 1 pour éviter les problemes de click
@@ -83,7 +89,7 @@ public class BaseView {
         WebElement webElem = WebElementHelper.waitUntilElementIsVisible(driver, ELEMENT_MISSING_TIMEOUT, By.xpath(XPath), isMandatory);
         // Click si existe
         if (webElem != null) {
-            click(webElem);
+            click(webElem, false);
             return true;
         }
         return false;

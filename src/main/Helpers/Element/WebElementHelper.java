@@ -117,7 +117,7 @@ public class WebElementHelper {
                     text = doWaitForExpectedText(expectedText, webElem, timeOutInSeconds);
                     break;
                 } catch (Exception e) {
-                    // Si le texte attendu n'est pas arrivé à la fin du timeout
+                    // Si le texte attendu n'est pas arrivé
                     if (e.getClass().equals(TimeoutException.class)) {
                         if (throwException) {
                             throw e;

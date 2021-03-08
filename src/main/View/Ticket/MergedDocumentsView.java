@@ -1,7 +1,6 @@
 package View.Ticket;
 
 import View.BaseView;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -25,7 +24,7 @@ public class MergedDocumentsView extends BaseView {
     public void clickCancelButton() {
         // Si l'élément est déjà chargé
         if (cancelBtn != null) {
-            super.click(cancelBtn);
+            super.click(cancelBtn, false);
         } else {
             findAndClickElement(CANCEL_BTN_XPATH, true);
         }

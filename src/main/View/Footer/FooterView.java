@@ -38,7 +38,7 @@ public class FooterView extends BaseView {
      * Vide le ticket en cours
      */
     public void clickOnDeleteTicketBtn() {
-        super.click(deleteTicketBtn);
+        super.click(deleteTicketBtn, false);
     }
 
     /**
@@ -57,7 +57,7 @@ public class FooterView extends BaseView {
      */
     public PaymentPanelView clickOnTotalToPayBtn() {
         // Click sur A payer
-        super.click(totalToPayBtn);
+        super.click(totalToPayBtn, false);
         return new PaymentPanelView(driver);
     }
 
@@ -65,7 +65,7 @@ public class FooterView extends BaseView {
      * Click sur le bouton 'Menu'
      */
     public MenuItemListView clickOnMenuBtn() {
-        super.click(menuBtn);
+        super.click(menuBtn, false);
         // Renvoi la liste des éléments du menu
         return new MenuItemListView(driver);
     }

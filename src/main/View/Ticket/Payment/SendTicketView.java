@@ -22,7 +22,7 @@ public class SendTicketView extends BaseView {
      * Click sur le bouton "Email seulement"
      */
     public void clickMailOnly() {
-        super.click(mailOnlyBtn);
+        super.click(mailOnlyBtn, false);
     }
 
     /**

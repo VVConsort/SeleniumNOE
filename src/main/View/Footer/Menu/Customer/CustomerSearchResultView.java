@@ -26,7 +26,7 @@ public class CustomerSearchResultView extends BaseView {
      */
     public CustomerCreateView clickOnNewCustomer() {
         // Click sur nouveau client
-        super.click(newCustomerBtn);
+        super.click(newCustomerBtn, false);
         // Retourne la vue création client
         return new CustomerCreateView(driver);
     }
@@ -35,6 +35,6 @@ public class CustomerSearchResultView extends BaseView {
      * Click sur Fermer
      */
     public void clickClose() {
-        super.click(closeBtn);
+        super.click(closeBtn, false);
     }
 }

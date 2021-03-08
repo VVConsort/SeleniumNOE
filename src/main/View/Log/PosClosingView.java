@@ -3,7 +3,6 @@ package View.Log;
 import Helpers.Element.WebElementHelper;
 import View.BaseView;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PosClosingView extends BaseView {
@@ -40,14 +39,14 @@ public class PosClosingView extends BaseView {
      * Suppression des reçus en attente
      */
     public void deleteAllPendingReceipts() {
-        super.click(WebElementHelper.getElement(driver, By.xpath(DELETE_ALL_PENDING_RECEIPTS_BTN_XPATH)));
+        super.click(WebElementHelper.getElement(driver, By.xpath(DELETE_ALL_PENDING_RECEIPTS_BTN_XPATH)), false);
     }
 
     /**
      * Confirme la suppression des reçus en attente
      */
     public void confirmPendingReceiptsDelete() {
-        super.click(WebElementHelper.getElement(driver, By.xpath(CONFIRM_PENDING_RECEIPTS_DELETE_BTN_XPATH)));
+        super.click(WebElementHelper.getElement(driver, By.xpath(CONFIRM_PENDING_RECEIPTS_DELETE_BTN_XPATH)), false);
     }
 
     /**

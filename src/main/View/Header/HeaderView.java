@@ -1,7 +1,6 @@
 package View.Header;
 
 import View.BaseView;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -25,7 +24,7 @@ public class HeaderView extends BaseView {
      * Clic sur le bouton Scanner
      */
     public ScannerView clickOnScanBtn() {
-        super.click(scannerBtn);
+        super.click(scannerBtn, false);
         // Retourne un objet Scanner
         return new ScannerView(driver);
     }

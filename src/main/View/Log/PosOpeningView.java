@@ -1,7 +1,6 @@
 package View.Log;
 
 import View.BaseView;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -42,7 +41,7 @@ public class PosOpeningView extends BaseView {
      * Click sur le détail 'Monnaie/Espece"
      */
     public void clickValidateCash() {
-        super.click(validateCashBtn);
+        super.click(validateCashBtn, false);
     }
 
     /**
@@ -53,7 +52,7 @@ public class PosOpeningView extends BaseView {
         WebElement confirmDateBtn = findElement(CONFIRM_POS_OPENING_DATE_BTN_XPATH, isMandatory);
         // Si il est présent
         if (confirmDateBtn != null) {
-            super.click(confirmDateBtn);
+            super.click(confirmDateBtn, false);
         }
     }
 

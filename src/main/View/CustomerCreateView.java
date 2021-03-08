@@ -236,35 +236,35 @@ public class CustomerCreateView extends BaseView {
      * Check "Documents contractuels"
      */
     public void checkInvoiceViaEMail() {
-        super.click(invoiceViaEmailCheck);
+        super.click(invoiceViaEmailCheck, false);
     }
 
     /**
      * Check "Consentement client"
      */
     public void checkCustConsent() {
-        super.click(custConsentCheck);
+        super.click(custConsentCheck, false);
     }
 
     /**
      * Check "SMS"
      */
     public void checkViaSms() {
-        super.click(viaSmsCheck);
+        super.click(viaSmsCheck, false);
     }
 
     /**
      * Check "Email"
      */
     public void checkViaEmail() {
-        super.click(viaEmailCheck);
+        super.click(viaEmailCheck, false);
     }
 
     /**
      * Checkée par défaut, unCheck "Même adresse pour livraison et facturation",
      */
     public void uncheckSameAddress() {
-        super.click(sameAddressCheck);
+        super.click(sameAddressCheck, false);
     }
 
     /**
@@ -381,7 +381,7 @@ public class CustomerCreateView extends BaseView {
      * Ferme la fenêtre et renvoie sur la vue de recherche
      */
     public CustomerSearchResultView clickCancel() {
-        click(cancelBtn);
+        click(cancelBtn, false);
         return new CustomerSearchResultView(driver);
     }
 
@@ -390,7 +390,7 @@ public class CustomerCreateView extends BaseView {
      * @return
      */
     public boolean clickSave() {
-        super.click(saveCustomerBtn);
+        super.click(saveCustomerBtn, false);
         // On attend eventuellement le message d'erreurs "Infos manquantes"
         return WebElementHelper.getElementFromText(driver, MISSING_MANDATORY_FIELD_MESSAGE, ELEMENT_MISSING_TIMEOUT, false) == null;
     }
