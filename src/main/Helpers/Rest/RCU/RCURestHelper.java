@@ -59,6 +59,7 @@ public class RCURestHelper extends RESTHelper {
     public static String searchCustomer(Customer cust) throws IOException {
         // Récupère le token si nécessaire
         setToken();
+        //Test branches
         // POST et récup de la réponse
         Response response = post(TestSuiteProperties.RCU_SEARCH_CUST_URL, getHeaderArgs(cust.country.getRCUValue(), cust.language.getRCUValue()), RCUJsonHelper.getSearchCustomerBody(cust));
         // Si l'appel est OK
@@ -151,18 +152,12 @@ public class RCURestHelper extends RESTHelper {
      * @return
      * @throws IOException
      */
-    public static String archiveCustomer(Customer cust) throws IOException {
+    public static boolean archiveCustomer(Customer cust) throws IOException {
         // Récupère le token si nécessaire
         setToken();
         // PUT avec le customerId afin de l'archiver
         Response response = put(getArchiveCustomerURL(cust.customerId), getHeaderArgs(cust.country.getRCUValue(), cust.language.getRCUValue()), RCUJsonHelper.getArchiveCustomerBody());
-        // Si l'appel est OK
-        if (isResponseOk(response)) {
-            // Construction du json à partir de la rép
-            JSONObject jsonBody = new JSONObject(response.body().string());
-            return jsonBody.toString();
-        }
-        return "";
+        return isResponseOk(response);
     }
 
     /**

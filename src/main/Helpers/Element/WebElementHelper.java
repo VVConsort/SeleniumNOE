@@ -121,9 +121,9 @@ public class WebElementHelper {
                     if (e.getClass().equals(TimeoutException.class)) {
                         if (throwException) {
                             throw e;
-                            //*[@id="terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_listOrderLines_tbody_control2_renderOrderLine4_control6"]
                         }
                         break;
+                        // Si on excède le nb max de tentative
                     } else if (attemptCount > 10) {
                         if (throwException) {
                             throw e;
@@ -134,7 +134,11 @@ public class WebElementHelper {
                     attemptCount++;
                 }
             }
-            return text == null ? webElem.getText() : text;
+            try {
+                return text == null ? webElem.getText() : text;
+            } catch (StaleElementReferenceException e) {
+                return text;
+            }
         }
         return text;
     }

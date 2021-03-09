@@ -32,6 +32,7 @@ public class SendTicketView extends BaseView {
     public void setMail(String email) {
         // Vide le champ
         mailInput.clear();
+        // Renseigne l'email
         mailInput.sendKeys(email);
     }
 }

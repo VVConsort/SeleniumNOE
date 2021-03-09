@@ -1,6 +1,7 @@
 package Step;
 
 import Helpers.DataBase.OpenBravo.OpenBravoDBHelper;
+import Helpers.Json.RCUJsonHelper;
 import Helpers.Rest.RCU.RCURestHelper;
 import Serializable.Customer.Customer;
 import Step.Value.BaseStepValue;
@@ -50,14 +51,107 @@ public class CustomerStep extends BaseStep {
     }
 
     @Step("Vérifie les données client insérées dans RCU")
-    public static void checkRCUCustomerValues(Customer cust,BaseStepValue baseStep)
-    {
-
+    public static void checkRCUCustomerValues(Customer cust, BaseStepValue baseStep) throws IOException {
+        boolean result = true;
+        // Récupération du client sur RCU
+        String response = RCURestHelper.getCustomer(cust);
+        // Si la réponse est vide on arrete la
+        if (response.isEmpty()) {
+            baseStep.isEquals(false);
+            return;
+        }
+        // Prénom
+        if (!cust.firstName.equals(RCUJsonHelper.getCustomerFirstName(response))) {
+            result = false;
+            System.out.println("Prénom incorrect");
+        }
+        // Nom
+        if (!cust.lastName.equals(RCUJsonHelper.getCustomerLastName(response))) {
+            result = false;
+            System.out.println("Nom incorrect");
+        }
+        // Type
+        if (!cust.type.getRCUValue().equals(RCUJsonHelper.getCustomerType(response))) {
+            result = false;
+            System.out.println("Type incorrect");
+        }
+        // Langue
+        if (!cust.language.getRCUValue().equals(RCUJsonHelper.getCustomerLanguage(response))) {
+            result = false;
+            System.out.println("Langue RCU incorrect");
+        }
+        // Phone fixe
+        if (cust.phone != null && !cust.phone.isEmpty()) {
+            if (!cust.phone.equals(RCUJsonHelper.getCustomerFixPhone(response))) {
+                result = false;
+                System.out.println("Tel fixe incorrect");
+            }
+        }
+        // Phone mobile
+        if (cust.mobilePhone != null && !cust.mobilePhone.isEmpty()) {
+            if (!cust.phone.equals(RCUJsonHelper.getCustomerMobilePhone(response))) {
+                result = false;
+                System.out.println("Tel mobile incorrect");
+            }
+        }
+        // Email
+        if (cust.email != null && !cust.email.isEmpty()) {
+            if (!cust.email.equals(RCUJsonHelper.getCustomerEmail(response))) {
+                result = false;
+                System.out.println("Email incorrect");
+            }
+        }
+        // Optin SMS
+        if (!cust.viaSms == RCUJsonHelper.getSMSOptinValue(response)) {
+            result = false;
+            System.out.println("Optin SMS incorrect");
+        }
+        // Optin Email
+        if (!cust.viaEmail == RCUJsonHelper.getEmailOptinValue((response))) {
+            result = false;
+            System.out.println("Optin Email incorrect");
+        }
+        // Adresse livraison ligne 1
+        if (!cust.shipLocationName.equals(RCUJsonHelper.getCustomerShippingAddress1(response))) {
+            result = false;
+            System.out.println("Adresse livraison ligne 1 incorrect");
+        }
+        // Adresse livraison ligne 2
+        if (!cust.shipLine2.equals(RCUJsonHelper.getCustomerShippingAddress2(response))) {
+            result = false;
+            System.out.println("Adresse livraison ligne 2 incorrect");
+        }
+        // Adresse livraison ligne 3
+        if (!cust.shipLine3.equals(RCUJsonHelper.getCustomerShippingAddress3(response))) {
+            result = false;
+            System.out.println("Adresse livraison ligne 3 incorrect");
+        }
+        // Adresse livraison ligne 4
+        if (!cust.shipLine4.equals(RCUJsonHelper.getCustomerShippingAddress4(response))) {
+            result = false;
+            System.out.println("Adresse livraison ligne 4 incorrect");
+        }
+        // Code Postal livraison
+        if (!cust.shipPostalCode.equals(RCUJsonHelper.getCustomerShippingAddressPostalCode(response))) {
+            result = false;
+            System.out.println("Code postal livraison incorrect");
+        }
+        // Ville livraison
+        if (!cust.shipCity.equals(RCUJsonHelper.getCustomerShippingAddressCity(response))) {
+            result = false;
+            System.out.println("Ville livraison incorrect");
+        }
+        // Pays livraison
+        if (!cust.shipCountry.getRCUValue().equals(RCUJsonHelper.getCustomerShippingAddressCountryCode(response))) {
+            result = false;
+            System.out.println("Pays livraison incorrect");
+        }
+        baseStep.isEquals(result);
     }
 
     @Step("Suppression logique du client {cust.customerId}")
     public static void archiveCustomer(Customer cust, BaseStepValue baseStep) throws IOException {
-        RCURestHelper.archiveCustomer(cust);
+        baseStep.isEquals(RCURestHelper.archiveCustomer(cust));
     }
 
     /**

@@ -21,6 +21,8 @@ public class PaymentPanelView extends BaseView {
     private static final String ALREADY_PAID_LBL_XPATH = " //*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_donezerolbl\"]";
     // Id du contenant des lignes de paiements
     private static final String PAYMENT_CONTENT_ID = "terminal_containerWindow_pointOfSale_multiColumn_rightPanel_toolbarpane_payment_paymentTabContent_payments";
+    // Bouton 'OK' du message d'erreur "Paiement non authorisé"
+    private static final String PAYMENT_NOT_ALLOWED_POPUP_OK_BTN_XPATH = "//button[@id=\"terminal_containerWindow_pointOfSale_OBNORCUS_paymentNotAllowedProfessional_footer_modalPaymentNotAllowedProfessionalButton\"]";
 
     // Boutton 'Espece'
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_rightPanel_rightBottomPanel_keyboard_toolbarcontainer_toolbarPayment_btnSide2_OBPOS_payment.cash_button\"]")
@@ -132,6 +134,14 @@ public class PaymentPanelView extends BaseView {
     }
 
     /**
+     * Ferme la pop "Paiement non authorisé" si celle-ci est affichée
+     */
+    public void clickPaymentNotAllowedOkButton()
+    {
+        findAndClickElement(PAYMENT_NOT_ALLOWED_POPUP_OK_BTN_XPATH,false);
+    }
+
+    /**
      * Renvoi vrai si la commande est déjà réglée
      * @return
      */
@@ -151,12 +161,6 @@ public class PaymentPanelView extends BaseView {
         // Récupère le Xpath de l'élement 'Montant ligne paiement'
         String lineAmountXPath = XPathPaymentHelper.getPaymentLineAmountXPath(paymentNameId);
         return WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(lineAmountXPath), false);
-        // Si le montant est présent
-        /*if (lineAmount != null) {
-            // On récupère la valeur contenue dans le texte
-            amount = lineAmount.getText();
-        }
-        return result;*/
     }
 
 }

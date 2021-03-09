@@ -1,6 +1,7 @@
 package Helpers.Json;
 
 import Serializable.Customer.Customer;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RCUJsonHelper {
@@ -19,6 +20,16 @@ public class RCUJsonHelper {
     private static final String EMAIL_KEY = "email";
     // Clé type business/personne
     private static final String TYPE_KEY = "type";
+    // Clé langage
+    private static final String LANGUAGE_KEY = "language";
+    // Clé array emails client
+    private static final String EMAILS_ARRAY_KEY = "emails";
+    // Clé  adresse mail client
+    private static final String RCU_EMAIL_ADDRESS = "emailAddress";
+    // Clé array addresse client
+    private static final String ADDRESS_ARRAY_KEY = "address";
+    // Clé type addresse/tél/email
+    private static final String RCU_TYPE_KEY = "type";
     // Clé objet recherche client b2c
     private static final String B2C_OBJECT_KEY = "b2cCustomers";
     // Clé objet recherche client b2b
@@ -33,19 +44,41 @@ public class RCUJsonHelper {
     private static final String ARCHIVED_KEY = "archived";
     //////// CLES ADRESSE////////////
     // Clé ligne 1 adr
-    private static final String ADR_LINE1_KEY ="address1";
+    private static final String ADR_LINE1_KEY = "address1";
     // Clé ligne 2 adr
-    private static final String ADR_LINE2_KEY ="address2";
+    private static final String ADR_LINE2_KEY = "address2";
     // Clé ligne 3 adr
-    private static final String ADR_LINE3_KEY ="address3";
+    private static final String ADR_LINE3_KEY = "address3";
     // Clé ligne 4 adr
-    private static final String ADR_LINE4_KEY ="address4";
+    private static final String ADR_LINE4_KEY = "address4";
     // Clé postal code
-    private static final String POSTAL_CODE_KEY ="postCode";
+    private static final String POSTAL_CODE_KEY = "postCode";
     // Clé ville
-    private static final String CITY_KEY ="city";
+    private static final String CITY_KEY = "city";
     // Clé code pays
-    private static final String COUNTRY_CODE_KEY ="countryCode";
+    private static final String COUNTRY_CODE_KEY = "countryCode";
+    // Valeur de "type" pour l'adresse de livraison
+    private static final String SHIPPING_ADDRESS_TYPE_VALUE = "PRINCIPAL";
+    // Clé tableau téléphone
+    private static final String RCU_PHONE_ARRAY_KEY = "phones";
+    // Clé num tél
+    private static final String RCU_PHONE_NUMBER_KEY = "phoneNumber";
+    // Valeur de "type" pour le tél fixe
+    private static final String FIX_PHONE_TYPE_VALUE = "FIX";
+    // Valeur de "type" pour le tél mobile
+    private static final String MOBILE_PHONE_TYPE_VALUE = "MOB";
+    // Clé tableau optin
+    private static final String OPTIN_ARRAY_KEY = "optins";
+    // Clé ID optin
+    private static final String OPTIN_ID_KEY = "id";
+    // Clé valeur optin
+    private static final String OPTIN_VALUE = "value";
+    // Clé optin sms
+    private static final String CONTRACTUAL_DOC_OPTIN_KEY = "OPTIN_CONTRACTUAL_DOCUMENTS";
+    // Clé optin mail
+    private static final String MAIL_OPTIN_KEY = "OPTIN_EMAIL";
+    // Clé optin sms
+    private static final String SMS_OPTIN_KEY = "OPTIN_SMS";
 
     /**
      * Extrait et retourne le token d'accès RCU
@@ -162,13 +195,220 @@ public class RCUJsonHelper {
 
     }
 
-    /*public static boolean compareCustomerFieldToJson(String json,Customer cust)
-    {
+    /**
+     * Retourne le nom du client
+     * @param json
+     * @return
+     */
+    public static String getCustomerLastName(String json) {
         JSONObject parser = new JSONObject(json);
-        boolean result = true;
-        if(cust.firstName.equals())
-    }*/
+        return parser.getString(LAST_NAME_KEY);
+    }
 
+    /**
+     * Retourne le prénom du client
+     * @param json
+     * @return
+     */
+    public static String getCustomerFirstName(String json) {
+        JSONObject parser = new JSONObject(json);
+        return parser.getString(FIRST_NAME_KEY);
+    }
 
+    /**
+     * Retourne la langue du client
+     * @param json
+     * @return
+     */
+    public static String getCustomerLanguage(String json) {
+        JSONObject parser = new JSONObject(json);
+        return parser.getString(LANGUAGE_KEY);
+    }
 
+    /**
+     * Retourne le type du client (business,person,etc)
+     * @param json
+     * @return
+     */
+    public static String getCustomerType(String json) {
+        JSONObject parser = new JSONObject(json);
+        return parser.getString(TYPE_KEY);
+    }
+
+    /**
+     * Retourne l'email du client
+     * @param json
+     * @return
+     */
+    public static String getCustomerEmail(String json) {
+        JSONObject parser = new JSONObject(json);
+        return parser.getJSONArray(EMAILS_ARRAY_KEY).getJSONObject(0).getString(RCU_EMAIL_ADDRESS);
+    }
+
+    public static String getCustomerShippingAddress1(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les addresses, 2 max
+        JSONArray addresArray = parser.getJSONArray(ADDRESS_ARRAY_KEY);
+        // Parcourt des addresses
+        for (int i = 0; i < addresArray.length(); i++) {
+            // Si c'est l'adresse de livraison
+            if (addresArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(SHIPPING_ADDRESS_TYPE_VALUE)) {
+                return addresArray.getJSONObject(i).getString(ADR_LINE1_KEY);
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerShippingAddress2(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les addresses, 2 max
+        JSONArray addresArray = parser.getJSONArray(ADDRESS_ARRAY_KEY);
+        // Parcourt des addresses
+        for (int i = 0; i < addresArray.length(); i++) {
+            // Si c'est l'adresse de livraison
+            if (addresArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(SHIPPING_ADDRESS_TYPE_VALUE)) {
+                return addresArray.getJSONObject(i).getString(ADR_LINE2_KEY);
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerShippingAddress3(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les addresses, 2 max
+        JSONArray addresArray = parser.getJSONArray(ADDRESS_ARRAY_KEY);
+        // Parcourt des addresses
+        for (int i = 0; i < addresArray.length(); i++) {
+            // Si c'est l'adresse de livraison
+            if (addresArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(SHIPPING_ADDRESS_TYPE_VALUE)) {
+                return addresArray.getJSONObject(i).getString(ADR_LINE3_KEY);
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerShippingAddress4(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les addresses, 2 max
+        JSONArray addresArray = parser.getJSONArray(ADDRESS_ARRAY_KEY);
+        // Parcourt des addresses
+        for (int i = 0; i < addresArray.length(); i++) {
+            // Si c'est l'adresse de livraison
+            if (addresArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(SHIPPING_ADDRESS_TYPE_VALUE)) {
+                return addresArray.getJSONObject(i).getString(ADR_LINE4_KEY);
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerShippingAddressPostalCode(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les addresses, 2 max
+        JSONArray addresArray = parser.getJSONArray(ADDRESS_ARRAY_KEY);
+        // Parcourt des addresses
+        for (int i = 0; i < addresArray.length(); i++) {
+            // Si c'est l'adresse de livraison
+            if (addresArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(SHIPPING_ADDRESS_TYPE_VALUE)) {
+                return addresArray.getJSONObject(i).getString(POSTAL_CODE_KEY);
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerShippingAddressCountryCode(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les addresses, 2 max
+        JSONArray addresArray = parser.getJSONArray(ADDRESS_ARRAY_KEY);
+        // Parcourt des addresses
+        for (int i = 0; i < addresArray.length(); i++) {
+            // Si c'est l'adresse de livraison
+            if (addresArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(SHIPPING_ADDRESS_TYPE_VALUE)) {
+                return addresArray.getJSONObject(i).getString(COUNTRY_CODE_KEY);
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerShippingAddressCity(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les addresses, 2 max
+        JSONArray addresArray = parser.getJSONArray(ADDRESS_ARRAY_KEY);
+        // Parcourt des addresses
+        for (int i = 0; i < addresArray.length(); i++) {
+            // Si c'est l'adresse de livraison
+            if (addresArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(SHIPPING_ADDRESS_TYPE_VALUE)) {
+                return addresArray.getJSONObject(i).getString(CITY_KEY);
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerMobilePhone(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les phones
+        JSONArray phoneArray = parser.getJSONArray(RCU_PHONE_ARRAY_KEY);
+        // Parcourt des tél
+        for (int i = 0; i < phoneArray.length(); i++) {
+            if (phoneArray.getJSONObject(1).getString(RCU_TYPE_KEY).equals(MOBILE_PHONE_TYPE_VALUE)) {
+                return phoneArray.getJSONObject(1).getString(RCU_PHONE_NUMBER_KEY).replaceAll("\\s+","");
+            }
+        }
+        return "";
+    }
+
+    public static String getCustomerFixPhone(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les phones
+        JSONArray phoneArray = parser.getJSONArray(RCU_PHONE_ARRAY_KEY);
+        // Parcours des tél
+        for (int i = 0; i < phoneArray.length(); i++) {
+            if (phoneArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(FIX_PHONE_TYPE_VALUE)) {
+                // On retire les espaces avant d'envoyer le num
+                return phoneArray.getJSONObject(i).getString(RCU_PHONE_NUMBER_KEY).replaceAll("\\s+","");
+            }
+        }
+        return "";
+    }
+
+    public static Boolean getEmailOptinValue(String json) {
+        Boolean result = null;
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les optins
+        JSONArray optinsArray = parser.getJSONArray(OPTIN_ARRAY_KEY);
+        // On boucle sur les optins
+        for (int i = 0; i < optinsArray.length(); i++) {
+            if (optinsArray.getJSONObject(i).getString(OPTIN_ID_KEY).equals(MAIL_OPTIN_KEY)) {
+                result = optinsArray.getJSONObject(i).getBoolean(OPTIN_VALUE);
+            }
+        }
+        return result;
+    }
+
+    public static Boolean getSMSOptinValue(String json) {
+        Boolean result = null;
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les optins
+        JSONArray optinsArray = parser.getJSONArray(OPTIN_ARRAY_KEY);
+        // On boucle sur les optins
+        for (int i = 0; i < optinsArray.length(); i++) {
+            if (optinsArray.getJSONObject(i).getString(OPTIN_ID_KEY).equals(SMS_OPTIN_KEY)) {
+                result = optinsArray.getJSONObject(i).getBoolean(OPTIN_VALUE);
+            }
+
+        }
+        return result;
+    }
+
+    public static String getContractualDocOptinValue(String json) {
+        JSONObject parser = new JSONObject(json);
+        // Tableau contenant les optins
+        JSONArray optinsArray = parser.getJSONArray(OPTIN_ARRAY_KEY);
+        // On boucle sur les optins
+        for (int i = 0; i < optinsArray.length(); i++) {
+            if (optinsArray.getJSONObject(i).getString(OPTIN_ID_KEY).equals(CONTRACTUAL_DOC_OPTIN_KEY)) {
+                return optinsArray.getJSONObject(i).getString(OPTIN_VALUE);
+            }
+        }
+        return "";
+    }
 }

@@ -71,7 +71,6 @@ public class BaseView {
         }
     }
 
-
     private void doClick(WebElement elem) {
         // Met le zoom à 1 pour éviter les problemes de click
         setZoomTo1();

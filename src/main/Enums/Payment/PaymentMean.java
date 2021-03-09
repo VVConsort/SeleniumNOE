@@ -1,12 +1,11 @@
 package Enums.Payment;
 
-
 /**
  * Moyen de paiements
  */
 public enum PaymentMean {
-    CREDIT_CARD("Carte de crédit"), CASH("Espèces"), CREDIT_NOTE("Avoir"),VOUCHER("Bon d'achat"),
-    MONTHLY_MAINTENANCE("Entretien mensualisé");
+    CREDIT_CARD("Carte de crédit"), CASH("Espèces"), CREDIT_NOTE("Avoir"), VOUCHER("Bon d'achat"),
+    MONTHLY_MAINTENANCE("Entretien mensualisé"), FLEET("Flotte");
 
     // Label du mode de paiement
     private String label;

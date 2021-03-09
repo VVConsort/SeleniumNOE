@@ -44,8 +44,5 @@ public class NOE655 extends BaseTest {
         PaymentStep.finalizeOrder(payStepValue);
         // Fermeture du BT
         TicketStep.deleteWorkOrder(driver);
-        /*String ouraganOrderState = OuraganStep.getOrderState(TestSuiteProperties.OURAGAN_DB_URL, TestSuiteProperties.OURAGAN_DB_USER, TestSuiteProperties.OURAGAN_DB_PASSWORD, OuraganJsonHelper.getOrderReference(OuraganJsonHelper.getJsonFromFileURL(jsonFilePath)));
-        // Comparaison avec l'état attendu
-        softAssert.assertEquals(ouraganOrderState, expectedState);*/
     }
 }

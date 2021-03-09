@@ -24,7 +24,7 @@ public class PaymentStep extends BaseStep {
         ReportHelper.attachScreenshot(stepValue.driver);
     }
 
-    @Step("Vérifie que le mode de paiement {value.paymentId} est présent")
+    @Step("Vérifie que le mode de paiement {value.paymentMean.label} est présent")
     public static void containsPaymentLine(PaymentStepValue value) {
         FooterView footerView = new FooterView(value.driver);
         // Clic sur le boutton "A payer" du footer
@@ -38,12 +38,10 @@ public class PaymentStep extends BaseStep {
     @Step("Vérifie que le montant de la ligne {value.paymentMean.label} est égale à {value.expectedValue}")
     public static void checkPaymentLineAmount(PaymentStepValue value) {
         FooterView footerView = new FooterView(value.driver);
-        // Clic sur le boutton "A payer" du footer
-        footerView.clickOnTotalToPayBtn();
-        // Vue panneau paiement
-        PaymentPanelView view = new PaymentPanelView(value.driver);
+        // Clic sur le boutton "A payer" du footer et fait apparaitre le panneau "Paiements"
+        PaymentPanelView paymentView = footerView.clickOnTotalToPayBtn();
         // Contrôle le montant de la ligne
-        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getPaymentLineAmountElem(value.paymentMean.getLabel()), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), paymentView.getPaymentLineAmountElem(value.paymentMean.getLabel()), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     // TODO : cas ou plusieurs même mode de paiement : différencier sur montant
@@ -139,11 +137,23 @@ public class PaymentStep extends BaseStep {
 
     @Step("Finalise le ticket en sélectionnant l'envoi {sendTicketMode.label}")
     public static void finalizeOrder(PaymentStepValue stepValue) {
+        boolean result = true;
         FooterView footer = new FooterView(stepValue.driver);
         // Vue panneau paiement
         PaymentPanelView view = footer.clickOnTotalToPayBtn();
         // Finalise la commande
-        sendTicket(stepValue, view.clickFinalize());
+        try {
+            sendTicket(stepValue, view.clickFinalize());
+        } catch (Exception e) {
+            // On ferme l'éventuel message 'Paiement interdit"
+            view.clickPaymentNotAllowedOkButton();
+            // On retire le mode de paiement ajouté afin de pouvoir vider le ticket
+            view.clickRemovePaymentLine(stepValue.paymentMean.getLabel());
+            result = false;
+        }
+        // On controle si la finalisation a été éffectué ou ap
+        stepValue.isTrue(result);
+        // Screenshot de fin de step
         ReportHelper.attachScreenshot(stepValue.driver);
     }
 
