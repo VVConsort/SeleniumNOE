@@ -128,11 +128,6 @@
             <class name="TestCases.Promotions.NOE682"/>
         </classes>
     </test>
-    <test name="openPos">
-        <classes>
-            <class name="TestCases.PosOpening.PosOpening"/>
-        </classes>
-    </test>
     <test name="NOE692">
         <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE692/webOrder.xml"/>
         <parameter name="expectedPendingAmount" value= "0.00"/>
