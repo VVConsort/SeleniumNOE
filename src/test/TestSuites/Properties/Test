@@ -1,5 +1,5 @@
 OB_POS_URL=https://norauto-test.cloud.openbravo.com/openbravo/web/org.openbravo.retail.posterminal
-TERMINAL_KEY=TESTAUTO-666
+TERMINAL_KEY=TESTAUTO-VALID
 USER=vvanhaute
 PASSWORD=1234567
 CHROME_PROFILE_PATH=C:\\Users\\ValentinVANHAUTE\\AppData\\Local\\Google\\Chrome\\User Data\\
