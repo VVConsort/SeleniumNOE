@@ -86,4 +86,11 @@
             <class name="TestCases.Ouragan.NOE636"/>
         </classes>
     </test>
+    <test name="NOE613">
+        <parameter name="jsonFilePath" value="src/test/TestCases/Ouragan/In/NOE613/noe613.xml"/>
+        <parameter name="expectedTotal" value="150.02"/>
+        <classes>
+            <class name="TestCases.Ouragan.NOE613"/>
+        </classes>
+    </test>
 </suite>
