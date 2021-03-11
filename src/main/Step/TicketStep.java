@@ -7,11 +7,10 @@ import View.Footer.FooterView;
 import View.Ticket.Payment.PaymentPanelView;
 import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
- * Classe utilitaire pour les promotions
+ * Classe utilitaire pour le ticket
  */
 public class TicketStep extends BaseStep {
 
@@ -71,5 +70,11 @@ public class TicketStep extends BaseStep {
     public static void checkTicketAmount(BaseStepValue stepValue) {
         ReceiptView receiptView = new ReceiptView(stepValue.driver);
         stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getTotalAmountElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+    }
+
+    @Step("Vérifie que le client {stepValue.expectedValue} est associé au ticket")
+    public static void checkLinkedCustomer(BaseStepValue stepValue) {
+        ReceiptView receiptView = new ReceiptView(stepValue.driver);
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getLinkedCustomer(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 }

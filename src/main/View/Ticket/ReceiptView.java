@@ -19,9 +19,20 @@ public class ReceiptView extends BaseView {
     // Montant total du ticket
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_totalReceiptLine_totalgross\"]")
     private WebElement totalToPay;
+    // Nom prénom du client associé au ticket
+    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_receiptHeader_receiptButtons_formElementBpbutton_coreElementContainer_bpbutton_name\"]")
+    private WebElement linkedCustomer;
 
     public ReceiptView(ChromeDriver driver) {
         init(driver, this);
+    }
+
+    /**
+     * Retourne le composant contenant le nom et prénom du client
+     * @return
+     */
+    public WebElement getLinkedCustomer() {
+        return linkedCustomer;
     }
 
     /**

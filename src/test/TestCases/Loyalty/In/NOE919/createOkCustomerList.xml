@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customerList>
+    <!-- Nom et prénom et code postal et ville et mobile-->
+    <customer>
+        <type>PERSON</type>
+        <title>MONSIEUR</title>
+        <lastName>last1</lastName>
+        <firstName>first1</firstName>
+        <language>FRENCH</language>
+        <mobilePhone>0651063447</mobilePhone>
+        <invoiceViaEmail>true</invoiceViaEmail>
+        <consent>true</consent>
+        <viaSms>false</viaSms>
+        <viaEmail>false</viaEmail>
+        <sameAddress>true</sameAddress>
+        <postalCode>59667</postalCode>
+        <city>DK SHIP</city>
+        <noErrorOnCreate>true</noErrorOnCreate>
+        <buCode>FR</buCode>
+    </customer>
+    <!-- Nom et prénom et code postal et ville et email-->
+    <customer>
+        <type>PERSON</type>
+        <title>MONSIEUR</title>
+        <lastName>last2</lastName>
+        <firstName>first2</firstName>
+        <language>FRENCH</language>
+        <email>check@C.com</email>
+        <invoiceViaEmail>true</invoiceViaEmail>
+        <consent>true</consent>
+        <viaSms>false</viaSms>
+        <viaEmail>false</viaEmail>
+        <sameAddress>true</sameAddress>
+        <postalCode>59667</postalCode>
+        <city>DK SHIP</city>
+        <noErrorOnCreate>true</noErrorOnCreate>
+        <buCode>FR</buCode>
+    </customer>
+    <!--Nom et prénom et code postal et ville et mobile optin SMS : tel mobile-->
+    <customer>
+        <type>PERSON</type>
+        <title>MONSIEUR</title>
+        <lastName>last3</lastName>
+        <firstName>first3</firstName>
+        <language>FRENCH</language>
+        <mobilePhone>0651063447</mobilePhone>
+        <invoiceViaEmail>true</invoiceViaEmail>
+        <consent>true</consent>
+        <viaSms>true</viaSms>
+        <viaEmail>false</viaEmail>
+        <sameAddress>true</sameAddress>
+        <postalCode>59667</postalCode>
+        <city>DK SHIP</city>
+        <noErrorOnCreate>true</noErrorOnCreate>
+        <buCode>FR</buCode>
+    </customer>
+    <!--Nom et prénom et code postal et ville et email optin mail : email-->
+    <customer>
+        <type>PERSON</type>
+        <title>MONSIEUR</title>
+        <lastName>last4</lastName>
+        <firstName>first4</firstName>
+        <language>FRENCH</language>
+        <email>check@C.com</email>
+        <invoiceViaEmail>true</invoiceViaEmail>
+        <consent>true</consent>
+        <viaSms>false</viaSms>
+        <viaEmail>true</viaEmail>
+        <sameAddress>true</sameAddress>
+        <postalCode>59667</postalCode>
+        <city>DK SHIP</city>
+        <noErrorOnCreate>true</noErrorOnCreate>
+        <buCode>FR</buCode>
+    </customer>
+    <!-- Tous les champs de rempli avec adresse diff et aucune optin-->
+    <customer>
+        <type>PERSON</type>
+        <title>MONSIEUR</title>
+        <lastName>last5</lastName>
+        <firstName>first5</firstName>
+        <language>FRENCH</language>
+        <mobilePhone>0651063447</mobilePhone>
+        <phone>0328641742</phone>
+        <email>check@C.com</email>
+        <invoiceViaEmail>true</invoiceViaEmail>
+        <consent>true</consent>
+        <viaSms>false</viaSms>
+        <viaEmail>false</viaEmail>
+        <sameAddress>false</sameAddress>
+        <locationName>La ligne1</locationName>
+        <line2>La ligne 2</line2>
+        <line3>La ligne 3</line3>
+        <line4>La ligne 4</line4>
+        <postalCode>59666</postalCode>
+        <city>DK</city>
+        <country>FRANCE</country>
+        <shipLocationName>La ligne ship 1</shipLocationName>
+        <shipLine2>La ligne ship 2</shipLine2>
+        <shipLine3>La ligne ship 3</shipLine3>
+        <shipLine4>La ligne ship 3</shipLine4>
+        <shipPostalCode>59667</shipPostalCode>
+        <shipCity>DK SHIP</shipCity>
+        <shipCountry>FRANCE</shipCountry>
+        <noErrorOnCreate>true</noErrorOnCreate>
+        <buCode>FR</buCode>
+    </customer>
+    <!-- Tous les champs de rempli avec adresse livraison/facturaion identique et full optin-->
+    <customer>
+        <type>PERSON</type>
+        <title>MONSIEUR</title>
+        <lastName>last6</lastName>
+        <firstName>first6</firstName>
+        <language>FRENCH</language>
+        <mobilePhone>0651063447</mobilePhone>
+        <phone>0328641742</phone>
+        <email>check@C.com</email>
+        <invoiceViaEmail>true</invoiceViaEmail>
+        <consent>true</consent>
+        <viaSms>true</viaSms>
+        <viaEmail>true</viaEmail>
+        <sameAddress>true</sameAddress>
+        <locationName>La ligne 1</locationName>
+        <line2>La ligne 2</line2>
+        <line3>La ligne 3</line3>
+        <line4>La ligne 4</line4>
+        <postalCode>59667</postalCode>
+        <city>DK </city>
+        <country>FRANCE</country>
+        <noErrorOnCreate>true</noErrorOnCreate>
+        <buCode>FR</buCode>
+    </customer>
+</customerList>

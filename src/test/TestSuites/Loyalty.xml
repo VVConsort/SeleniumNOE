@@ -8,7 +8,8 @@
         </classes>
     </test>
     <test name="NOE919">
-        <parameter name="customerListFilePath" value="src/test/TestCases/Loyalty/In/NOE919/ClientList.xml"/>
+        <parameter name="missingMandatoryFieldFilePath" value="src/test/TestCases/Loyalty/In/NOE919/missingInfosCustomerList.xml"/>
+        <parameter name="createOKFilePath" value="src/test/TestCases/Loyalty/In/NOE919/createOkCustomerList.xml"/>
         <classes>
             <class name="TestCases.Loyalty.NOE919"/>
         </classes>

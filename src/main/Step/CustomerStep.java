@@ -40,7 +40,7 @@ public class CustomerStep extends BaseStep {
         step.isEquals(isCreated);
     }
 
-    @Step("Vérifie : client présent en base {baseStep.expectedValue}")
+    @Step("Vérifie : client {cust.firstName} {cust.lastName} présent en base {baseStep.expectedValue}")
     public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws IOException, SQLException {
         String rcuResponse = "";
         // Récupération en BDD OB du customerId
@@ -54,11 +54,12 @@ public class CustomerStep extends BaseStep {
         baseStep.isEquals(!rcuResponse.isEmpty());
     }
 
-    @Step("Vérifie les données client insérées dans RCU")
+    @Step("Vérifie les données du client {cust.firstName} {cust.lastName} {cust.customerId} insérées dans RCU")
     public static void checkRCUCustomerValues(Customer cust, BaseStepValue baseStep) throws IOException {
         boolean result = true;
         // Récupération du client sur RCU
         String response = RCURestHelper.getCustomer(cust);
+        System.out.println("Comparaison valeures RCU : " + cust.firstName + " " + cust.lastName);
         // Si la réponse est vide on arrete la
         if (response.isEmpty()) {
             baseStep.isEquals(false);
@@ -75,12 +76,12 @@ public class CustomerStep extends BaseStep {
             System.out.println("Nom incorrect");
         }
         // Type
-        if (!cust.type.getRCUValue().equals(RCUJsonHelper.getCustomerType(response))) {
+        if (!cust.type.getRCUValue().equalsIgnoreCase(RCUJsonHelper.getCustomerType(response))) {
             result = false;
             System.out.println("Type incorrect");
         }
         // Langue
-        if (!cust.language.getRCUValue().equals(RCUJsonHelper.getCustomerLanguage(response))) {
+        if (!cust.language.getRCUValue().equalsIgnoreCase(RCUJsonHelper.getCustomerLanguage(response))) {
             result = false;
             System.out.println("Langue RCU incorrect");
         }
@@ -115,45 +116,122 @@ public class CustomerStep extends BaseStep {
             result = false;
             System.out.println("Optin Email incorrect");
         }
-        // Adresse livraison ligne 1
-        if (!cust.shipLocationName.equals(RCUJsonHelper.getCustomerShippingAddress1(response))) {
-            result = false;
-            System.out.println("Adresse livraison ligne 1 incorrect");
+        // Si l'adresse de livraison/facturation diff
+        if (!cust.sameAddress) {
+            // Adresse livraison ligne 1
+            if (cust.shipLocationName != null && !cust.shipLocationName.equalsIgnoreCase(RCUJsonHelper.getCustomerShippingAddress1(response))) {
+                result = false;
+                System.out.println("Adresse livraison ligne 1 incorrect");
+            }
+            // Adresse livraison ligne 2
+            if (cust.shipLine2 != null && !cust.shipLine2.equalsIgnoreCase(RCUJsonHelper.getCustomerShippingAddress2(response))) {
+                result = false;
+                System.out.println("Adresse livraison ligne 2 incorrect");
+            }
+            // Adresse livraison ligne 3
+            if (cust.shipLine3 != null && !cust.shipLine3.equalsIgnoreCase(RCUJsonHelper.getCustomerShippingAddress3(response))) {
+                result = false;
+                System.out.println("Adresse livraison ligne 3 incorrect");
+            }
+            // Adresse livraison ligne 4
+            if (cust.shipLine4 != null && !cust.shipLine4.equalsIgnoreCase(RCUJsonHelper.getCustomerShippingAddress4(response))) {
+                result = false;
+                System.out.println("Adresse livraison ligne 4 incorrect");
+            }
+            // Code Postal livraison
+            if (cust.shipPostalCode != null && !cust.shipPostalCode.equalsIgnoreCase(RCUJsonHelper.getCustomerShippingAddressPostalCode(response))) {
+                result = false;
+                System.out.println("Code postal livraison incorrect");
+            }
+            // Ville livraison
+            if (cust.shipCity != null && !cust.shipCity.equalsIgnoreCase(RCUJsonHelper.getCustomerShippingAddressCity(response))) {
+                result = false;
+                System.out.println("Ville livraison incorrect");
+            }
+            // Pays livraison
+            if (cust.shipCountry != null && !cust.shipCountry.getRCUValue().equalsIgnoreCase(RCUJsonHelper.getCustomerShippingAddressCountryCode(response))) {
+                result = false;
+                System.out.println("Pays livraison incorrect");
+            }
+            // Addresse Ligne 1 invoice
+            if (cust.locationName != null && !cust.locationName.equalsIgnoreCase(RCUJsonHelper.getCustomerInvoiceAddress1(response))) {
+                result = false;
+                System.out.println("Adresse facturation ligne 1 incorrect");
+            }
+            // Adresse invoice ligne 2
+            if (cust.line2 != null && !cust.line2.equalsIgnoreCase(RCUJsonHelper.getCustomerInvoiceAddress2(response))) {
+                result = false;
+                System.out.println("Adresse facturation ligne 2 incorrect");
+            }
+            // Adresse invoice ligne 3
+            if (cust.line3 != null && !cust.line3.equalsIgnoreCase(RCUJsonHelper.getCustomerInvoiceAddress3(response))) {
+                result = false;
+                System.out.println("Adresse facturation ligne 3 incorrect");
+            }
+            // Adresse invoice ligne 4
+            if (cust.line4 != null && !cust.line4.equalsIgnoreCase(RCUJsonHelper.getCustomerInvoiceAddress4(response))) {
+                result = false;
+                System.out.println("Adresse facturation ligne 4 incorrect");
+            }
+            // Code Postal invoice
+            if (cust.postalCode != null && !cust.postalCode.equalsIgnoreCase(RCUJsonHelper.getCustomerInvoiceAddressPostalCode(response))) {
+                result = false;
+                System.out.println("Code postal facturation incorrect");
+            }
+            // Ville invoice
+            if (cust.city != null && !cust.city.equalsIgnoreCase(RCUJsonHelper.getCustomerInvoiceAddressCity(response))) {
+                result = false;
+                System.out.println("Ville facturation incorrect");
+            }
+            // Pays invoice
+            if (cust.country != null && !cust.country.getRCUValue().equalsIgnoreCase(RCUJsonHelper.getCustomerInvoiceAddressCountryCode(response))) {
+                result = false;
+                System.out.println("Pays facturation incorrect");
+            }
+
         }
-        // Adresse livraison ligne 2
-        if (!cust.shipLine2.equals(RCUJsonHelper.getCustomerShippingAddress2(response))) {
-            result = false;
-            System.out.println("Adresse livraison ligne 2 incorrect");
-        }
-        // Adresse livraison ligne 3
-        if (!cust.shipLine3.equals(RCUJsonHelper.getCustomerShippingAddress3(response))) {
-            result = false;
-            System.out.println("Adresse livraison ligne 3 incorrect");
-        }
-        // Adresse livraison ligne 4
-        if (!cust.shipLine4.equals(RCUJsonHelper.getCustomerShippingAddress4(response))) {
-            result = false;
-            System.out.println("Adresse livraison ligne 4 incorrect");
-        }
-        // Code Postal livraison
-        if (!cust.shipPostalCode.equals(RCUJsonHelper.getCustomerShippingAddressPostalCode(response))) {
-            result = false;
-            System.out.println("Code postal livraison incorrect");
-        }
-        // Ville livraison
-        if (!cust.shipCity.equals(RCUJsonHelper.getCustomerShippingAddressCity(response))) {
-            result = false;
-            System.out.println("Ville livraison incorrect");
-        }
-        // Pays livraison
-        if (!cust.shipCountry.getRCUValue().equals(RCUJsonHelper.getCustomerShippingAddressCountryCode(response))) {
-            result = false;
-            System.out.println("Pays livraison incorrect");
+        // Même addresse facturation/livraison
+        else {
+            // Adresse principal ligne 1
+            if (cust.locationName != null && !cust.locationName.equals(RCUJsonHelper.getCustomerPrincipalAddress1(response))) {
+                result = false;
+                System.out.println("Adresse principale ligne 1 incorrect");
+            }
+            // Adresse principal ligne 2
+            if (cust.line2 != null && !cust.line2.equalsIgnoreCase(RCUJsonHelper.getCustomerPrincipalAddress2(response))) {
+                result = false;
+                System.out.println("Adresse principale ligne 2 incorrect");
+            }
+            // AAdresse principal ligne 3
+            if (cust.line3 != null && !cust.line3.equalsIgnoreCase(RCUJsonHelper.getCustomerPrincipalAddress3(response))) {
+                result = false;
+                System.out.println("Adresse principale ligne 3 incorrect");
+            }
+            // Adresse principal ligne 4
+            if (cust.line4 != null && !cust.line4.equalsIgnoreCase(RCUJsonHelper.getCustomerPrincipalAddress4(response))) {
+                result = false;
+                System.out.println("Adresse principale ligne 4 incorrect");
+            }
+            // Adresse principal Code Postal
+            if (cust.postalCode != null && !cust.postalCode.equalsIgnoreCase(RCUJsonHelper.getCustomerPrincipalAddressPostalCode(response))) {
+                result = false;
+                System.out.println("Code postal principal incorrect");
+            }
+            // Adresse principal Ville
+            if (cust.city != null && !cust.city.equalsIgnoreCase(RCUJsonHelper.getCustomerPrincipalAddressCity(response))) {
+                result = false;
+                System.out.println("Ville principale incorrect");
+            }
+            // Adresse principal Pays
+            if (cust.country != null && !cust.country.getRCUValue().equalsIgnoreCase(RCUJsonHelper.getCustomerPrincipalAddressCountryCode(response))) {
+                result = false;
+                System.out.println("Pays principal incorrect");
+            }
         }
         baseStep.isTrue(result);
     }
 
-    @Step("Suppression logique du client {cust.customerId}")
+    @Step("Suppression logique du client {cust.firstName} + {cust.lastName} {cust.customerId}")
     public static void archiveCustomer(Customer cust, BaseStepValue baseStep) throws IOException {
         baseStep.isEquals(RCURestHelper.archiveCustomer(cust));
     }

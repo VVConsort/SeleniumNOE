@@ -16,7 +16,7 @@ RCU_AUTH_URL =https://apiqual.norautointernational.com/uaa/oauth/token?grant_typ
 RCU_GET_TOKEN_AUTH=Basic bm9lOjI0YmY4MDc3OWVjNmRlODc1MjA4ZWFlODY5YmE5MjI0NTU1MWZjZjZhY2Q2ZjE5NGJjNjBjZmFmZmRmZjM1MGU=
 RCU_SEARCH_CUST_URL=https://apiqual.norautointernational.com/v1/customer/facade/customers/_search
 RCU_ARCHIVE_CUST_URL=https://apiqual.norautointernational.com/v3/customer/service/customers/
-RCU_GET_CUST_URL=https://apiqual.norautointernational.com/v1/customer/facade/customers
+RCU_GET_CUST_URL=https://apiqual.norautointernational.com/v3/customer/service/customers/
 OB_DATABASE_URL=jdbc:postgresql://localhost:5437/openbravo
 OB_DATABASE_USER=norauto_ro
 OB_DATABASE_PASSWORD=ajGAK22ezcJGX76M
