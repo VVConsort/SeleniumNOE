@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class OpenBravoDBHelper {
 
     // Requete de récup du customerID
-    private static final String GET_CUSTOMER_ID_QUERY = "SELECT REFERENCENO FROM c_BPartner WHERE NAME = ?";
+    private static final String GET_CUSTOMER_ID_QUERY = "SELECT REFERENCENO FROM c_BPartner WHERE NAME = ? ORDER BY UPDATED DESC";
     //select * from c_BPartner where NAME = 'SiSiSi LeTesting'
 
     /**

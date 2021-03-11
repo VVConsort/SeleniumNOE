@@ -185,13 +185,13 @@ public class RCUJsonHelper {
     }
 
     /**
-     * Retourne le nombre de résultat de  la recherche selon le type de client
+     * Retourne l'id client
      * @param json
-     * @param isPerson
      * @return
      */
-    public static String getCustomerId(String json, boolean isPerson) {
-        return isPerson ? getB2CCustomerId(json) : getB2BCustomerId(json);
+    public static String getCustomerId(String json) {
+        JSONObject parser = new JSONObject(json);
+        return parser.getString(CUSTOMER_ID_KEY);
 
     }
 
@@ -350,7 +350,7 @@ public class RCUJsonHelper {
         // Parcourt des tél
         for (int i = 0; i < phoneArray.length(); i++) {
             if (phoneArray.getJSONObject(1).getString(RCU_TYPE_KEY).equals(MOBILE_PHONE_TYPE_VALUE)) {
-                return phoneArray.getJSONObject(1).getString(RCU_PHONE_NUMBER_KEY).replaceAll("\\s+","");
+                return phoneArray.getJSONObject(1).getString(RCU_PHONE_NUMBER_KEY).replaceAll("\\s+", "");
             }
         }
         return "";
@@ -364,7 +364,7 @@ public class RCUJsonHelper {
         for (int i = 0; i < phoneArray.length(); i++) {
             if (phoneArray.getJSONObject(i).getString(RCU_TYPE_KEY).equals(FIX_PHONE_TYPE_VALUE)) {
                 // On retire les espaces avant d'envoyer le num
-                return phoneArray.getJSONObject(i).getString(RCU_PHONE_NUMBER_KEY).replaceAll("\\s+","");
+                return phoneArray.getJSONObject(i).getString(RCU_PHONE_NUMBER_KEY).replaceAll("\\s+", "");
             }
         }
         return "";

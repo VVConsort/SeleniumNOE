@@ -42,12 +42,16 @@ public class CustomerStep extends BaseStep {
 
     @Step("Vérifie : client présent en base {baseStep.expectedValue}")
     public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws IOException, SQLException {
+        String rcuResponse = "";
         // Récupération en BDD OB du customerId
         cust.customerId = OpenBravoDBHelper.getCustomerID(cust.lastName, cust.firstName);
-        // On fait un GET avec ce clientID sur RCU
-        String response = RCURestHelper.getCustomer(cust);
-        // Vérifie que la réponse n'est pas vide
-        baseStep.isEquals(!response.isEmpty());
+        // Si il n'y a pas de customer id, aucun appel à RCU n'a été fait
+        if (cust.customerId != null && !cust.customerId.isEmpty()) {
+            // On fait un GET avec ce clientID sur RCU
+            rcuResponse = RCURestHelper.getCustomer(cust);
+        }
+        // Vérifie que la réponse correspond à celle attendue
+        baseStep.isEquals(!rcuResponse.isEmpty());
     }
 
     @Step("Vérifie les données client insérées dans RCU")
@@ -61,12 +65,12 @@ public class CustomerStep extends BaseStep {
             return;
         }
         // Prénom
-        if (!cust.firstName.equals(RCUJsonHelper.getCustomerFirstName(response))) {
+        if (!cust.firstName.equalsIgnoreCase(RCUJsonHelper.getCustomerFirstName(response))) {
             result = false;
             System.out.println("Prénom incorrect");
         }
         // Nom
-        if (!cust.lastName.equals(RCUJsonHelper.getCustomerLastName(response))) {
+        if (!cust.lastName.equalsIgnoreCase(RCUJsonHelper.getCustomerLastName(response))) {
             result = false;
             System.out.println("Nom incorrect");
         }
@@ -89,14 +93,14 @@ public class CustomerStep extends BaseStep {
         }
         // Phone mobile
         if (cust.mobilePhone != null && !cust.mobilePhone.isEmpty()) {
-            if (!cust.phone.equals(RCUJsonHelper.getCustomerMobilePhone(response))) {
+            if (!cust.mobilePhone.equals(RCUJsonHelper.getCustomerMobilePhone(response))) {
                 result = false;
                 System.out.println("Tel mobile incorrect");
             }
         }
         // Email
         if (cust.email != null && !cust.email.isEmpty()) {
-            if (!cust.email.equals(RCUJsonHelper.getCustomerEmail(response))) {
+            if (!cust.email.equalsIgnoreCase(RCUJsonHelper.getCustomerEmail(response))) {
                 result = false;
                 System.out.println("Email incorrect");
             }
@@ -146,7 +150,7 @@ public class CustomerStep extends BaseStep {
             result = false;
             System.out.println("Pays livraison incorrect");
         }
-        baseStep.isEquals(result);
+        baseStep.isTrue(result);
     }
 
     @Step("Suppression logique du client {cust.customerId}")
@@ -169,10 +173,12 @@ public class CustomerStep extends BaseStep {
         // Nom
         custCreateView.setCustLastName(customer.lastName);
         // Date de naissance
-        //FIXME : peux plus le set par JavaScript (javascript error: Unable to find owning document)s
+        //FIXME : peux plus le set par JavaScript (javascript error: Unable to find owning document)
         //custCreateView.setCustBirthDate(customer.birthdate);
         // Langue
-        custCreateView.setCustLanguage(customer.language.getOBValue());
+        if (customer.language != null) {
+            custCreateView.setCustLanguage(customer.language.getOBValue());
+        }
         // Num Mobile
         custCreateView.setMobilePhone(customer.mobilePhone);
         // Num fixe
@@ -197,7 +203,9 @@ public class CustomerStep extends BaseStep {
             custCreateView.uncheckSameAddress();
             // Adresse de livraison
             // Pays
-            custCreateView.setShippingCountry(customer.shipCountry.getOBValue());
+            if (customer.shipCountry != null) {
+                custCreateView.setShippingCountry(customer.shipCountry.getOBValue());
+            }
             // N et nom voie
             custCreateView.setShippingLocation(customer.shipLocationName);
             // Appartement
@@ -213,7 +221,9 @@ public class CustomerStep extends BaseStep {
         }
         // Adresse facturation
         // Pays
-        custCreateView.setInvoicingCountry(customer.country.getOBValue());
+        if (customer.country != null) {
+            custCreateView.setInvoicingCountry(customer.country.getOBValue());
+        }
         // N et nom voie
         custCreateView.setInvoicingLocation(customer.locationName);
         // Appartement

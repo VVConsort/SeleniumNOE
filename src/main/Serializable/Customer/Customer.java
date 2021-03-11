@@ -89,12 +89,14 @@ public class Customer implements Serializable {
     public String customerId;
     // Indique si la création de ce client doit lancer une erreur ou non
     public boolean noErrorOnCreate;
+    // NORAUTO's country code (BU of the customer not its nationality)
+    public String buCode;
 
     public Customer() {
 
     }
 
-    public Customer(CustomerType type, String title, String firstName, String lastName, String birthdate, CustomerLangage language, String mobilePhone, String phone, String email, boolean invoiceViaEmail, boolean consent, boolean viaSms, boolean viaEmail, boolean sameAddress, CustomerCountry country, String locationName, String line2, String line3, String line4, String postalCode, String city, CustomerCountry shipCountry, String shipLocationName, String shipLine2, String shipLine3, String shipLine4, String shipPostalCode, String shipCity, boolean throwError) {
+    public Customer(CustomerType type, String title, String firstName, String lastName, String birthdate, CustomerLangage language, String mobilePhone, String phone, String email, boolean invoiceViaEmail, boolean consent, boolean viaSms, boolean viaEmail, boolean sameAddress, CustomerCountry country, String locationName, String line2, String line3, String line4, String postalCode, String city, CustomerCountry shipCountry, String shipLocationName, String shipLine2, String shipLine3, String shipLine4, String shipPostalCode, String shipCity, boolean throwError,String buCode) {
         this.type = type;
         this.title = title;
         this.firstName = firstName;
@@ -124,5 +126,6 @@ public class Customer implements Serializable {
         this.shipPostalCode = shipPostalCode;
         this.shipCity = shipCity;
         this.noErrorOnCreate = throwError;
+        this.buCode = buCode;
     }
 }
