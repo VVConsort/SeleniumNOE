@@ -1,7 +1,5 @@
 package Helpers.Rest.RCU;
 
-import Enums.Customer.CustomerType;
-import Enums.REST.RESTCodeStatut;
 import Helpers.Json.RCUJsonHelper;
 import Helpers.Rest.RESTHelper;
 import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
@@ -39,8 +37,7 @@ public class RCURestHelper extends RESTHelper {
         // Récupère le token si nécessaire
         setToken();
         // GET et récup de la réponse
-        //get(String URL, Map<String, String> headersArg)
-        Response response = get(getGetCustomerURL(customer), getHeaderArgs(customer.country.getRCUValue(), customer.language.getRCUValue()));
+        Response response = get(getGetCustomerURL(customer), getHeaderArgs(customer.buCode, customer.language.getRCUValue()));
         // Si l'appel est OK
         if (isResponseOk(response)) {
             // Construction du json à partir de la rép
@@ -56,10 +53,9 @@ public class RCURestHelper extends RESTHelper {
      * @return
      * @throws IOException
      */
-    public static String searchCustomer(Customer cust) throws IOException {
+   /* public static String searchCustomer(Customer cust) throws IOException {
         // Récupère le token si nécessaire
         setToken();
-        //Test branches
         // POST et récup de la réponse
         Response response = post(TestSuiteProperties.RCU_SEARCH_CUST_URL, getHeaderArgs(cust.country.getRCUValue(), cust.language.getRCUValue()), RCUJsonHelper.getSearchCustomerBody(cust));
         // Si l'appel est OK
@@ -73,16 +69,7 @@ public class RCURestHelper extends RESTHelper {
             return jsonBody.toString();
         }
         return "";
-    }
-
-    /**
-     * Renvoi vrai si le server renvoi OK
-     * @param response
-     * @return
-     */
-    private static boolean isResponseOk(Response response) {
-        return response != null && (response.code() == RESTCodeStatut.OK.getCode() || response.code() == RESTCodeStatut.OK_NO_CONTENT.getCode());
-    }
+    } */
 
     /**
      * Récupère le token auprès d'RCU si nécessaire
@@ -105,15 +92,15 @@ public class RCURestHelper extends RESTHelper {
     }
 
     /**
-     * Construit et retourne les arguments header pour la recherche client
-     * @param countryCode
+     * Construit et retourne les arguments langue/pays dans le header
+     * @param buCode
      * @param language
      * @return
      */
-    private static Map getHeaderArgs(String countryCode, String language) {
+    private static Map getHeaderArgs(String buCode, String language) {
         Map headerArgs = new HashMap<String, String>();
         setTokenInHeader(headerArgs);
-        headerArgs.put(COUNTRY_CODE_HEADER_KEY, countryCode);
+        headerArgs.put(COUNTRY_CODE_HEADER_KEY, buCode);
         headerArgs.put(LANGUAGE_CODE_HEADER_KEY, language);
         return headerArgs;
     }
@@ -135,18 +122,6 @@ public class RCURestHelper extends RESTHelper {
     }
 
     /**
-     * @param cust
-     * @return
-     */
-    /*private Map getArchiveCustomerHeaderArgsMap(Customer cust) {
-        Map headerArgs = new HashMap<String, String>();
-        setTokenInHeader(headerArgs);
-        headerArgs.put(CUSTOMER_ID_KEY, cust.customerId);
-        headerArgs.put(LANGUAGE_CODE_HEADER_KEY, cust.language.getRCUValue());
-        return headerArgs;
-    }*/
-
-    /**
      * Supprime logiquement un client en le flagant comme archivé
      * @param cust
      * @return
@@ -156,7 +131,7 @@ public class RCURestHelper extends RESTHelper {
         // Récupère le token si nécessaire
         setToken();
         // PUT avec le customerId afin de l'archiver
-        Response response = put(getArchiveCustomerURL(cust.customerId), getHeaderArgs(cust.country.getRCUValue(), cust.language.getRCUValue()), RCUJsonHelper.getArchiveCustomerBody());
+        Response response = put(getArchiveCustomerURL(cust.customerId), getHeaderArgs(cust.buCode, cust.language.getRCUValue()), RCUJsonHelper.getArchiveCustomerBody());
         return isResponseOk(response);
     }
 

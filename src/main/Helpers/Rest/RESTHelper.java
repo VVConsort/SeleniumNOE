@@ -98,10 +98,19 @@ public class RESTHelper {
         // Appel
         Response response = client.newCall(request).execute();
         // Check erreur
-        if (response.code() != RESTCodeStatut.OK.getCode()) {
-            System.out.println("Error: " + response.code());
+        if (!isResponseOk(response)) {
+            System.out.println("Error : " + response.code() + " " + method.getLabel() + " " + URL);
         }
         return response;
+    }
+
+    /**
+     * Renvoi vrai si le server renvoi OK
+     * @param response
+     * @return
+     */
+    protected static boolean isResponseOk(Response response) {
+        return response != null && (response.code() == RESTCodeStatut.OK.getCode() || response.code() == RESTCodeStatut.OK_NO_CONTENT.getCode());
     }
 
     /**

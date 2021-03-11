@@ -70,6 +70,10 @@ public class PosOpeningStep {
         do {
             // Approuve la différence de rendue si nécessaire
             closingView.confirmApprovalReason(false);
+            // Supprime les éventuels reçu en attente
+            if (closingView.deleteAllPendingReceipts()) {
+                closingView.confirmPendingReceiptsDelete();
+            }
             hasNextBtn = closingView.clickNext(false);
             Thread.sleep(500);
             ReportHelper.attachScreenshot(driver);

@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Classe utilitaire pour l'import des BR Ouragan
  */
-public class OuraganRESTHelper {
+public class OuraganRESTHelper extends RESTHelper {
 
     /**
      * Poste un BT Ouragan vers OB
@@ -24,7 +24,7 @@ public class OuraganRESTHelper {
      */
     public int postOuraganOrderToOpenBravo(String json, String orderLoaderUrl, String orderLoaderUser, String orderLoaderPassword, String orderLoaderSynchronizedProcessing) throws IOException {
         // Post vers l'OrderLoader et recupération du code réponse
-        return RESTHelper.post(getCompleteOrderLoaderURL(orderLoaderUrl, orderLoaderUser, orderLoaderPassword, orderLoaderSynchronizedProcessing), json).code();
+        return post(getCompleteOrderLoaderURL(orderLoaderUrl, orderLoaderUser, orderLoaderPassword, orderLoaderSynchronizedProcessing), json).code();
     }
 
     /**
