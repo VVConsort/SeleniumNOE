@@ -30,13 +30,14 @@ public class BaseStepValue {
         // Prend un screenshot
         // ReportHelper.attachScreenshot(driver);
         //String uuid = UUID.randomUUID().toString();
+        Allure.getLifecycle().updateStep(s -> s.setStatus(Status.PASSED));
         try {
             Assert.assertEquals(valueToTest, expectedValue);
         } catch (AssertionError e) {
             Allure.getLifecycle().updateStep(s -> s.setStatus(Status.FAILED));
             Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
         }
-        Allure.getLifecycle().updateStep(s -> s.setStatus(Status.PASSED));
+
     }
 
     /**
