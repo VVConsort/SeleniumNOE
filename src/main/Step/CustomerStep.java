@@ -13,11 +13,14 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class CustomerStep extends BaseStep {
 
-    @Step("Crée un client")
+    /**
+     * Crée un client sur OB
+     * @param customer
+     * @param step
+     */
     public static void createCustomer(Customer customer, BaseStepValue step) {
         ///////////FIXME bug sur l'ouverture de la fenetre de recherche, une fois c'est la recherche une fois le résult qui s'affiche zobi
         CustomerSearchView custSearch = new FooterView(step.driver).clickOnMenuBtn().clickOnSearchCustomer();
@@ -41,11 +44,12 @@ public class CustomerStep extends BaseStep {
         Assert.assertEquals(isCreated, step.expectedValue);
     }
 
-    public static void testMe(BaseStepValue step) {
-        Assert.assertEquals(1, step.expectedValue);
-    }
-
-
+    /**
+     * Vérifie la présence du client sur RCU
+     * @param cust
+     * @param baseStep
+     * @throws Exception
+     */
     public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws Exception {
         String rcuResponse = "";
         // Récupération en BDD OB du customerId
@@ -57,13 +61,18 @@ public class CustomerStep extends BaseStep {
                 rcuResponse = RCURestHelper.getCustomer(cust);
             }
         } catch (Exception e) {
-            throw new Exception (e);
+            throw new Exception(e);
         }
         // Vérifie que la réponse correspond à celle attendue
         baseStep.isEquals(!rcuResponse.isEmpty());
     }
 
-    @Step("Vérifie les données du client {cust.firstName} {cust.lastName} {cust.customerId} insérées dans RCU")
+    /**
+     * Vérifie les données du client insérées sur RCU
+     * @param cust
+     * @param baseStep
+     * @throws IOException
+     */
     public static void checkRCUCustomerValues(Customer cust, BaseStepValue baseStep) throws IOException {
         boolean result = true;
         // Récupération du client sur RCU
@@ -240,7 +249,12 @@ public class CustomerStep extends BaseStep {
         baseStep.isTrue(result);
     }
 
-    @Step("Suppression logique du client {cust.firstName} + {cust.lastName} {cust.customerId}")
+    /**
+     * Suppression logique du client sur RCU
+     * @param cust
+     * @param baseStep
+     * @throws IOException
+     */
     public static void archiveCustomer(Customer cust, BaseStepValue baseStep) throws IOException {
         baseStep.isEquals(RCURestHelper.archiveCustomer(cust));
     }
