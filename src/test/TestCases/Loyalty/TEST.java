@@ -16,7 +16,7 @@ public class TEST extends BaseTest {
         testFailed();
         testOk();
         //softAssert.assertEquals("1","3");
-        assertAll();
+        onAfterTest();
 
     }
 
