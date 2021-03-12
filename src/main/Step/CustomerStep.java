@@ -40,6 +40,11 @@ public class CustomerStep extends BaseStep {
         step.isEquals(isCreated);
     }
 
+    @Step("Customer step description TestMe")
+    public static void testMe(BaseStepValue step) {
+        step.isEquals(1);
+    }
+
     @Step("Vérifie : client {cust.firstName} {cust.lastName} présent en base {baseStep.expectedValue}")
     public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws IOException, SQLException {
         String rcuResponse = "";

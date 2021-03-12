@@ -1,12 +1,19 @@
 package Step.Value;
 
 import Helpers.Test.ReportHelper;
+import io.qameta.allure.Allure;
+import io.qameta.allure.model.Status;
+import io.qameta.allure.model.StepResult;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.util.UUID;
+
 public class BaseStepValue {
 
+    private static StepResult result_fail;
+    private static StepResult result_pass;
     public Object expectedValue;
     public ChromeDriver driver;
     boolean isHardAssert;
@@ -24,11 +31,15 @@ public class BaseStepValue {
     public void isEquals(Object valueToTest) {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
-        if (isHardAssert) {
+        String uuid = UUID.randomUUID().toString();
+        try {
             Assert.assertEquals(valueToTest, expectedValue);
-        } else {
-            soft.assertEquals(valueToTest, expectedValue);
+        } catch (AssertionError e) {
+            Allure.getLifecycle().startStep(uuid, new StepResult().setDescription("test failed step desc").setStatus(Status.FAILED));
+            Allure.getLifecycle().stopStep(uuid);
         }
+        Allure.getLifecycle().startStep(uuid, new StepResult().setDescription("test success step desc").setStatus(Status.PASSED));
+        Allure.getLifecycle().stopStep(uuid);
     }
 
     /**
