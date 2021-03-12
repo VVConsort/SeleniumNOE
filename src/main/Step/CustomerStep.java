@@ -42,9 +42,8 @@ public class CustomerStep extends BaseStep {
     }
 
     public static void testMe(BaseStepValue step) {
-        step("Nom sub test me", () -> {
             Assert.assertEquals(1, step.expectedValue);
-        });
+            step.soft.assertEquals(1, step.expectedValue);
     }
 
     @Step("Vérifie : client {cust.firstName} {cust.lastName} présent en base {baseStep.expectedValue}")

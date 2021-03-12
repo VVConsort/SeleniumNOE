@@ -19,12 +19,13 @@ public class BaseStep {
             runnable.run();
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(Status.PASSED));
         } catch (AssertionError e) {
-            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED)));
+            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED))
+                    .setStatusDetails(ResultsUtils.getStatusDetails(e).orElse(null)));
             Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
 
         } catch (Exception e) {
-            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN)));
-
+            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN))
+                    .setStatusDetails(ResultsUtils.getStatusDetails(e).orElse(null)));
             Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
         } finally {
             Allure.getLifecycle().stopStep(uuid);

@@ -5,7 +5,11 @@ import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import Step.Value.Payment.PaymentStepValue;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
+import io.qameta.allure.model.Status;
+import io.qameta.allure.model.StepResult;
+import io.qameta.allure.util.ResultsUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.IHookCallBack;
 import org.testng.IHookable;
@@ -15,6 +19,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
+
+import java.util.UUID;
 
 public class BaseTest  {
 
@@ -35,6 +41,28 @@ public class BaseTest  {
             }
         }
     }*/
+
+    public static void step(String name, Runnable runnable) {
+        String uuid = UUID.randomUUID().toString();
+        StepResult result = new StepResult().setName(name);
+        Allure.getLifecycle().startStep(uuid, result);
+
+        try {
+            runnable.run();
+            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(Status.PASSED));
+        } catch (AssertionError e) {
+            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED))
+                    .setStatusDetails(ResultsUtils.getStatusDetails(e).orElse(null)));
+            Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
+
+        } catch (Exception e) {
+            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN))
+                    .setStatusDetails(ResultsUtils.getStatusDetails(e).orElse(null)));
+            Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
+        } finally {
+            Allure.getLifecycle().stopStep(uuid);
+        }
+    }
 
     /**
      * Charge les properties de la TestSuite

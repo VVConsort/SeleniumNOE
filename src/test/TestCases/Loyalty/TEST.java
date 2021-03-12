@@ -8,23 +8,27 @@ import org.testng.annotations.Test;
 public class TEST extends BaseTest {
 
     @Test(description = "Main test")
-    public void mainTest() {
-        //testOk();
-        //testOk();
+    public void mainTest() throws Exception {
+        testOk();
+        testOk();
         testFailed();
-       // testOk();
+        testOk();
+        softAssert.assertAll();
     }
 
     private void testOk() {
-        BaseStepValue step = getNewBaseStepValue(false);
-        step.expectedValue = 1;
-        CustomerStep.testMe(step);
-
+        BaseStepValue base = getNewBaseStepValue(false);
+        base.expectedValue = 1;
+        step("test Ok step ", () -> {
+            CustomerStep.testMe(base);
+        });
     }
 
     private void testFailed() {
-        BaseStepValue step = getNewBaseStepValue(false);
-        step.expectedValue = 2;
-        CustomerStep.testMe(step);
+        BaseStepValue base = getNewBaseStepValue(false);
+        base.expectedValue = 3;
+        step("test KO step ", () -> {
+            CustomerStep.testMe(base);
+        });
     }
 }

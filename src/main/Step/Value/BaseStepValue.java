@@ -14,7 +14,7 @@ public class BaseStepValue {
     public Object expectedValue;
     public ChromeDriver driver;
     boolean isHardAssert;
-    private SoftAssert soft;
+    public SoftAssert soft;
 
     public BaseStepValue(ChromeDriver driver, SoftAssert soft, boolean isHardAssert) {
         this.driver = driver;
