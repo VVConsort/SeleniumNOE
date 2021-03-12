@@ -9,6 +9,7 @@ import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Link;
+import io.qameta.allure.Muted;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
