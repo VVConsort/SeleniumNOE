@@ -27,7 +27,7 @@ public class BaseTest {
     // Soft assert
     protected  SoftAssert softAssert = new SoftAssert();
     // Liste contenant les erreurs d'assertion
-    private  List<String> assertionError = new ArrayList<String>();
+    private  List<String> assertionError = new ArrayList<>();
     // Driver Chrome
     protected ChromeDriver driver;
 
@@ -136,11 +136,11 @@ public class BaseTest {
 
     @AfterTest
     protected void gatherAssertionErrors() {
+        // Fermeture du navigateur
+        closeBrowser();
         if (assertionError != null && !assertionError.isEmpty()) {
             throw new AssertionError(String.join("\n", assertionError));
         }
-        // Fermeture du navigateur
-        closeBrowser();
     }
 
     protected void onAfterTest() {

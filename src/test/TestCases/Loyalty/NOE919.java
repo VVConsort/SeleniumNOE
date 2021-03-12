@@ -75,6 +75,14 @@ public class NOE919 extends BaseTest {
                     e.printStackTrace();
                 }
             });
+            // Controle données RCU
+            step("Contrôle l'intégrité des données insérées sur RCU", () -> {
+                try {
+                    CustomerStep.checkRCUCustomerValues(customer, baseStep);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
             // Association ticket
             step("Contrôle que le client est associé au ticket", () -> {
                         baseStep.expectedValue = customer.firstName + " " + customer.lastName;

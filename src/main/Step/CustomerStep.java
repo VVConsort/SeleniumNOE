@@ -9,7 +9,6 @@ import View.CustomerCreateView;
 import View.Footer.FooterView;
 import View.Footer.Menu.Customer.CustomerSearchResultView;
 import View.Footer.Menu.Customer.CustomerSearchView;
-import io.qameta.allure.Step;
 import org.testng.Assert;
 
 import java.io.IOException;
@@ -80,7 +79,7 @@ public class CustomerStep extends BaseStep {
         System.out.println("Comparaison valeures RCU : " + cust.firstName + " " + cust.lastName);
         // Si la réponse est vide on arrete la
         if (response.isEmpty()) {
-            baseStep.isEquals(false);
+            Assert.assertEquals(false, baseStep.expectedValue);
             return;
         }
         // Prénom
@@ -246,7 +245,7 @@ public class CustomerStep extends BaseStep {
                 System.out.println("Pays principal incorrect");
             }
         }
-        baseStep.isTrue(result);
+        Assert.assertTrue(result);
     }
 
     /**
@@ -256,7 +255,7 @@ public class CustomerStep extends BaseStep {
      * @throws IOException
      */
     public static void archiveCustomer(Customer cust, BaseStepValue baseStep) throws IOException {
-        baseStep.isEquals(RCURestHelper.archiveCustomer(cust));
+        Assert.assertEquals(RCURestHelper.archiveCustomer(cust), baseStep.expectedValue);
     }
 
     /**
