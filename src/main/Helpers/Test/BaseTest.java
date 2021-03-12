@@ -99,7 +99,7 @@ public class BaseTest implements IHookable {
     @AfterTest
     protected void onAfterTest() {
         // On test les comparaisons
-        assertAll();
+        //assertAll();
         // Fermeture du navigateur
         closeBrowser();
     }

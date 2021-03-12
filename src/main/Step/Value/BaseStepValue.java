@@ -8,8 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
-import java.util.UUID;
-
 public class BaseStepValue {
 
     private static StepResult result_fail;
@@ -30,16 +28,15 @@ public class BaseStepValue {
      */
     public void isEquals(Object valueToTest) {
         // Prend un screenshot
-        ReportHelper.attachScreenshot(driver);
-        String uuid = UUID.randomUUID().toString();
+        // ReportHelper.attachScreenshot(driver);
+        //String uuid = UUID.randomUUID().toString();
         try {
             Assert.assertEquals(valueToTest, expectedValue);
         } catch (AssertionError e) {
-            Allure.getLifecycle().startStep(uuid, new StepResult().setDescription("test failed step desc").setStatus(Status.FAILED));
-            Allure.getLifecycle().stopStep(uuid);
+            Allure.getLifecycle().updateStep(s -> s.setStatus(Status.FAILED));
+            Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
         }
-        Allure.getLifecycle().startStep(uuid, new StepResult().setDescription("test success step desc").setStatus(Status.PASSED));
-        Allure.getLifecycle().stopStep(uuid);
+        Allure.getLifecycle().updateStep(s -> s.setStatus(Status.PASSED));
     }
 
     /**
