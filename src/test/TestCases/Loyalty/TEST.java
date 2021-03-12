@@ -21,8 +21,8 @@ public class TEST extends BaseTest {
 
     private void testOk() {
         BaseStepValue base = getNewBaseStepValue(false);
-        base.expectedValue = 66;
-        step("test Ok step ", () -> {
+        base.expectedValue = 1;
+        step("Vérifie que la valeur est égal à 1 ", () -> {
             CustomerStep.testMe(base);
         });
     }
@@ -30,7 +30,7 @@ public class TEST extends BaseTest {
     private void testFailed() {
         BaseStepValue base = getNewBaseStepValue(false);
         base.expectedValue = 66;
-        step("test KO step ", () -> {
+        step("Vérifie que la valeur est égal à 66 ", () -> {
             CustomerStep.testMe(base);
         });
     }
