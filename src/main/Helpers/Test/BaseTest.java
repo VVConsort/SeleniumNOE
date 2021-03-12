@@ -8,6 +8,7 @@ import Step.Value.Payment.PaymentStepValue;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import io.qameta.allure.model.Status;
+import io.qameta.allure.model.StatusDetails;
 import io.qameta.allure.model.StepResult;
 import io.qameta.allure.util.ResultsUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,10 +22,10 @@ import java.util.UUID;
 
 public class BaseTest {
 
+    // Soft assert
+    protected static SoftAssert softAssert = new SoftAssert();
     // Driver Chrome
     protected ChromeDriver driver;
-    // Soft assert
-    protected SoftAssert softAssert = new SoftAssert();
 
 
     /*public void run(IHookCallBack callBack, ITestResult testResult) {
@@ -39,20 +40,29 @@ public class BaseTest {
         }
     }*/
 
+    /**
+     * Ajoute une nouvelle Step au test
+     * @param name     Description de la step
+     * @param runnable
+     */
     public static void step(String name, Runnable runnable) {
         String uuid = UUID.randomUUID().toString();
         StepResult result = new StepResult().setName(name);
         Allure.getLifecycle().startStep(uuid, result);
+        StatusDetails statutDetails = new StatusDetails();
         try {
             runnable.run();
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(Status.PASSED));
         } catch (AssertionError e) {
+            statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED))
-                    .setStatusDetails(ResultsUtils.getStatusDetails(e).orElse(null)));
+                    .setStatusDetails(statutDetails));
+            softAssert.assertTrue(false, "L'étape " + name + " a échoué.");
         } catch (Exception e) {
+            statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN))
-                    .setStatusDetails(ResultsUtils.getStatusDetails(e).orElse(null)));
-            Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
+                    .setStatusDetails(statutDetails));
+            softAssert.assertTrue(false, "L'étape " + name + " a rencontré une exception");
         } finally {
             Allure.getLifecycle().stopStep(uuid);
         }
@@ -120,8 +130,8 @@ public class BaseTest {
 
     @AfterTest
     protected void onAfterTest() {
-        // On test les comparaisons
-        //assertAll();
+        // Si il y'a des assertions fausse, alors cela mettre le test en FAILED
+        softAssert.assertAll();
         // Fermeture du navigateur
         closeBrowser();
     }
