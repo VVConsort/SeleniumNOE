@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class CustomerStep extends BaseStep {
 
     @Step("Crée un client")
-    public static void createCustomer(Customer customer, BaseStepValue step) throws InterruptedException {
+    public static void createCustomer(Customer customer, BaseStepValue step) {
         ///////////FIXME bug sur l'ouverture de la fenetre de recherche, une fois c'est la recherche une fois le résult qui s'affiche zobi
         CustomerSearchView custSearch = new FooterView(step.driver).clickOnMenuBtn().clickOnSearchCustomer();
         custSearch.clickCancel();
@@ -38,23 +38,26 @@ public class CustomerStep extends BaseStep {
             searchView.clickClose();
         }
         // Comparaison avec le résultat attendu
-        step.isEquals(isCreated);
+        Assert.assertEquals(isCreated, step.expectedValue);
     }
 
     public static void testMe(BaseStepValue step) {
-        step.soft.assertEquals(1, step.expectedValue);
         Assert.assertEquals(1, step.expectedValue);
     }
 
-    @Step("Vérifie : client {cust.firstName} {cust.lastName} présent en base {baseStep.expectedValue}")
-    public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws IOException, SQLException {
+
+    public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws Exception {
         String rcuResponse = "";
         // Récupération en BDD OB du customerId
-        cust.customerId = OpenBravoDBHelper.getCustomerID(cust.lastName, cust.firstName);
-        // Si il n'y a pas de customer id, aucun appel à RCU n'a été fait
-        if (cust.customerId != null && !cust.customerId.isEmpty()) {
-            // On fait un GET avec ce clientID sur RCU
-            rcuResponse = RCURestHelper.getCustomer(cust);
+        try {
+            cust.customerId = OpenBravoDBHelper.getCustomerID(cust.lastName, cust.firstName);
+            // Si il n'y a pas de customer id, aucun appel à RCU n'a été fait
+            if (cust.customerId != null && !cust.customerId.isEmpty()) {
+                // On fait un GET avec ce clientID sur RCU
+                rcuResponse = RCURestHelper.getCustomer(cust);
+            }
+        } catch (Exception e) {
+            throw new Exception (e);
         }
         // Vérifie que la réponse correspond à celle attendue
         baseStep.isEquals(!rcuResponse.isEmpty());

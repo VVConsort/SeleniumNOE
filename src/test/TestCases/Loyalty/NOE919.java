@@ -15,14 +15,13 @@ import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class NOE919 extends BaseTest {
 
-    @Test(description = "Création d'un client en caisse")
+    @Test(description = "Création client en caisse")
     @Parameters({"missingMandatoryFieldFilePath", "createOKFilePath"})
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-919")
-    public void noe919(String missingMandatoryFieldFilePath, String createOKFilePath) throws IOException, InterruptedException, JAXBException, SQLException {
+    public void noe919(String missingMandatoryFieldFilePath, String createOKFilePath) throws Exception {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();
         // Test infos manquants client
@@ -31,47 +30,69 @@ public class NOE919 extends BaseTest {
         createOkTest(createOKFilePath);
     }
 
-    @Step("Tentative de création clients avec champs obligatoires manquants")
-    private void missingFieldsTest(String missingMandatoryFieldFilePath) throws JAXBException, IOException, InterruptedException, SQLException {
+    @Step("Tente de créer des clients ayant des informations obligatoires manquantes")
+    private void missingFieldsTest(String missingMandatoryFieldFilePath) throws JAXBException {
         // On récupère les clients à créer
         CustomerList customersToCreate = (CustomerList) Unmarshaller.unmarshall(missingMandatoryFieldFilePath, CustomerList.class);
-        // Crée la liste de clients
-        createCustomers(customersToCreate);
+        BaseStepValue baseStep = getNewBaseStepValue(false);
+        // Parcourt les clients à tenter de créer
+        for (Customer customer : customersToCreate.customers) {
+            // Certains clients avec infos obligatoires manquantes doivent lancer une erreur à la création
+            baseStep.expectedValue = customer.noErrorOnCreate;
+            // Tente de créer le client sur OB
+            step("Vérifie qu'il est impossible de créer le client" + customer.firstName + " " + customer.lastName + " sur OpenBravo", () -> {
+                CustomerStep.createCustomer(customer, baseStep);
+            });
+            // Controle non présence RCU
+            step("Contrôle que le client n'a pas été crée sur RCU", () -> {
+                try {
+                    CustomerStep.checkCustomerPresenceOnRCU(customer, baseStep);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 
-    @Step("Tentative de création clients avec champs obligatoires renseignés")
-    private void createOkTest(String createOKFilePath) throws InterruptedException, SQLException, IOException, JAXBException {
+    @Step("Création de client ayant les informations nécessaires")
+    private void createOkTest(String createOKFilePath) throws JAXBException {
         // On récupère les clients à créer
         CustomerList customersToCreate = (CustomerList) Unmarshaller.unmarshall(createOKFilePath, CustomerList.class);
-        // Crée la liste de clients
-        createCustomers(customersToCreate);
-    }
-
-    /**
-     * Crée une liste de client sur OB
-     * @param customerList
-     * @throws InterruptedException
-     */
-    private void createCustomers(CustomerList customerList) throws IOException, InterruptedException, SQLException {
-        BaseStepValue stepValue = getNewBaseStepValue(false);
+        BaseStepValue baseStep = getNewBaseStepValue(false);
         // Parcourt des clients à créer
-        for (Customer cust : customerList.customers) {
+        for (Customer customer : customersToCreate.customers) {
             // Certains clients avec infos obligatoires manquantes doivent lancer une erreur à la création
-            stepValue.expectedValue = cust.noErrorOnCreate;
+            baseStep.expectedValue = customer.noErrorOnCreate;
             // Crée le client sur OB
-            CustomerStep.createCustomer(cust, stepValue);
-            // Vérifie la présence ou pas du client sur RCU
-            CustomerStep.checkCustomerPresenceOnRCU(cust, stepValue);
-            // Si le client a été crée
-            if (cust.noErrorOnCreate) {
-                stepValue.expectedValue = cust.firstName + " " + cust.lastName;
-                // Vérifie qu'il est associé au ticket
-                TicketStep.checkLinkedCustomer(stepValue);
-                // Comparaison des données OB/RCU
-                CustomerStep.checkRCUCustomerValues(cust, stepValue);
-                // Archivage du client
-                CustomerStep.archiveCustomer(cust, stepValue);
-            }
+            step("Vérifie que le client" + customer.firstName + " " + customer.lastName + " est crée sur OpenBravo", () -> {
+                CustomerStep.createCustomer(customer, baseStep);
+            });
+            // Controle  présence RCU
+            step("Contrôle que le client a été crée sur RCU", () -> {
+                try {
+                    CustomerStep.checkCustomerPresenceOnRCU(customer, baseStep);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            // Association ticket
+            step("Contrôle que le client est associé au ticket", () -> {
+                        baseStep.expectedValue = customer.firstName + " " + customer.lastName;
+                        // Vérifie qu'il est associé au ticket
+                        TicketStep.checkLinkedCustomer(baseStep);
+                    }
+            );
+            // Archivage du client
+            step("Archive le client sur RCU", () -> {
+                        // Vérifie qu'il est associé au ticket
+                        baseStep.expectedValue = true;
+                        try {
+                            CustomerStep.archiveCustomer(customer, baseStep);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+            );
         }
     }
 }

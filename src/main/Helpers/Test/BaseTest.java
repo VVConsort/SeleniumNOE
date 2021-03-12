@@ -61,12 +61,12 @@ public class BaseTest {
             statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED))
                     .setStatusDetails(statutDetails));
-            assertionError.add("L'étape " + name + " a échoué : " + e.getMessage());
+            assertionError.add("L'étape '" + name + "' a échoué : " + e.getMessage());
         } catch (Exception e) {
             statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN))
                     .setStatusDetails(statutDetails));
-            assertionError.add("L'étape " + name + " a rencontré une exception : " + e.getMessage());
+            assertionError.add("L'étape '" + name + "' a rencontré une exception : " + e.getMessage());
         } finally {
             Allure.getLifecycle().stopStep(uuid);
         }
