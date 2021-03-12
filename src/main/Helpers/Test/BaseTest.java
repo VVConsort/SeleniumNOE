@@ -5,34 +5,26 @@ import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import Step.Value.Payment.PaymentStepValue;
-import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
-import io.qameta.allure.model.Status;
-import io.qameta.allure.model.StatusDetails;
-import io.qameta.allure.model.StepResult;
-import io.qameta.allure.util.ResultsUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.IHookCallBack;
+import org.testng.IHookable;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+public class BaseTest implements IHookable {
 
-public class BaseTest {
-
-    // Soft assert
-    protected  SoftAssert softAssert = new SoftAssert();
-    // Liste contenant les erreurs d'assertion
-    private  List<String> assertionError = new ArrayList<>();
     // Driver Chrome
     protected ChromeDriver driver;
+    // Soft assert
+    protected SoftAssert softAssert = new SoftAssert();
 
-
-    /*public void run(IHookCallBack callBack, ITestResult testResult) {
+    @Override
+    public void run(IHookCallBack callBack, ITestResult testResult) {
 
         callBack.runTestMethod(testResult);
         if (testResult.getThrowable() != null) {
@@ -41,36 +33,6 @@ public class BaseTest {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-    }*/
-
-    /**
-     * Ajoute une nouvelle Step au test
-     * @param name     Description de la step
-     * @param runnable
-     */
-    public void step(String name, Runnable runnable) {
-        String uuid = UUID.randomUUID().toString();
-        StepResult result = new StepResult().setName(name);
-        Allure.getLifecycle().startStep(uuid, result);
-        StatusDetails statutDetails = new StatusDetails();
-        // Prend un screenshot
-        ReportHelper.attachScreenshot(driver);
-        try {
-            runnable.run();
-            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(Status.PASSED));
-        } catch (AssertionError e) {
-            statutDetails.setMessage(e.getMessage());
-            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED))
-                    .setStatusDetails(statutDetails));
-            assertionError.add("L'étape '" + name + "' a échoué : " + e.getMessage());
-        } catch (Exception e) {
-            statutDetails.setMessage(e.getMessage());
-            Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN))
-                    .setStatusDetails(statutDetails));
-            assertionError.add("L'étape '" + name + "' a rencontré une exception : " + e.getMessage());
-        } finally {
-            Allure.getLifecycle().stopStep(uuid);
         }
     }
 
@@ -135,19 +97,11 @@ public class BaseTest {
     }
 
     @AfterTest
-    protected void gatherAssertionErrors() {
+    protected void onAfterTest() {
+        // On test les comparaisons
+        assertAll();
         // Fermeture du navigateur
         closeBrowser();
-        if (assertionError != null && !assertionError.isEmpty()) {
-            throw new AssertionError(String.join("\n", assertionError));
-        }
-    }
-
-    protected void onAfterTest() {
-        // Si il y'a des assertions fausse, alors cela mettre le test en FAILED
-        softAssert.assertAll();
-
-
     }
 
     /**

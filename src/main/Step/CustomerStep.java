@@ -9,18 +9,15 @@ import View.CustomerCreateView;
 import View.Footer.FooterView;
 import View.Footer.Menu.Customer.CustomerSearchResultView;
 import View.Footer.Menu.Customer.CustomerSearchView;
-import org.testng.Assert;
+import io.qameta.allure.Step;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CustomerStep extends BaseStep {
 
-    /**
-     * Crée un client sur OB
-     * @param customer
-     * @param step
-     */
-    public static void createCustomer(Customer customer, BaseStepValue step) {
+    @Step("Crée un client")
+    public static void createCustomer(Customer customer, BaseStepValue step) throws InterruptedException {
         ///////////FIXME bug sur l'ouverture de la fenetre de recherche, une fois c'est la recherche une fois le résult qui s'affiche zobi
         CustomerSearchView custSearch = new FooterView(step.driver).clickOnMenuBtn().clickOnSearchCustomer();
         custSearch.clickCancel();
@@ -40,38 +37,24 @@ public class CustomerStep extends BaseStep {
             searchView.clickClose();
         }
         // Comparaison avec le résultat attendu
-        Assert.assertEquals(isCreated, step.expectedValue);
+        step.isEquals(isCreated);
     }
 
-    /**
-     * Vérifie la présence du client sur RCU
-     * @param cust
-     * @param baseStep
-     * @throws Exception
-     */
-    public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws Exception {
+    @Step("Vérifie : client {cust.firstName} {cust.lastName} présent en base {baseStep.expectedValue}")
+    public static void checkCustomerPresenceOnRCU(Customer cust, BaseStepValue baseStep) throws IOException, SQLException {
         String rcuResponse = "";
         // Récupération en BDD OB du customerId
-        try {
-            cust.customerId = OpenBravoDBHelper.getCustomerID(cust.lastName, cust.firstName);
-            // Si il n'y a pas de customer id, aucun appel à RCU n'a été fait
-            if (cust.customerId != null && !cust.customerId.isEmpty()) {
-                // On fait un GET avec ce clientID sur RCU
-                rcuResponse = RCURestHelper.getCustomer(cust);
-            }
-        } catch (Exception e) {
-            throw new Exception(e);
+        cust.customerId = OpenBravoDBHelper.getCustomerID(cust.lastName, cust.firstName);
+        // Si il n'y a pas de customer id, aucun appel à RCU n'a été fait
+        if (cust.customerId != null && !cust.customerId.isEmpty()) {
+            // On fait un GET avec ce clientID sur RCU
+            rcuResponse = RCURestHelper.getCustomer(cust);
         }
         // Vérifie que la réponse correspond à celle attendue
         baseStep.isEquals(!rcuResponse.isEmpty());
     }
 
-    /**
-     * Vérifie les données du client insérées sur RCU
-     * @param cust
-     * @param baseStep
-     * @throws IOException
-     */
+    @Step("Vérifie les données du client {cust.firstName} {cust.lastName} {cust.customerId} insérées dans RCU")
     public static void checkRCUCustomerValues(Customer cust, BaseStepValue baseStep) throws IOException {
         boolean result = true;
         // Récupération du client sur RCU
@@ -79,7 +62,7 @@ public class CustomerStep extends BaseStep {
         System.out.println("Comparaison valeures RCU : " + cust.firstName + " " + cust.lastName);
         // Si la réponse est vide on arrete la
         if (response.isEmpty()) {
-            Assert.assertEquals(false, baseStep.expectedValue);
+            baseStep.isEquals(false);
             return;
         }
         // Prénom
@@ -245,17 +228,12 @@ public class CustomerStep extends BaseStep {
                 System.out.println("Pays principal incorrect");
             }
         }
-        Assert.assertTrue(result);
+        baseStep.isTrue(result);
     }
 
-    /**
-     * Suppression logique du client sur RCU
-     * @param cust
-     * @param baseStep
-     * @throws IOException
-     */
+    @Step("Suppression logique du client {cust.firstName} + {cust.lastName} {cust.customerId}")
     public static void archiveCustomer(Customer cust, BaseStepValue baseStep) throws IOException {
-        Assert.assertEquals(RCURestHelper.archiveCustomer(cust), baseStep.expectedValue);
+        baseStep.isEquals(RCURestHelper.archiveCustomer(cust));
     }
 
     /**
