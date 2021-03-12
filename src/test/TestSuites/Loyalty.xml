@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="NOE462-Loyalty">
     <parameter name="propertiesFilePath" value="src/test/TestSuites/Properties/Loyalty"/>
-    <!--<test name="openPos">
+    <test name="openPos">
         <classes>
             <class name="TestCases.PosOpening.PosOpening"/>
         </classes>
@@ -12,12 +12,6 @@
         <parameter name="createOKFilePath" value="src/test/TestCases/Loyalty/In/NOE919/createOkCustomerList.xml"/>
         <classes>
             <class name="TestCases.Loyalty.NOE919"/>
-        </classes>
-    </test> -->
-
-    <test name="TEST">
-        <classes>
-            <class name="TestCases.Loyalty.TEST"/>
         </classes>
     </test>
 </suite>
