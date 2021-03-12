@@ -25,9 +25,9 @@ import java.util.UUID;
 public class BaseTest {
 
     // Soft assert
-    protected static SoftAssert softAssert = new SoftAssert();
+    protected  SoftAssert softAssert = new SoftAssert();
     // Liste contenant les erreurs d'assertion
-    private static List<String> assertionError = new ArrayList<String>();
+    private  List<String> assertionError = new ArrayList<String>();
     // Driver Chrome
     protected ChromeDriver driver;
 
@@ -49,11 +49,13 @@ public class BaseTest {
      * @param name     Description de la step
      * @param runnable
      */
-    public static void step(String name, Runnable runnable) {
+    public void step(String name, Runnable runnable) {
         String uuid = UUID.randomUUID().toString();
         StepResult result = new StepResult().setName(name);
         Allure.getLifecycle().startStep(uuid, result);
         StatusDetails statutDetails = new StatusDetails();
+        // Prend un screenshot
+        ReportHelper.attachScreenshot(driver);
         try {
             runnable.run();
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(Status.PASSED));
@@ -137,14 +139,15 @@ public class BaseTest {
         if (assertionError != null && !assertionError.isEmpty()) {
             throw new AssertionError(String.join("\n", assertionError));
         }
+        // Fermeture du navigateur
+        closeBrowser();
     }
 
     protected void onAfterTest() {
         // Si il y'a des assertions fausse, alors cela mettre le test en FAILED
         softAssert.assertAll();
 
-        // Fermeture du navigateur
-        closeBrowser();
+
     }
 
     /**
