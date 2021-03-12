@@ -16,15 +16,15 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
-public class BaseTest implements IHookable {
+public class BaseTest  {
 
     // Driver Chrome
     protected ChromeDriver driver;
     // Soft assert
     protected SoftAssert softAssert = new SoftAssert();
 
-    @Override
-    public void run(IHookCallBack callBack, ITestResult testResult) {
+
+    /*public void run(IHookCallBack callBack, ITestResult testResult) {
 
         callBack.runTestMethod(testResult);
         if (testResult.getThrowable() != null) {
@@ -34,7 +34,7 @@ public class BaseTest implements IHookable {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     /**
      * Charge les properties de la TestSuite

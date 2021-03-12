@@ -9,10 +9,10 @@ public class TEST extends BaseTest {
 
     @Test(description = "Main test")
     public void mainTest() {
-        testOk();
-        testOk();
+        //testOk();
+        //testOk();
         testFailed();
-        testOk();
+       // testOk();
     }
 
     private void testOk() {

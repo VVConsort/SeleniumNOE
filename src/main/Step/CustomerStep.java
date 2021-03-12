@@ -10,6 +10,7 @@ import View.Footer.FooterView;
 import View.Footer.Menu.Customer.CustomerSearchResultView;
 import View.Footer.Menu.Customer.CustomerSearchView;
 import io.qameta.allure.Step;
+import org.testng.Assert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,9 +41,10 @@ public class CustomerStep extends BaseStep {
         step.isEquals(isCreated);
     }
 
-    @Step("Customer step description TestMe")
     public static void testMe(BaseStepValue step) {
-        step.isEquals(1);
+        step("Nom sub test me", () -> {
+            Assert.assertEquals(1, step.expectedValue);
+        });
     }
 
     @Step("Vérifie : client {cust.firstName} {cust.lastName} présent en base {baseStep.expectedValue}")

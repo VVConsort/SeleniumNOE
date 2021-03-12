@@ -1,8 +1,7 @@
 package Step.Value;
 
 import Helpers.Test.ReportHelper;
-import io.qameta.allure.Allure;
-import io.qameta.allure.model.Status;
+import io.qameta.allure.Step;
 import io.qameta.allure.model.StepResult;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -26,18 +25,9 @@ public class BaseStepValue {
     /**
      * Comparaison des deux valeures
      */
+    @Step("Customer step description TestMe")
     public void isEquals(Object valueToTest) {
-        // Prend un screenshot
-        // ReportHelper.attachScreenshot(driver);
-        //String uuid = UUID.randomUUID().toString();
-        Allure.getLifecycle().updateStep(s -> s.setStatus(Status.PASSED));
-        try {
-            Assert.assertEquals(valueToTest, expectedValue);
-        } catch (AssertionError e) {
-            Allure.getLifecycle().updateStep(s -> s.setStatus(Status.FAILED));
-            Allure.getLifecycle().updateTestCase(s -> s.setStatus(Status.FAILED));
-        }
-
+        Assert.assertEquals(valueToTest, expectedValue);
     }
 
     /**
