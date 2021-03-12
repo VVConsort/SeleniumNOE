@@ -18,12 +18,16 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class BaseTest {
 
     // Soft assert
     protected static SoftAssert softAssert = new SoftAssert();
+    // Liste contenant les erreurs d'assertion
+    private static List<String> assertionError = new ArrayList<String>();
     // Driver Chrome
     protected ChromeDriver driver;
 
@@ -57,12 +61,12 @@ public class BaseTest {
             statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED))
                     .setStatusDetails(statutDetails));
-            softAssert.assertTrue(false, "L'étape " + name + " a échoué :");
+            assertionError.add("L'étape " + name + " a échoué : " + e.getMessage());
         } catch (Exception e) {
             statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN))
                     .setStatusDetails(statutDetails));
-            softAssert.assertTrue(false, "L'étape " + name + " a rencontré une exception");
+            assertionError.add("L'étape " + name + " a rencontré une exception : " + e.getMessage());
         } finally {
             Allure.getLifecycle().stopStep(uuid);
         }
@@ -128,10 +132,17 @@ public class BaseTest {
         }
     }
 
+    @AfterTest
+    protected void gatherAssertionErrors() {
+        if (assertionError != null && !assertionError.isEmpty()) {
+            throw new AssertionError(String.join("\n", assertionError));
+        }
+    }
 
     protected void onAfterTest() {
         // Si il y'a des assertions fausse, alors cela mettre le test en FAILED
         softAssert.assertAll();
+
         // Fermeture du navigateur
         closeBrowser();
     }

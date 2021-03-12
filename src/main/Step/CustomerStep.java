@@ -11,7 +11,6 @@ import View.Footer.Menu.Customer.CustomerSearchResultView;
 import View.Footer.Menu.Customer.CustomerSearchView;
 import io.qameta.allure.Step;
 import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -43,7 +42,7 @@ public class CustomerStep extends BaseStep {
     }
 
     public static void testMe(BaseStepValue step) {
-       step.soft.assertEquals(1, step.expectedValue);
+        step.soft.assertEquals(1, step.expectedValue);
         Assert.assertEquals(1, step.expectedValue);
     }
 
