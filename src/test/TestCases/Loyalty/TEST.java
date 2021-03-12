@@ -16,13 +16,14 @@ public class TEST extends BaseTest {
         testFailed();
         testOk();
         //softAssert.assertEquals("1","3");
+        assertAll();
 
     }
 
     private void testOk() {
         BaseStepValue base = getNewBaseStepValue(false);
         base.expectedValue = 1;
-        step("Vérifie que la valeur est égal à 1 ", () -> {
+        step("Vérifie que la valeur est égal à 1", () -> {
             CustomerStep.testMe(base);
         });
     }

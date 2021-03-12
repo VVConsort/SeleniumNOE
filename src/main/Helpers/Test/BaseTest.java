@@ -57,7 +57,7 @@ public class BaseTest {
             statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.FAILED))
                     .setStatusDetails(statutDetails));
-            softAssert.assertTrue(false, "L'étape " + name + " a échoué.");
+            softAssert.assertTrue(false, "L'étape " + name + " a échoué :");
         } catch (Exception e) {
             statutDetails.setMessage(e.getMessage());
             Allure.getLifecycle().updateStep(uuid, s -> s.setStatus(ResultsUtils.getStatus(e).orElse(Status.BROKEN))
@@ -128,7 +128,7 @@ public class BaseTest {
         }
     }
 
-    @AfterTest
+
     protected void onAfterTest() {
         // Si il y'a des assertions fausse, alors cela mettre le test en FAILED
         softAssert.assertAll();
