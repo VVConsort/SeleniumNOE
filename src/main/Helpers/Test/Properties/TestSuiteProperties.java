@@ -1,4 +1,4 @@
-package Helpers.Test.TestSuiteProperties;
+package Helpers.Test.Properties;
 
 public class TestSuiteProperties {
     // URL de la caisse

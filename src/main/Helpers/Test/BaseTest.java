@@ -1,6 +1,7 @@
 package Helpers.Test;
 
-import Helpers.Test.TestSuiteProperties.PropertiesLoader;
+import Helpers.Test.Properties.Loader.StepAssertionMessageLoader;
+import Helpers.Test.Properties.Loader.TestPropertiesLoader;
 import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
@@ -57,8 +58,8 @@ public class BaseTest implements IHookable {
     }
 
     private void loadProperties(String propertiesFilePath) {
-        PropertiesLoader pro = new PropertiesLoader();
-        pro.setTestSuiteProperties(propertiesFilePath);
+        TestPropertiesLoader pro = new TestPropertiesLoader(propertiesFilePath);
+        pro.setProperties();
     }
 
     /**
@@ -88,8 +89,6 @@ public class BaseTest implements IHookable {
         try {
             softAssert.assertAll();
         } catch (AssertionError err) {
-            // Prend un screenshot
-            ReportHelper.attachScreenshot(driver);
             // Fermeture du navigateur
             closeBrowser();
             throw err;
@@ -97,7 +96,7 @@ public class BaseTest implements IHookable {
     }
 
     @AfterTest
-    protected void onAfterTest() {
+    protected void verifyAssertions() {
         // On test les comparaisons
         assertAll();
         // Fermeture du navigateur

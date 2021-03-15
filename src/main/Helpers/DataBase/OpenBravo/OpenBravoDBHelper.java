@@ -1,7 +1,7 @@
 package Helpers.DataBase.OpenBravo;
 
 import Helpers.DataBase.PostgreSQLHelper;
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

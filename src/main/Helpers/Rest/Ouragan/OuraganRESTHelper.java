@@ -3,7 +3,7 @@ package Helpers.Rest.Ouragan;
 import Enums.REST.RESTCodeStatut;
 import Helpers.Json.OuraganJsonHelper;
 import Helpers.Rest.RESTHelper;
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 import org.testng.Assert;
 
 import java.io.IOException;

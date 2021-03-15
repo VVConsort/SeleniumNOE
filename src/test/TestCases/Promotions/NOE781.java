@@ -1,7 +1,7 @@
 package TestCases.Promotions;
 
 import Helpers.Test.BaseTest;
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 import Step.*;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;

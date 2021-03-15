@@ -17,7 +17,7 @@ import java.io.IOException;
 public class NOE613 extends BaseTest {
 
     @Parameters({"jsonFilePath", "expectedTotal"})
-    @Test(description = " Scanner et payer un RA contenant 1 prestation C et 1 article A")
+    @Test(description = "Scanner et payer un RA contenant 1 prestation C et 1 article A")
     @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-613")
     public void noe613(String jsonFilePath, String expectedTotal) throws IOException, InterruptedException {
         // Intégration du BT

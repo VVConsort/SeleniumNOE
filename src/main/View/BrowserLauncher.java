@@ -1,6 +1,6 @@
 package View;
 
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 

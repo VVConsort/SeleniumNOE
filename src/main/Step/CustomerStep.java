@@ -3,6 +3,7 @@ package Step;
 import Helpers.DataBase.OpenBravo.OpenBravoDBHelper;
 import Helpers.Json.RCUJsonHelper;
 import Helpers.Rest.RCU.RCURestHelper;
+import Helpers.Test.Properties.StepAssertionMessages;
 import Serializable.Customer.Customer;
 import Step.Value.BaseStepValue;
 import View.CustomerCreateView;
@@ -13,10 +14,11 @@ import io.qameta.allure.Step;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 
 public class CustomerStep extends BaseStep {
 
-    @Step("Crée un client")
+    @Step("step.assertionMessage")
     public static void createCustomer(Customer customer, BaseStepValue step) throws InterruptedException {
         ///////////FIXME bug sur l'ouverture de la fenetre de recherche, une fois c'est la recherche une fois le résult qui s'affiche zobi
         CustomerSearchView custSearch = new FooterView(step.driver).clickOnMenuBtn().clickOnSearchCustomer();

@@ -9,6 +9,7 @@ public class BaseStepValue {
 
     public Object expectedValue;
     public ChromeDriver driver;
+    public String assertionMessage;
     boolean isHardAssert;
     private SoftAssert soft;
 
@@ -25,9 +26,9 @@ public class BaseStepValue {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
-            Assert.assertEquals(valueToTest, expectedValue);
+            Assert.assertEquals(valueToTest, expectedValue, assertionMessage);
         } else {
-            soft.assertEquals(valueToTest, expectedValue);
+            soft.assertEquals(valueToTest, expectedValue, assertionMessage);
         }
     }
 
@@ -39,9 +40,9 @@ public class BaseStepValue {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
-            Assert.assertNotNull(valueToTest);
+            Assert.assertNotNull(valueToTest, assertionMessage);
         } else {
-            soft.assertNotNull(valueToTest);
+            soft.assertNotNull(valueToTest, assertionMessage);
         }
     }
 
@@ -53,9 +54,9 @@ public class BaseStepValue {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
-            Assert.assertNull(valueToTest);
+            Assert.assertNull(valueToTest, assertionMessage);
         } else {
-            soft.assertNull(valueToTest);
+            soft.assertNull(valueToTest, assertionMessage);
         }
     }
 
@@ -63,9 +64,9 @@ public class BaseStepValue {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
-            Assert.assertTrue(valueToTest);
+            Assert.assertTrue(valueToTest, assertionMessage);
         } else {
-            soft.assertTrue(valueToTest);
+            soft.assertTrue(valueToTest, assertionMessage);
         }
     }
 
@@ -73,15 +74,14 @@ public class BaseStepValue {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
         if (isHardAssert) {
-            Assert.assertFalse(valueToTest);
+            Assert.assertFalse(valueToTest, assertionMessage);
         } else {
-            soft.assertFalse(valueToTest);
+            soft.assertFalse(valueToTest, assertionMessage);
         }
     }
 
     public String getExpectedValue() {
         return String.valueOf(expectedValue);
     }
-
 
 }

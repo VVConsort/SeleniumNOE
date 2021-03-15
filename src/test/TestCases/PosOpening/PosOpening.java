@@ -1,7 +1,7 @@
 package TestCases.PosOpening;
 
 import Helpers.Test.BaseTest;
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 import Step.LoggingStep;
 import Step.PosOpeningStep;
 import Step.Value.LoggingStepValue;

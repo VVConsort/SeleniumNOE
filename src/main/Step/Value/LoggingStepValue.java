@@ -1,6 +1,6 @@
 package Step.Value;
 
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 
 public class LoggingStepValue {
 

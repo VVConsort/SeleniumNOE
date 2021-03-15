@@ -2,7 +2,7 @@ package Step;
 
 import Helpers.Loading.LoadingHelper;
 import Helpers.Test.ReportHelper;
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 import Step.Value.LoggingStepValue;
 import View.BackOffice.LoggingPage;
 import View.BrowserLauncher;

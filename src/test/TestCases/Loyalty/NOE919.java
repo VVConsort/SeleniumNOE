@@ -60,17 +60,22 @@ public class NOE919 extends BaseTest {
             stepValue.expectedValue = cust.noErrorOnCreate;
             // Crée le client sur OB
             CustomerStep.createCustomer(cust, stepValue);
+            stepValue.assertionMessage = "Création client " + cust.firstName + " " + cust.lastName + " sur OB : ";
             // Vérifie la présence ou pas du client sur RCU
+            stepValue.assertionMessage = " Présence client " + cust.firstName + " " + cust.lastName + " sur RCU : ";
             CustomerStep.checkCustomerPresenceOnRCU(cust, stepValue);
             // Si le client a été crée
             if (cust.noErrorOnCreate) {
-                stepValue.expectedValue = cust.firstName + " " + cust.lastName;
                 // Vérifie qu'il est associé au ticket
+                stepValue.expectedValue = cust.firstName + " " + cust.lastName;
+                stepValue.assertionMessage = "Client " + cust.firstName + " " + cust.lastName + " lié au ticket : ";
                 TicketStep.checkLinkedCustomer(stepValue);
                 // Comparaison des données OB/RCU
+                stepValue.assertionMessage = "Client " + cust.firstName + " " + cust.lastName + " données complètes sur RCU : ";
                 CustomerStep.checkRCUCustomerValues(cust, stepValue);
                 // Archivage du client
                 stepValue.expectedValue = true;
+                stepValue.assertionMessage = " Client " + cust.firstName + " " + cust.lastName + " archivé : ";
                 CustomerStep.archiveCustomer(cust, stepValue);
             }
         }

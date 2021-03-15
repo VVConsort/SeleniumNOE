@@ -2,7 +2,7 @@ package Helpers.Rest.RCU;
 
 import Helpers.Json.RCUJsonHelper;
 import Helpers.Rest.RESTHelper;
-import Helpers.Test.TestSuiteProperties.TestSuiteProperties;
+import Helpers.Test.Properties.TestSuiteProperties;
 import Serializable.Customer.Customer;
 import okhttp3.Response;
 import org.json.JSONObject;
