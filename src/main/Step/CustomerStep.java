@@ -3,7 +3,6 @@ package Step;
 import Helpers.DataBase.OpenBravo.OpenBravoDBHelper;
 import Helpers.Json.RCUJsonHelper;
 import Helpers.Rest.RCU.RCURestHelper;
-import Helpers.Test.Properties.StepAssertionMessages;
 import Serializable.Customer.Customer;
 import Step.Value.BaseStepValue;
 import View.CustomerCreateView;
@@ -14,7 +13,6 @@ import io.qameta.allure.Step;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.MessageFormat;
 
 public class CustomerStep extends BaseStep {
 
@@ -39,6 +37,7 @@ public class CustomerStep extends BaseStep {
             searchView.clickClose();
         }
         // Comparaison avec le résultat attendu
+        step.assertionMessage = "Création client " + customer.firstName + " " + customer.lastName + " sur OB : ";
         step.isEquals(isCreated);
     }
 
@@ -52,6 +51,7 @@ public class CustomerStep extends BaseStep {
             // On fait un GET avec ce clientID sur RCU
             rcuResponse = RCURestHelper.getCustomer(cust);
         }
+        baseStep.assertionMessage = " Présence client " + cust.firstName + " " + cust.lastName + " sur RCU : ";
         // Vérifie que la réponse correspond à celle attendue
         baseStep.isEquals(!rcuResponse.isEmpty());
     }
@@ -61,6 +61,7 @@ public class CustomerStep extends BaseStep {
         boolean result = true;
         // Récupération du client sur RCU
         String response = RCURestHelper.getCustomer(cust);
+        baseStep.assertionMessage = "Client " + cust.firstName + " " + cust.lastName + " données complètes sur RCU : ";
         System.out.println("Comparaison valeures RCU : " + cust.firstName + " " + cust.lastName);
         // Si la réponse est vide on arrete la
         if (response.isEmpty()) {
@@ -235,6 +236,7 @@ public class CustomerStep extends BaseStep {
 
     @Step("Suppression logique du client {cust.firstName} + {cust.lastName} {cust.customerId}")
     public static void archiveCustomer(Customer cust, BaseStepValue baseStep) throws IOException {
+        baseStep.assertionMessage = " Client " + cust.firstName + " " + cust.lastName + " archivé : ";
         baseStep.isEquals(RCURestHelper.archiveCustomer(cust));
     }
 
