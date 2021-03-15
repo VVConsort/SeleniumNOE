@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 public class CustomerStep extends BaseStep {
 
-    @Step("step.assertionMessage")
+    @Step("Création d'un client sur OpenBravo")
     public static void createCustomer(Customer customer, BaseStepValue step) throws InterruptedException {
         ///////////FIXME bug sur l'ouverture de la fenetre de recherche, une fois c'est la recherche une fois le résult qui s'affiche zobi
         CustomerSearchView custSearch = new FooterView(step.driver).clickOnMenuBtn().clickOnSearchCustomer();
