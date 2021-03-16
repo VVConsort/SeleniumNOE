@@ -97,10 +97,7 @@ public class RESTHelper {
                 .build();
         // Appel
         Response response = client.newCall(request).execute();
-        // Check erreur
-        if (!isResponseOk(response)) {
-            System.out.println("Error : " + response.code() + " " + method.getLabel() + " " + URL);
-        }
+        System.out.println(response.code() + " " + method.getLabel() + " " + URL);
         return response;
     }
 

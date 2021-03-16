@@ -4,6 +4,7 @@ import Helpers.Element.WebElementHelper;
 import Helpers.XPath.XPathDiscountHelper;
 import Helpers.XPath.XPathLineHelper;
 import View.BaseView;
+import View.Customer.CustomerDetailView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,6 +23,9 @@ public class ReceiptView extends BaseView {
     // Nom prénom du client associé au ticket
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_receiptHeader_receiptButtons_formElementBpbutton_coreElementContainer_bpbutton_name\"]")
     private WebElement linkedCustomer;
+    // Btn d'édition client
+    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_receiptHeader_receiptButtons_formElementBpbutton_coreElementContainer_bpbutton\"]")
+    private WebElement customerDetailBtn;
 
     public ReceiptView(ChromeDriver driver) {
         init(driver, this);
@@ -140,6 +144,15 @@ public class ReceiptView extends BaseView {
         }
         // On retourne le composant prix unitaire
         return result;
+    }
+
+    /**
+     * Click sur le bouton d'édition client et renvoi la vue détail client
+      * @return
+     */
+    public CustomerDetailView openCustomerDetail() {
+        super.click(customerDetailBtn, false);
+        return new CustomerDetailView(driver);
     }
 
 }

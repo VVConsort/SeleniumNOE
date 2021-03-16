@@ -20,6 +20,8 @@ public class RCUJsonHelper {
     private static final String EMAIL_KEY = "email";
     // Clé type business/personne
     private static final String TYPE_KEY = "type";
+    // Clé titre
+    private static final String TITLE_KEY = "title";
     // Clé langage
     private static final String LANGUAGE_KEY = "language";
     // Clé array emails client
@@ -237,6 +239,16 @@ public class RCUJsonHelper {
     public static String getCustomerType(String json) {
         JSONObject parser = new JSONObject(json);
         return parser.getString(TYPE_KEY);
+    }
+
+    /**
+     * Retourne le titre du client (mr,mrs,compagny)
+     * @param json
+     * @return
+     */
+    public static String getCustomerTitle(String json) {
+        JSONObject parser = new JSONObject(json);
+        return String.valueOf(parser.getInt(TITLE_KEY));
     }
 
     /**

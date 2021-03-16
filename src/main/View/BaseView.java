@@ -112,6 +112,8 @@ public class BaseView {
      */
     protected void sendKeys(WebElement element, String keys) {
         if (element != null && keys != null && !keys.isEmpty()) {
+            // Vide l'élement
+            element.clear();
             element.sendKeys(keys);
         }
     }

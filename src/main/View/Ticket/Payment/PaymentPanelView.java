@@ -136,9 +136,8 @@ public class PaymentPanelView extends BaseView {
     /**
      * Ferme la pop "Paiement non authorisé" si celle-ci est affichée
      */
-    public void clickPaymentNotAllowedOkButton()
-    {
-        findAndClickElement(PAYMENT_NOT_ALLOWED_POPUP_OK_BTN_XPATH,false);
+    public void clickPaymentNotAllowedOkButton() {
+        findAndClickElement(PAYMENT_NOT_ALLOWED_POPUP_OK_BTN_XPATH, false);
     }
 
     /**
@@ -155,7 +154,6 @@ public class PaymentPanelView extends BaseView {
      * @return
      */
     public WebElement getPaymentLineAmountElem(String paymentLabel) {
-        WebElement result = null;
         // On récupère l'id de l'élement 'Nom ligne paiement'
         String paymentNameId = getPaymentLineIdElemByText(paymentLabel);
         // Récupère le Xpath de l'élement 'Montant ligne paiement'

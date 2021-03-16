@@ -1,13 +1,14 @@
-package View;
+package View.Customer;
 
 import Helpers.Element.WebElementHelper;
+import View.BaseView;
 import View.Footer.Menu.Customer.CustomerSearchResultView;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class CustomerCreateView extends BaseView {
+public class CustomerEditView extends BaseView {
 
     // Message au moment de la création pour signaler les infos obligatoires manquantes
     private static final String MISSING_MANDATORY_FIELD_MESSAGE = "Renseigner les champs requis:";
@@ -141,7 +142,7 @@ public class CustomerCreateView extends BaseView {
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_customerCreateAndEdit_footer_newCustomer_footer_newcustomersave\"]")
     private WebElement saveCustomerBtn;
 
-    public CustomerCreateView(ChromeDriver driver) {
+    public CustomerEditView(ChromeDriver driver) {
         init(driver, this);
     }
 

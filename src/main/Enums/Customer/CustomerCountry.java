@@ -2,7 +2,7 @@ package Enums.Customer;
 
 public enum CustomerCountry {
 
-    FRANCE("FR", "France");
+    FRANCE("FR", "France"),UK("UK","United Kingdom");
     // Valeur RCU
     private String rcuValue;
     // Valeur OB

@@ -14,4 +14,12 @@
             <class name="TestCases.Loyalty.NOE919"/>
         </classes>
     </test>
-</suite>
+    <test name="NOE921">
+        <parameter name="createCustomerFilePath" value="src/test/TestCases/Loyalty/In/NOE921/createCustomer.xml"/>
+        <parameter name="modifyCustomerFilePath" value="src/test/TestCases/Loyalty/In/NOE921/modifyCustomer.xml"/>
+        <classes>
+            <class name="TestCases.Loyalty.NOE921"/>
+        </classes>
+    </test>
+    <!-- <test
+ </suite>

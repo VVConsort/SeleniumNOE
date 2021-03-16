@@ -2,7 +2,8 @@ package Enums.Customer;
 
 public enum CustomerLangage {
 
-    FRENCH("fr-FR", "French (France)");
+    FRENCH("fr-FR", "French (France)"),
+    UK_ENGLISH("en-GB", "English (United Kingdom)");
     // Valeur RCU
     private String rcuValue;
     // Valeur OB

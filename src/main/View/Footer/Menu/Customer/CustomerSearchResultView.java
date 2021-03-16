@@ -1,7 +1,7 @@
 package View.Footer.Menu.Customer;
 
 import View.BaseView;
-import View.CustomerCreateView;
+import View.Customer.CustomerEditView;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -24,11 +24,11 @@ public class CustomerSearchResultView extends BaseView {
      * Click sur nouveau client
      * @return
      */
-    public CustomerCreateView clickOnNewCustomer() {
+    public CustomerEditView clickOnNewCustomer() {
         // Click sur nouveau client
         super.click(newCustomerBtn, false);
         // Retourne la vue création client
-        return new CustomerCreateView(driver);
+        return new CustomerEditView(driver);
     }
 
     /**

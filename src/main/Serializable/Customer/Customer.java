@@ -2,9 +2,11 @@ package Serializable.Customer;
 
 import Enums.Adapter.CustomerCountryAdapter;
 import Enums.Adapter.CustomerLangageAdapter;
+import Enums.Adapter.CustomerTitleAdapter;
 import Enums.Adapter.CustomerTypeAdapter;
 import Enums.Customer.CustomerCountry;
 import Enums.Customer.CustomerLangage;
+import Enums.Customer.CustomerTitle;
 import Enums.Customer.CustomerType;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,8 +23,9 @@ public class Customer implements Serializable {
     @XmlJavaTypeAdapter(CustomerTypeAdapter.class)
     public CustomerType type;
     /* PERSONAL INFORMATION */
-    // Civilité
-    public String title;
+    // Titre
+    @XmlJavaTypeAdapter(CustomerTitleAdapter.class)
+    public CustomerTitle title;
     // Prénom
     public String firstName;
     // Nom
@@ -41,18 +44,17 @@ public class Customer implements Serializable {
     public String email;
     /* AUTRES */
     // Programme de fid ?
-    // TODO
     /* PREFERENCE DE CONTACT */
     // Documents contractuels
-    public boolean invoiceViaEmail;
+    public Boolean invoiceViaEmail;
     // Consentement client
-    public boolean consent;
+    public Boolean consent;
     // SMS
-    public boolean viaSms;
+    public Boolean viaSms;
     // Email
-    public boolean viaEmail;
+    public Boolean viaEmail;
     // Même adresse facturation/livraison
-    public boolean sameAddress;
+    public Boolean sameAddress;
     /* Adresse facturation OU même adresse livraison/facturation */
     // Pays
     @XmlJavaTypeAdapter(CustomerCountryAdapter.class)
@@ -96,7 +98,7 @@ public class Customer implements Serializable {
 
     }
 
-    public Customer(CustomerType type, String title, String firstName, String lastName, String birthdate, CustomerLangage language, String mobilePhone, String phone, String email, boolean invoiceViaEmail, boolean consent, boolean viaSms, boolean viaEmail, boolean sameAddress, CustomerCountry country, String locationName, String line2, String line3, String line4, String postalCode, String city, CustomerCountry shipCountry, String shipLocationName, String shipLine2, String shipLine3, String shipLine4, String shipPostalCode, String shipCity, boolean throwError,String buCode) {
+    public Customer(CustomerType type, CustomerTitle title, String firstName, String lastName, String birthdate, CustomerLangage language, String mobilePhone, String phone, String email, Boolean invoiceViaEmail, Boolean consent, Boolean viaSms, Boolean viaEmail, Boolean sameAddress, CustomerCountry country, String locationName, String line2, String line3, String line4, String postalCode, String city, CustomerCountry shipCountry, String shipLocationName, String shipLine2, String shipLine3, String shipLine4, String shipPostalCode, String shipCity, boolean throwError,String buCode) {
         this.type = type;
         this.title = title;
         this.firstName = firstName;

@@ -26,7 +26,7 @@ public class NOE919 extends BaseTest {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();
         // Test infos manquants client
-        missingFieldsTest(missingMandatoryFieldFilePath);
+       // missingFieldsTest(missingMandatoryFieldFilePath);
         // Test création clients infos ok
         createOkTest(createOKFilePath);
     }

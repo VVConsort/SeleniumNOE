@@ -124,7 +124,7 @@
         <line3>La ligne 3</line3>
         <line4>La ligne 4</line4>
         <postalCode>59667</postalCode>
-        <city>DK </city>
+        <city>DK</city>
         <country>FRANCE</country>
         <noErrorOnCreate>true</noErrorOnCreate>
         <buCode>FR</buCode>
