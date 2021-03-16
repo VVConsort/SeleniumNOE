@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customerList>
+    <customer>
+        <type>PERSON</type>
+        <title>MR</title>
+        <lastName>VERYFIRSTLASTNAME</lastName>
+        <firstName>VERYFIRSTCREATE</firstName>
+        <language>FRENCH</language>
+        <mobilePhone>0651063447</mobilePhone>
+        <phone>0328641742</phone>
+        <email>create@create.com</email>
+        <invoiceViaEmail>false</invoiceViaEmail>
+        <consent>false</consent>
+        <viaSms>false</viaSms>
+        <viaEmail>false</viaEmail>
+        <sameAddress>true</sameAddress>
+        <locationName>La ligne 1</locationName>
+        <line2>La ligne 2</line2>
+        <line3>La ligne 3</line3>
+        <line4>La ligne 4</line4>
+        <postalCode>59667</postalCode>
+        <city>DK</city>
+        <country>FRANCE</country>
+        <noErrorOnCreate>true</noErrorOnCreate>
+        <buCode>FR</buCode>
+    </customer>
+</customerList>
