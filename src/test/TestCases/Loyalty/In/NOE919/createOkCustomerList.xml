@@ -3,7 +3,7 @@
     <!-- Nom et prénom et code postal et ville et mobile-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <lastName>last1</lastName>
         <firstName>first1</firstName>
         <language>FRENCH</language>
@@ -21,7 +21,7 @@
     <!-- Nom et prénom et code postal et ville et email-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <lastName>last2</lastName>
         <firstName>first2</firstName>
         <language>FRENCH</language>
@@ -39,7 +39,7 @@
     <!--Nom et prénom et code postal et ville et mobile optin SMS : tel mobile-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <lastName>last3</lastName>
         <firstName>first3</firstName>
         <language>FRENCH</language>
@@ -57,7 +57,7 @@
     <!--Nom et prénom et code postal et ville et email optin mail : email-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <lastName>last4</lastName>
         <firstName>first4</firstName>
         <language>FRENCH</language>
@@ -75,7 +75,7 @@
     <!-- Tous les champs de rempli avec adresse diff et aucune optin-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <lastName>last5</lastName>
         <firstName>first5</firstName>
         <language>FRENCH</language>
@@ -107,7 +107,7 @@
     <!-- Tous les champs de rempli avec adresse livraison/facturaion identique et full optin-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <lastName>last6</lastName>
         <firstName>first6</firstName>
         <language>FRENCH</language>

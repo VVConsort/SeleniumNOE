@@ -3,7 +3,7 @@
     <!-- FirstName missing-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <lastName>FirstNameMiss</lastName>
         <language>FRENCH</language>
         <mobilePhone>0651063447</mobilePhone>
@@ -34,7 +34,7 @@
     <!-- LastName missing-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <firstName>lastNameMiss</firstName>
         <language>FRENCH</language>
         <mobilePhone>0651063447</mobilePhone>
@@ -65,7 +65,7 @@
     <!-- Code postal manquant (même addresse facturation/livraison-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <firstName>missing</firstName>
         <lastName>postalCode</lastName>
         <language>FRENCH</language>
@@ -89,7 +89,7 @@
     <!-- Ville manquante (même addresse facturation/livraison-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <firstName>missing</firstName>
         <lastName>city</lastName>
         <language>FRENCH</language>
@@ -113,7 +113,7 @@
     <!--Aucun contact (ni mobile ni mail)-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <firstName>no</firstName>
         <lastName>contact</lastName>
         <language>FRENCH</language>
@@ -136,7 +136,7 @@
     <!-- Optin email : mail manquant -->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <firstName>mailOptin</firstName>
         <lastName>noMail</lastName>
         <language>FRENCH</language>
@@ -160,7 +160,7 @@
     <!-- Optin sms : pas de mobile juste le fixe (doit claquer)-->
     <customer>
         <type>PERSON</type>
-        <title>MONSIEUR</title>
+        <title>MR</title>
         <firstName>optinSMS</firstName>
         <lastName>noMob</lastName>
         <language>FRENCH</language>
@@ -181,5 +181,4 @@
         <noErrorOnCreate>false</noErrorOnCreate>
         <buCode>FR</buCode>
     </customer>
-
 </customerList>
