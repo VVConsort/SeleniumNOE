@@ -6,6 +6,7 @@ import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import Step.Value.Payment.PaymentStepValue;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.qameta.allure.Step;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.IHookCallBack;
@@ -17,15 +18,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
-public class BaseTest implements IHookable {
+public class BaseTest extends AbstractTestNGCucumberTests {
 
     // Driver Chrome
     protected ChromeDriver driver;
     // Soft assert
     protected SoftAssert softAssert = new SoftAssert();
 
-    @Override
-    public void run(IHookCallBack callBack, ITestResult testResult) {
+    /*public void run(IHookCallBack callBack, ITestResult testResult) {
 
         callBack.runTestMethod(testResult);
         if (testResult.getThrowable() != null) {
@@ -35,7 +35,7 @@ public class BaseTest implements IHookable {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     /**
      * Charge les properties de la TestSuite
