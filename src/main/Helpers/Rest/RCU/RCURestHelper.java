@@ -72,7 +72,7 @@ public class RCURestHelper extends RESTHelper {
     } */
 
     /**
-     * Récupère le token auprès d'RCU si nécessaire
+     * Récupère le token authentification auprès d'RCU si nécessaire
      * @throws IOException
      */
     private static void setToken() throws IOException {

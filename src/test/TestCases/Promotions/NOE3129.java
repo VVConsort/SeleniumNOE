@@ -13,11 +13,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.testng.CucumberOptions;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.net.MalformedURLException;
 
-@CucumberOptions(features = {"src/test/Features"}, tags = "@TEST_NOE-3129")
+@CucumberOptions(features = {"src/test/Features"}, tags = "@TEST_NOE-3129", plugin = "json:target/cucumber-report.json")
 public class NOE3129 extends BaseTest {
+
+    ChromeDriver myDriver;
 
     @Given("I have a ticket with product {string} in it")
     public void iHaveATicketWithProductInIt(String produtCode) throws MalformedURLException, InterruptedException {
@@ -34,7 +37,7 @@ public class NOE3129 extends BaseTest {
         PaymentStepValue stepValue = getNewPaymentStepValue(true);
         stepValue.paymentMean = PaymentMean.VOUCHER;
         stepValue.paymentId = arg0;
-        stepValue.expectedValue = false;
+        stepValue.expectedValue = true;
         PaymentStep.useVoucher(stepValue);
     }
 

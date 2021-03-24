@@ -128,7 +128,6 @@ public class RESTHelper {
                 builder.add(entry.getKey(), entry.getValue());
             }
         }
-
         // On build et retourne le header
         return builder.build();
     }

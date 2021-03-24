@@ -1,6 +1,6 @@
 package Helpers.Test;
 
-import Helpers.Test.Properties.Loader.StepAssertionMessageLoader;
+import Helpers.Rest.XRay.XRayRestHelper;
 import Helpers.Test.Properties.Loader.TestPropertiesLoader;
 import Step.TicketStep;
 import Step.Value.BaseStepValue;
@@ -9,33 +9,24 @@ import Step.Value.Payment.PaymentStepValue;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.qameta.allure.Step;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.IHookCallBack;
-import org.testng.IHookable;
-import org.testng.ITestResult;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
+import java.io.IOException;
+
 public class BaseTest extends AbstractTestNGCucumberTests {
 
+    protected static final String hum = "";
     // Driver Chrome
-    protected ChromeDriver driver;
+    protected static ChromeDriver driver;
     // Soft assert
     protected SoftAssert softAssert = new SoftAssert();
-
-    /*public void run(IHookCallBack callBack, ITestResult testResult) {
-
-        callBack.runTestMethod(testResult);
-        if (testResult.getThrowable() != null) {
-            try {
-                ReportHelper.attachScreenshot(driver, testResult.getMethod().getMethodName());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
+    // Nom du test
+    protected String testId = "";
 
     /**
      * Charge les properties de la TestSuite
@@ -84,23 +75,36 @@ public class BaseTest extends AbstractTestNGCucumberTests {
      * Fait apparaitre les comparaisons fausses et met éventuellement le test en FAILED
      */
     @Step("Vérification des valeurs attendues")
-    protected void assertAll() {
+    protected void assertAll(ITestContext result) throws IOException {
         // On visualise les comparaisons fausses
         try {
             softAssert.assertAll();
         } catch (AssertionError err) {
             // Fermeture du navigateur
             closeBrowser();
+            // Envoie REST à jira
+            postCucumberTestExecutionToXRay(result.getName());
             throw err;
         }
     }
 
     @AfterTest
-    protected void verifyAssertions() {
+    protected void verifyAssertions(ITestContext result) throws IOException {
         // On test les comparaisons
-        assertAll();
+        assertAll(result);
         // Fermeture du navigateur
         closeBrowser();
+        // Envoie REST à jira
+        postCucumberTestExecutionToXRay(result.getName());
+
+    }
+
+    /**
+     * Envoie le report d'éxécution Cucumber vers XRay
+     * @throws IOException
+     */
+    private void postCucumberTestExecutionToXRay(String testName) throws IOException {
+        XRayRestHelper.postReportToXRay(testName);
     }
 
     /**
@@ -137,6 +141,4 @@ public class BaseTest extends AbstractTestNGCucumberTests {
     private boolean isDriverClosed() {
         return driver == null || driver.getSessionId() == null;
     }
-
-
 }

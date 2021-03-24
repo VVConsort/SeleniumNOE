@@ -2,10 +2,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="NOE462-Loyalty">
     <parameter name="propertiesFilePath" value="src\test\TestSuites\Properties\Loyalty"/>
- 
     <test name="NOE3129">
         <classes>
             <class name="TestCases.Promotions.NOE3129"/>
+        </classes>
+    </test>
+    <test name="NOE3128">
+        <parameter name="expectedTotal" value="150.02"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE3128"/>
         </classes>
     </test>
 </suite>
