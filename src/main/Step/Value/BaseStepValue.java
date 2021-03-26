@@ -25,10 +25,12 @@ public class BaseStepValue {
     public void isEquals(Object valueToTest) {
         // Prend un screenshot
         ReportHelper.attachScreenshot(driver);
-        if (isHardAssert) {
-            Assert.assertEquals(valueToTest, expectedValue, assertionMessage);
-        } else {
-            soft.assertEquals(valueToTest, expectedValue, assertionMessage);
+        if (expectedValue != null) {
+            if (isHardAssert) {
+                Assert.assertEquals(valueToTest, expectedValue, assertionMessage);
+            } else {
+                soft.assertEquals(valueToTest, expectedValue, assertionMessage);
+            }
         }
     }
 
