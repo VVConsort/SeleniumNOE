@@ -80,7 +80,7 @@ public class BaseTest extends AbstractTestNGCucumberTests {
             // Fermeture du navigateur
             closeBrowser();
             // Envoie REST à jira
-            postCucumberTestExecutionToXRay(result.getName());
+            //postCucumberTestExecutionToXRay(result.getName());
             throw err;
         }
     }
@@ -92,7 +92,7 @@ public class BaseTest extends AbstractTestNGCucumberTests {
         // Fermeture du navigateur
         closeBrowser();
         // Envoie REST à jira
-        postCucumberTestExecutionToXRay(result.getName());
+        //postCucumberTestExecutionToXRay(result.getName());
     }
 
     /**
