@@ -1,9 +1,12 @@
 package Step;
 
+import Helpers.DataBase.OpenBravo.OpenBravoDBHelper;
 import Helpers.Element.WebElementHelper;
 import Step.Value.DiscountStepValue;
 import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
+
+import java.sql.SQLException;
 
 public class DiscountStep extends BaseStep {
 
@@ -34,6 +37,11 @@ public class DiscountStep extends BaseStep {
         ReceiptView view = new ReceiptView(value.driver);
         // Vérification du montant
         value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getDiscountLineAmountElem(value.discountLabel), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+    }
+
+    @Step("Vérifie qu'un bon d'achat a été généré il y'a moins de 5 seconds")
+    public static void checkCouponIsCreated(String couponAmount, DiscountStepValue value) throws SQLException {
+        value.isEquals(!OpenBravoDBHelper.getLastCreatedCoupon(couponAmount).isEmpty());
     }
 
 }

@@ -20,13 +20,10 @@ import java.io.IOException;
 
 public class BaseTest extends AbstractTestNGCucumberTests {
 
-    protected static final String hum = "";
     // Driver Chrome
     protected static ChromeDriver driver;
     // Soft assert
     protected SoftAssert softAssert = new SoftAssert();
-    // Nom du test
-    protected String testId = "";
 
     /**
      * Charge les properties de la TestSuite
@@ -96,7 +93,6 @@ public class BaseTest extends AbstractTestNGCucumberTests {
         closeBrowser();
         // Envoie REST à jira
         postCucumberTestExecutionToXRay(result.getName());
-
     }
 
     /**

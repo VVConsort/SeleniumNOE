@@ -1,6 +1,7 @@
 package Helpers.DataBase;
 
 import java.sql.*;
+import java.util.List;
 
 public class PostgreSQLHelper {
 
@@ -8,11 +9,10 @@ public class PostgreSQLHelper {
         Connection result = null;
         try {
             Class.forName("org.postgresql.Driver");
-            result = DriverManager.getConnection("jdbc:postgresql://localhost:5437/openbravo", "norauto_ro", "ajGAK22ezcJGX76M");
+            result = DriverManager.getConnection(URL, user, password);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         System.out.println("Connection PostgreSQL ouverture");
         return result;
@@ -24,7 +24,7 @@ public class PostgreSQLHelper {
      * @param queryParams
      * @return
      */
-    public static ResultSet executeQuery(String dbUrl, String dbUser, String dbPassword, String query, String[] queryParams) throws SQLException {
+    public static ResultSet executeQuery(String dbUrl, String dbUser, String dbPassword, String query, List<Object> queryParams) throws SQLException {
         // Connection à la DBB
         Connection connection = connect(dbUrl, dbUser, dbPassword);
         // On crée une requete préparée
@@ -41,11 +41,15 @@ public class PostgreSQLHelper {
      * @param paramsList
      * @throws SQLException
      */
-    private static void setParams(PreparedStatement statement, String[] paramsList) throws SQLException {
+    private static void setParams(PreparedStatement statement, List<Object> paramsList) throws SQLException {
+        int index = 1;
         // Parcourt les paramètres
-        for (String param : paramsList) {
-            int index = 1;
-            statement.setString(index, param);
+        for (Object param : paramsList) {
+            if (param instanceof String) {
+                statement.setString(index, (String) param);
+            } else if (param instanceof Date) {
+                statement.setDate(index, (Date) param);
+            }
             index++;
         }
     }
