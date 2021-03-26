@@ -14,7 +14,7 @@ public class PaymentStepValue extends BaseStepValue {
     // Méthode d'envoi du ticket
     public SendTicketMode sendTicketMode;
     // Email destinataire ticket
-    public String email = "noetest@gmail.com";
+    public String email = "noetest@norauto.com";
 
     public PaymentStepValue(ChromeDriver driver, SoftAssert soft, boolean isHardAssert) {
         super(driver, soft, isHardAssert);

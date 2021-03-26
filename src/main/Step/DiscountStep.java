@@ -39,9 +39,12 @@ public class DiscountStep extends BaseStep {
         value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), view.getDiscountLineAmountElem(value.discountLabel), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
-    @Step("Vérifie qu'un bon d'achat a été généré il y'a moins de 5 seconds")
-    public static void checkCouponIsCreated(String couponAmount, DiscountStepValue value) throws SQLException {
-        value.isEquals(!OpenBravoDBHelper.getLastCreatedCoupon(couponAmount).isEmpty());
+    @Step("Vérifie qu'un bon d'achat a été généré il y a moins de 5 seconds")
+    public static String checkCouponCreation(String couponAmount, DiscountStepValue value) throws SQLException {
+        value.assertionMessage = "Bon d'achat généré il y a moins de 5 secondes : ";
+        String createdCouponCode = OpenBravoDBHelper.getLastCreatedCoupon(couponAmount);
+        value.isEquals(!createdCouponCode.isEmpty());
+        return createdCouponCode;
     }
 
 }

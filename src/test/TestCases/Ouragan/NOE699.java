@@ -34,13 +34,13 @@ public class NOE699 extends BaseTest {
         // On paie en espèce
         PaymentStepValue payStep = getNewPaymentStepValue(false);
         payStep.sendTicketMode = SendTicketMode.MAIL_ONLY;
-        payStep.email = "noetest@gmail.com";
+        payStep.email = "noetest@norauto.com";
         PaymentStep.payWithCash(payStep);
         // On finalise la commande
         PaymentStep.finalizeOrder(payStep);
         // Vérifier qu'un bon d'achat a été généré
         DiscountStepValue discountStep = getNewDiscountStepValue(false);
         discountStep.expectedValue = true;
-        DiscountStep.checkCouponIsCreated(couponAmount, discountStep);
+        DiscountStep.checkCouponCreation(couponAmount, discountStep);
     }
 }

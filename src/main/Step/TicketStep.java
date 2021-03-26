@@ -45,6 +45,7 @@ public class TicketStep extends BaseStep {
         // Page panier
         FooterView footer = new FooterView(stepValue.driver);
         // Comparaison du total avec la valeure attendue
+        stepValue.assertionMessage = "Montant à payer : ";
         stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), footer.getTotalToPayElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
