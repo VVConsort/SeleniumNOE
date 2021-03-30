@@ -18,7 +18,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 
-public class BaseTest extends AbstractTestNGCucumberTests {
+public class BaseTest {
 
     // Driver Chrome
     protected static ChromeDriver driver;

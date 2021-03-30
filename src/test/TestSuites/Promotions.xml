@@ -129,4 +129,11 @@
             <class name="TestCases.Promotions.NOE3190"/>
         </classes>
     </test>
+    <test name="NOE698">
+        <parameter name="productCode" value="2051295"/>
+        <parameter name="couponCode" value="29005330010200061393"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE698"/>
+        </classes>
+    </test>
 </suite>

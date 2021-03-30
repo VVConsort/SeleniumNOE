@@ -117,8 +117,8 @@ public class PaymentStep extends BaseStep {
             // Ferme la fenetre d'erreur
             invalidView.clickOK();
         }
-        // Assert si il y'a une erreur lors de l'ajout du voucher
-        stepValue.isEquals(invalidView != null);
+        // Check si l'ajout s'est passé sans erreur
+        stepValue.isEquals(invalidView == null);
         ReportHelper.attachScreenshot(stepValue.driver);
     }
 
