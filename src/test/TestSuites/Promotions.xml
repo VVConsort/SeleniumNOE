@@ -98,9 +98,9 @@
         </classes>
     </test>
     <test name="NOE695">
-        <parameter name="productCode" value="2167322"/>
-        <parameter name="creditNoteCode" value="TESTAUTO-0020000092"/>
-        <parameter name="expectedPendingAmount" value="23.95€"/>
+        <parameter name="productCode" value="2158612"/>
+        <parameter name="voucherCode" value="29005330010200071452"/>
+        <parameter name="expectedTotalToPay" value="51.90"/>
         <classes>
             <class name="TestCases.Promotions.NOE695"/>
         </classes>

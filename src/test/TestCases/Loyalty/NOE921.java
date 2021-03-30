@@ -6,7 +6,6 @@ import Serializable.Customer.Customer;
 import Serializable.Customer.CustomerList;
 import Step.CustomerStep;
 import Step.LoggingStep;
-import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import io.qameta.allure.Link;
 import io.qameta.allure.Step;
@@ -52,7 +51,7 @@ public class NOE921 extends BaseTest {
             CustomerStep.checkCustomerPresenceOnRCU(cust, stepValue);
             // Vérifie qu'il est associé au ticket
             stepValue.expectedValue = cust.firstName + " " + cust.lastName;
-            TicketStep.checkLinkedCustomer(stepValue);
+            CustomerStep.checkLinkedCustomer(stepValue);
             // Stockage de l'id
             _customerId = cust.customerId;
         }

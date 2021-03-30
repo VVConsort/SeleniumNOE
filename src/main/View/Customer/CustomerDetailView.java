@@ -1,6 +1,8 @@
 package View.Customer;
 
 import View.BaseView;
+import View.Customer.Edit.CustomerEditView;
+import View.Customer.Edit.CustomerHandleAddressView;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;

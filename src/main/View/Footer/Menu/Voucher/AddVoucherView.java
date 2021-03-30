@@ -7,18 +7,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class VoucherCodeInputView extends BaseView {
+public class AddVoucherView extends BaseView {
 
     // XPath bouton OK voucher incorrect
-    private static final String INVALID_VOUCHER_POP_UP_XPATH = "//*[@id=\"terminal_confirmationContainer_dynamicConfirmationPopup\"]";
+    protected static final String INVALID_VOUCHER_POP_UP_XPATH = "//*[@id=\"terminal_confirmationContainer_dynamicConfirmationPopup\"]";
+
     // Bouton OK
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_OBDISCP_modalInsertCouponCode_footer_okButton\"]")
-    private WebElement okButton;
+    protected WebElement okButton;
+
     // Saisie code
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_OBDISCP_modalInsertCouponCode_body_formElementCouponcode_coreElementContainer_couponcode\"]")
-    private WebElement voucherCodeInput;
+    protected WebElement voucherCodeInput;
 
-    public VoucherCodeInputView(ChromeDriver driver) {
+    public AddVoucherView(ChromeDriver driver) {
         init(driver, this);
     }
 
@@ -35,6 +37,7 @@ public class VoucherCodeInputView extends BaseView {
      */
     public InvalidVoucherView clickOk() {
         InvalidVoucherView result = null;
+        // Appuie sur OK
         super.click(okButton, false);
         // On attend éventuellement l'affichage de la popup "Bon d'achat invalide"
         WebElement invalidVoucherBtn = WebElementHelper.waitUntilElementIsVisible(driver, 10, By.xpath(INVALID_VOUCHER_POP_UP_XPATH), false);
@@ -45,5 +48,4 @@ public class VoucherCodeInputView extends BaseView {
         }
         return result;
     }
-
 }

@@ -4,8 +4,9 @@ import Helpers.Element.WebElementHelper;
 import Helpers.Test.ReportHelper;
 import Step.Value.Payment.PaymentStepValue;
 import View.Footer.FooterView;
+import View.Footer.Menu.Voucher.AddVoucherView;
 import View.Footer.Menu.Voucher.InvalidVoucherView;
-import View.Footer.Menu.Voucher.VoucherCodeInputView;
+import View.Footer.Menu.Voucher.RemoveVoucherView;
 import View.Ticket.Payment.CreditNote.CreditNoteSearchView;
 import View.Ticket.Payment.CreditNote.CreditNoteUnitView;
 import View.Ticket.Payment.PaymentPanelView;
@@ -95,7 +96,7 @@ public class PaymentStep extends BaseStep {
         ReportHelper.attachScreenshot(driver);
     }
 
-    //@Step("Controle que le montant restant à payer est égal à {stepValue.expectedValue}")
+    @Step("Controle que le montant restant à payer est égal à {stepValue.expectedValue}")
     public static void checkPendingAmount(PaymentStepValue stepValue) {
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(stepValue.driver);
@@ -107,7 +108,7 @@ public class PaymentStep extends BaseStep {
     public static void useVoucher(PaymentStepValue stepValue) {
         FooterView footerView = new FooterView(stepValue.driver);
         // Pop up bon d'achat
-        VoucherCodeInputView voucherView = footerView.clickOnMenuBtn().clickOnVoucher();
+        AddVoucherView voucherView = footerView.clickOnMenuBtn().clickOnVoucher();
         // On entre le code du bon d'achat
         voucherView.enterVoucherCode(stepValue.paymentId);
         // On click sur OK
@@ -118,6 +119,27 @@ public class PaymentStep extends BaseStep {
             invalidView.clickOK();
         }
         // Check si l'ajout s'est passé sans erreur
+        stepValue.assertionMessage = "Bon d'achat ajouté au ticket : ";
+        stepValue.isEquals(invalidView == null);
+        ReportHelper.attachScreenshot(stepValue.driver);
+    }
+
+    @Step("Retire le bon d'achat {stepValue.paymentId} du ticket")
+    public static void removeVoucher(PaymentStepValue stepValue) {
+        FooterView footerView = new FooterView(stepValue.driver);
+        // Pop up retirer bon d'achat
+        RemoveVoucherView voucherView = footerView.clickOnMenuBtn().clickOnRemoveVoucher();
+        // On entre le code du bon d'achat à retirer
+        voucherView.enterVoucherCode(stepValue.paymentId);
+        // On click sur OK
+        InvalidVoucherView invalidView = voucherView.clickOk();
+        // Si le bon d'achat n'existe pas/n'est pas dans le panier
+        if (invalidView != null) {
+            // Ferme la fenetre d'erreur
+            invalidView.clickOK();
+        }
+        // Check si la suppression s'est passé sans erreur
+        stepValue.assertionMessage = "Bon d'achat retiré du ticket : ";
         stepValue.isEquals(invalidView == null);
         ReportHelper.attachScreenshot(stepValue.driver);
     }

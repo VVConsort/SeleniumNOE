@@ -1,8 +1,8 @@
-package View.Customer;
+package View.Customer.Edit;
 
 import Helpers.Element.WebElementHelper;
 import View.BaseView;
-import View.Footer.Menu.Customer.CustomerSearchResultView;
+import View.Customer.Search.CustomerSearchResultView;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;

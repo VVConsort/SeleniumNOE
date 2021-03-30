@@ -73,10 +73,4 @@ public class TicketStep extends BaseStep {
         stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getTotalAmountElem(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
-    @Step("Vérifie que le client {stepValue.expectedValue} est associé au ticket")
-    public static void checkLinkedCustomer(BaseStepValue stepValue) {
-        ReceiptView receiptView = new ReceiptView(stepValue.driver);
-        stepValue.assertionMessage = "Client " + stepValue.expectedValue + " associé au ticket : ";
-        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getLinkedCustomer(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
-    }
 }

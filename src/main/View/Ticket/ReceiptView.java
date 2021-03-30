@@ -5,6 +5,7 @@ import Helpers.XPath.XPathDiscountHelper;
 import Helpers.XPath.XPathLineHelper;
 import View.BaseView;
 import View.Customer.CustomerDetailView;
+import View.Customer.Search.CustomerSearchView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,15 +18,23 @@ public class ReceiptView extends BaseView {
 
     // Préfixe du libellé des promotions sur OB
     private static final String OB_DISCOUNT_LABEL_PREFIX = "-- ";
+
     // Montant total du ticket
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_orderview_totalReceiptLine_totalgross\"]")
     private WebElement totalToPay;
+
     // Nom prénom du client associé au ticket
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_receiptHeader_receiptButtons_formElementBpbutton_coreElementContainer_bpbutton_name\"]")
     private WebElement linkedCustomer;
+
     // Btn d'édition client
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_receiptHeader_receiptButtons_formElementBpbutton_coreElementContainer_bpbutton\"]")
     private WebElement customerDetailBtn;
+
+    // Btn recherche client
+    @FindBy(xpath ="//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftPanel_receiptview_receiptHeader_receiptButtons_separator\"]")
+    private WebElement searchBtn;
+
 
     public ReceiptView(ChromeDriver driver) {
         init(driver, this);
@@ -153,6 +162,15 @@ public class ReceiptView extends BaseView {
     public CustomerDetailView openCustomerDetail() {
         super.click(customerDetailBtn, false);
         return new CustomerDetailView(driver);
+    }
+
+    /**
+     * Appuie sur "Recherche"
+     */
+    public CustomerSearchView clickSearch(){
+        super.click(searchBtn,false);
+        // Retourne la vue de recherche client
+        return new CustomerSearchView(driver);
     }
 
 }

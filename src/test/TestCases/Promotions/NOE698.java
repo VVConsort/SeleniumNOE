@@ -31,9 +31,10 @@ public class NOE698 extends BaseTest {
         // Tentative d'ajout de bon d'achat
         PaymentStepValue payStep = getNewPaymentStepValue(false);
         payStep.paymentId = couponCode;
+        // On vérifie que le voucher ne ce soit pas appliqué
         payStep.expectedValue = false;
         PaymentStep.useVoucher(payStep);
-        // Vérifier que le montant à payer n'a pas bouger
+        // Vérifier que le montant à payer n'a pas gébou
         BaseStepValue baseStep = getNewBaseStepValue(false);
         baseStep.expectedValue = totalToPayBeforeVoucher;
         TicketStep.checkTotalToPay(baseStep);

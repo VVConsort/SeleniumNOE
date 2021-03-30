@@ -1,8 +1,9 @@
-package View.Customer;
+package View.Customer.Edit;
 
 import Helpers.Element.WebElementHelper;
 import Helpers.XPath.XPathCustomerAddressHelper;
 import View.BaseView;
+import View.Customer.Edit.CustomerEditAddressView;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;

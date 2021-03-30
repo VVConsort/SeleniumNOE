@@ -1,4 +1,4 @@
-package View.Customer;
+package View.Customer.Edit;
 
 import View.BaseView;
 import org.openqa.selenium.WebElement;

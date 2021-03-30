@@ -1,19 +1,24 @@
 package View.Footer.Menu;
 
 import View.BaseView;
-import View.Footer.Menu.Customer.CustomerSearchView;
-import View.Footer.Menu.Voucher.VoucherCodeInputView;
+import View.Customer.Search.CustomerSearchView;
+import View.Footer.Menu.Voucher.AddVoucherView;
+import View.Footer.Menu.Voucher.RemoveVoucherView;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class MenuItemListView extends BaseView {
 
-    // Boutton bon d'achat
+    // Boutton "Bon d'achat"
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_mainMenu_menuHolder_menuScroller_menuCoupons\"]")
     private WebElement voucherBtn;
 
-    // Boutton Recherche client
+    // Bouton "Enlever bon d'achat du ticket"
+    @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_mainMenu_menuHolder_menuScroller_menuRemoveCoupons\"]")
+    private WebElement removeVoucherBtn;
+
+    // Boutton "Recherche client"
     @FindBy(xpath = "//*[@id=\"terminal_containerWindow_pointOfSale_multiColumn_leftToolbar_leftToolbar_toolbar_mainMenu_menuHolder_menuScroller_menuCustomers\"]")
     private WebElement customerSearchBtn;
 
@@ -24,10 +29,19 @@ public class MenuItemListView extends BaseView {
     /**
      * Click sur "Bon d'achat"
      */
-    public VoucherCodeInputView clickOnVoucher() {
+    public AddVoucherView clickOnVoucher() {
         super.click(voucherBtn, false);
         // Retourne le composant de saisie de bon d'achat
-        return new VoucherCodeInputView(driver);
+        return new AddVoucherView(driver);
+    }
+
+    /**
+     * Click sur "Enlever bon d'achat du ticket"
+     */
+    public RemoveVoucherView clickOnRemoveVoucher() {
+        super.click(removeVoucherBtn, false);
+        // Retourne le composant de saisie de bon d'achat
+        return new RemoveVoucherView(driver);
     }
 
     /**

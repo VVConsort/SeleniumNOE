@@ -6,7 +6,6 @@ import Serializable.Customer.Customer;
 import Serializable.Customer.CustomerList;
 import Step.CustomerStep;
 import Step.LoggingStep;
-import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import io.qameta.allure.Link;
 import io.qameta.allure.Step;
@@ -26,7 +25,7 @@ public class NOE919 extends BaseTest {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();
         // Test infos manquants client
-       // missingFieldsTest(missingMandatoryFieldFilePath);
+        missingFieldsTest(missingMandatoryFieldFilePath);
         // Test création clients infos ok
         createOkTest(createOKFilePath);
     }
@@ -66,7 +65,7 @@ public class NOE919 extends BaseTest {
             if (cust.noErrorOnCreate) {
                 // Vérifie qu'il est associé au ticket
                 stepValue.expectedValue = cust.firstName + " " + cust.lastName;
-                TicketStep.checkLinkedCustomer(stepValue);
+                CustomerStep.checkLinkedCustomer(stepValue);
                 // Comparaison des données OB/RCU
                 CustomerStep.checkRCUCustomerValues(cust, stepValue);
                 // Archivage du client

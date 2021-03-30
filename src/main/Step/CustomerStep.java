@@ -1,15 +1,16 @@
 package Step;
 
 import Helpers.DataBase.OpenBravo.OpenBravoDBHelper;
+import Helpers.Element.WebElementHelper;
 import Helpers.Json.RCUJsonHelper;
 import Helpers.Rest.RCU.RCURestHelper;
 import Serializable.Customer.Customer;
 import Step.Value.BaseStepValue;
-import View.Customer.CustomerEditAddressView;
-import View.Customer.CustomerEditView;
+import View.Customer.Edit.CustomerEditAddressView;
+import View.Customer.Edit.CustomerEditView;
+import View.Customer.Search.CustomerSearchResultView;
+import View.Customer.Search.CustomerSearchView;
 import View.Footer.FooterView;
-import View.Footer.Menu.Customer.CustomerSearchResultView;
-import View.Footer.Menu.Customer.CustomerSearchView;
 import View.Ticket.ReceiptView;
 import io.qameta.allure.Step;
 
@@ -414,5 +415,31 @@ public class CustomerStep extends BaseStep {
         if (cust.customerId == null || cust.customerId.isEmpty()) {
             cust.customerId = OpenBravoDBHelper.getCustomerID(cust.lastName, cust.firstName);
         }
+    }
+
+    /**
+     * @param lastName
+     * @param stepValue
+     */
+    @Step("Associe le client {custLastName} {firstName} au ticket")
+    public static void linkCustomerToTicketByLastName(String lastName, String firstName, BaseStepValue stepValue) {
+        // Clic sur "Recherche client" et affiche la vue de recherche
+        CustomerSearchView searchView = new ReceiptView(stepValue.driver).clickSearch();
+        // Saisie le nom
+        searchView.setLastName(lastName);
+        // Saisie le prénom
+        searchView.setFirstName(firstName);
+        // Applique les filtre, lance la recherche et click sur le premier client trouvé
+        searchView.clickApplyFilter().clickOnFirstSearchResult();
+        // Contrôle que le client est maintenant associé au ticket
+        stepValue.expectedValue = firstName + " " + lastName;
+        checkLinkedCustomer(stepValue);
+    }
+
+    @Step("Vérifie que le client {stepValue.expectedValue} est associé au ticket")
+    public static void checkLinkedCustomer(BaseStepValue stepValue) {
+        ReceiptView receiptView = new ReceiptView(stepValue.driver);
+        stepValue.assertionMessage = "Client " + stepValue.expectedValue + " associé au ticket : ";
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getLinkedCustomer(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 }
