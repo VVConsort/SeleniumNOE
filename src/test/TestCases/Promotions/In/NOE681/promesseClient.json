@@ -6,7 +6,7 @@
 		{
 			"internalDocumentType": "RA",
 			"collaboratorId": "01",
-			"documentNo": "00720080914311320699",
+			"documentNo": "00722280914311320699",
 			"orderReference": "",
 			"norautoClientType": "PAR",
 			"businessPartner": "0e9cdb71-f62e-11e9-a781-0f1bdafcbf12",
@@ -14,7 +14,7 @@
 			"kilometer": 122170,
 			"discountList": [
 				{
-					"promesseClient": 90
+					"promesseClient": 99
 				}
 			],
 			"ticketActions": 0,

@@ -122,9 +122,8 @@
         </classes>
     </test>
     <test name="NOE3190">
-        <parameter name="jsonFilePath" value="src/test/TestCases/Promotions/In/NOE3190/promesseClient.json"/>
         <parameter name="productCode" value="2051295"/>
-        <parameter name="couponAmount" value="90"/>
+        <parameter name="voucherCode" value="5C5CDD22345FBCFB5A95"/>
         <classes>
             <class name="TestCases.Promotions.NOE3190"/>
         </classes>
@@ -134,6 +133,13 @@
         <parameter name="couponCode" value="29005330010200061393"/>
         <classes>
             <class name="TestCases.Promotions.NOE698"/>
+        </classes>
+    </test>
+    <test name="NOE681">
+        <parameter name="jsonFilePath" value="src/test/TestCases/Promotions/In/NOE681/promesseClient.json"/>
+        <parameter name="couponAmount" value="99"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE681"/>
         </classes>
     </test>
 </suite>
