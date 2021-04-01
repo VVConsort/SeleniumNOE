@@ -10,7 +10,7 @@
     <test name="NOE859">
         <parameter name="crossedPriceProduct" value="97217"/>
         <parameter name="familyDiscountProduct" value="361559"/>
-        <parameter name="expectedTotal" value="78.70"/>
+        <parameter name="expectedTotal" value="88.70"/>
         <classes>
             <class name="TestCases.Promotions.NOE859"/>
         </classes>
@@ -107,7 +107,7 @@
     </test>
     <test name="NOE683">
         <parameter name="productCode" value="0000002212135"/>
-        <parameter name="voucherCode" value="8FDB7018D4892E8CA35A"/>
+        <parameter name="voucherCode" value="B3721A1D9011AACBA3A7"/>
         <parameter name="expectedTotal" value="57.95€"/>
         <classes>
             <class name="TestCases.Promotions.NOE683"/>

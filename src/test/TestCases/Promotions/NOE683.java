@@ -35,6 +35,8 @@ public class NOE683 extends BaseTest {
         BaseStepValue stepValue = getNewBaseStepValue(false);
         stepValue.expectedValue = expectedTotal;
         TicketStep.checkTotalToPay(stepValue);
+        // On retire le bon d'achat du ticket
+        PaymentStep.removeVoucher(payStepValue);
         // Vidage du ticket
         TicketStep.deleteTicket(driver);
     }
