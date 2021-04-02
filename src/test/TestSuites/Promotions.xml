@@ -107,7 +107,7 @@
     </test>
     <test name="NOE683">
         <parameter name="productCode" value="0000002212135"/>
-        <parameter name="voucherCode" value="B3721A1D9011AACBA3A7"/>
+        <parameter name="voucherCode" value="A61C027B12921E1C81A9"/>
         <parameter name="expectedTotal" value="57.95"/>
         <classes>
             <class name="TestCases.Promotions.NOE683"/>
@@ -116,7 +116,7 @@
     <test name="NOE682">
         <parameter name="productCode" value="0000002212135"/>
         <parameter name="voucherCode" value="474200E0B4C283030FEC"/>
-        <parameter name="expectedTotal" value="62.95€"/>
+        <parameter name="expectedTotal" value="62.95"/>
         <classes>
             <class name="TestCases.Promotions.NOE682"/>
         </classes>
