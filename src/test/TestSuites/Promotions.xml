@@ -142,4 +142,12 @@
             <class name="TestCases.Promotions.NOE681"/>
         </classes>
     </test>
+    <test name="NOE694">
+        <parameter name="productCode" value="2167322"/>
+        <parameter name="voucherCode" value="983B0153057000001253"/>
+        <parameter name="expectedTotal" value="9.95"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE694"/>
+        </classes>
+    </test>
 </suite>
