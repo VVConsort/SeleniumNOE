@@ -1,5 +1,6 @@
 package TestCases.Promotions;
 
+import Enums.Payment.PaymentMean;
 import Helpers.Test.BaseTest;
 import Step.LoggingStep;
 import Step.PaymentStep;
@@ -28,6 +29,7 @@ public class NOE694 extends BaseTest {
         // Ajout du bon d'achat
         PaymentStepValue payStepValue = getNewPaymentStepValue(false);
         payStepValue.paymentId = voucherCode;
+        payStepValue.paymentMean = PaymentMean.VOUCHER;
         PaymentStep.useVoucher(payStepValue);
         // Controle du prix du ticket
         BaseStepValue stepValue = getNewBaseStepValue(false);

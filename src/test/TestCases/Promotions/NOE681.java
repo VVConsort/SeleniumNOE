@@ -1,5 +1,6 @@
 package TestCases.Promotions;
 
+import Enums.Payment.PaymentMean;
 import Enums.Payment.SendTicketMode;
 import Helpers.Test.BaseTest;
 import Step.*;
@@ -28,6 +29,7 @@ public class NOE681 extends BaseTest {
         OuraganStep.openWorkOrder(documentCode, driver);
         // On paie en espèce
         PaymentStepValue payStep = getNewPaymentStepValue(false);
+        payStep.paymentMean = PaymentMean.CASH;
         payStep.sendTicketMode = SendTicketMode.MAIL_ONLY;
         payStep.email = "noetest@norauto.com";
         PaymentStep.payWithCash(payStep);
