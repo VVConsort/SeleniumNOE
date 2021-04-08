@@ -92,7 +92,6 @@ public class OuraganJsonHelper {
      * @throws IOException
      */
     public static String getJsonFromFileURL(String jsonFilePath) throws IOException {
-        String result = "";
         // On récupère le json à partir du chemin spécifié en paramètre
         Path fileName = Path.of(jsonFilePath);
         // On retourne le json

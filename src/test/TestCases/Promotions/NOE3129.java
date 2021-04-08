@@ -20,7 +20,6 @@ import java.net.MalformedURLException;
 @CucumberOptions(features = {"src/test/Features"}, tags = "@TEST_NOE-3129", plugin = "json:target/cucumber-report.json")
 public class NOE3129 extends BaseTest {
 
-    ChromeDriver myDriver;
 
     @Given("I have a ticket with product {string} in it")
     public void iHaveATicketWithProductInIt(String produtCode) throws MalformedURLException, InterruptedException {

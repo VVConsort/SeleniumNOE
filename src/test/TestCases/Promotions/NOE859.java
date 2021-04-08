@@ -29,8 +29,6 @@ public class NOE859 extends BaseTest {
         TicketStep.checkTotalToPay(stepValue);
         // Suppression ticket
         TicketStep.deleteTicket(driver);
-
-
     }
 }
 
