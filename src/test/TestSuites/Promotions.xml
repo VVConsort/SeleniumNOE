@@ -150,4 +150,12 @@
             <class name="TestCases.Promotions.NOE694"/>
         </classes>
     </test>
+    <test name="NOE907">
+        <parameter name="productCode" value="2167322"/>
+        <parameter name="cardToSCan" value="1001000219026"/>
+        <parameter name="expectedTotalToPay" value="17.46"/>
+        <classes>
+            <class name="TestCases.Promotions.NOE907"/>
+        </classes>
+    </test>
 </suite>
