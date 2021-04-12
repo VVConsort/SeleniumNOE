@@ -74,13 +74,12 @@ public class CustomerStep extends BaseStep {
             return;
         }
         // Prénom
-        if (!cust.firstName.equalsIgnoreCase(RCUJsonHelper.getCustomerFirstName(response))) {
+        if (cust.firstName != null && !cust.firstName.equalsIgnoreCase(RCUJsonHelper.getCustomerFirstName(response))) {
             result = false;
             baseStep.assertionMessage = baseStep.assertionMessage.concat("Prénom incorrect, ");
-
         }
         // Nom
-        if (!cust.lastName.equalsIgnoreCase(RCUJsonHelper.getCustomerLastName(response))) {
+        if (cust.lastName != null && !cust.lastName.equalsIgnoreCase(RCUJsonHelper.getCustomerLastName(response))) {
             result = false;
             baseStep.assertionMessage = baseStep.assertionMessage.concat("Nom incorrect, ");
         }
