@@ -64,7 +64,7 @@ public class PaymentStep extends BaseStep {
      */
     private static CreditNoteUnitView getCreditNoteUnitView(PaymentStepValue stepValue) {
         FooterView footerView = new FooterView(stepValue.driver);
-        // Clic sur le boutton "A payer" du footer
+        // Clic sur le boutton "A payer" du footergetLabel()
         footerView.clickOnTotalToPayBtn();
         // Panel de paiement
         PaymentPanelView paymentPanel = new PaymentPanelView(stepValue.driver);
