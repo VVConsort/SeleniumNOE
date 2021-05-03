@@ -6,7 +6,6 @@ import Step.TicketStep;
 import Step.Value.BaseStepValue;
 import Step.Value.DiscountStepValue;
 import Step.Value.Payment.PaymentStepValue;
-import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.qameta.allure.Step;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
