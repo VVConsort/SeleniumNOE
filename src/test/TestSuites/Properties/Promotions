@@ -1,7 +1,7 @@
 OB_POS_URL=https://norauto-test.cloud.openbravo.com/openbravo/web/org.openbravo.retail.posterminal
 TERMINAL_KEY=TESTAUTO-002
 USER=vvanhaute
-PASSWORD=1234567
+PASSWORD=12345678
 CHROME_PROFILE_PATH=C://Users//APP-vvanhaute//AppData//Local//Google//Chrome//User data
 CHROME_PROFILE=Profile 1
 ORDER_LOADER_URL=https://norauto-test.cloud.openbravo.com/openbravo/org.openbravo.mobile.core.service.jsonrest/com.openbravo.norauto.ouragan.integration.OuraganExternalOrderLoader
