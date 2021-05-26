@@ -71,33 +71,31 @@ public class BaseTest {
      * Fait apparaitre les comparaisons fausses et met éventuellement le test en FAILED
      */
     @Step("Vérification des valeurs attendues")
-    protected void assertAll(ITestContext result) throws IOException {
+    protected void assertAll() throws AssertionError, IOException {
         // On visualise les comparaisons fausses
         try {
             softAssert.assertAll();
         } catch (AssertionError err) {
-            // Fermeture du navigateur
             closeBrowser();
-            // Envoie REST à jira
-            //postCucumberTestExecutionToXRay(result.getName());
             throw err;
         }
     }
 
     @AfterTest
-    protected void verifyAssertions(ITestContext result) throws IOException {
+    protected void onAfterTest(ITestContext result) throws IOException {
         // On test les comparaisons
-        assertAll(result);
+        assertAll();
         // Fermeture du navigateur
         closeBrowser();
         // Envoie REST à jira
-        //postCucumberTestExecutionToXRay(result.getName());
+        // postCucumberTestExecutionToXRay(result.getName());
     }
 
     /**
      * Envoie le report d'éxécution Cucumber vers XRay
      * @throws IOException
      */
+    @Step("Mise à jours du statut d'éxécution du test sur Jira/XRay")
     private void postCucumberTestExecutionToXRay(String testName) throws IOException {
         XRayRestHelper.postReportToXRay(testName);
     }

@@ -76,9 +76,9 @@ public class PaymentPanelView extends BaseView {
      * Appuie sur le boutton "Suppression ligne de paiement"
      * @param paymentLabel
      */
-    public void clickRemovePaymentLine(String paymentLabel) {
+    public void clickRemovePaymentLine(String paymentLabel,boolean throwException) {
         // On récupère l'id de l'élement 'Nom ligne paiement'
-        String paymentNameId = getPaymentLineIdElemByText(paymentLabel);
+        String paymentNameId = getPaymentLineIdElemByText(paymentLabel,throwException);
         // Récupère le Xpath du boutton suppression paiement
         String removePaymentLineBtnXPath = XPathPaymentHelper.getRemovePaymentButtonAmountXPath(paymentNameId);
         // Recherche du bouttn "Supprimer ligne" associé au mode de paiement
@@ -95,9 +95,9 @@ public class PaymentPanelView extends BaseView {
      * @param paymentLabel
      * @return
      */
-    public boolean hasPaymentLine(String paymentLabel) {
+    public boolean hasPaymentLine(String paymentLabel,boolean throwException) {
         // On récupère l'élément 'Ligne paiement' à partir de son libellé
-        return getPaymentLineIdElemByText(paymentLabel) != null;
+        return getPaymentLineIdElemByText(paymentLabel,throwException) != null;
     }
 
     /**
@@ -113,10 +113,11 @@ public class PaymentPanelView extends BaseView {
      * @param label
      * @return
      */
-    private String getPaymentLineIdElemByText(String label) {
+    private String getPaymentLineIdElemByText(String label,boolean throwException) {
         String result = "";
         // Recherche l'élement 'label' à partir du texte
-        WebElement paymentLineElem = WebElementHelper.getElementFromIdAndText(PAYMENT_CONTENT_ID, label, driver);
+        //String id, String text, ChromeDriver driver, int timeOutInSec, boolean throwException
+        WebElement paymentLineElem = WebElementHelper.getElementFromIdAndText(PAYMENT_CONTENT_ID, label, driver,ELEMENT_MISSING_TIMEOUT,throwException);
         // Blindage
         if (paymentLineElem != null) {
             // Affectation de l'id de l'élement
@@ -153,9 +154,9 @@ public class PaymentPanelView extends BaseView {
      * @param paymentLabel
      * @return
      */
-    public WebElement getPaymentLineAmountElem(String paymentLabel) {
+    public WebElement getPaymentLineAmountElem(String paymentLabel,boolean throwException) {
         // On récupère l'id de l'élement 'Nom ligne paiement'
-        String paymentNameId = getPaymentLineIdElemByText(paymentLabel);
+        String paymentNameId = getPaymentLineIdElemByText(paymentLabel,throwException);
         // Récupère le Xpath de l'élement 'Montant ligne paiement'
         String lineAmountXPath = XPathPaymentHelper.getPaymentLineAmountXPath(paymentNameId);
         return WebElementHelper.waitUntilElementIsVisible(driver, 5, By.xpath(lineAmountXPath), false);

@@ -43,16 +43,17 @@ public class XRayRestHelper extends RESTHelper {
         // Récupère le token si nécessaire
         setToken();
         // On met le content du report dans un String
-        String content = Files.readString(Paths.get("target/cucumber-report.json"));
+        //target/cucumber-report" + "NOE3639" + ".json"
+        String content = Files.readString(Paths.get("target/cucumber-report" + testName + ".json"));
         // Envoi à XRay
         Response postResponse = post("https://xray.cloud.xpand-it.com/api/v2/import/execution/cucumber/", getHeaderArgs(), content);
         // Si le POST est ok
         if (isResponseOk(postResponse)) {
             // Copie et move vers target/sentCucumberReport
-            Path pathToFile = Paths.get("target/cucumberReports/" + testName + ".json");
+            /*Path pathToFile = Paths.get("target/cucumberReports/" + testName + ".json");
             Files.createDirectories(pathToFile.getParent());
             Files.createFile(pathToFile);
-            Files.write(pathToFile, content.getBytes(StandardCharsets.UTF_8));
+            Files.write(pathToFile, content.getBytes(StandardCharsets.UTF_8));*/
         }
     }
 

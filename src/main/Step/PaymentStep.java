@@ -33,7 +33,7 @@ public class PaymentStep extends BaseStep {
         // Vue panneau paiement
         PaymentPanelView payView = new PaymentPanelView(value.driver);
         // Test si la ligne de paiement est présente
-        value.isTrue(payView.hasPaymentLine(value.paymentMean.getLabel()));
+        value.isTrue(payView.hasPaymentLine(value.paymentMean.getLabel(), false));
     }
 
     @Step("Vérifie que le montant de la ligne {value.paymentMean.label} est égale à {value.expectedValue}")
@@ -42,7 +42,7 @@ public class PaymentStep extends BaseStep {
         // Clic sur le boutton "A payer" du footer et fait apparaitre le panneau "Paiements"
         PaymentPanelView paymentView = footerView.clickOnTotalToPayBtn();
         // Contrôle le montant de la ligne
-        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), paymentView.getPaymentLineAmountElem(value.paymentMean.getLabel()), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+        value.isEquals(WebElementHelper.waitUntilExpectedText(value.getExpectedValue(), paymentView.getPaymentLineAmountElem(value.paymentMean.getLabel(), false), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
     }
 
     // TODO : cas ou plusieurs même mode de paiement : différencier sur montant
@@ -54,7 +54,7 @@ public class PaymentStep extends BaseStep {
         // Vue panneau paiement
         PaymentPanelView view = new PaymentPanelView(value.driver);
         // Appuie sur le btn de suppression correspond au mode de paiement
-        view.clickRemovePaymentLine(value.paymentMean.getLabel());
+        view.clickRemovePaymentLine(value.paymentMean.getLabel(), false);
         ReportHelper.attachScreenshot(value.driver);
     }
 
@@ -172,7 +172,7 @@ public class PaymentStep extends BaseStep {
             // On ferme l'éventuel message 'Paiement interdit"
             view.clickPaymentNotAllowedOkButton();
             // On retire le mode de paiement ajouté afin de pouvoir vider le ticket
-            view.clickRemovePaymentLine(stepValue.paymentMean.getLabel());
+            view.clickRemovePaymentLine(stepValue.paymentMean.getLabel(), false);
             result = false;
         }
         // On controle si la finalisation a été éffectué ou ap

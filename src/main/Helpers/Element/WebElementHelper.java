@@ -69,9 +69,9 @@ public class WebElementHelper {
      * @param driver
      * @return
      */
-    public static WebElement getElementFromIdAndText(String id, String text, ChromeDriver driver) {
-        String Xpath = "*//div[starts-with(@id,'" + id + "') and contains (text(),'" + text + "')]";
-        return getElement(driver, By.xpath(Xpath));
+    public static WebElement getElementFromIdAndText(String id, String text, ChromeDriver driver, int timeOutInSec, boolean throwException) {
+        String Xpath = "*//*[starts-with(@id,'" + id + "') and contains (text(),'" + text + "')]";
+        return waitUntilElementIsVisible(driver, timeOutInSec, By.xpath(Xpath), throwException);
     }
 
     /**
@@ -107,6 +107,14 @@ public class WebElementHelper {
         return elem;
     }
 
+    /**
+     * Attend que le composant ait le texte attendu
+     * @param expectedText
+     * @param webElem
+     * @param timeOutInSeconds
+     * @param throwException
+     * @return
+     */
     public static String waitUntilExpectedText(String expectedText, WebElement webElem, int timeOutInSeconds, boolean throwException) {
         String text = null;
         // Nb de tentative
@@ -187,6 +195,13 @@ public class WebElementHelper {
         });
     }
 
+    /**
+     * Attend que le composant ait le texte souhaité
+     * @param expectedText
+     * @param webElem
+     * @param timeOutInSec
+     * @return
+     */
     private static String doWaitForExpectedText(String expectedText, WebElement webElem, int timeOutInSec) {
         String text = "";
         if (webElem != null) {
@@ -200,7 +215,7 @@ public class WebElementHelper {
             text = (String) wait.until(new Function<WebElement, String>() {
                 public String apply(WebElement webElem) {
                     System.out.println(webElem.getAttribute("id") + " text : " + webElem.getText() + " expected text : " + expectedText);
-                    if (webElem.getText().equals(expectedText)) {
+                    if (webElem.getText().trim().equals(expectedText)) {
                         return webElem.getText();
                     }
                     // Si l'élément n'est pas visible à l'écran (getText() retourne null sur un élément caché/non affiché)
