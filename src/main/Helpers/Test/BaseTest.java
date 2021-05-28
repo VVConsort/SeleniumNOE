@@ -21,7 +21,7 @@ public class BaseTest {
 
     // Driver Chrome
     protected static ChromeDriver driver;
-    // Soft assert
+    // Assertion ne lançant pas d'éxception directement au controle
     protected SoftAssert softAssert = new SoftAssert();
 
     /**
