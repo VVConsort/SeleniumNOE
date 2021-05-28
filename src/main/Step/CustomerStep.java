@@ -420,25 +420,37 @@ public class CustomerStep extends BaseStep {
      * @param lastName
      * @param stepValue
      */
-    @Step("Associe le client {custLastName} {firstName} au ticket")
-    public static void linkCustomerToTicketByLastName(String lastName, String firstName, BaseStepValue stepValue) {
+    //@Step("Associe le client {custLastName} {firstName} au ticket")
+    /*public static void linkCustomerToTicketByLastName(String lastName, String firstName, BaseStepValue stepValue) {
+        // Recherche du client par nom/prénom et association du premier résultat
+        searchCustomerByLastAndFirstName(lastName, firstName, stepValue).clickOnFirstSearchResult();
+        // Contrôle que le client est maintenant associé au ticket
+        stepValue.expectedValue = firstName + " " + lastName;
+    }*/
+    @Step("Vérifie que le client {stepValue.expectedValue} est associé au ticket")
+    public static void checkLinkedCustomer(BaseStepValue stepValue) {
+        ReceiptView receiptView = new ReceiptView(stepValue.driver);
+        stepValue.assertionMessage = "Client " + stepValue.expectedValue + " associé au ticket : ";
+        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getLinkedCustomer(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+    }
+
+    @Step("Recherche un client par son nom et prénom")
+    public static void searchCustomerByLastAndFirstName(String lastName, String firstName, BaseStepValue stepValue) {
         // Clic sur "Recherche client" et affiche la vue de recherche
         CustomerSearchView searchView = new ReceiptView(stepValue.driver).clickSearch();
         // Saisie le nom
         searchView.setLastName(lastName);
         // Saisie le prénom
         searchView.setFirstName(firstName);
-        // Applique les filtre, lance la recherche et click sur le premier client trouvé
-        searchView.clickApplyFilter().clickOnFirstSearchResult();
-        // Contrôle que le client est maintenant associé au ticket
-        stepValue.expectedValue = firstName + " " + lastName;
-        checkLinkedCustomer(stepValue);
+        // Applique les filtre et lance la recherche
+        searchView.clickApplyFilter();
     }
 
-    @Step("Vérifie que le client {stepValue.expectedValue} est associé au ticket")
-    public static void checkLinkedCustomer(BaseStepValue stepValue) {
-        ReceiptView receiptView = new ReceiptView(stepValue.driver);
-        stepValue.assertionMessage = "Client " + stepValue.expectedValue + " associé au ticket : ";
-        stepValue.isEquals(WebElementHelper.waitUntilExpectedText(stepValue.getExpectedValue(), receiptView.getLinkedCustomer(), WAIT_FOR_VALUE_TIMEOUT_IN_SEC, false));
+    @Step("Associe le client {stepValue.expectedValue} au ticket")
+    public static void linkCustomer(BaseStepValue stepValue) {
+        // Vue résultat de la recherche
+        CustomerSearchResultView resultView = new CustomerSearchResultView(stepValue.driver);
+        // On click sur le premeir client des résultats
+        resultView.linkCustomer(stepValue.getExpectedValue(), true);
     }
 }

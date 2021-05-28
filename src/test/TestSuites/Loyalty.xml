@@ -21,4 +21,16 @@
             <class name="TestCases.Loyalty.NOE921"/>
         </classes>
     </test>
- </suite>
+    <test name="NOE3639">
+        <parameter name="businessLastName" value="2167322"/>
+        <classes>
+            <class name="TestCases.Loyalty.NOE3639"/>
+            <parameter name="personFirst" value="LINKTICKETP"/>
+            <parameter name="personLast" value="LINKTICKETN"/>
+            <parameter name="businessSearchName" value="LINKBUSINESS"/>
+            <parameter name="businessDisplayName" value="LINKBUSINESS"/>
+            <parameter name="fleetSearchName" value="GRETA 66"/>
+            <parameter name="fleetDisplayName" value="GRETA DES PYRENEES ORIENTALES"/>
+        </classes>
+    </test>
+</suite>

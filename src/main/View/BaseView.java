@@ -9,7 +9,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class BaseView {
 
-    // Timeout
+    // Timeout de présence des éléments de la page
     protected static final int ELEMENT_MISSING_TIMEOUT = 15;
     // Driver
     protected ChromeDriver driver;
@@ -58,8 +58,7 @@ public class BaseView {
                 break;
             } catch (Exception e) {
                 if (attemptCount > 10) {
-                    if(isMandatory)
-                    {
+                    if (isMandatory) {
                         throw e;
                     }
                     break;
