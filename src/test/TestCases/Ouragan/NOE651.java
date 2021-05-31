@@ -18,7 +18,7 @@ import java.io.IOException;
 public class NOE651 extends BaseTest {
     @Parameters({"jsonFilePath", "expectedAmountToPay", "expectedState"})
     @Test(description = "Scanner et régler en caisse une réservation Web disponible en magasin")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-651")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-651")
     public void noe651(String jsonFilePath, String expectedAmountToPay, String expectedState) throws IOException, InterruptedException {
         // Intégration sur OB du BT Ouragan
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);

@@ -17,7 +17,7 @@ public class NOE3190 extends BaseTest {
 
     @Parameters({"productCode", "voucherCode"})
     @Test(description = "Vérifier que l'application d'un bon d'achat supérieur au montant du ticket ne passe pas le montant ticket en négatif")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-3190")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-3190")
     public void noe3190(String productCode, String voucherCode) throws IOException, InterruptedException {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();

@@ -20,7 +20,7 @@ public class NOE919 extends BaseTest {
 
     @Test(description = "Création d'un client en caisse")
     @Parameters({"missingMandatoryFieldFilePath", "createOKFilePath"})
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-919")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-919")
     public void noe919(String missingMandatoryFieldFilePath, String createOKFilePath) throws IOException, InterruptedException, JAXBException, SQLException {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();

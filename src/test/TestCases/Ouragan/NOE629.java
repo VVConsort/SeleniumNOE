@@ -16,7 +16,7 @@ public class NOE629 extends BaseTest {
 
     @Parameters({"jsonFilePath", "expectedDepositLabel", "expectedDeposit"})
     @Test(description = "Scanner et payer une Réservation contenant un article A avec paiement d'un acompte")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-629")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-629")
     public void noe629(String jsonFilePath, String expectedDepositLabel, String expectedDeposit) throws IOException, InterruptedException {
         // Intégration du BT
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);

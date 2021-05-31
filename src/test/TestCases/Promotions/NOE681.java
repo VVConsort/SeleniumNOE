@@ -17,7 +17,7 @@ public class NOE681 extends BaseTest {
 
     @Parameters({"jsonFilePath", "couponAmount"})
     @Test(description = "Bon Achat : Génération d'un bon d'achat \"Promesse client\"")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-681")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-681")
     public void noe681(String jsonFilePath, String couponAmount) throws IOException, InterruptedException, SQLException {
         // Envoie du relevé atelier vers OB pour génèrer un bon d'achat promesse client
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);

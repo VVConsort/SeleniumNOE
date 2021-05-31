@@ -77,7 +77,7 @@ public class RESTHelper {
     }
 
     /**
-     * Construit et renvoi la requete
+     * Construit et envoi la requete
      * @param URL
      * @param method
      * @param jsonBody

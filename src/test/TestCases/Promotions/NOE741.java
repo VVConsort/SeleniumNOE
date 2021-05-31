@@ -17,7 +17,7 @@ public class NOE741 extends BaseTest {
 
     @Parameters({"productCode", "creditNoteCode"})
     @Test(description = "Encaisser un achat et passer un avoir déjà consommé émis depuis OpenBravo")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-741")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-741")
     public void noe741(String productCode, String creditNoteCode) throws MalformedURLException, InterruptedException {
         // Log OB
         driver = LoggingStep.launchAndLogToOpenBravo();

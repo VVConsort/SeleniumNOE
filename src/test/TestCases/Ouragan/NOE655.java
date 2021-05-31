@@ -17,7 +17,7 @@ public class NOE655 extends BaseTest {
 
     @Parameters({"jsonFilePath", "expectedPendingAmount", "expectedState"})
     @Test(description = " Scanner et régler une Réservation Web contenant un article A et un article B")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-655")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-655")
     public void noe655(String jsonFilePath, String expectedPendingAmount, String expectedState) throws IOException, InterruptedException, SQLException {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);

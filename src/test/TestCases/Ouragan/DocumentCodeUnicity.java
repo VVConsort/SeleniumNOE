@@ -17,7 +17,7 @@ public class DocumentCodeUnicity extends BaseTest {
 
     @Parameters({"jsonFilePath"})
     @Test(description = "Scanner et régler le solde d'une Réservation Magasin")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-636")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-636")
     public void documentCodeUnicity(String jsonFilePath) throws IOException, InterruptedException {
         // Intégration sur OB du BT Ouragan
 

@@ -15,7 +15,7 @@ public class NOE763 extends BaseTest {
 
     @Parameters({"productCode", "expectedTotalAmount",})
     @Test(description = "Remise immédiate : remise sur montant ticket")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-763")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-763")
     public void noe763(String productCode, String expectedTotalAmount) throws IOException, InterruptedException {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();

@@ -16,7 +16,7 @@ public class NOE762 extends BaseTest {
 
     @Parameters({"discountLabel", "discountedProductCode", "expectedDiscountAmount",})
     @Test(description = "Remise immédiate : Remise en montant sur un article (cet article uniquement)")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-762")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-762")
     public void noe762(String discountLabel, String discountedProductCode, String expectedDiscountAmount) throws MalformedURLException, InterruptedException {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();

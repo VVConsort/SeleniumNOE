@@ -141,7 +141,6 @@ public class PaymentStep extends BaseStep {
         // Check si la suppression s'est passé sans erreur
         stepValue.assertionMessage = "Bon d'achat retiré du ticket : ";
         stepValue.isEquals(invalidView == null);
-        ReportHelper.attachScreenshot(stepValue.driver);
     }
 
     @Step("Paie en espèces")
@@ -196,6 +195,4 @@ public class PaymentStep extends BaseStep {
             }
         }
     }
-
-
 }

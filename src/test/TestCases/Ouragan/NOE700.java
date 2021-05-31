@@ -15,7 +15,7 @@ public class NOE700 extends BaseTest {
 
     @Parameters({"jsonFilePath", "discountLabel", "discountAmount", "expectedTotal"})
     @Test(description = "Scanner un RA contenant une remise manuelle")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-700")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-700")
     public void noe700(String jsonFilePath, String discountLabel, String discountAmount, String expectedTotal) throws IOException, InterruptedException {
         // Envoie du relevé atelier vers OB
         String documentCode = OuraganStep.postWorkOrderToOpenBravo(jsonFilePath);

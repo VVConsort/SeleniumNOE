@@ -15,7 +15,7 @@ public class NOE907 extends BaseTest {
 
     @Parameters({"productCode", "cardToSCan", "expectedTotalToPay"})
     @Test(description = "Carte de collaborateur: Vérification du plafond de 30%max appliqué avec une promotion marketing existante")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-907")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-907")
     public void noe907(String productCode, String cardToSCan, String expectedTotalToPay) throws MalformedURLException, InterruptedException {
         // Lancement et log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();

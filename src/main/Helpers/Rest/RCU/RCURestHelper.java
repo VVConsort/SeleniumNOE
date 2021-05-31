@@ -21,7 +21,6 @@ public class RCURestHelper extends RESTHelper {
     private static final String LANGUAGE_CODE_HEADER_KEY = "language";
     // Clé customer id header
     private static final String CUSTOMER_ID_KEY = "customerId";
-
     // Préfxx token d'accès
     private static final String TOKEN_PREFIX = "bearer ";
     // Token

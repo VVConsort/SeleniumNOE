@@ -15,7 +15,7 @@ public class NOE859 extends BaseTest {
 
     @Parameters({"crossedPriceProduct", "familyDiscountProduct", "expectedTotal"})
     @Test(description = "Acheter un produit A en promotion (Prix barré) et un produit B ayant une offre commerciale de 10% sur la famille du produit")
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-859")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-859")
     public void noe859(String crossedPriceProduct, String familyDiscountProduct, String expectedTotal) throws MalformedURLException, InterruptedException {
         // Lance et se log sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();

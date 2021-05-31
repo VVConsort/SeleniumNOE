@@ -14,16 +14,16 @@ public class NOE3639 extends BaseTest {
 
     @Test(description = "Vérifier que les différents type de clients sont associables au ticket")
     @Parameters({"personLast", "personFirst", "businessSearchName", "businessDisplayName", "fleetSearchName", "fleetDisplayName"})
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-3639")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-3639")
     public void NOE3639(String personLast, String personFirst, String businessSearchName, String businessDisplayName, String fleetSearchName, String fleetDisplayName) throws MalformedURLException, InterruptedException {
         // Lancement et identification sur OB
         driver = LoggingStep.launchAndLogToOpenBravo();
         // Client personne
         searchAndLinkPersonCustomer(personLast, personFirst);
         // Client business
-        searchFleetBusinessCustomer(businessSearchName, businessDisplayName);
+        searchAndLinkFleetBusinessCustomer(businessSearchName, businessDisplayName);
         // Client flotte
-        searchFleetBusinessCustomer(fleetSearchName, fleetDisplayName);
+        searchAndLinkFleetBusinessCustomer(fleetSearchName, fleetDisplayName);
     }
 
     /**
@@ -47,7 +47,7 @@ public class NOE3639 extends BaseTest {
      * @param searchName
      * @param displayName
      */
-    private void searchFleetBusinessCustomer(String searchName, String displayName) {
+    private void searchAndLinkFleetBusinessCustomer(String searchName, String displayName) {
         BaseStepValue stepValue = getNewBaseStepValue(false);
         // Recherche du client
         CustomerStep.searchCustomerByLastAndFirstName(searchName, "", stepValue);

@@ -23,7 +23,7 @@ public class NOE921 extends BaseTest {
 
     @Test(description = "Modification d'un client en caisse")
     @Parameters({"createCustomerFilePath", "modifyCustomerFilePath"})
-    @Link(name = "Jira ticket", url = "https://openbravo.atlassian.net/browse/NOE-921")
+    @Link(name = "Jira ticket", url = "https://mobivia.atlassian.net/browse/NOE-921")
     public void noe921(String createCustomerFilePath, String modifyCustomerFilePath) throws IOException, InterruptedException, JAXBException, SQLException {
         // Récupère le client à créer
         CustomerList customerToCreate = (CustomerList) Unmarshaller.unmarshall(createCustomerFilePath, CustomerList.class);
